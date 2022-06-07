@@ -105,3 +105,5 @@ def registro(request):
                     "form":RegistrationForm
                 }
     return render(request, 'registration/registrar.html', data)
+
+def sobreNosotros():
