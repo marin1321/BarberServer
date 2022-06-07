@@ -8,5 +8,10 @@
 </head>
 <body>
     <h1>Perfil Cliente</h1>
+    {% for datosC in datosC %}
+    <p>{{ datosC.nombres }}</p>
+    {% endfor %}
+    <a href="{% url 'eliminarCuenta' %}">Eliminar cuenta</a>
+    <a href="{% url 'editarPerfilC' %}">Editar cuenta</a>
 </body>
 </html>

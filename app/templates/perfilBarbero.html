@@ -8,5 +8,10 @@
 </head>
 <body>
     <h1>Perfil Barbero</h1>
+    {% for datosB in datosB %}
+    <p>{{ datosB.nombres }}</p>
+    {% endfor %}
+    <a href="{% url 'eliminarCuenta' %}">Eliminar cuenta</a>
+    <a href="{% url 'editarPerfilB' %}">Editar cuenta</a>
 </body>
 </html>
