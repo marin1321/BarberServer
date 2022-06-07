@@ -1,0 +1,490 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');/* Pertenece a los estilos del login y register */
+@import url(https://fonts.googleapis.com/css?family=Alegreya+Sans:300);
+
+a{
+    margin-top: 17px;
+    text-decoration: none;
+    list-style-type:none;
+    color: #fefd9f;
+}
+.link{
+    color: #ccc;
+    font-size: 15px;
+    letter-spacing: 1px;
+    transition: 0.4s;
+}
+
+.a{
+    width: 20%;
+    height: 15%;
+}
+
+.NavLink .active{
+    border-bottom: 2px solid #fff;
+}
+.NavLink{
+    width: 40rem;
+    height: 4rem;
+    display: flex;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    justify-content: space-evenly;
+}
+.NavLink a:hover{
+    text-decoration: none;
+}
+/* .OnOff{
+    transition: 3.S;
+    border: 2px  solid #c7c7c7;
+    width: 10px;
+    height: 10px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    margin-right: 26px;
+    margin-left: 29px;
+    background: red;
+} */
+.Switch{
+    display: flex;
+    justify-content: flex-end;
+}
+header{
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height:7em;
+    background: transparent;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+    transition: 0.4s;
+}
+.slider{
+    background: url(../img/srb.jpeg) no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 62.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgSlider{
+    width: 10rem;
+    height: 8rem;
+}
+
+.imagenLogo{
+    width: 100%!important;
+    height: 100%!important;
+}
+.sliders{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem; 
+    align-items: center;
+}
+.sect_f{
+    max-width: 1100px;
+    height: 470px;
+    width: 90%;
+    overflow: hidden;
+    margin: auto;
+    color: whitesmoke;
+    padding: 35px;
+    /* font-family: 'Open Sans' sans-serif; */
+}
+.sect_f1{
+    max-width: 1100px;
+    height: 400px;
+    width: 90%;
+    overflow: hidden;
+    margin: auto;
+    color: whitesmoke;
+    padding: 35px;
+    /* font-family: 'Open Sans' sans-serif; */
+}
+.container-elements{
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+}
+.container-elements1{
+    display: grid;
+    grid-template-columns: 2fr 1.5fr;
+}
+.cont-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.element1{
+    background: url(../img/young-man-barber.jpg) no-repeat center center;
+    background-size: 100%;
+}
+.element2{
+    background: url(../img/handsome-man-barbershop.jpg) no-repeat center center;
+    background-size: 100%;
+}
+.secc{
+    background: url(../img/vintage-chairs.jpg);
+    /* width: 100%;
+    height: 100vh; */
+    width: 100%;
+    height: 62.5em;
+    background-position: center;
+    position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    justify-content: center;
+    align-items: center;
+}
+.secc1{
+    background: url(../img/client-doing-hair-cut-barber-shop-salon.jpg);
+    /* width: 100%;
+    height: 100vh; */
+    width: 100%;
+    height: 62.5em;
+    background-position: center;
+    position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    justify-content: center;
+    align-items: center;
+}
+.tit{
+    font-size: 35px;
+    text-align: center;
+    padding: 30px;
+    font-weight: 800;
+}
+.parrafo{
+    font-size: 20px;
+    padding: 15px;
+    text-align: center;
+}
+.row{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.text{
+    width: auto;
+    height: auto;
+    font-family: 'Rye', cursive;
+    color: white;
+    font-size: 4rem;
+    text-shadow: 0 0 10px yellow;
+    text-align: center;
+}
+
+body {
+    /* font-family: 'Alegreya Sans', sans-serif; */
+    font-family:'Alegreya Sans', sans-serif;
+}
+
+/* Sticky footer position and size
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 15em;
+  background-color: #292c2f;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height:260px;
+}
+
+
+/* Sticky footer style and color
+-------------------------------------------------- */
+footer {
+  padding-top: 30px;
+  background-color: #292c2f;
+  color: #bbb;
+  margin-bottom: 0px;
+}
+
+footer a {
+  color: #999;
+}
+
+footer a:hover, footer a:focus {
+  color: #aaa;
+  text-decoration:none;
+  border-bottom:1px dotted #999;
+}
+
+footer .form-control {
+    background-color: #1f2022;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    border: none;
+    resize: none;
+    color: #d1d2d2;
+    margin-bottom: 5px;
+}
+.logoF{
+    width: 60px;
+}
+@media screen and (min-width: 1350px) {
+    .imagenLogo{
+        width: 100px;
+    }
+    .slider{
+        height: 1100px;
+    }
+}
+a:not([href]):not([tabindex]) {
+    color: #ccc;;
+}
+a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+    color: #fefd9f; 
+    text-decoration: none;
+    list-style-type:none;
+}
+#page-content-wrapper{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: black;
+}
+.textH4{
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 15px;
+    color:white;
+}
+.textH2{
+    font-size: 38px;
+    font-weight: 600;
+    padding: 0 0 10px;
+    margin: 0;
+    margin-top: 0;
+    text-transform: none;
+    color: #fefd9f;
+}
+.lead{
+    color: white;
+}
+.textAbout{
+    color: #fefd9f;
+}
+.nav-item :hover{
+    color: white;
+}
+.nav-item .active{
+    border: 1px white solid;
+    background: white;
+    color:black
+}
+.nav-pills .nav-item .active{
+    background: white;
+    color:black
+}
+.nav-item .active:hover{
+    background-color: transparent;
+    color: white;
+}
+.about-tab .tab-content .tab-pane{
+	padding: 20px;
+	text-align: center;
+    color: white;
+}
+
+.about-tab .tab-content .tab-pane ul li{
+    display: inline-block;
+    margin: 0px 10px;   
+}
+.contacto{
+    display: flex;
+    height: 500px;
+    justify-content: center;
+}
+.containers{
+    margin-top: 100px;
+    background: url(../img/fondo/barberContact.jpg) no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+.aboutU{
+    padding-top: 90px;
+}.submenus{
+    text-decoration: none;
+    list-style: none;
+    width: 50px;
+    height: 50px;
+}
+.submenus a:hover{
+    font-weight: bold;
+}
+.children{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+	padding: 0px;
+	width: 150px;
+	height: 0;
+	float:  right;
+	position: absolute;
+    right: 0px;
+	top: 95px;
+	border: 0;
+	opacity: 0;
+	filter: alpha(opacity=0); /* Internet Explorer*/
+	overflow: hidden;
+	background: rgba(0,0,0,0.9);    
+	z-index: -1;
+	border-radius: 0px 0px 5px 5px;
+	-moz-border-radius: 0px 0px 5px 5px;
+	-webkit-border-radius: 0px 0px 5px 5px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	-moz-transition: all 0.3s ease-in-out 0s;
+	-ms-transition: all 0.3s ease-in-out 0s;
+	-o-transition: all 0.3s ease-in-out 0s;
+	transition: all 0.3s ease-in-out 0s;
+}
+.children li{
+    margin: 0;
+}
+.submenus:hover ul.children{height:150px;opacity:1;}
+.submenus ul.children li a{
+	color: #fefefe !important;
+	padding: 13px 0 13px 20px;
+	width: 130px;
+	border-bottom: 1px solid #2f2f2f;
+	font-size: 12px;
+	
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: flex-end;
+}
+.submenus ul li a:hover{
+	color: #fefd9f !important;
+	font-weight: bold;
+	padding-right:28px;
+}
+
+/*modificar barra de navegación*/
+.mostrar-menu, .esconder-menu{
+    font-size: 30px;
+    cursor: pointer;
+    display: none;
+    transition: 0.4s;
+}
+
+.mostrar-menu{
+    order: 1;
+}
+
+#check{
+    display: none;
+}
+
+@media(max-width: 800px){
+    /*HEADER*/
+    .mostrar-menu, .esconder-menu{
+        display: block;
+    }
+
+    .mostrar-menu{
+        width: 1.4em;
+        height: 1.4em;
+        margin-right: 40px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .NavLink{
+        position: fixed;
+        width: 30%;
+        height: 27em;
+        background: rgba(0,0,0,1);
+        /* right: 0; */
+        right: -100%;
+        top: 0;
+        text-align: center;
+        padding: 100px 0px;
+        z-index: 50;
+        transition: 0.8s;
+        display: flex;
+        flex-direction: column;
+        margin:0;
+    }
+    .NavLink .active{
+        border-bottom: 0px;
+    }
+    .link{
+        display: block;
+    }
+    .esconder-menu{
+        width: 45px;
+        height: 45px;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        color: #fff;
+        margin: 0;
+        text-align: center;
+        transition: 0.4s;
+    }
+    .esconder-menu:hover{
+        background-color: #1c1c1c;
+        color:#f44336;
+    }
+
+    .mostrar-menu:hover{
+        background-color: #1c1c1c;
+        color:#ffd17b;
+    }
+    #check:checked ~ .NavLink{
+        right: 0;
+    }
+    .submenus{
+        width: 100%;
+        height: auto;
+        text-align: center;
+        margin-top: 17px;
+    }
+    .imgP{
+        width: auto;
+        height: auto;
+        padding: 0!important;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+    .children{
+        right: 0;
+        top: 27em;
+    }
+    header{height:6em;}
+
+    .imgSlider{
+        height: 7rem;
+        width: 9rem;
+    }
+}
+
+.col-md-5 form fieldset button{
+    border: 1px solid black;
+    color: black;
+}
+

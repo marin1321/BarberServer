@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+option{ background-color: #222; }
+
+/*clases*/
+.mainConsultBarber{
+width: 100%;
+height: 100%;
+justify-content: center;
+align-items: center;
+}
+
+.nom-categoria{
+height: 4.5rem;
+width: 50%;
+text-align: center;
+color: white;
+font-size: 4rem;
+margin-top: 1.5rem;
+border-bottom: 5px solid white;
+font-family: 'Rye', cursive;
+text-shadow: 0 0 10px yellow;
+}
+
+.cards-barberos{
+    /* display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(400px,1fr)); */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    row-gap: 10px;
+} 
+
+#seleciona{
+    background: linear-gradient(#333, #222);
+    color: white;
+    border: 1px solid #444;
+}
+
+#main{
+width: 90%;
+height: 100%;
+margin-top: 8em;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+background: linear-gradient(rgb(17, 17, 17), #333);
+border-radius: 30px;
+padding-bottom: 3rem;
+}

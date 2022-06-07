@@ -1,0 +1,37 @@
+.clasificacionF {
+  display: flex;
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+  justify-content: space-between;
+}
+
+.clasificacionF p {
+  text-align: center;
+}
+
+.clasificacionF label {
+  font-size: 20px;
+}
+
+.clasificacion input[type="radio"] {
+  display: none;
+}
+
+.clasificacion label {
+  color: grey;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.clasificacion label:hover,
+.clasificacion label:hover ~ label {
+  color: orange;
+}
+
+.clasificacion input[type="radio"]:checked ~ label {
+  color: orange;
+}

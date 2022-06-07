@@ -78,13 +78,13 @@ WSGI_APPLICATION = 'BarberServer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'BARBER_SERVER',
-        'USER': 'postgres',
-        'PASSWORD': 'FOODTIME123',
-        'HOST': 'localhost',
-        'DATABASE_PORT': '5432'
-    }
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'BARBER_SERVER',
+            'USER': 'root',
+            'PASSWORD': 'Sena1234',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
 }
 
 

@@ -1,0 +1,129 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+/*clases*/
+.cards{
+  height: 38rem;
+  width: 25em;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #1c1b29;
+  background: linear-gradient(#333, #222);
+  align-items: center;
+}
+
+.figura{
+  height: 60%;
+  width: 100%;
+  clip-path: polygon(0 0,100% 0, 100% 85%, 0 100%);
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.img_cards{
+  height: 100%;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+}
+
+.infoBasica{
+  height: 42%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info, .info-modal{
+  width: 95%;
+  color: white;
+  font-size: 1.4rem;
+}
+
+/*identificadores*/
+#nombre{
+  color: #fefd9f;
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/*--------------boton ver mas------------*/
+.blur{
+  position: absolute;
+  z-index: 5;
+  height: 38rem;
+  width: 25em;
+  background-color: rgba(0,0,0,0.65);
+  opacity: 0;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-VerMas{
+  --color: #ffd17b;
+  font-family: inherit;
+  display: inline-block;
+  width: 8em;
+  height: 2.6em;
+  line-height: 2.5em;
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--color);
+  transition: color .5s;
+  z-index: 1;
+  font-size: 17px;
+  border-radius: 6px;
+  font-weight: 500;
+  color: var(--color);
+  background: linear-gradient(#1b1b1b, #111);
+ }
+ 
+ .btn-VerMas:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: var(--color);
+  height: 150px;
+  width: 200px;
+  border-radius: 50%;
+ }
+ 
+ .btn-VerMas:hover {
+  color: #fff;
+ }
+ 
+ .btn-VerMas:before {
+  top: 100%;
+  left: 100%;
+  transition: all .7s;
+ }
+ 
+ .btn-VerMas:hover:before {
+  top: -30px;
+  left: -30px;
+ }
+ 
+ .btn-VerMas:active:before {
+  border-color: #ffd17b;
+  transition: background 0s;
+ }
+
+.blur:hover, .btn-VerMas{
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-VerMas:hover{
+  background:linear-gradient(#1b1b1b, #111) ;
+  border: 1px solid black;
+  color: black
+}

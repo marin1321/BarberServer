@@ -1,0 +1,87 @@
+/* From uiverse.io by @adamgiebl */
+.cssbuttons-io-button {
+    display: flex;
+    font-weight: 600;
+    height: 100%;
+    font-size: 10px;
+    border: none;
+    padding: 0.7em 2em;
+    font-size: 18px;
+    font-family: inherit;
+    background-blend-mode: multiply;
+    color: rgb(235, 234, 234);
+    border-radius: 9px;
+    background: linear-gradient(225deg, #181818, #2e2e2e);
+    box-shadow: -5px 5px 10px #191919,
+                5px -5px 10px #292929;
+    justify-content: center
+}
+.cssbuttons-io-button:hover{
+    background: #212121;
+    transition: background 1s ease;
+    box-shadow: -5px 5px 10px #191919,
+                5px -5px 10px #292929;
+}
+.cssbuttons-io-button:active {
+    transition: box-shadow .1s ease;
+    border-radius: 9px;
+    background: #212121;
+    box-shadow: inset -5px 5px 10px #191919,
+                 inset 5px -5px 10px #292929;
+   }
+   
+   .cssbuttons-io-button span {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+   }
+   
+.cssbuttons-io-button:hover span {
+    opacity: 0.7;
+   }
+.bi-pencil-square{ height: 70%;}
+
+.filaEditar{
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+ .editar{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* .categorias{
+    color: #fff;
+} */
+
+.editar, .form-switch{
+    font-size: x-large;
+}
+
+.derechaBoton{
+    display: flex;
+    right: 0;
+}
+
+.timeline-sm-item .verCita{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.timeline-sm-item .verCita button{
+    background-color: #050505;
+    border-radius: 10px;
+    height: 3rem;
+    width: 5rem;
+    border: 1px solid #0d6efd;
+    color: #fff;
+}
+
+.timeline-sm-item .verCita button:hover{
+    box-shadow: 0 0 10px 2px #0d6efd inset;
+}

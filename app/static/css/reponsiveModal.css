@@ -1,0 +1,18 @@
+/* @media screen and (min-width: 1350px) {
+    .contenedorModalPerfil{
+        height: 35rem;
+    }
+    .imgLocal{
+        width: 70%;
+        height: 75%;
+    }
+    .texto{
+        display: flex;
+        flex-direction: column;
+        height: 60%;
+    }
+    .local{
+        height: 60%;
+        display: flex;
+    }
+} */
