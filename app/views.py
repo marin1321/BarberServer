@@ -105,3 +105,54 @@ def registro(request):
                     "form":RegistrationForm
                 }
     return render(request, 'registration/registrar.html', data)
+
+def eliminarCuenta(request):
+    global user_id 
+    user_id = request.user.id
+    usuarioActivo = User.objects.get(id=user_id)
+    if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+        id = Trabajadores.objects.get(email=usuarioActivo).id
+        usuario = get_object_or_404(Trabajadores, id=id)
+        usuario.delete()
+    if Clientes.objects.filter(email=usuarioActivo).exists()==True:
+        id = Clientes.objects.get(email=usuarioActivo).id
+        usuario = get_object_or_404(Clientes, id=id)
+        usuario.delete()
+    usuarioActivo.delete()
+    return redirect(to="inicio")
+
+def editarPerfilC(request):
+    global user_id 
+    user_id = request.user.id
+    usuarioActivo = User.objects.get(id=user_id)
+    id = Clientes.objects.get(email=usuarioActivo).id
+    perfil = get_object_or_404(Clientes, id=id)
+    data = {
+        'form': EditarClienteForm(instance=perfil),
+    }
+    if request.method=='POST':
+        formulario = EditarClienteForm(data=request.POST, instance=perfil, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="perfilC")
+        else:
+            data["form"] = formulario
+    return render(request, 'editarPerfilC.html', data)
+
+def editarPerfilB(request):
+    global user_id 
+    user_id = request.user.id
+    usuarioActivo = User.objects.get(id=user_id)
+    id = Trabajadores.objects.get(email=usuarioActivo).id
+    perfil = get_object_or_404(Trabajadores, id=id)
+    data = {
+        'form': EditarBarberoForm(instance=perfil),
+    }
+    if request.method=='POST':
+        formulario = EditarBarberoForm(data=request.POST, instance=perfil, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="perfilB")
+        else:
+            data["form"] = formulario
+    return render(request, 'editarPerfilB.html', data)
