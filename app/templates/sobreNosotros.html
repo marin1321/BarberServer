@@ -1,12 +1,182 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" href="{% static 'img/logo/favicon.ico' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Web site created using create-react-app" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/lore.css'%}">
+    <title>BARBER SERVER</title>
+    <script defer src="/static/js/bundle.js"></script>
 </head>
+
 <body>
-    
+    <header class="header">
+        <div class="imgSlider">
+            <img class="imagenLogo" src="../static/img/logo/logo-LetrasBlancas.png" alt="Logo">
+        </div><input type="checkbox" id="check"><label for="check" class="mostrar-menu">≡</label>
+        <nav class="NavLink">
+            <a aria-current="page" class="active" href="{% url 'inicio' %}"><a class="link" href="{% url 'inicio' %}">INICIO</a></a>
+            <a> <a class="link" href="{% url 'sobreNosotros' %}">SOBRE NOSOTROS</a></a>
+            <a> <a class="link" href="{% url 'barberos' %}">BARBEROS</a> </a>
+            <a> <a class="link">CONTACTENOS</a> </a>
+            <a> <a class="link">INGRESAR</a> </a>
+            <label for="check" class="esconder-menu">×</label>
+        </nav>
+    </header>
+    <div class="aboutU">
+        <div id="page-content-wrapper">
+            <div class="section wb">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-left">
+                            <div class="message-box">
+                                <h4 class="textH4">Acerca De Nosotros</h4>
+                                <h2 class="textH2">Bienvenidos a BARBERSERVER</h2>
+                                <p class="lead">Desde la niñez muchos hombres y mujeres han asistido a un barbero o
+                                    peluquero, de hecho, es algo que ya tiene mucho tiempo, la metodología de asignar
+                                    una hora para una cita y tener una relación cliente-barbero siempre ha sido la
+                                    misma, por un cuaderno o una agenda, o ya en la actualidad por medio de las redes
+                                    sociales.</p>
+                                <p class="textAbout"> BarberSever es un software encargado de darle un orden a las citas
+                                    y horarios de los cortes, ya sea en una barbería o en una peluquería, también se
+                                    encarga de mejorar el servicio con los clientes de las barberías ya que este sistema
+                                    es necesario para muchos emprendedores dueños de barberías y peluquerías que quieren
+                                    tener una nueva metodología de pedido y asignación de citas para un corte de
+                                    cabello.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="right-box"><img class="img-fluid" src="{% static 'img/fondo/motilar.jpg' %}" alt="AGZ"></div>
+                        </div>
+                    </div>
+                    <hr class="hr1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="about-tab">
+                                <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
+                                    <li class="nav-item"><a class="nav-link active" href="#tab_a"
+                                            data-toggle="tab">Nuestra Misión</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#tab_b" data-toggle="tab">Por Qué
+                                            Nosotros</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#tab_c" data-toggle="tab">Alcance</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tab_a">
+                                        <p>BarberServer tiene como objetivo mejorar la relación entre un cliente y un
+                                            barbero o peluquero, mediante una mejor, sencilla y rápida forma de pedir
+                                            una cita por medio del ya mencionado (principalmente) sistema web, además de
+                                            beneficiar de forma eficiente a ambas partes con respecto al tiempo y la
+                                            organización, aspectos los cuales también se buscan primordialmente con este
+                                            sistema.</p>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_b">
+                                        <p>BarberServer es un software que tendrá una agenda online que funciona como un
+                                            ERP para pymes. Es versátil, puede funcionar cómo agenda para tus citas para
+                                            corte de cabello en tu peluquería o barbería, y esto es lo que va mejorar la
+                                            relación con tus clientes. Este software te llevará a tener un mejor orden
+                                            con los horarios de las citas de tus clientes y ese factor es el que te va a
+                                            dar reconocimiento por parte de la comunidad. Los usuarios que se registren
+                                            tendrán ciertos beneficios sobre los usuarios comunes o libres ya que a
+                                            estos se les guardará sus datos tanto personales como dentro de la página,
+                                            como lo son las citas.</p>
+                                        <ul>
+                                            <li><i class="fa fa-circle-o" aria-hidden="true"></i>Experiencia del usuario
+                                            </li>
+                                            <li><i class="fa fa-circle-o" aria-hidden="true"></i>Dispositivos completos
+                                            </li>
+                                            <li><i class="fa fa-circle-o" aria-hidden="true"></i>Diseño impresionante
+                                            </li>
+                                            <li><i class="fa fa-circle-o" aria-hidden="true"></i>Impacto visual</li>
+                                            <li><i class="fa fa-circle-o" aria-hidden="true"></i>100% sincronizado</li>
+                                            <li><i class="fa fa-circle-o" aria-hidden="true"></i>Soporte personalizado
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_c">
+                                        <p>BarberServer va a tener una página web con un programa para ordenador y otro
+                                            para dispositivos móviles, también se espera que esta última se encuentre en
+                                            la mayoría de todas las tiendas de aplicaciones tanto para Android como para
+                                            IOS, también el sistema se va a extender principalmente por las principales
+                                            ciudades del departamento del Quindío y en un futuro se piensa expandir por
+                                            todo territorio nacional.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="logoF" src="../static/img/logo/logo-LetrasBlancas.png" alt="logo">
+                    <h5>BARBERSERVER CO.</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled"><a aria-current="page" class="active" href="/">
+                                    <li><a>Inicio</a></li>
+                                </a><a class="" href="/Contact">
+                                    <li><a>Contacto</a></li>
+                                </a><a class="" href="/About">
+                                    <li><a>Sobre Nosotros</a></li>
+                                </a><a class="" href="/Login">
+                                    <li><a>Ingresar</a></li>
+                                </a></ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled">
+                                <li><a
+                                        href="https://drive.google.com/drive/folders/1Ml9agz-_Nyd70hbgrfMkMH123uOKNYrq?usp=sharing">Documentacion</a>
+                                </li>
+                                <li><a href="">Suporte</a></li>
+                                <li><a href="">Termino Legales</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="nav">
+                        <li class="nav-item"><a href="" class="nav-link pl-0"><i class="fa fa-facebook fa-lg"></i></a>
+                        </li>
+                        <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-twitter fa-lg"></i></a></li>
+                        <li class="nav-item"><a href="https://github.com/vector18xd/BarberServer.git"
+                                class="nav-link"><i class="fa fa-github fa-lg"></i></a></li>
+                        <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-instagram fa-lg"></i></a></li>
+                    </ul><br>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="text-md-right">¡Envianos un comentario!</h5>
+                    <hr>
+                </div>
+                <div class="col-md-5">
+                    <form>
+                        <fieldset class="form-group"><input type="email" class="form-control" id="exampleInputEmail1"
+                                placeholder="Ingrese E-mail"></fieldset>
+                        <fieldset class="form-group"><textarea class="form-control" id="exampleMessage"
+                                placeholder="Mensage"></textarea></fieldset>
+                        <fieldset class="form-group text-xs-right"><button type="button"
+                                class="btn btn-secondary-outline btn-lg">Enviar</button></fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
