@@ -106,9 +106,6 @@ def registro(request):
                 }
     return render(request, 'registration/registrar.html', data)
 
-<<<<<<< HEAD
-def sobreNosotros():
-=======
 def eliminarCuenta(request):
     global user_id 
     user_id = request.user.id
@@ -159,4 +156,3 @@ def editarPerfilB(request):
         else:
             data["form"] = formulario
     return render(request, 'editarPerfilB.html', data)
->>>>>>> 663372066f3f8d763735c84f3dd2dc5399c1be6f
