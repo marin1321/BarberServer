@@ -1,12 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block stilos %}
+<link rel="stylesheet" href="{% static 'css/estilosBarber.css'%}">
+<link rel="stylesheet" href="{% static 'css/search.css'%}">
+{% endblock stilos %}
+{% block appContenido %}
+<div class="aboutU">
+    <div id="page-content-wrapper">
+        <div class="section wb">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-left">
+                        <div class="message-box">
+                            <h4 class="textH4">Acerca De Nosotros</h4>
+                            <h2 class="textH2">Bienvenidos a BARBERSERVER</h2>
+                            <p class="lead">Desde la niñez muchos hombres y mujeres han asistido a un barbero o
+                                peluquero, de hecho, es algo que ya tiene mucho tiempo, la metodología de asignar
+                                una hora para una cita y tener una relación cliente-barbero siempre ha sido la
+                                misma, por un cuaderno o una agenda, o ya en la actualidad por medio de las redes
+                                sociales.</p>
+                            <p class="textAbout"> BarberSever es un software encargado de darle un orden a las citas
+                                y horarios de los cortes, ya sea en una barbería o en una peluquería, también se
+                                encarga de mejorar el servicio con los clientes de las barberías ya que este sistema
+                                es necesario para muchos emprendedores dueños de barberías y peluquerías que quieren
+                                tener una nueva metodología de pedido y asignación de citas para un corte de
+                                cabello.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div class="right-box"><img class="img-fluid" src="{% static 'img/fondo/motilar.jpg' %}" alt="AGZ"></div>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="about-tab">
+                            <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="tab_a" role="tab" aria-controls="tab_a1" data-bs-target="#tab_a1" aria-selected="true" type="button" data-bs-toggle="pill">Nuestra Misión</button></li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link btnUbout" data-bs-toggle="pill" id="tab_b" role="tab" aria-controls="tab_b1" data-bs-target="#tab_b1" aria-selected="false" type="button">Por QuéNosotros</button></li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" data-bs-toggle="pill" id="tab_c" role="tab" aria-controls="tab_c1" data-bs-target="#tab_c1" aria-selected="false" type="button">Alcance</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tab_a1" role="tabpanel" aria-labelledby="tab_a" tabindex="0">
+                                    <p>BarberServer tiene como objetivo mejorar la relación entre un cliente y un
+                                        barbero o peluquero, mediante una mejor, sencilla y rápida forma de pedir
+                                        una cita por medio del ya mencionado (principalmente) sistema web, además de
+                                        beneficiar de forma eficiente a ambas partes con respecto al tiempo y la
+                                        organización, aspectos los cuales también se buscan primordialmente con este
+                                        sistema.</p>
+                                </div>
+                                <div class="tab-pane fade" id="tab_b1" role="tabpanel" aria-labelledby="tab_b" tabindex="0">
+                                    <p>BarberServer es un software que tendrá una agenda online que funciona como un
+                                        ERP para pymes. Es versátil, puede funcionar cómo agenda para tus citas para
+                                        corte de cabello en tu peluquería o barbería, y esto es lo que va mejorar la
+                                        relación con tus clientes. Este software te llevará a tener un mejor orden
+                                        con los horarios de las citas de tus clientes y ese factor es el que te va a
+                                        dar reconocimiento por parte de la comunidad. Los usuarios que se registren
+                                        tendrán ciertos beneficios sobre los usuarios comunes o libres ya que a
+                                        estos se les guardará sus datos tanto personales como dentro de la página,
+                                        como lo son las citas.</p>
+                                    <ul>
+                                        <li><i class="fa fa-circle-o" aria-hidden="true"></i>Experiencia del usuario
+                                        </li>
+                                        <li><i class="fa fa-circle-o" aria-hidden="true"></i>Dispositivos completos
+                                        </li>
+                                        <li><i class="fa fa-circle-o" aria-hidden="true"></i>Diseño impresionante
+                                        </li>
+                                        <li><i class="fa fa-circle-o" aria-hidden="true"></i>Impacto visual</li>
+                                        <li><i class="fa fa-circle-o" aria-hidden="true"></i>100% sincronizado</li>
+                                        <li><i class="fa fa-circle-o" aria-hidden="true"></i>Soporte personalizado
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="tab_c1" role="tabpanel" aria-labelledby="tab_c" tabindex="0">
+                                    <p>BarberServer va a tener una página web con un programa para ordenador y otro
+                                        para dispositivos móviles, también se espera que esta última se encuentre en
+                                        la mayoría de todas las tiendas de aplicaciones tanto para Android como para
+                                        IOS, también el sistema se va a extender principalmente por las principales
+                                        ciudades del departamento del Quindío y en un futuro se piensa expandir por
+                                        todo territorio nacional.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

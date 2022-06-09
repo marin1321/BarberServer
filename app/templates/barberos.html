@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stilos %}
+<link rel="stylesheet" href="{% static 'css/estilosBarber.css'%}">
+<link rel="stylesheet" href="{% static 'css/search.css'%}">
+<link rel="stylesheet" href="{% static 'css/barberos.css'%}">
+<link rel="stylesheet" href="{% static 'css/card.css'%}">
+<link rel="stylesheet" href="{% static 'css/modal.css'%}">
+{% endblock stilos %}
+{% block llamdoJavaScript %}
+
+{% endblock llamdoJavaScript %}
+{% block appContenido %}
+<div class="aboutU">
+        <main class="mainConsultBarber">
+            <section class="busqueda">
+                <form action="" method="" class="form-busqueda"><input type="search"
+                        placeholder="What are you looking for?"><button>Search</button><select name="opciones"
+                        id="seleciona">
+                        <option value="Todos">Todos</option>
+                        <option value="Barberos">Barberos</option>
+                        <option value="Peluqueros">Peluqueros</option>
+                        <option value="Estilista">Estilista</option>
+                    </select></form>
+            </section>
+            <section id="main">
+                <h2 class="nom-categoria">Barberos</h2>
+                <div class="cards-barberos">
+                    <article class="cards card1">
+                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
+                        <figure class="figura"><img src="{% static 'img/Gustavo.jpg'%}" alt="las vegas"
+                                class="img_cards"></figure>
+                        <div class="infoBasica">
+                            <h3 id="nombre">Gustavo Quintana</h3>
+                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
+                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
+                            <h4 class="info"><b>Estado:</b> Activo</h4>
+                        </div>
+                    </article>
+                    <article class="cards card1">
+                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
+                        <figure class="figura"><img src="{% static 'img/Gustavo.jpg'%}" alt="las vegas"
+                                class="img_cards"></figure>
+                        <div class="infoBasica">
+                            <h3 id="nombre">Gustavo Quintana</h3>
+                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
+                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
+                            <h4 class="info"><b>Estado:</b> Activo</h4>
+                        </div>
+                    </article>
+                    <article class="cards card1">
+                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
+                        <figure class="figura"><img src="{% static 'img/Gustavo.jpg'%}" alt="las vegas"
+                                class="img_cards"></figure>
+                        <div class="infoBasica">
+                            <h3 id="nombre">Gustavo Quintana</h3>
+                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
+                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
+                            <h4 class="info"><b>Estado:</b> Activo</h4>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+{%endblock%}
