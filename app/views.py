@@ -115,6 +115,9 @@ def registro(request):
                 }
     return render(request, 'registration/registrar.html', data)
 
+def sobreNosotros():
+    pass
+
 def eliminarCuenta(request):
     global user_id 
     user_id = request.user.id
