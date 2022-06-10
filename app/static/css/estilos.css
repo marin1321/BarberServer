@@ -33,6 +33,7 @@ a{
 }
 .NavLink a:hover{
     text-decoration: none;
+    color: #fefd9f;
 }
 /* .OnOff{
     transition: 3.S;
@@ -295,6 +296,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
     background-color: transparent;
     color: white;
 }
+
 .about-tab .tab-content .tab-pane{
 	padding: 20px;
 	text-align: center;
@@ -487,4 +489,6 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
     border: 1px solid black;
     color: black;
 }
-
+nav-link{
+    color: wheat;
+}

@@ -14,7 +14,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    background: url(../../img/barberos.jpg) no-repeat center center;
+    background: url(../img/barberos.jpg) no-repeat center center;
     background-size:cover;
 }
 
