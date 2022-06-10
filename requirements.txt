@@ -3,3 +3,4 @@ psycopg2-binary
 pymysql
 pillow
 pymysql
+django-admin-interface

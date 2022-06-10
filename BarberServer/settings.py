@@ -33,6 +33,7 @@ LOGOUT_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'colorfield',
 ]
 
 MIDDLEWARE = [
@@ -81,12 +83,11 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
-            'PASSWORD': '',
+            'PASSWORD': 'Sena1234',
             'HOST': 'localhost',
             'PORT': '3306',
         }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
