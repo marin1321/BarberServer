@@ -15,6 +15,9 @@ def sobreNosotros(request):
 def barber(request):
     return render(request, 'barberos.html')
 
+def contactenos(request):
+    return render(request, 'contactenos.html')
+
 def perfil(request):
     global user_id
     user_id = request.user.id

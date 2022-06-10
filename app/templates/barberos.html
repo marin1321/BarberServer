@@ -11,12 +11,11 @@
 
 {% endblock llamdoJavaScript %}
 {% block appContenido %}
-<div class="aboutU">
+<div id="consultBarber">
         <main class="mainConsultBarber">
             <section class="busqueda">
                 <form action="" method="" class="form-busqueda"><input type="search"
-                        placeholder="What are you looking for?"><button>Search</button><select name="opciones"
-                        id="seleciona">
+                        placeholder="What are you looking for?"><button>Search</button><select name="opciones" id="seleciona">
                         <option value="Todos">Todos</option>
                         <option value="Barberos">Barberos</option>
                         <option value="Peluqueros">Peluqueros</option>
@@ -28,8 +27,7 @@
                 <div class="cards-barberos">
                     <article class="cards card1">
                         <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
-                        <figure class="figura"><img src="{% static 'img/Gustavo.jpg'%}" alt="las vegas"
-                                class="img_cards"></figure>
+                        <figure class="figura"><img src="/static/img/Gustavo.jpg" alt="imagen del barbero Gustavo" class="img_cards"></figure>
                         <div class="infoBasica">
                             <h3 id="nombre">Gustavo Quintana</h3>
                             <h4 class="info"><b>Barrio:</b> Limonar</h4>
@@ -39,8 +37,7 @@
                     </article>
                     <article class="cards card1">
                         <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
-                        <figure class="figura"><img src="{% static 'img/Gustavo.jpg'%}" alt="las vegas"
-                                class="img_cards"></figure>
+                        <figure class="figura"><img src="/static/img/Gustavo.jpg" alt="imagen del barbero Gustavo" class="img_cards"></figure>
                         <div class="infoBasica">
                             <h3 id="nombre">Gustavo Quintana</h3>
                             <h4 class="info"><b>Barrio:</b> Limonar</h4>
@@ -50,8 +47,7 @@
                     </article>
                     <article class="cards card1">
                         <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
-                        <figure class="figura"><img src="{% static 'img/Gustavo.jpg'%}" alt="las vegas"
-                                class="img_cards"></figure>
+                        <figure class="figura"><img src="/static/img/Gustavo.jpg" alt="imagen del barbero Gustavo" class="img_cards"></figure>
                         <div class="infoBasica">
                             <h3 id="nombre">Gustavo Quintana</h3>
                             <h4 class="info"><b>Barrio:</b> Limonar</h4>
