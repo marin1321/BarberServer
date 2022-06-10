@@ -6,6 +6,7 @@ urlpatterns=[
     path('sobre_nosotros/', sobreNosotros, name='sobreNosotros'),
     path('perfil/', perfil, name='perfil'),
     path('barberos/', barber, name='barberos'),
+    path('modal_barberos/<id>/', modal_barber, name='modal_barberos'),
     path('contactenos/', contactenos, name='contactenos'),
     path('perfil_barbero/', perfilBarbero, name='perfilB'),
     path('perfil_cliente/', perfilCliente, name='perfilC'),
@@ -13,4 +14,5 @@ urlpatterns=[
     path('elimininar_cunta/', eliminarCuenta, name='eliminarCuenta'),
     path('editar_perfil_cliente/', editarPerfilC, name='editarPerfilC'),
     path('editar_perfil_barbero/', editarPerfilB, name='editarPerfilB'),
+    path('contacto/', contacto, name='contactos'),
 ]

@@ -1,0 +1,53 @@
+
+<!-- Modal -->
+{% for dataT in dataT %}
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <section class="fondo">
+                <div class="contenedorModalPerfil xl:h-10 modal-header">
+                    <section class="btn-cerrar" type="button" data-bs-dismiss="modal"> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                      </section>
+                      <section class="contenedor-modal">
+                    <figure class="campoimg-modal">
+                        <img src={{dataT.foto.url}} alt="El barbero Gustavo" class="img-vtn"/>
+                    </figure>
+                    <article class="infoBasica-modal">
+                        <section class="texto">
+                            <h3 id="nombre-modal">{{dataT.nombres }}</h3>
+                            <h4 class="info-modal"><b>Especialización:</b> Barbero</h4>
+                            <h4 class="info-modal"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
+                            <h4 class="info-modal"><b>Estado:</b> Activo</h4>
+                            <h4 class="info-modal"><b>Descripción:</b> Activo Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, rerum fugiat! Temporibus officiis magni molestias repellat reprehenderit. Aperiam recusandae labore aspernatur distinctio consectetur aut placeat laudantium. Ex quod fugit eligendi.</h4>
+                        </section>
+                        <section class="local">
+                            <h4 class="info-modal" id="direccion"><b>Dirección:</b> B/Limonar 3era etapa manzana 6 casa #3</h4>
+                            <figure class="mdl_campoImgLocal">
+                            </figure>
+                        </section>
+                        <button  class="btn-cita">
+                            AGENDAR
+                            <div class="icon">
+                              <svg
+                                height="24"
+                                width="24"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path
+                                  d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                  fill="currentColor"
+                                ></path>
+                              </svg>
+                            </div>
+                          </button>
+                    </section> 
+                    </div>
+                </article>
+            </section>
+        </div> 
+    </div>
+    {% endfor %}

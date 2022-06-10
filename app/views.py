@@ -13,7 +13,11 @@ def sobreNosotros(request):
     return render(request, 'sobreNosotros.html')
 
 def barber(request):
-    return render(request, 'barberos.html')
+    barber = Trabajadores.objects.all()
+    data = {
+        "barber":barber
+    } 
+    return render(request, 'barberos.html', data)
 
 def contactenos(request):
     return render(request, 'contactenos.html')
@@ -168,3 +172,11 @@ def editarPerfilB(request):
         else:
             data["form"] = formulario
     return render(request, 'editarPerfilB.html', data)
+def modal_barber(request, id):
+    barbero = Trabajadores.objects.filter( id = id )
+    data = {
+        "dataT":barbero
+    } 
+    return render(request, 'modalB.html', data)
+def contacto(request):
+    return render(request, 'contacto.html')
