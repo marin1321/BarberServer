@@ -8,11 +8,19 @@
 <link rel="stylesheet" href="{% static 'css/modal.css'%}">
 {% endblock stilos %}
 {% block llamdoJavaScript %}
-
+<script src="{% static 'js' %}"></script>
+<script type="text/javascript">
+    var $ = jQuery.noConflict()
+    function barbero(url){
+        $('#exampleModal').load(url, function(){
+            $(this).modal('show');
+        })
+    }
+</script>
 {% endblock llamdoJavaScript %}
 {% block appContenido %}
 <div class="aboutU">
-        <main class="mainConsultBarber">
+        <main class="mainConsultBarber" style="background-image: url('{% static 'img/barberos.jpg' %}')">
             <section class="busqueda">
                 <form action="" method="" class="form-busqueda"><input type="search"
                         placeholder="What are you looking for?"><button>Search</button><select name="opciones"
@@ -26,40 +34,28 @@
             <section id="main">
                 <h2 class="nom-categoria">Barberos</h2>
                 <div class="cards-barberos">
+                    {% for barber in barber %}
                     <article class="cards card1">
-                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
-                        <figure class="figura"><img src="{% static 'img/Gustavo.jpg'%}" alt="las vegas"
-                                class="img_cards"></figure>
+                        <div class="blur"><button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button></div>
+                        <figure class="figura">
+                            {% if barber.foto %}
+                            <img src="{{ barber.foto.url }}" alt="las vegas"
+                                class="img_cards">
+                            {% endif %}
+                            </figure>
                         <div class="infoBasica">
-                            <h3 id="nombre">Gustavo Quintana</h3>
-                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
+                            <h3 id="nombre">{{ barber.nombres }}</h3>
+                            <h4 class="info"><b>Barrio:</b>{{ barber.nom_local }}</h4>
                             <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
                             <h4 class="info"><b>Estado:</b> Activo</h4>
                         </div>
                     </article>
-                    <article class="cards card1">
-                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
-                        <figure class="figura"><img src="{% static 'img/Gustavo.jpg'%}" alt="las vegas"
-                                class="img_cards"></figure>
-                        <div class="infoBasica">
-                            <h3 id="nombre">Gustavo Quintana</h3>
-                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
-                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
-                            <h4 class="info"><b>Estado:</b> Activo</h4>
-                        </div>
-                    </article>
-                    <article class="cards card1">
-                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
-                        <figure class="figura"><img src="{% static 'img/Gustavo.jpg'%}" alt="las vegas"
-                                class="img_cards"></figure>
-                        <div class="infoBasica">
-                            <h3 id="nombre">Gustavo Quintana</h3>
-                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
-                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
-                            <h4 class="info"><b>Estado:</b> Activo</h4>
-                        </div>
-                    </article>
+                    {% endfor %}
+                    
                 </div>
             </section>
         </main>
+        <div  class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        </div>
+        
 {%endblock%}

@@ -14,7 +14,7 @@
   
   .contenedorModalPerfil{
     width: 70%;
-    height: 36em;
+    height: 28em;
     top: 7.2em;
     background: linear-gradient(#1b1b1b, #111);
     /* background-color: #292c2f; */
@@ -87,7 +87,12 @@
     width: 100%;
     height: 50%;
   }
-
+  .texto h3{
+    color: #fefd9f;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: center;
+  }
   .local-calendario{
     width: 100%;
     height: auto;
@@ -96,7 +101,7 @@
 
   .local{
     width: 100%;
-    height: 54%;
+    height: 30%;
   }
   
   .btn-cita{
@@ -154,13 +159,6 @@
     border-radius: 20px;
   }
 
-  .mdl_campoImgLocal{
-    width: 75%;
-    height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
   
   .imgLocal{
     width: 80%;

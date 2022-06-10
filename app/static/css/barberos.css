@@ -47,7 +47,7 @@ text-shadow: 0 0 10px yellow;
 #main{
 width: 90%;
 height: 100%;
-margin-top: 8em;
+margin-top: 6em;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;

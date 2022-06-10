@@ -30,14 +30,14 @@
 <body>
     <header class="header">
         <div class="imgSlider">
-            <img class="imagenLogo" src="../static/img/logo/logo-LetrasBlancas.png" alt="Logo">
+            <img class="imagenLogo" src="{% static 'img/logo/logo-LetrasBlancas.png' %}" alt="Logo">
         </div><input type="checkbox" id="check"><label for="check" class="mostrar-menu">≡</label>
         <nav class="NavLink">
             <a aria-current="page" class="active" href="{% url 'inicio' %}"><a class="link" href="{% url 'inicio' %}">INICIO</a></a>
             <a> <a class="link" href="{% url 'sobreNosotros' %}">SOBRE NOSOTROS</a></a>
             <a> <a class="link" href="{% url 'barberos' %}" >BARBEROS</a> </a>
-            <a> <a class="link">CONTACTENOS</a> </a>
-            <a> <a class="link">INGRESAR</a> </a>
+            <a> <a class="link" href="{% url 'contactos' %}">CONTACTENOS</a> </a>
+            <a> <a class="link" href="{% url 'login' %}">INGRESAR</a> </a>
             <label for="check" class="esconder-menu">×</label>
         </nav>
     </header>

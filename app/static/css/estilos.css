@@ -489,6 +489,6 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
     border: 1px solid black;
     color: black;
 }
-nav-link{
+.nav-link{
     color: wheat;
 }
