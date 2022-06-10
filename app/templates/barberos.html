@@ -23,8 +23,7 @@
         <main class="mainConsultBarber" style="background-image: url('{% static 'img/barberos.jpg' %}')">
             <section class="busqueda">
                 <form action="" method="" class="form-busqueda"><input type="search"
-                        placeholder="What are you looking for?"><button>Search</button><select name="opciones"
-                        id="seleciona">
+                        placeholder="What are you looking for?"><button>Search</button><select name="opciones" id="seleciona">
                         <option value="Todos">Todos</option>
                         <option value="Barberos">Barberos</option>
                         <option value="Peluqueros">Peluqueros</option>
@@ -36,6 +35,7 @@
                 <div class="cards-barberos">
                     {% for barber in barber %}
                     <article class="cards card1">
+<<<<<<< HEAD
                         <div class="blur"><button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button></div>
                         <figure class="figura">
                             {% if barber.foto %}
@@ -46,6 +46,33 @@
                         <div class="infoBasica">
                             <h3 id="nombre">{{ barber.nombres }}</h3>
                             <h4 class="info"><b>Barrio:</b>{{ barber.nom_local }}</h4>
+=======
+                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
+                        <figure class="figura"><img src="/static/img/Gustavo.jpg" alt="imagen del barbero Gustavo" class="img_cards"></figure>
+                        <div class="infoBasica">
+                            <h3 id="nombre">Gustavo Quintana</h3>
+                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
+                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
+                            <h4 class="info"><b>Estado:</b> Activo</h4>
+                        </div>
+                    </article>
+                    <article class="cards card1">
+                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
+                        <figure class="figura"><img src="/static/img/Gustavo.jpg" alt="imagen del barbero Gustavo" class="img_cards"></figure>
+                        <div class="infoBasica">
+                            <h3 id="nombre">Gustavo Quintana</h3>
+                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
+                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
+                            <h4 class="info"><b>Estado:</b> Activo</h4>
+                        </div>
+                    </article>
+                    <article class="cards card1">
+                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
+                        <figure class="figura"><img src="/static/img/Gustavo.jpg" alt="imagen del barbero Gustavo" class="img_cards"></figure>
+                        <div class="infoBasica">
+                            <h3 id="nombre">Gustavo Quintana</h3>
+                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
+>>>>>>> 8e7ec368915b181ee4f04605a05fa6a9326cfb1c
                             <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
                             <h4 class="info"><b>Estado:</b> Activo</h4>
                         </div>

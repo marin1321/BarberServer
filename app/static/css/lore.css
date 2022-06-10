@@ -2,7 +2,11 @@
 /* Estilos del login y el register */
 
 .sliderlore{
+<<<<<<< HEAD
     background:  no-repeat center center;
+=======
+    background: url(../img/blg.jpg) no-repeat center center;
+>>>>>>> 8e7ec368915b181ee4f04605a05fa6a9326cfb1c
     background-size: cover;
     width: 100%;
     height: 62.5em;
