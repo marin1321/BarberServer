@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import *
 
 class ServiciosAdmin(admin.ModelAdmin):
-    model = Servicios
+    model = Servicio
     list_display = ("tipoServicio", "valor")
 
     class Meta:
@@ -14,7 +14,7 @@ class ServiciosAdmin(admin.ModelAdmin):
 class ClientesAdmin(admin.ModelAdmin):
     list_display = ("nombres", "apellidos", "telefono", "email", "rol")
 
-admin.site.register(Servicios, ServiciosAdmin)
+admin.site.register(Servicio, ServiciosAdmin)
 admin.site.register(Clientes)
 admin.site.register(Trabajadores)
 admin.site.register(Categoria)

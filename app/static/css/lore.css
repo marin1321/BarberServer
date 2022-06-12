@@ -3,6 +3,10 @@
 
 .sliderlore{
     background:  no-repeat center center;
+<<<<<<< HEAD
+=======
+    background: url(../img/blg.jpg) no-repeat center center;
+>>>>>>> fadd2c3b8a29e069aeb96ce50ae255e4c9b5eb99
     background-size: cover;
     width: 100%;
     height: 62.5em;
