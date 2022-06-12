@@ -3,31 +3,35 @@
 {% block stilos %}
 <link rel="stylesheet" href="{% static 'css/lore.css'%}">
 {% endblock stilos %}
+{% block llamdoJavaScript %}
+<script src="{% static 'js/card.js'%}"></script>
+{% endblock llamdoJavaScript %}
 {% block appContenido %}
 <div class='sliderlore'>
     <div class="containerform" id="container">
         <div class="form-container sign-up-container">
-            <form action="#" class='formlr' method="POST">{% csrf_token %}
+            <form action="{% url 'registro' %}" class='formlr' method="post">{% csrf_token %}
+                {{form}}
                 <h1 class='h1form'>Crear Cuenta</h1>
-                <input type="email" placeholder="Gmail" id='remail' class='inputform'/>
-                <input type="text" placeholder="Nombres" id='rname' class='inputform'/>
-                <input type="text" placeholder="Apellidos" id='rapellido' class='inputform'/>
-                <input type="text" placeholder="Telefono" id='ruser' class='inputform'/>
-                <input type="password" placeholder="Contraseña" id='rpassword' class='inputform'/>
+                <input type="email" placeholder="Gmail"name="email" id='remail' class='inputform'/>
+                <input type="text" placeholder="Nombres" name="nombres" id='rname' class='inputform'/>
+                <input type="text" placeholder="Apellidos" name="apellidos" id='rapellido' class='inputform'/>
+                <input type="text" placeholder="Telefono"name="telefono" id='ruser' class='inputform'/>
+                <input type="password" placeholder="Contraseña" name="password" id='rpassword' class='inputform'/>
                 <div class="radiusB">
-                    <input type="radio" name='decision' value="trabajador" id='trabajador'  />
-                    <label forHtml="trabajador" class="labelRadio">Trabajador</label>
-                    <input type="radio" name='decision' value="cliente" id='cliente'  />
+                    <input type="radio" name='decision' value="trabajador" id='trabajador'  onchange="Mover()"/>
+                    <label forHtml="trabajador" class="labelRadio" >Trabajador</label>
+                    <input type="radio" name='decision' value="cliente" id='cliente' onchange="Regresar()" />
                     <label forHtml="cliente" class="labelRadio">Cliente</label>
                 </div>
-                <button class='buttonform' >Crear Cuenta</button>
+                <button class='buttonform'x >Crear Cuenta</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#" class='formlr'>
+            <form action="" class='formlr' method="post" enctype="multipart/form-data">{% csrf_token %}
                 <h1 class='h1form'>Iniciar Sesion</h1>
-                <input type="text" placeholder="Email" id='usname' class='inputform'  name="Email"/>
-                <input type="password" placeholder="Contraseña" id='uspassword' class='inputform'   name="Password"/>
+                <input type="text" placeholder="Email" id='usname' class='inputform'  name="username"/>
+                <input type="password" placeholder="Contraseña" id='uspassword' class='inputform'   name="password"/>
                 <a href="#" class='aform'>¿Olvidaste tu contraseña?</a>
                 <button class='buttonform' type="submit">Iniciar Sesion</button>
             </form>
@@ -37,12 +41,12 @@
                 <div class="overlay-panel overlay-left">
                     <h1 class='h1form'>¡Bienvenido de nuevo!</h1>
                     <p class='pform'>Para mantenerse conectado con nosotros, inicie sesión con su información personal</p>
-                    <button class="ghost buttonform" >Iniciar Sesion</button>
+                    <button class="ghost buttonform" onclick="change1()">Iniciar Sesion</button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <h1 class='h1form'>¡Hola amig@!</h1>
                     <p class='pform'>Ingresa tus datos personales y comienza tu viaje con nosotros</p>
-                    <button class="ghost buttonform" >Crear Cuenta</button>
+                    <button class="ghost buttonform" onclick="change2()">Crear Cuenta</button>
                 </div>
             </div>
         </div>
