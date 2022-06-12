@@ -117,12 +117,12 @@ def registro(request):
                 data = {
                     "form":RegistrationForm
                 }
-    return render(request, 'registration/registrar.html', data)
+    return render(request, 'registration/login.html', data)
 
 def sobreNosotros():
     pass
 
-def inactivarCuenta(request):
+def eliminarCuenta(request):
     global user_id 
     user_id = request.user.id
     usuarioActivo = User.objects.get(id=user_id)

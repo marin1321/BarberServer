@@ -2,13 +2,13 @@ from django.db import models
 
 # Create your models here.
 
-class Servicios(models.Model):
+class Servicio(models.Model):
     tipoServicio = models.CharField(max_length=50)
     valor = models.FloatField()
 
 class Categoria(models.Model):
     nombre_cat = models.CharField(max_length=60)
-    idServicio = models.ForeignKey(Servicios, on_delete=models.SET_NULL, blank=True, null=True)
+    idServicio = models.ForeignKey(Servicio, on_delete=models.SET_NULL, blank=True, null=True)
 
 class Trabajadores(models.Model):
     nombres = models.CharField(max_length=50)
@@ -34,8 +34,6 @@ class Clientes(models.Model):
 class citas(models.Model):
     idTrabajador = models.ForeignKey(Trabajadores, on_delete=models.SET_NULL, blank=True, null=True)
     idCliente = models.ForeignKey(Clientes, on_delete=models.SET_NULL, blank=True, null=True)
-    idServicio = models.ForeignKey(Servicios, on_delete=models.SET_NULL, blank=True, null=True)
+    idServicio = models.ForeignKey(Servicio, on_delete=models.SET_NULL, blank=True, null=True)
     hora = models.TimeField()
     fecha = models.DateField()
-
-    
