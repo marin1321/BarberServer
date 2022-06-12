@@ -122,7 +122,7 @@ def registro(request):
 def sobreNosotros():
     pass
 
-def eliminarCuenta(request):
+def inactivarCuenta(request):
     global user_id 
     user_id = request.user.id
     usuarioActivo = User.objects.get(id=user_id)

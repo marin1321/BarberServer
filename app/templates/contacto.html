@@ -1,8 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block stilos %}
 <link rel="stylesheet" href="{% static 'css/contactof.css' %}">
 {% endblock stilos %}
+
+{% block javascript %}
+<script type="text/javascrit">
+    const email = (e) =>{
+        e.preventDefault()
+        const user = document.getElementById("firstname").value
+        const emails = document.getElementById("Email").value
+        const numeroT = document.getElementById("phone").value
+        const messages = document.getElementById("message").value
+        let  data =({
+               user_name:user,
+               email:emails,
+            message:messages,
+            numero:numeroT
+        })
+        console.log(data)
+        post(data)
+    }
+    const post = (data ) =>{
+        console.log(data);
+        emailjs.send("service_3ttevpo", "template_sla5daj",data,"OZyZikHyRdk3lV1Zx")
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+
+
+
+        
+    }
+</script>
+{% endblock javascript %}
+
 {% block appContenido %}
 <div class='sliderlore' style="background-image: url('{% static 'img/blg.jpg' %}')">
     <div class="containerContactform "  id="container">

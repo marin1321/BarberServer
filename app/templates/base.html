@@ -38,6 +38,11 @@
             <a> <a class="link" href="{% url 'barberos' %}" >BARBEROS</a> </a>
             <a> <a class="link" href="{% url 'contactos' %}">CONTACTENOS</a> </a>
             <a> <a class="link" href="{% url 'login' %}">INGRESAR</a> </a>
+
+            {% if user.is_authemticated %}
+            <a> <a href="{% url 'logout' %}"> Cerrar Sesion </a> </a>
+            {% endif %}
+
             <label for="check" class="esconder-menu">×</label>
         </nav>
     </header>
