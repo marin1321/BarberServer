@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+{% endblock %} 
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +22,7 @@
     <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="/logo192.png" />
     <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
-    <link rel="stylesheet" href="{% static 'css/lore.css'%}">
+    <link rel="stylesheet" href="{% static 'css/lore.css'%}"> 
     {% block stilos %}
     {% endblock  %}
     <title>BARBER SERVER</title>
