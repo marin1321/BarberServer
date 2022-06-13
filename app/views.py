@@ -19,8 +19,7 @@ def barber(request):
     } 
     return render(request, 'barberos.html', data)
 
-def contactenos(request):
-    return render(request, 'contactenos.html')
+
 
 def perfil(request):
     global user_id
@@ -117,10 +116,8 @@ def registro(request):
                 data = {
                     "form":RegistrationForm
                 }
-    return render(request, 'registration/registrar.html', data)
+    return render(request, 'registration/login.html', data)
 
-def sobreNosotros():
-    pass
 
 def eliminarCuenta(request):
     global user_id 
