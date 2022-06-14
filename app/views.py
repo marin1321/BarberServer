@@ -43,6 +43,8 @@ def perfilBarbero(request):
         data = {
             'datosB':datosB,
         }
+        print("AQUI --> " +str(request.user))
+
         return render(request, 'perfilBarbero.html', data)
     else:
         return redirect(to="login")
