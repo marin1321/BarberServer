@@ -22,43 +22,33 @@ def barber(request):
 
 
 def perfil(request):
-    if request.user.is_authenticated:
-        global user_id
-        user_id = request.user.id
-        usuarioActivo = User.objects.get(id=user_id)
-        if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
-            return redirect(to="perfilB")
-        if Clientes.objects.filter(email=usuarioActivo).exists()==True:
-            return redirect(to="perfilC")
-    else:
-        return redirect(to="login")
-
+    global user_id
+    user_id = request.user.id
+    usuarioActivo = User.objects.get(id=user_id)
+    if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+        return redirect(to="perfilB")
+    if Clientes.objects.filter(email=usuarioActivo).exists()==True:
+        return redirect(to="perfilC")
 
 def perfilBarbero(request):
-    if request.user.is_authenticated:
-        global user_id 
-        user_id = request.user.id
-        usuarioActivo = User.objects.get(id=user_id)
-        datosB = Trabajadores.objects.filter(email=usuarioActivo)
-        data = {
-            'datosB':datosB,
-        }
-        return render(request, 'perfilBarbero.html', data)
-    else:
-        return redirect(to="login")
+    global user_id 
+    user_id = request.user.id
+    usuarioActivo = User.objects.get(id=user_id)
+    datosB = Trabajadores.objects.filter(email=usuarioActivo)
+    data = {
+        'datosB':datosB,
+    }
+    return render(request, 'perfilBarbero.html', data)
 
 def perfilCliente(request):
-    if request.user.is_authenticated:
-        global user_id 
-        user_id = request.user.id
-        usuarioActivo = User.objects.get(id=user_id)
-        datosC = Clientes.objects.filter(email=usuarioActivo)
-        data = {
-            'datosC':datosC,
-        }
-        return render(request, 'perfilCliente.html', data)
-    else:
-        return redirect(to="login")
+    global user_id 
+    user_id = request.user.id
+    usuarioActivo = User.objects.get(id=user_id)
+    datosC = Clientes.objects.filter(email=usuarioActivo)
+    data = {
+        'datosC':datosC,
+    }
+    return render(request, 'perfilCliente.html', data)
 
 def registro(request):
     data = {

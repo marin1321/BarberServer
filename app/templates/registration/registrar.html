@@ -28,12 +28,12 @@
                 </div>
                 <div class="nuevoForm formlr">
                     <h1 class='h1form'>Datos Adicionales</h1>
+                    {{ form.idCategoria}}
                     {% comment %} {{form.nom_local}}
                     {{ form.direccion }}
-                    {{ form.idCategoria}}
                     {{ form.foto}} {% endcomment %}
-                    <input type="text" placeholder="Nombre del local" id='nom_local' class='inputform'/>
-                    <input type="text" placeholder="Dirección del Local" id='direccion' class='inputform'/>
+                    <input type="text" placeholder="Nombre del local" name="nom_local" id='nom_local' class='inputform'/>
+                    <input type="text" placeholder="Dirección del Local" name="direccion" id='direccion' class='inputform'/>
                 </div>
             </form>
         </div>
