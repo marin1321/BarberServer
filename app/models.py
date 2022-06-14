@@ -13,8 +13,8 @@ class Categoria(models.Model):
 class Trabajadores(models.Model):
     nombres = models.CharField(max_length=50)
     apellidos = models.CharField(max_length=50)
-    nom_local = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=70)
+    nom_local = models.CharField(max_length=50, null=True, blank=True)
+    direccion = models.CharField(max_length=70, null=True, blank=True)
     telefono = models.CharField(max_length=30)
     foto = models.ImageField(upload_to="trabajadores", blank=True, null=True)
     idCategoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, blank=True, null=True)
