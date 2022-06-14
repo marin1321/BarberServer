@@ -35,8 +35,14 @@
             <div> <a class="link" href="{% url 'inicio' %}">INICIO</a> </div>
             <div> <a class="link" href="{% url 'sobreNosotros' %}">SOBRE NOSOTROS</a> </div>
             <div> <a class="link" href="{% url 'barberos' %}" >BARBEROS</a> </div>
-            <div> <a class="link" href="{% url 'contactenos' %}">CONTACTENOS</a> </div>
-            <div> <a class="link">INGRESAR</a> </a>
+            <div> <a class="link" href="{% url 'contactos' %}">CONTACTENOS</a> </div>
+
+            {% if user.is_authenticated %}
+            <div> <a href="{% url 'logout' %}"> Cerrar Sesiòn </a> </div>
+            {% else %}
+            <div> <a class="link" href="{% url 'login' %}">INGRESAR</a> </div>
+            {% endif %}
+
             <label for="check" class="esconder-menu">×</label>
         </nav>
     </header>

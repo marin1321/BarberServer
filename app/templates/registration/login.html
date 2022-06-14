@@ -3,15 +3,16 @@
 {% block stilos %}
 <link rel="stylesheet" href="{% static 'css/lore.css'%}">
 {% endblock stilos %}
+
 {% block llamdoJavaScript %}
 <script src="{% static 'js/card.js'%}"></script>
 {% endblock llamdoJavaScript %}
+
 {% block appContenido %}
 <div class='sliderlore'>
     <div class="containerform" id="container">
         <div class="form-container sign-up-container">
-            <form action="{% url 'registro' %}" class='formlr' method="post">{% csrf_token %}
-                {{form}}
+            <form action="{% url 'registro' %}" class='formlr' method="post">{% csrf_token %} 
                 <h1 class='h1form'>Crear Cuenta</h1>
                 <input type="email" placeholder="Gmail"name="email" id='remail' class='inputform'/>
                 <input type="text" placeholder="Nombres" name="nombres" id='rname' class='inputform'/>

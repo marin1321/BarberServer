@@ -1,40 +1,3 @@
-                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
-                        <figure class="figura"><img src="/static/img/Gustavo.jpg" alt="imagen del barbero Gustavo" class="img_cards"></figure>
-                        <div class="infoBasica">
-                            <h3 id="nombre">Gustavo Quintana</h3>
-                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
-                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
-                            <h4 class="info"><b>Estado:</b> Activo</h4>
-                        </div>
-                    </article>
-                    <article class="cards card1">
-                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
-                        <figure class="figura"><img src="/static/img/Gustavo.jpg" alt="imagen del barbero Gustavo" class="img_cards"></figure>
-                        <div class="infoBasica">
-                            <h3 id="nombre">Gustavo Quintana</h3>
-                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
-                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
-                            <h4 class="info"><b>Estado:</b> Activo</h4>
-                        </div>
-                    </article>
-                    <article class="cards card1">
-                        <div class="blur"><button class="btn-VerMas">Ver Más</button></div>
-                        <figure class="figura"><img src="/static/img/Gustavo.jpg" alt="imagen del barbero Gustavo" class="img_cards"></figure>
-                        <div class="infoBasica">
-                            <h3 id="nombre">Gustavo Quintana</h3>
-                            <h4 class="info"><b>Barrio:</b> Limonar</h4>
-                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
-                            <h4 class="info"><b>Estado:</b> Activo</h4>
-                        </div>
-                    </article>
-                    {% endfor %}
-                    
-                </div>
-            </section>
-        </main>
-        <div  class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        </div>
-        
 {% extends 'base.html' %}
 {% load static %}
 {% block stilos %}
@@ -83,7 +46,7 @@
                             <h3 id="nombre">{{ barber.nombres }}</h3>
                             <h4 class="info"><b>Barrio:</b>{{ barber.nom_local }}</h4>
                             <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
-                            <h4 class="info"><b>Estado:</b> Activo</h4>
+                            <h4 class="info"><b>Estado:</b>{{ barber.state }}</h4>
                         </div>
                     </article>
                     {% endfor %}

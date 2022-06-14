@@ -12,7 +12,7 @@ class ServiciosAdmin(admin.ModelAdmin):
         verbose_name_plural = "Countries"
 
 class ClientesAdmin(admin.ModelAdmin):
-    list_display = ("nombres", "apellidos", "telefono", "email", "foto","rol")
+    list_display = ("nombres", "apellidos", "telefono", "email", "foto", "rol", "state")
 
 class TrabajadoresAdmin(admin.ModelAdmin):
     list_display = ("nombres", "apellidos", "nom_local", "direccion", "telefono", "foto", "idCategoria", "email", "rol")
