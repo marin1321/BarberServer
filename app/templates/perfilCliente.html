@@ -1,4 +1,4 @@
-{% comment %} <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
     {% for datosC in datosC %}
     <p>{{ datosC.nombres }}</p>
     {% endfor %}
-    <a href="{% url 'eliminarCuenta' %}">Eliminar cuenta</a>
+    <a href="{% url 'inactivarCuenta' %}">Inactivar cuenta</a>
     <a href="{% url 'editarPerfilC' %}">Editar cuenta</a>
 </body>
-</html> {% endcomment %}
+</html>
