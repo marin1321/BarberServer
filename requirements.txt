@@ -5,3 +5,4 @@ pillow
 pymysql
 django-admin-interface
 django-tailwind
+tailwind
