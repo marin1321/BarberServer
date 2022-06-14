@@ -9,23 +9,6 @@
 {% block appContenido %}
 <div class='sliderlore'>
     <div class="containerform" id="container">
-        <div class="form-container sign-up-container">
-            <form action="{% url 'registro' %}" class='formlr' method="post">{% csrf_token %}
-                <h1 class='h1form'>Crear Cuenta</h1>
-                <input type="email" placeholder="Gmail"name="email" id='remail' class='inputform'/>
-                <input type="text" placeholder="Nombres" name="nombres" id='rname' class='inputform'/>
-                <input type="text" placeholder="Apellidos" name="apellidos" id='rapellido' class='inputform'/>
-                <input type="text" placeholder="Telefono"name="telefono" id='ruser' class='inputform'/>
-                <input type="password" placeholder="Contraseña" name="password" id='rpassword' class='inputform'/>
-                <div class="radiusB">
-                    <input type="radio" name='decision' value="trabajador" id='trabajador'  onchange="Mover()"/>
-                    <label forHtml="trabajador" class="labelRadio" >Trabajador</label>
-                    <input type="radio" name='decision' value="cliente" id='cliente' onchange="Regresar()" />
-                    <label forHtml="cliente" class="labelRadio">Cliente</label>
-                </div>
-                <button class='buttonform'x >Crear Cuenta</button>
-            </form>
-        </div>
         <div class="form-container sign-in-container">
             <form action="" class='formlr' method="post" enctype="multipart/form-data">{% csrf_token %}
                 <h1 class='h1form'>Iniciar Sesion</h1>
@@ -37,23 +20,15 @@
         </div>
         <div class="overlay-container">
             <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1 class='h1form'>¡Bienvenido de nuevo!</h1>
-                    <p class='pform'>Para mantenerse conectado con nosotros, inicie sesión con su información personal</p>
-                    <button class="ghost buttonform" onclick="change1()">Iniciar Sesion</button>
-                </div>
+                <form  action="{% url 'registro' %}" method="post">{% csrf_token %}
                 <div class="overlay-panel overlay-right">
                     <h1 class='h1form'>¡Hola amig@!</h1>
                     <p class='pform'>Ingresa tus datos personales y comienza tu viaje con nosotros</p>
-                    <button class="ghost buttonform" onclick="change2()">Crear Cuenta</button>
+                    <button class="ghost buttonform">Crear Cuenta</button>
                 </div>
+                </form>
             </div>
         </div>
-    </div>
-    <div class="nuevoForm formlr">
-        <h1 class='h1form'>Datos Adicionales</h1>
-        <input type="text" placeholder="Nombre del local" id='nomLocal' class='inputform'/>
-        <input type="text" placeholder="Dirección del Local" id='direccionLocal' class='inputform'/>
     </div>
 </div>
 {% endblock appContenido %}

@@ -116,7 +116,7 @@ def registro(request):
                 data = {
                     "form":RegistrationForm
                 }
-    return render(request, 'registration/login.html', data)
+    return render(request, 'registration/registrar.html', data)
 
 
 def eliminarCuenta(request):

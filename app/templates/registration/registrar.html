@@ -1,8 +1,53 @@
+{% extends 'base.html' %}
 {% load static %}
-
-<form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-    {{ form }}
-    <button id="id_btn" type="submit">
-        Login
-    </button>
-</form>
+{% block stilos %}
+<link rel="stylesheet" href="{% static 'css/lore.css'%}">
+{% endblock stilos %}
+{% block llamdoJavaScript %}
+<script src="{% static 'js/card.js'%}"></script>
+{% endblock llamdoJavaScript %}
+{% block appContenido %}
+<div class='sliderlore'>
+    <div class="containerform right-panel-active" id="container">
+        <div class="form-container sign-up-container">
+            <form action="" class='formlr' method="post">{% csrf_token %}
+                <div>
+                <h1 class='h1form'>Crear Cuenta</h1>
+                <input type="email" placeholder="Gmail"name="email" id='remail' class='inputform'/>
+                <input type="text" placeholder="Nombres" name="nombres" id='rname' class='inputform'/>
+                <input type="text" placeholder="Apellidos" name="apellidos" id='rapellido' class='inputform'/>
+                <input type="text" placeholder="Telefono"name="telefono" id='ruser' class='inputform'/>
+                <input type="password" placeholder="Contraseña" name="password" id='rpassword' class='inputform'/>
+                <div class="radiusB">
+                    <input type="radio" name='decision' value="trabajador" id='trabajador'  onchange="Mover()"/>
+                    <label forHtml="trabajador" class="labelRadio" >Trabajador</label>
+                    <input type="radio" name='decision' value="cliente" id='cliente' onchange="Regresar()" />
+                    <label forHtml="cliente" class="labelRadio">Cliente</label>
+                </div>
+                <button class='buttonform'>Crear Cuenta</button>
+                </div>
+                <div class="nuevoForm formlr">
+                    <h1 class='h1form'>Datos Adicionales</h1>
+                    {% comment %} {{form.nom_local}}
+                    {{ form.direccion }}
+                    {{ form.idCategoria}}
+                    {{ form.foto}} {% endcomment %}
+                    <input type="text" placeholder="Nombre del local" id='nom_local' class='inputform'/>
+                    <input type="text" placeholder="Dirección del Local" id='direccion' class='inputform'/>
+                </div>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <form action="{% url 'login' %}" method="post">{% csrf_token %}
+                <div class="overlay-panel overlay-left">
+                    <h1 class='h1form'>¡Bienvenido de nuevo!</h1>
+                    <p class='pform'>Para mantenerse conectado con nosotros, inicie sesión con su información personal</p>
+                    <button class="ghost buttonform">Iniciar Sesion</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock appContenido %}
