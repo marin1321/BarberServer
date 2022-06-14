@@ -20,6 +20,7 @@ class Trabajadores(models.Model):
     idCategoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, blank=True, null=True)
     rol = models.CharField(max_length=45)
     email = models.EmailField()
+    state = models.CharField(max_length=30, null=True)
     password = models.CharField(max_length=200)
 
 class Clientes(models.Model):
@@ -30,6 +31,7 @@ class Clientes(models.Model):
     foto = models.ImageField(upload_to="clientes", blank=True, null=True)
     password = models.CharField(max_length=100)
     rol = models.CharField(max_length=45)
+    state = models.CharField(max_length=30, null=True)
 
 class citas(models.Model):
     idTrabajador = models.ForeignKey(Trabajadores, on_delete=models.SET_NULL, blank=True, null=True)
