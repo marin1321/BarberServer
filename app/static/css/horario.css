@@ -38,7 +38,7 @@
     color: white;
   }
   .add-btn:hover {
-    width: 120px;
+    width: 40%;
   }
   
   .add-btn::before,

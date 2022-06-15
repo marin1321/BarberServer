@@ -35,24 +35,24 @@
                 <div class="cards-barberos">
                     {% for barber in barber %}
                     <article class="cards card1">
-                        <div class="blur"><button href="#" class="btn-VerMas" >Ver Más</button></div>
+                        <div class="Efectoblur"><button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button></div>
                         <figure class="figura">
                             {% if barber.foto %}
-                                <img src="{{ barber.foto.url }}" alt="las vegas"
-                                    class="img_cards">
+                            <img src="{{ barber.foto.url }}" alt="las vegas"
+                                class="img_cards">
                             {% endif %}
                             </figure>
                         <div class="infoBasica">
                             <h3 id="nombre">{{ barber.nombres }}</h3>
                             <h4 class="info"><b>Barrio:</b>{{ barber.nom_local }}</h4>
                             <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
-                            <h4 class="info"><b>Estado:</b>{{ barber.state }}</h4>
+                            <h4 class="info"><b>Estado:</b> Activo</h4>
                         </div>
                     </article>
                     {% endfor %}
                 </div>
             </section>
         </main>
-        <div  class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div  class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         </div>
 {% endblock %}

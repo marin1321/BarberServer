@@ -122,6 +122,33 @@ def horarioBarber(request):
     data = {
         "form" : HorariosBarbero
     }
+    if request.method=='POST':
+        global user_id 
+        user_id = request.user.id
+        id_usuario = Trabajadores.objects.get(id=user_id)
+        inicioHora = request.POST.get('horaInicio')
+        fecha = request.POST.get('fecha')
+        fecha =  fecha.strip()
+        inicioHora = inicioHora.strip()
+        hora2 = inicioHora[3:5]
+        hora2 = int(hora2) + 30
+        if hora2 >= 60:
+            hora2 = int(hora2) - 60
+            hora1 = inicioHora[0:2]
+            hora1 = int(hora1) + 2
+        else: 
+            hora1 = inicioHora[0:2]
+            hora1 = int(hora1) + 1
+        finalizarHora = str(hora1) + ":" + str(hora2)
+        activo = "activo"
+        horario = horarios()
+        horario.idTrabajador = id_usuario
+        horario.horaInicio = inicioHora
+        horario.fecha = fecha
+        horario.horaFinalizacion = finalizarHora
+        horario.estado = activo
+        horario.save()
+
     return render(request, "horarioBarber.html", data)
 
 def eliminarCuenta(request):

@@ -54,7 +54,7 @@
 }
 
 /*--------------boton ver mas------------*/
-.blur{
+.Efectoblur{
   position: absolute;
   z-index: 5;
   height: 38rem;
@@ -117,7 +117,7 @@
   transition: background 0s;
  }
 
-.blur:hover, .btn-VerMas{
+.Efectoblur:hover, .btn-VerMas{
   opacity: 1;
   visibility: visible;
 }
