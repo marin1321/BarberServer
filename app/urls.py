@@ -9,6 +9,7 @@ urlpatterns=[
     path('modal_barberos/<id>/', modal_barber, name='modal_barberos'),
     path('perfil_barbero/', perfilBarbero, name='perfilB'),
     path('perfil_cliente/', perfilCliente, name='perfilC'),
+    path('citas_barbero/', citasBarbero, name='citasBarbero'),
     path('accounts/registrar/', registro, name='registro'),
     path('elimininar_cunta/', eliminarCuenta, name='inactivarCuenta'),
     path('editar_perfil_cliente/', editarPerfilC, name='editarPerfilC'),

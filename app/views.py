@@ -19,8 +19,6 @@ def barber(request):
     } 
     return render(request, 'barberos.html', data)
 
-
-
 def perfil(request):
     global user_id
     user_id = request.user.id
@@ -49,6 +47,9 @@ def perfilCliente(request):
         'datosC':datosC,
     }
     return render(request, 'perfilCliente.html', data)
+
+def citasBarbero(request):
+    return render(request, 'citasBarbero.html')
 
 def registro(request):
     data = {
