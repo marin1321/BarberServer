@@ -14,4 +14,5 @@ urlpatterns=[
     path('editar_perfil_cliente/', editarPerfilC, name='editarPerfilC'),
     path('editar_perfil_barbero/', editarPerfilB, name='editarPerfilB'),
     path('contacto/', contacto, name='contactos'),
+    path('horarios/', horarioBarber, name='horarios'),
 ]

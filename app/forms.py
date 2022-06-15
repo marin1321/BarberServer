@@ -16,3 +16,8 @@ class EditarBarberoForm(forms.ModelForm):
     class Meta:
         model = Trabajadores
         fields = ["nombres", "apellidos", "telefono", "foto", "nom_local", "direccion", "idCategoria"]
+        
+class HorariosBarbero(forms.ModelForm):
+    class Meta:
+        model = horarios
+        fields = ["horaInicio", "fecha", "horaFinalizacion"]

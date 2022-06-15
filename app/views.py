@@ -118,6 +118,11 @@ def registro(request):
                 }
     return render(request, 'registration/registrar.html', data)
 
+def horarioBarber(request):
+    data = {
+        "form" : HorariosBarbero
+    }
+    return render(request, "horarioBarber.html", data)
 
 def eliminarCuenta(request):
     global user_id 
