@@ -31,14 +31,19 @@ def perfil(request):
         return redirect(to="perfilC")
 
 def perfilBarbero(request):
-    global user_id 
-    user_id = request.user.id
-    usuarioActivo = User.objects.get(id=user_id)
-    datosB = Trabajadores.objects.filter(email=usuarioActivo)
-    data = {
-        'datosB':datosB,
-    }
-    return render(request, 'perfilBarbero.html', data)
+    if request.user.is_authenticated:
+        global user_id 
+        user_id = request.user.id
+        usuarioActivo = User.objects.get(id=user_id)
+        datosB = Trabajadores.objects.filter(email=usuarioActivo)
+        data = {
+            'datosB':datosB,
+        }
+        print("AQUI --> " +str(request.user))
+
+        return render(request, 'perfilBarbero.html', data)
+    else:
+        return redirect(to="login")
 
 def perfilCliente(request):
     global user_id 

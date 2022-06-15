@@ -63,11 +63,12 @@
                         </ul>
                     </div>
                 </div>
+                {% for datosB in datosB %}
                 <div class="col-md-8">
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="row">
-                                <h4 class="col-sm-3 mb-0 alturaTamaño">Nombre(s)</h4>
+                                <h4 class="col-sm-3 mb-0 alturaTamaño">{{ datosB.nombres }}</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 text-secondary alturaTamaño" id="info1"></p>
                                     <input type="text" class="form-control" id="infoInput1" placeholder="" name="Nombres" value="">
@@ -75,7 +76,7 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <h4 class="col-sm-3 mb-0 alturaTamaño">Apellido(s)</h4>
+                                <h4 class="col-sm-3 mb-0 alturaTamaño">{{ datosB.apellidos }}</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 text-secondary alturaTamaño" id="info6"></p>
                                     <input type="text" class="form-control" id="infoInput6" name="Apellidos" placeholder="" value="">
@@ -83,7 +84,7 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <h4 class="col-sm-3 mb-0 alturaTamaño">E-mail</h4>
+                                <h4 class="col-sm-3 mb-0 alturaTamaño">{{ datosB.email }}</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 text-secondary alturaTamaño" id="info2"></p>
                                     <input type="text" class="form-control col-sm-9" id="infoInput2" placeholder="" name="Email" value="">
@@ -91,14 +92,14 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <h4 class="col-sm-3 mb-0 alturaTamaño">Número de Celular</h4>
+                                <h4 class="col-sm-3 mb-0 alturaTamaño">{{ datosB.telefono }}</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 text-secondary alturaTamaño" id="info3"></p><input type="text" class="form-control col-sm-9" id="infoInput3" placeholder="" name="Telefono" value="">
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <h4 class="col-sm-3 mb-0 alturaTamaño">Nombre de local</h4>
+                                <h4 class="col-sm-3 mb-0 alturaTamaño">{{ datosB.nom_local }}</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 text-secondary alturaTamaño" id="info4"></p>
                                     <input type="text" class="form-control col-sm-9" id="infoInput4" placeholder="" name="Nom_local" value="">
@@ -106,7 +107,7 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <h4 class="col-sm-3 mb-0 alturaTamaño">Dirección</h4>
+                                <h4 class="col-sm-3 mb-0 alturaTamaño">{{ datosB.direccion }}</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 text-secondary alturaTamaño" id="info5"></p>
                                     <input type="text" class="form-control col-sm-9" id="infoInput5" placeholder="" name="Direccion" value="">
@@ -143,6 +144,7 @@
                         </ul>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>
