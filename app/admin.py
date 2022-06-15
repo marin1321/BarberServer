@@ -17,10 +17,15 @@ class CategoriaAdmin(admin.ModelAdmin):
     list_display = ("nombre_cat", "idServicio",)
 
 class CitasAdmin(admin.ModelAdmin):
-    list_display = ("idTrabajador", "idCliente", "idCliente", "hora", "fecha")
+    list_display = ("idCliente", "idServicio", "horaRegistroCita", "fechaRegistroCita")
+
+class HorarioAdmin(admin.ModelAdmin):
+    list_display = ("idTrabajador", "horaInicio", "fecha", "horaFinalizacion", "estado")
+
 
 admin.site.register(Servicio, ServiciosAdmin)
 admin.site.register(Clientes, ClientesAdmin)
 admin.site.register(Trabajadores, TrabajadoresAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(citas, CitasAdmin)
+admin.site.register(horarios, HorarioAdmin)
