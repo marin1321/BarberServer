@@ -35,7 +35,7 @@
                 <div class="cards-barberos">
                     {% for barber in barber %}
                     <article class="cards card1">
-                        <div class="Efectoblur"><button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button></div>
+                        <div class="efectoBlur"><button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button></div>
                         <figure class="figura">
                             {% if barber.foto %}
                             <img src="{{ barber.foto.url }}" alt="las vegas"
