@@ -2,6 +2,9 @@
 {% load static %}
 {% load tailwind_tags %}
 <html lang="en">
+<!-- {% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+{% endblock %}  -->
 
 <head>
     <meta charset="UTF-8">
@@ -40,7 +43,16 @@
             <div> <a class="link" href="{% url 'contactos' %}">CONTACTENOS</a> </div>
 
             {% if user.is_authenticated %}
-            <div> <a href="{% url 'logout' %}"> Cerrar Sesiòn </a> </div>
+            {% comment %} <div> <a href="{% url 'logout' %}"> Cerrar Sesiòn </a> </div> {% endcomment %}
+            <div>
+                <li class="submenus">
+                    <a><img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/></a>
+                    <ul class="children">
+                            <li><a href="#">CITAS</a></li>
+                            <li><a href="{% url 'logout' %}"> SALIR</a></li>
+                    </ul>
+                </li>
+            </div>
             {% else %}
             <div> <a class="link" href="{% url 'login' %}">INGRESAR</a> </div>
             {% endif %}
