@@ -130,7 +130,9 @@ def horarioBarber(request):
     if request.method=='POST':
         global user_id 
         user_id = request.user.id
-        id_usuario = Trabajadores.objects.get(id=user_id)
+        usuarioActivo = User.objects.get(id=user_id)
+        id_usuario = Trabajadores.objects.get(email=usuarioActivo)
+        print(id_usuario)
         inicioHora = request.POST.get('horaInicio')
         fecha = request.POST.get('fecha')
         fecha =  fecha.strip()
