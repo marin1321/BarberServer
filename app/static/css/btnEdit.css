@@ -45,6 +45,7 @@
     display: flex;
     align-items: center;
     margin-top: 10px;
+    justify-content: center;
 }
  .editar{
     height: 100%;

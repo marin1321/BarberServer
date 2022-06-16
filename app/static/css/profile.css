@@ -225,6 +225,9 @@ hr{ border: 1px solid #444; }
     border: 2px solid #ffd17b;
 }
 .list-unstyled .timeline-sm-item .timeline-sm-date {
+    display: flex;
+    flex-direction: column;
+    width: 6rem;
     position: absolute;
     left: -104px;
 }
