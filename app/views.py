@@ -44,14 +44,17 @@ def perfilBarbero(request):
         return redirect(to="login")
 
 def perfilCliente(request):
-    global user_id 
-    user_id = request.user.id
-    usuarioActivo = User.objects.get(id=user_id)
-    datosC = Clientes.objects.filter(email=usuarioActivo)
-    data = {
-        'datosC':datosC,
-    }
-    return render(request, 'perfilCliente.html', data)
+    if request.user.is_authenticated:
+        global user_id 
+        user_id = request.user.id
+        usuarioActivo = User.objects.get(id=user_id)
+        datosC = Clientes.objects.filter(email=usuarioActivo)
+        data = {
+            'datosC':datosC,
+        }
+        return render(request, 'perfilCliente.html', data)
+    else:
+        return redirect(to="login")
 
 def citasBarbero(request):
     return render(request, 'citasBarbero.html')

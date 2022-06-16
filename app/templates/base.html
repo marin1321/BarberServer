@@ -45,17 +45,13 @@
             {% if user.is_authenticated %}
             {% comment %} <div> <a href="{% url 'logout' %}"> Cerrar Sesiòn </a> </div> {% endcomment %}
             <div>
-                <form action="perfil">
-                    <li class="submenus">
-                        <button>
-                            <a><img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/></a>
-                        </button>
-                        <ul class="children">
+                <li class="submenus">
+                    <a href = "{% url 'perfil' %}"><img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/></a>
+                    <ul class="children">
                             <li><a href="#">CITAS</a></li>
                             <li><a href="{% url 'logout' %}"> SALIR</a></li>
-                        </ul>
-                    </li>
-                </form>
+                    </ul>
+                </li>
             </div>
             {% else %}
             <div> <a class="link" href="{% url 'login' %}">INGRESAR</a> </div>
