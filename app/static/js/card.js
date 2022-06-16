@@ -12,9 +12,11 @@
 // }
 function Mover(){
     console.log("ok");
-    const nuevoForm= document.querySelector(".nuevoForm")
+    const nuevoForm= document.querySelector(".nuevoForm");
     nuevoForm.classList.add("mostrarFormulario");
     nuevoForm.classList.remove("regresarFormulario");
+    const containerForm = document.querySelector(".containerform");
+    containerForm.style.marginRight = "20rem";
     Mostrar=true
 }
 
@@ -24,6 +26,9 @@ function Regresar(){
         const nuevoForm= document.querySelector(".nuevoForm")
         nuevoForm.classList.remove("mostrarFormulario");
         nuevoForm.classList.add("regresarFormulario");
+        const containerForm= document.querySelector(".containerform");
+        containerForm.style.marginRight= "0";
+        console.log(containerForm);
         setMostrar(false)
     }else{
         console.log("No esta");

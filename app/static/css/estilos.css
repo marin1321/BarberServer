@@ -330,6 +330,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
     height: 50px;
 }
 .submenus a:hover{
+    height: 300;
     font-weight: bold;
 }
 .children{
@@ -364,7 +365,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 .children li{
     margin: 0;
 }
-.submenus:hover ul.children{height:150px;opacity:1;}
+.submenus:hover ul.children{height:250px;opacity:1;}
 .submenus ul.children li a{
 	color: #fefefe !important;
 	padding: 13px 0 13px 20px;

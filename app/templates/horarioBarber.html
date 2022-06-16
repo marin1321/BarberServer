@@ -8,7 +8,7 @@
 {% block appContenido %}
 <div class='sliderlore' style="background-image: url('{% static 'img/blg.jpg' %}')">
     <div class="containerHorario "  id="container">
-        <div class="form-container sign-in-contacto-container">
+        <div class="form-container sign-in-contacto-container formlr">
             <form action="" class='formlr' method="post">{% csrf_token %}
                 <div class="titulo">
                 <h1 class='h1form'>Horarios</h1>
@@ -22,10 +22,10 @@
                         <div class="btn-txt">Añadir Horario</div>
                     </button>
                 </div>
-                <div class="btnHora">
-                    <button class='buttonform'>Ver Horarios</button>
-                </div>
             </form>
+                <div class="btnHora">
+                    <a href="{% url 'verHorario' %}"><button class='buttonform'>Ver Horarios</button></a>
+                </div>
         </div>
     </div>
 </div>
