@@ -291,7 +291,10 @@
 }
 
 .radiusB{
-	width: 60%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 	height: auto;
 	color: whitesmoke;
 }
@@ -500,3 +503,21 @@
 	}
 }
 /* inputFile */
+.form-control{
+	background: transparent;
+	color: #ffd17b;
+}
+#id_idCategoria{
+	background: linear-gradient(#333, #222);
+    color: white;
+    border: 1px solid #444;
+	width: 10rem;
+	height: 2.5rem;
+	margin-left: 2rem;
+	z-index: 20;
+	position: relative;
+}
+/* categoria */
+.categoria{
+	display: flex;
+}
