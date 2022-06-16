@@ -31,7 +31,6 @@ def perfil(request):
 def perfilBarbero(request):
     if request.user.is_authenticated:
         global user_id 
-        user_id = request.user.id
         usuarioActivo = User.objects.get(id=user_id)
         datosB = Trabajadores.objects.filter(email=usuarioActivo)
         data = {
@@ -215,3 +214,23 @@ def modal_barber(request, id):
     return render(request, 'modalB.html', data)
 def contacto(request):
     return render(request, 'contacto.html')
+def verHorarios(request):
+    global user_id 
+    user_id = request.user.id
+    usuarioActivo = User.objects.get(id=user_id)
+    id_usuario = Trabajadores.objects.get(email=usuarioActivo)
+    datosH = horarios.objects.filter(idTrabajador=id_usuario)
+    datosB = Trabajadores.objects.filter(email=usuarioActivo)
+    print('dattosB', datosB)
+    data = {
+        'datosH':datosH,
+        'datosB':datosB,
+    }
+    return render(request, 'verHorarios.html', data)
+# def eliminarHorario(request):
+#     if request.method=='POST':
+#         id = request.POST.get('id')
+#         print('id', id)
+#         usuario = get_object_or_404(horarios, id=id)
+#         usuario.delete()
+#         return redirect(to="inicio")

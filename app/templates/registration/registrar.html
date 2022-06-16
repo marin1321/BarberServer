@@ -18,13 +18,16 @@
                 <input type="text" placeholder="Apellidos" name="apellidos" id='rapellido' class='inputform'/>
                 <input type="text" placeholder="Telefono"name="telefono" id='ruser' class='inputform'/>
                 <input type="password" placeholder="Contraseña" name="password" id='rpassword' class='inputform'/>
+                <div class="input-group input-group-sm mb-3">
+                    <input type="file" class="inputform" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
                 <div class="radiusB">
                     <input type="radio" name='decision' value="trabajador" id='trabajador'  onchange="Mover()"/>
                     <label forHtml="trabajador" class="labelRadio" >Trabajador</label>
                     <input type="radio" name='decision' value="cliente" id='cliente' onchange="Regresar()" />
                     <label forHtml="cliente" class="labelRadio">Cliente</label>
                 </div>
-                <button class='buttonform'>Crear Cuenta</button>
+                    <button class='buttonform'>Crear Cuenta</button>
                 </div>
                 <div class="nuevoForm formlr">
                     <h1 class='h1form'>Datos Adicionales</h1>

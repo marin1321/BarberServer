@@ -16,4 +16,6 @@ urlpatterns=[
     path('editar_perfil_barbero/', editarPerfilB, name='editarPerfilB'),
     path('contacto/', contacto, name='contactos'),
     path('horarios/', horarioBarber, name='horarios'),
+    path('verHorario/', verHorarios, name='verHorario'),
+    # path('eliminarHorario/', eliminarHorario, name='eliminarHorario'),
 ]

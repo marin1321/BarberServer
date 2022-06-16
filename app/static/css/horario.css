@@ -119,3 +119,24 @@
     height: 4px;
     top: calc(50% - 2px);
   }
+  /* ver Horarios */
+  .card-body {
+    display: flex;
+    flex-direction: column; 
+    width: 75%;
+  }
+  .cardVerHorarios{
+    margin-top: 7rem;
+    background: #333;
+  }
+  .nom-categoria {
+    border-bottom:0;
+  }
+  .card-title{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .table{
+    --bs-table-color: #f8f9fa;
+  }
