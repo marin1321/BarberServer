@@ -156,7 +156,26 @@ def horarioBarber(request):
         horario.estado = activo
         horario.save()
 
-    return render(request, "horarioBarber.html", data)
+    return render(request, "horariodBarber.html", data)
+
+def citas(request):
+    data = {
+        "form" : Citas 
+    }
+
+    if request.method == 'POST':
+        formulario = Citas(data=request.POST)
+        if formulario.is_valid():
+            idServicio = request.POST.get('idServicio')
+            horaRegistroCita = request.POST.get('horaRegistroCita')
+            fechaRegistroCita = request.POST.get('fechaRegistroCita')
+            idHorario = request.POST.get('idHorario')
+            idServicio = idServicio.strip()
+            horaRegistroCita = horaRegistroCita.strip()
+            fechaRegistroCita = fechaRegistroCita.strip()
+            idHorario = idHorario.strip()
+
+    return render(request, "citas.html", data)
 
 def eliminarCuenta(request):
     global user_id 
@@ -208,14 +227,17 @@ def editarPerfilB(request):
         else:
             data["form"] = formulario
     return render(request, 'editarPerfilB.html', data)
+
 def modal_barber(request, id):
     barbero = Trabajadores.objects.filter( id = id )
     data = {
         "dataT":barbero
     } 
     return render(request, 'modalB.html', data)
+
 def contacto(request):
     return render(request, 'contacto.html')
+
 def verHorarios(request):
     global user_id 
     user_id = request.user.id

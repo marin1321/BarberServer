@@ -36,15 +36,19 @@ class Clientes(models.Model):
     password = models.CharField(max_length=100)
     rol = models.CharField(max_length=45)
     state = models.CharField(max_length=30, null=True)
+
 class horarios(models.Model):
     idTrabajador = models.ForeignKey(Trabajadores, on_delete=models.SET_NULL, blank=True, null=True)
     horaInicio = models.TimeField()
     fecha = models.DateField()
     horaFinalizacion = models.TimeField()
     estado =  models.CharField(max_length=30, null=True)
+
 class citas(models.Model):
     idCliente = models.ForeignKey(Clientes, on_delete=models.SET_NULL, blank=True, null=True)
     idServicio = models.ForeignKey(Servicio, on_delete=models.SET_NULL, blank=True, null=True)
     horaRegistroCita = models.TimeField()
     fechaRegistroCita = models.DateField()
     idHorario = models.ForeignKey(horarios, on_delete=models.SET_NULL, blank=True, null=True)
+
+
