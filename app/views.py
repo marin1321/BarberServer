@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from .forms import *
 from .models import *
+from django.contrib import messages 
 
 # Create your views here.
 
@@ -46,14 +47,17 @@ def perfilBarbero(request):
         return redirect(to="login")
 
 def perfilCliente(request):
-    global user_id 
-    user_id = request.user.id
-    usuarioActivo = User.objects.get(id=user_id)
-    datosC = Clientes.objects.filter(email=usuarioActivo)
-    data = {
-        'datosC':datosC,
-    }
-    return render(request, 'perfilCliente.html', data)
+    if request.user.is_authenticated:
+        global user_id 
+        user_id = request.user.id
+        usuarioActivo = User.objects.get(id=user_id)
+        datosC = Clientes.objects.filter(email=usuarioActivo)
+        data = {
+            'datosC':datosC,
+        }
+        return render(request, 'perfilCliente.html', data)
+    else:
+        return redirect(to="login")
 
 def registro(request):
     data = {
@@ -101,6 +105,7 @@ def registro(request):
                     barbero.save()
                     user = User.objects.create_user(email, email, password)
                     login(request, user)
+                    messages.success(request, "Registrado con exito") 
                     request.session['id'] = user.id
                     return redirect(to="perfilB")
                 else:
