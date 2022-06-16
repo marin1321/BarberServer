@@ -14,6 +14,11 @@
     <a href="{% url 'inactivarCuenta' %}">Inactivar cuenta</a>
     <a href="{% url 'editarPerfilB' %}">Editar cuenta</a> -->
     <div class="container">
+
+        {% block horarios %}
+            <li><a href="{% url 'horarios' %}"> HORARIOS </a></li>
+        {% endblock %}
+
         {% for datosB in datosB %}
         <div class="main-body">
             <div class="row cardsP gutters-sm">
