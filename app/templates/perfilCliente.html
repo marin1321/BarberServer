@@ -16,21 +16,31 @@
     <div class="container">
         <div class="main-body">
             <div class="row cardsP gutters-sm">
+                {% for datosC in datosC %}
                 <div class="col-md-4 mb-3">
                     <div class="cardP cardP-body">
                         <div class="d-flex flex-column align-items-center text-center imagenPerfil">
                             <button class="subirImagen">
-                                <img src="{{ datosC.foto }}" alt="Admin" class="rounded-circle" width="150">
+                                {% if datosC.foto %}
+                                    <img src="{{ datosC.foto.url }}" alt="Admin" class="rounded-circle" width="150">
+                                    {% else %}
+                                        <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                {% endif %}
                             </button>
                             <div class="mt-3">
                                 <h4></h4>
                                 <p class=" mb-1"></p>
-                                <p class="font-size-sm ">Bay Area, San Francisco, CA</p>
+                                <p class="font-size-sm ">{{datosC.nombres}} {{datosC.apellidos}}</p>
                                 <div class="btnActivateM">
                                     <label class="switch">
-                                        <input type="checkbox"> <span class="sliderP"></span>  
+                                        {% if datosC.state == "activo" %}
+                                            <input type="checkbox" checked> <span class="sliderP"></span> 
+                                            {% else %}
+                                                <input type="checkbox"> <span class="sliderP"></span>
+                                        {% endif %}
+                                        
                                     </label>
-                                    <button class="btn btnM btn-outline-primary">Mensaje</button>
+                                    {% comment %} <button class="btn btnM btn-outline-primary">Mensaje</button> {% endcomment %}
                                 </div>
                             </div>
                         </div>
@@ -60,7 +70,6 @@
                         </ul>
                     </div>
                 </div>
-                {% for datosC in datosC %}
                 <div class="col-md-8">
                     <div class="card mb-3">
                         <div class="card-body">
@@ -97,39 +106,31 @@
                             </div>
                             <hr>
                             <div class="row-2 filaEditar" id="row-2">
-                                <div class="col-10 form-check form-switch editar">
+                                {% comment %} <div class="col-10 form-check form-switch editar">
                                     <input class="col-2 form-check-input align-self-center" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                                     <label class="col-10 form-check-label align-self-center pt-2" forhtml="flexSwitchCheckDefault">Editar</label>
-                                </div>
+                                </div> {% endcomment %}
+                                <a href="{% url 'editarPerfilC' %}"><button class='buttonform'>Editar</button></a>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                     <div class="col-lg-14 col-xl-14 cardP-box">
                         <ul class="list-unstyled timeline-sm">
-                            <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
-                                <h5 class="mt-0">Lead designer / Developer</h5>
-                                <p>websitename.com</p>
-                                <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
-                                    desirable: one could refuse to pay expensive translators. To achieve this, it would
-                                    be necessary to have uniform grammar, pronunciation and more common words.</p>
-                                <div class="verCita">
-                                    <a>Ver Cita</a>
-                                </div>
-                            </li>
-                            <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
-                                <h5 class="mt-0">Lead designer / Developer</h5>
-                                <p>websitename.com</p>
-                                <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
-                                    desirable: one could refuse to pay expensive translators. To achieve this, it would
-                                    be necessary to have uniform grammar, pronunciation and more common words.</p>
-                                <div class="verCita">
-                                    <a>Ver Cita</a>
-                                </div>
-                            </li>
+                            {% for citasId in citas %}
+                                {% if citasId.peticion == "aceptar" %}
+                                <li class="timeline-sm-item">
+                                    <span class="timeline-sm-date">{{citasId.idHorario.fecha}}</span>
+                                    <h5 class="mt-0">{{citasId.idTrabajador.idCategoria}}: {{citasId.idServicio.tipoServicio}}</h5>
+                                    <p> Peluquero: {{ citasId.idTrabajador.nombres }} {{ citasId.idTrabajador.apellidos }}</p>
+                                    <p class="text-white-50 mt-2">Hora de inicio de corte: {{citasId.idHorario.horaInicio}}</p>
+                                    <p class="text-white-50 mt-2">Hora de finalizacion de corte: {{citasId.idHorario.horaFinalizacion}}</p>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
-                {% endfor %}
             </div>
         </div>
     </div>

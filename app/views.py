@@ -54,7 +54,10 @@ def perfilCliente(request):
         user_id = request.user.id
         usuarioActivo = User.objects.get(id=user_id)
         datosC = Clientes.objects.filter(email=usuarioActivo)
+        idCliente = Clientes.objects.get(email=usuarioActivo)
+        citasId = citas.objects.filter(idCliente=idCliente)
         data = {
+            'citas':citasId,
             'datosC':datosC,
         }
         return render(request, 'perfilCliente.html', data)
@@ -110,6 +113,7 @@ def registro(request):
                 idCategoria = idCategoria.strip()
                 nom_local = nom_local.strip()
                 direccion = direccion.strip()
+                state = "activo"
                 print("\n\n\n", idCategoria ,"\n\n\n")
                 if idCategoria != "":
                     print("\n\n\n diferente \n\n\n")
@@ -125,6 +129,7 @@ def registro(request):
                     barbero.direccion=direccion
                     idCategoria = Categoria.objects.get(id=idCategoria)
                     barbero.idCategoria=idCategoria
+                    barbero.state = state
                     barbero.save()
                     user = User.objects.create_user(email, email, password)
                     login(request, user)
@@ -139,6 +144,7 @@ def registro(request):
                     cliente.foto=foto
                     cliente.password=password
                     cliente.rol="Cliente"
+                    cliente.state = state
                     cliente.save()
                     user = User.objects.create_user(email, email, password)
                     login(request, user)
