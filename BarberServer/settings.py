@@ -93,7 +93,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
-            'PASSWORD': 'Sena1234',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '3306',
         }
