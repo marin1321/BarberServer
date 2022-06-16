@@ -10,6 +10,10 @@ class Categoria(models.Model):
     nombre_cat = models.CharField(max_length=60)
     idServicio = models.ForeignKey(Servicio, on_delete=models.SET_NULL, blank=True, null=True)
 
+    def __str__(self):
+        return self.nombre_cat
+
+
 class Trabajadores(models.Model):
     nombres = models.CharField(max_length=50)
     apellidos = models.CharField(max_length=50)
@@ -33,14 +37,18 @@ class Clientes(models.Model):
     rol = models.CharField(max_length=45)
     state = models.CharField(max_length=30, null=True)
 
-class citas(models.Model):
-    idCliente = models.ForeignKey(Clientes, on_delete=models.SET_NULL, blank=True, null=True)
-    idServicio = models.ForeignKey(Servicio, on_delete=models.SET_NULL, blank=True, null=True)
-    horaRegistroCita = models.TimeField()
-    fechaRegistroCita = models.DateField()
 class horarios(models.Model):
     idTrabajador = models.ForeignKey(Trabajadores, on_delete=models.SET_NULL, blank=True, null=True)
     horaInicio = models.TimeField()
     fecha = models.DateField()
     horaFinalizacion = models.TimeField()
     estado =  models.CharField(max_length=30, null=True)
+
+class citas(models.Model):
+    idCliente = models.ForeignKey(Clientes, on_delete=models.SET_NULL, blank=True, null=True)
+    idServicio = models.ForeignKey(Servicio, on_delete=models.SET_NULL, blank=True, null=True)
+    horaRegistroCita = models.TimeField()
+    fechaRegistroCita = models.DateField()
+    idHorario = models.ForeignKey(horarios, on_delete=models.SET_NULL, blank=True, null=True)
+
+
