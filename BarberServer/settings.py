@@ -114,6 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 
 # Internationalization

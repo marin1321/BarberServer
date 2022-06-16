@@ -19,8 +19,6 @@ def barber(request):
     } 
     return render(request, 'barberos.html', data)
 
-
-
 def perfil(request):
     global user_id
     user_id = request.user.id
@@ -31,14 +29,18 @@ def perfil(request):
         return redirect(to="perfilC")
 
 def perfilBarbero(request):
-    global user_id 
-    user_id = request.user.id
-    usuarioActivo = User.objects.get(id=user_id)
-    datosB = Trabajadores.objects.filter(email=usuarioActivo)
-    data = {
-        'datosB':datosB,
-    }
-    return render(request, 'perfilBarbero.html', data)
+    if request.user.is_authenticated:
+        global user_id 
+        usuarioActivo = User.objects.get(id=user_id)
+        datosB = Trabajadores.objects.filter(email=usuarioActivo)
+        data = {
+            'datosB':datosB,
+        }
+        print("AQUI --> " +str(request.user))
+
+        return render(request, 'perfilBarbero.html', data)
+    else:
+        return redirect(to="login")
 
 def perfilCliente(request):
     global user_id 
@@ -49,6 +51,9 @@ def perfilCliente(request):
         'datosC':datosC,
     }
     return render(request, 'perfilCliente.html', data)
+
+def citasBarbero(request):
+    return render(request, 'citasBarbero.html')
 
 def registro(request):
     data = {
@@ -118,6 +123,40 @@ def registro(request):
                 }
     return render(request, 'registration/registrar.html', data)
 
+def horarioBarber(request):
+    data = {
+        "form" : HorariosBarbero
+    }
+    if request.method=='POST':
+        global user_id 
+        user_id = request.user.id
+        usuarioActivo = User.objects.get(id=user_id)
+        id_usuario = Trabajadores.objects.get(email=usuarioActivo)
+        print(id_usuario)
+        inicioHora = request.POST.get('horaInicio')
+        fecha = request.POST.get('fecha')
+        fecha =  fecha.strip()
+        inicioHora = inicioHora.strip()
+        hora2 = inicioHora[3:5]
+        hora2 = int(hora2) + 30
+        if hora2 >= 60:
+            hora2 = int(hora2) - 60
+            hora1 = inicioHora[0:2]
+            hora1 = int(hora1) + 2
+        else: 
+            hora1 = inicioHora[0:2]
+            hora1 = int(hora1) + 1
+        finalizarHora = str(hora1) + ":" + str(hora2)
+        activo = "activo"
+        horario = horarios()
+        horario.idTrabajador = id_usuario
+        horario.horaInicio = inicioHora
+        horario.fecha = fecha
+        horario.horaFinalizacion = finalizarHora
+        horario.estado = activo
+        horario.save()
+
+    return render(request, "horarioBarber.html", data)
 
 def eliminarCuenta(request):
     global user_id 
@@ -177,3 +216,23 @@ def modal_barber(request, id):
     return render(request, 'modalB.html', data)
 def contacto(request):
     return render(request, 'contacto.html')
+def verHorarios(request):
+    global user_id 
+    user_id = request.user.id
+    usuarioActivo = User.objects.get(id=user_id)
+    id_usuario = Trabajadores.objects.get(email=usuarioActivo)
+    datosH = horarios.objects.filter(idTrabajador=id_usuario)
+    datosB = Trabajadores.objects.filter(email=usuarioActivo)
+    print('dattosB', datosB)
+    data = {
+        'datosH':datosH,
+        'datosB':datosB,
+    }
+    return render(request, 'verHorarios.html', data)
+# def eliminarHorario(request):
+#     if request.method=='POST':
+#         id = request.POST.get('id')
+#         print('id', id)
+#         usuario = get_object_or_404(horarios, id=id)
+#         usuario.delete()
+#         return redirect(to="inicio")

@@ -16,7 +16,7 @@
 	color: #FFFFFF;
 	margin: 3%;
 	font-size: 200%;
-	text-shadow: 0 0 10px yellow
+	text-shadow: 0 0 10px yellow;
 }
 
 /* h2 {
@@ -145,12 +145,13 @@
 	0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	/* overflow: hidden; */
-	width: 48rem;
-	height: 30rem;
-	margin: 0 40px;
+	width: 52rem;
+	height: 32rem;
+	margin: 0 2rem;
+	/* margin: 0 40px; */
 	animation-name: trasladarse;
 	animation-duration: 0.4s;
-	transition: 4s
+	transition: 4s;
 }
 
 .form-container {
@@ -287,10 +288,11 @@
 }
 .labelRadio{
 	padding-right: 10px;
+	margin-top: 10px;
 }
 
 .radiusB{
-	width: 60%;
+	width: 100%;
 	height: auto;
 	color: whitesmoke;
 }
@@ -425,67 +427,151 @@
 
 /*nuevo formulario*/
 .nuevoForm{
-	transform: translateX(220%);
+	transform: translateX(60%);
 	height: 30em;
 	width: 20em;
-	position: relative;
+	position: absolute;
 	display: none;
 	padding-right: 40px;
 	padding-left: 5px;
 	right: 23rem;
 	z-index: 1;
 	opacity: 0;
+	transition-duration: 2s;
 }
 
 .mostrarFormulario{
-	transform: translateX(220%);
+	transform: translateX(60%);
 	display: block;
-	position: relative;
+	position: absolute;
 	top: 0;
+	left: 50%;
 	opacity: 1;
 	animation-name: nuevoFormulario;
-	animation-duration: 4s;
+	animation-duration: 3s;
 	transition-property: translateX;
-	transition-duration: 6s;
 	z-index: 200;
 }
 
 .regresarFormulario{
 	transform: translateX(0);
-	position: relative;
+	position: absolute;
 	display: block;
 	overflow: hidden;
 	animation-name: regresarFormulario;
 	animation-duration: 6s;
 	transition-property: translateX;
-	transition-duration: 4s;
-	z-index: 2;
+	transition-duration: 5s;
+	z-index: -2;
+	left: 50%;
 	animation-fill-mode: forwards;
 }
 
 @keyframes nuevoFormulario {
 	0% {
 		opacity: 0;
-		z-index: 0;
+		z-index: -1;
 		transform: translateX(0);
+	}
+	25%{
+		z-index: -1;
 	}
 	50%, 100% {
 		opacity: 1;
 		z-index: 0;
-		transform: translateX(220%);
+		transform: translateX(60%);
 	}
 }
 @keyframes regresarFormulario {
 	0% {
 		opacity: 1;
 		z-index: 0;
-		transform: translateX(100%);
+		transform: translateX(60%);
 	}
-	50%, 100% {
+	10%{
+		z-index: -2;
+		transform: translateX(40%);
+	}
+	40%, 100% {
 		opacity: 0;
-		z-index: 0;
+		z-index: -2;
 		transform: translateX(0%);
 		width: 0;
 		height: 0;
 	}
 }
+
+@media (max-width: 1144px) { 
+	.nuevoForm{
+		width: 18em;
+		padding-right: 20px;
+	}
+
+	.mostrarFormulario{ transform: translateX(55%); }
+}
+
+@media (max-width: 1024px) { 
+	/* .containerform{
+		width: 40rem;
+		height: 32rem;
+	} */
+
+	.formlr { padding: 0 20px; }
+
+	@keyframes nuevoFormulario {
+		0% {
+			opacity: 0;
+			z-index: -1;
+			transform: translateX(0);
+		}
+		25%{
+			z-index: -1;
+		}
+		50%, 100% {
+			opacity: 1;
+			z-index: 0;
+			transform: translateX(55%);
+		}
+	}
+}
+
+@media (max-width: 986px) { 
+	
+
+	.mostrarFormulario{ transform: translateX(50%); }
+	@keyframes nuevoFormulario {
+		0% {
+			opacity: 0;
+			z-index: -1;
+			transform: translateX(0);
+		}
+		25%{
+			z-index: -1;
+		}
+		50%, 100% {
+			opacity: 1;
+			z-index: 0;
+			transform: translateX(50%);
+		}
+	}
+}
+
+@media (max-width: 928px) { 
+	.mostrarFormulario{ transform: translateX(45%); }
+	@keyframes nuevoFormulario {
+		0% {
+			opacity: 0;
+			z-index: -1;
+			transform: translateX(0);
+		}
+		25%{
+			z-index: -1;
+		}
+		50%, 100% {
+			opacity: 1;
+			z-index: 0;
+			transform: translateX(45%);
+		}
+	}
+}
+/* inputFile */

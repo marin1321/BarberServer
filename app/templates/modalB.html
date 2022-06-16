@@ -12,7 +12,10 @@
                       </section>
                       <section class="contenedor-modal">
                     <figure class="campoimg-modal">
-                        <img src={{dataT.foto.url}} alt="El barbero Gustavo" class="img-vtn"/>
+                        {% if dataT.foto %}
+                          <img src={{dataT.foto.url}} alt="El barbero Gustavo" class="img-vtn"/>
+                        {% endif %}
+                        
                     </figure>
                     <article class="infoBasica-modal">
                         <section class="texto">
