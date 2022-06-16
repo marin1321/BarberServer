@@ -1,8 +1,14 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block stilos %}
+{% comment %} <link rel="stylesheet" href="{% static 'css/lore.css'%}"> {% endcomment %}
+{% endblock stilos %}
 
+{% block appContenido %}
 <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
     {{ form }}
     <button id="id_btn" type="submit">
         Login
     </button>
 </form>
+{% endblock appContenido %}
