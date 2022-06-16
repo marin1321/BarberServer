@@ -131,6 +131,7 @@
   }
   .nom-categoria {
     border-bottom:0;
+    font-size: 3rem;
   }
   .card-title{
     display: flex;

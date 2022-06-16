@@ -15,6 +15,8 @@
         <section class="citasIzq">
             <h2 class="tituloIzq">MIS CITAS</h2>
             <div class="cardsCitas">
+              {% for datosCita in datosCita %}
+              {% if datosCita.peticion == "pendiente" %}
                 <article class="cardCita">
                     <div class="infoCita">
                         <h3 class="titulo">¡Victor te ha pedido una cita!</h3>
@@ -25,19 +27,13 @@
                         <h4 class="txtCita"><b>Servicio:</b> corte de cabello</h4>
                     </div>
                     <div class="btnsCita">
-                        <button id="btnAceptarCita"><i class="fa fa-check mx-1" id="chulo" aria-hidden="true"></i>
-                            Aceptar</button>
-                        <button id="btnEditarCita">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-square"
-                                id="editar" viewBox="0 0 16 16">
-                                <path
-                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z">
-                                </path>
-                                <path fill-rule="evenodd"
-                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z">
-                                </path>
-                            </svg>Editar</button>
-                        <button id="btnRechazarCita">
+                        <form action="" method="post">{% csrf_token %}
+                            <input type='hidden' value="aceptar" name='peticion'>
+                            <input type='hidden' value={{ datosCita.id }} name='idCita'>
+                            <button id="btnAceptarCita"><i class="fa fa-check mx-1" id="chulo" aria-hidden="true"></i>
+                                Aceptar</button>
+                        </form>
+                            <button id="btnRechazarCita">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-square"
                                 id="equis" viewBox="0 0 16 16">
                                 <path
@@ -46,6 +42,8 @@
                             </svg>Rechazar</button>
                     </div>
                 </article>
+                {% endif %} 
+                {% endfor %} 
             </div>
         </section>
         <section class="citasFiltro">
@@ -70,160 +68,7 @@
                 </li>
             </ul>
             <hr>
-            <article class="campoCalendario">
-                <div class="react-calendar ">
-                    <div class="react-calendar__navigation">
-                        <button aria-label="" class="react-calendar__navigation__arrow react-calendar__navigation__prev2-button" type="button">«</button>
-                        <button aria-label="" class="react-calendar__navigation__arrow react-calendar__navigation__prev-button" type="button">‹</button>
-                        <button aria-label="" class="react-calendar__navigation__label" style="flex-grow: 1;" type="button">
-                            <span class="react-calendar__navigation__label__labelText react-calendar__navigation__label__labelText--from">junio de 2022</span>
-                        </button>
-                        <button aria-label="" class="react-calendar__navigation__arrow react-calendar__navigation__next-button" type="button">›</button>
-                        <button aria-label="" class="react-calendar__navigation__arrow react-calendar__navigation__next2-button" type="button">»</button>
-                    </div>
-                    <div class="react-calendar__viewContainer">
-                        <div class="react-calendar__month-view ">
-                            <div style="display: flex; align-items: flex-end;">
-                                <div style="flex-grow: 1; width: 100%;">
-                                    <div class="react-calendar__month-view__weekdays" style="display: flex;">
-                                        <div class="react-calendar__month-view__weekdays__weekday" style="flex: 0 0 14.2857%; overflow: hidden;">
-                                            <abbr aria-label="lunes" title="lunes">lun</abbr>
-                                        </div>
-                                        <div class="react-calendar__month-view__weekdays__weekday" style="flex: 0 0 14.2857%; overflow: hidden;">
-                                            <abbr aria-label="martes" title="martes">mar</abbr>
-                                        </div>
-                                        <div class="react-calendar__month-view__weekdays__weekday" style="flex: 0 0 14.2857%; overflow: hidden;">
-                                            <abbr aria-label="miércoles" title="miércoles">mié</abbr>
-                                        </div>
-                                        <div class="react-calendar__month-view__weekdays__weekday" style="flex: 0 0 14.2857%; overflow: hidden;">
-                                            <abbr aria-label="jueves" title="jueves">jue</abbr>
-                                        </div>
-                                        <div class="react-calendar__month-view__weekdays__weekday" style="flex: 0 0 14.2857%; overflow: hidden;">
-                                            <abbr aria-label="viernes" title="viernes">vie</abbr>
-                                        </div>
-                                        <div class="react-calendar__month-view__weekdays__weekday" style="flex: 0 0 14.2857%; overflow: hidden;">
-                                            <abbr aria-label="sábado" title="sábado">sáb</abbr>
-                                        </div>
-                                        <div class="react-calendar__month-view__weekdays__weekday" style="flex: 0 0 14.2857%; overflow: hidden;">
-                                            <abbr aria-label="domingo" title="domingo">dom</abbr>
-                                        </div>
-                                    </div>
-                                    <div class="react-calendar__month-view__days" style="display: flex; flex-wrap: wrap;">
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--neighboringMonth" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="30 de mayo de 2022">30</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--neighboringMonth" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="31 de mayo de 2022">31</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="1 de junio de 2022">1</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="2 de junio de 2022">2</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="3 de junio de 2022">3</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="4 de junio de 2022">4</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="5 de junio de 2022">5</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="6 de junio de 2022">6</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="7 de junio de 2022">7</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="8 de junio de 2022">8</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="9 de junio de 2022">9</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="10 de junio de 2022">10</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="11 de junio de 2022">11</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="12 de junio de 2022">12</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="13 de junio de 2022">13</abbr>
-                                            </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="14 de junio de 2022">14</abbr>
-                                            </button>
-                                        <button class="react-calendar__tile react-calendar__tile--now react-calendar__tile--active react-calendar__tile--range react-calendar__tile--rangeStart react-calendar__tile--rangeEnd react-calendar__tile--rangeBothEnds react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="15 de junio de 2022">15</abbr>
-                                            </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="16 de junio de 2022">16</abbr>
-                                            </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="17 de junio de 2022">17</abbr>
-                                            </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="18 de junio de 2022">18</abbr>
-                                            </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="19 de junio de 2022">19</abbr>
-                                            </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="20 de junio de 2022">20</abbr>
-                                            </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="21 de junio de 2022">21</abbr>
-                                            </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="22 de junio de 2022">22</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="23 de junio de 2022">23</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="24 de junio de 2022">24</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="25 de junio de 2022">25</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="26 de junio de 2022">26</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="27 de junio de 2022">27</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="28 de junio de 2022">28</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="29 de junio de 2022">29</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="30 de junio de 2022">30</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--neighboringMonth" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="1 de julio de 2022">1</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend react-calendar__month-view__days__day--neighboringMonth" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="2 de julio de 2022">2</abbr>
-                                        </button>
-                                        <button class="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend react-calendar__month-view__days__day--neighboringMonth" style="flex: 0 0 14.2857%; overflow: hidden;" type="button">
-                                            <abbr aria-label="3 de julio de 2022">3</abbr>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
         </section>
     </div>
 </body>
 {% endblock %}
-
-</html>

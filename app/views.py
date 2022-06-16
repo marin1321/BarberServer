@@ -1,8 +1,13 @@
+import email
+from arrow import now
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from .forms import *
 from .models import *
+from datetime import datetime
+import time
+
 
 # Create your views here.
 
@@ -53,7 +58,25 @@ def perfilCliente(request):
     return render(request, 'perfilCliente.html', data)
 
 def citasBarbero(request):
-    return render(request, 'citasBarbero.html')
+    global user_id 
+    user_id = request.user.id
+    usuarioActivo = User.objects.get(id=user_id)
+    idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
+    datosCita = citas.objects.filter(idTrabajador = idTrabajador)
+    data = {
+        "datosCita":datosCita
+    }
+    if request.method=='POST':
+        peticion = request.POST.get('peticion')
+        idCita = request.POST.get('idCita')
+        idCita =  citas.objects.get(id=idCita)
+        if peticion == "aceptar":
+            idCita.peticion = "aceptar"
+            idCita.save()
+        else:
+            idCita.peticion = "cancelada"
+            idCita.save()
+    return render(request, 'citasBarbero.html', data)
 
 def registro(request):
     data = {
@@ -69,9 +92,9 @@ def registro(request):
                 nombres = request.POST.get('nombres')
                 apellidos = request.POST.get('apellidos')
                 telefono = request.POST.get('telefono')
-                email = request.POST.get('email')
                 foto=request.FILES.get('foto')
                 password = request.POST.get('password')
+                email = request.POST.get('email')
                 idCategoria = request.POST.get('idCategoria')
                 nom_local = request.POST.get('nom_local')
                 direccion = request.POST.get('direccion')
@@ -156,26 +179,45 @@ def horarioBarber(request):
         horario.estado = activo
         horario.save()
 
-    return render(request, "horariodBarber.html", data)
+    return render(request, "horarioBarber.html", data)
 
-def citas(request):
+def cita(request, id):
+    # data = {
+    #     "form" : Citas 
+    # }
+    global user_id 
+    user_id = request.user.id
+    usuarioActivo = User.objects.get(id=user_id)
+    idCliente =  Clientes.objects.get(email=usuarioActivo)
+    horario = horarios.objects.filter( idTrabajador = id )
+    barbero = Trabajadores.objects.get( id = id )
     data = {
-        "form" : Citas 
-    }
-
+        "horario":horario
+    } 
     if request.method == 'POST':
-        formulario = Citas(data=request.POST)
-        if formulario.is_valid():
-            idServicio = request.POST.get('idServicio')
-            horaRegistroCita = request.POST.get('horaRegistroCita')
-            fechaRegistroCita = request.POST.get('fechaRegistroCita')
-            idHorario = request.POST.get('idHorario')
-            idServicio = idServicio.strip()
-            horaRegistroCita = horaRegistroCita.strip()
-            fechaRegistroCita = fechaRegistroCita.strip()
-            idHorario = idHorario.strip()
+        idCategoria = Trabajadores.objects.get( id = id ).idCategoria
+        idCategoria = Categoria.objects.get(nombre_cat = idCategoria).idServicio
+        idServicio = idCategoria
+        horaRegistroCita = time.strftime("%H:%M:%S")
+        horaRegistroCita = horaRegistroCita.strip()
+        idHorario = request.POST.get('idHorario')
+        fechaRegistroCita = datetime.today().strftime('%Y-%m-%d')
+        fechaRegistroCita = fechaRegistroCita.strip()
+        idHorario = idHorario.strip()
+        idHorario =  horarios.objects.get(id=idHorario)
+        cita = citas()
+        cita.idCliente = idCliente
+        cita.idServicio = idServicio
+        cita.horaRegistroCita = horaRegistroCita
+        cita.fechaRegistroCita = fechaRegistroCita
+        cita.idHorario = idHorario
+        cita.idTrabajador = barbero
+        cita.peticion = "pendiente"
+        cita.save()
+        idHorario.estado = "inactivo"
+        idHorario.save()
 
-    return render(request, "citas.html", data)
+    return render(request, "agendar.html", data)
 
 def eliminarCuenta(request):
     global user_id 
