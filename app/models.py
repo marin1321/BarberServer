@@ -50,5 +50,5 @@ class citas(models.Model):
     horaRegistroCita = models.TimeField()
     fechaRegistroCita = models.DateField()
     idHorario = models.ForeignKey(horarios, on_delete=models.SET_NULL, blank=True, null=True)
-
-
+    peticion =  models.CharField(max_length=30, null=True)
+    idTrabajador = models.ForeignKey(Trabajadores, on_delete=models.SET_NULL, blank=True, null=True)

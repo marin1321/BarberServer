@@ -17,33 +17,31 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th class="sortable">Name</th>
                     <th class="sortable">Date</th>
                     <th class="sortable">Comienzo</th>
                     <th class="sortable">Finalizar</th>
-                    <th> </th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {% for datosH in datosH %}
-                    {% if datosH.estado == "activo" %}
+                  {% for horario in horario %}
+                    {% if horario.estado == "activo" %}
                         <tr>
-                            <td class="text-nowrap align-middle" name="id">{{datosH.id}}</td>
-                            <td class="text-nowrap align-middle">{{datosH.idTrabajador.nombres}}</td>
-                            <td class="text-nowrap align-middle"><span>{{datosH.fecha}}</span></td>
-                            <td class="text-nowrap align-middle"><span>{{datosH.horaInicio}}</span></td>
-                            <td class="text-nowrap align-middle"><span>{{datosH.horaFinalizacion}}</span></td>
+                            <td class="text-nowrap align-middle">{{horario.idTrabajador.nombres}}</td>
+                            <td class="text-nowrap align-middle"><span>{{horario.fecha}}</span></td>
+                            <td class="text-nowrap align-middle"><span>{{horario.horaInicio}}</span></td>
+                            <td class="text-nowrap align-middle"><span>{{horario.horaFinalizacion}}</span></td>
                             <td class="text-center align-middle">
                             <div class="btn-group align-top" >
-                                <button class="btn btn-sm btn-outline-secondary badge" type="button" data-toggle="modal" data-target="#user-form-modal">Edit</button>
-                                {% comment %} <button class="btn btn-sm btn-outline-secondary badge"><i class="fa fa-trash"></i></button> {% endcomment %}
-                            </div>
+                                <form action="" method="post">{% csrf_token %}
+                                  <input type='hidden' value={{ horario.id }} name='idHorario'>
+                                  <button class="btn btn-sm btn-outline-secondary badge" data-toggle="modal" data-target="#user-form-modal">Agendar</button>
+                                  {% comment %} <button class="btn btn-sm btn-outline-secondary badge"><i class="fa fa-trash"></i></button> {% endcomment %}
+                                </form>
+                              </div>
                             </td>
                         </tr>
-                        {% else %}
-                        <h2>No tiene horario Tadavia</h2>
                     {% endif %}
                   {% endfor %}
                 </tbody>
