@@ -6,11 +6,13 @@
 option{ background-color: #222; }
 
 /*clases*/
+
 .mainConsultBarber{
-width: 100%;
-height: 100%;
-justify-content: center;
-align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8em;
 }
 
 .nom-categoria{
@@ -45,13 +47,13 @@ text-shadow: 0 0 10px yellow;
 }
 
 #main{
-width: 90%;
-height: 100%;
-margin-top: 6em;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-background: linear-gradient(rgb(17, 17, 17), #333);
-border-radius: 30px;
-padding-bottom: 3rem;
+    width: 90%;
+    height: 100%;
+    margin-top: 2.5em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: linear-gradient(rgb(17, 17, 17), #333);
+    border-radius: 30px;
+    padding-bottom: 3rem;
 }

@@ -10,7 +10,7 @@
 {% endblock stilos %}
 {% block appContenido %}
 
-<body>
+<main class="mainCitaTrabajador">
     <div class="ctrCitaTrabajador">
         <section class="citasIzq">
             <h2 class="tituloIzq">MIS CITAS</h2>
@@ -19,12 +19,12 @@
               {% if datosCita.peticion == "pendiente" %}
                 <article class="cardCita">
                     <div class="infoCita">
-                        <h3 class="titulo">¡Victor te ha pedido una cita!</h3>
-                        <h4 class="txtCita"><b>Nombre completo:</b> Victor Ramirez</h4>
-                        <h4 class="txtCita"><b>Fecha:</b> 29/02/2023</h4>
-                        <h4 class="txtCita"><b>Hora:</b> 05:30 pm</h4>
-                        <h4 class="txtCita"><b><i class="fa fa-whatsapp" aria-hidden="true"></i>:</b> 3213586909</h4>
-                        <h4 class="txtCita"><b>Servicio:</b> corte de cabello</h4>
+                        <h3 class="titulo">¡{{ datosCita.idCliente.nombres }} te ha pedido una cita!</h3>
+                        <h4 class="txtCita"><b>Nombre completo:</b> {{ datosCita.idCliente.nombres }} {{ datosCita.idCliente.apellidos }}</h4>
+                        <h4 class="txtCita"><b>Fecha:</b> {{ datosCita.idHorario.fecha }}</h4>
+                        <h4 class="txtCita"><b>Hora:</b> {{ datosCita.idHorario.horaInicio }}</h4>
+                        <h4 class="txtCita"><b><i class="fa fa-whatsapp" aria-hidden="true"></i>:</b>{{ datosCita.idCliente.telefono }}</h4>
+                        <h4 class="txtCita"><b>Servicio:</b>{{ datosCita.peticion }}  //corte de cabello</h4>
                     </div>
                     <div class="btnsCita">
                         <form action="" method="post">{% csrf_token %}
@@ -70,5 +70,5 @@
             <hr>
         </section>
     </div>
-</body>
+</main>
 {% endblock %}
