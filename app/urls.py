@@ -17,5 +17,6 @@ urlpatterns=[
     path('contacto/', contacto, name='contactos'),
     path('horarios/', horarioBarber, name='horarios'),
     path('verHorario/', verHorarios, name='verHorario'),
+    path('citas/', citas, name='citas')
     # path('eliminarHorario/', eliminarHorario, name='eliminarHorario'),
 ]

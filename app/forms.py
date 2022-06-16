@@ -21,3 +21,8 @@ class HorariosBarbero(forms.ModelForm):
     class Meta:
         model = horarios
         fields = ["horaInicio", "fecha", "horaFinalizacion"]
+
+class Citas(forms.ModelForm):
+    class Meta:
+        model = citas
+        fields = ["idServicio","horaRegistroCita", "fechaRegistroCita", "idHorario"]
