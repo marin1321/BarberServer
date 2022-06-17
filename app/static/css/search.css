@@ -1,8 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Cabin:400);
 
 .busqueda {
-	height: 100%;
-	position: absolute;
+	height: 5%;
 	text-align: center;
 	width: 100%;
 }
@@ -20,7 +19,7 @@
 	margin: 12rem auto 0;
 	padding: 20px;
 	position: relative;
-	z-index: 1;
+	z-index: 100;
 }
 
 /* .busqueda:before,
