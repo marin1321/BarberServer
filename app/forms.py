@@ -11,7 +11,10 @@ class EditarClienteForm(forms.ModelForm):
     class Meta:
         model = Clientes
         fields = ["nombres", "apellidos", "telefono", "foto"]
-
+class EditarBarberoForm(forms.ModelForm):
+    class Meta:
+        model = Trabajadores
+        fields = ["nombres", "apellidos", "telefono", "foto", "idCategoria", "nom_local", "direccion"]
     class Meta:
         model = Trabajadores
         fields = ["nombres", "apellidos", "telefono", "foto", "nom_local", "direccion", "idCategoria"]

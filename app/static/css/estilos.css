@@ -64,6 +64,7 @@ header{
     background: rgba(0,0,0,0.9);
     z-index: 1000;
     transition: 0.4s;
+    top:0;
 }
 .slider{
     background: url(../img/srb.jpeg) no-repeat center center;
@@ -216,6 +217,7 @@ footer {
   background-color: #292c2f;
   color: #bbb;
   margin-bottom: 0px;
+  margin-top: 2em;
 }
 
 footer a {

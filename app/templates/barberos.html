@@ -19,40 +19,40 @@
 </script>
 {% endblock llamdoJavaScript %}
 {% block appContenido %}
-<div class="aboutU">
-        <main class="mainConsultBarber">
-            <section class="busqueda">
-                <form action="" method="" class="form-busqueda"><input type="search"
-                        placeholder="What are you looking for?"><button>Search</button><select name="opciones" id="seleciona">
-                        <option value="Todos">Todos</option>
-                        <option value="Barberos">Barberos</option>
-                        <option value="Peluqueros">Peluqueros</option>
-                        <option value="Estilista">Estilista</option>
-                    </select></form>
-            </section>
-            <section id="main">
-                <h2 class="nom-categoria">Barberos</h2>
-                <div class="cards-barberos">
-                    {% for barber in barber %}
-                    <article class="cards card1">
-                        <div class="efectoBlur"><button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button></div>
-                        <figure class="figura">
-                            {% if barber.foto %}
-                            <img src="{{ barber.foto.url }}" alt="las vegas"
-                                class="img_cards">
-                            {% endif %}
-                            </figure>
-                        <div class="infoBasica">
-                            <h3 id="nombre">{{ barber.nombres }}</h3>
-                            <h4 class="info"><b>Barrio:</b>{{ barber.nom_local }}</h4>
-                            <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
-                            <h4 class="info"><b>Estado:</b> Activo</h4>
-                        </div>
-                    </article>
-                    {% endfor %}
-                </div>
-            </section>
-        </main>
+<main class="barberos">
+    <div class="mainConsultBarber">
+        <section class="busqueda">
+            <form action="" method="" class="form-busqueda"><input type="search"
+                    placeholder="What are you looking for?"><button>Search</button><select name="opciones" id="seleciona">
+                    <option value="Todos">Todos</option>
+                    <option value="Barberos">Barberos</option>
+                    <option value="Peluqueros">Peluqueros</option>
+                    <option value="Estilista">Estilista</option>
+                </select></form>
+        </section>
+        <section id="main">
+            <h2 class="nom-categoria">Barberos</h2>
+            <div class="cards-barberos">
+                {% for barber in barber %}
+                <article class="cards card1">
+                    <div class="efectoBlur"><button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button></div>
+                    <figure class="figura">
+                        {% if barber.foto %}
+                        <img src="{{ barber.foto.url }}" alt="las vegas"
+                            class="img_cards">
+                        {% endif %}
+                        </figure>
+                    <div class="infoBasica">
+                        <h3 id="nombre">{{ barber.nombres }}</h3>
+                        <h4 class="info"><b>Barrio:</b>{{ barber.nom_local }}</h4>
+                        <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
+                        <h4 class="info"><b>Estado:</b> Activo</h4>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
         <div  class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        </div>
+</main>
 {% endblock %}

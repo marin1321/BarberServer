@@ -40,7 +40,7 @@
             <div> <a class="link" href="{% url 'inicio' %}">INICIO</a> </div>
             <div> <a class="link" href="{% url 'sobreNosotros' %}">SOBRE NOSOTROS</a> </div>
             <div> <a class="link" href="{% url 'barberos' %}" >BARBEROS</a> </div>
-            <div> <a class="link" href="{% url 'contactos' %}">CONTACTENOS</a> </div>
+            <div> <a class="link" href="{% url 'contactos' %}">CONTÁCTENOS</a> </div>
 
             {% if user.is_authenticated %}
             {% comment %} <div> <a href="{% url 'logout' %}"> Cerrar Sesiòn </a> </div> {% endcomment %}
@@ -51,7 +51,7 @@
                             <li><a href="#">CITAS</a></li>
                             {%block horarios%}
                             {%endblock%}
-                            <li><a href="{% url 'logout' %}"> SALIR</a></li>
+                            <li><a href="{% url 'logout' %}">SALIR</a></li>
                     </ul>
                 </li> 
             </div>
@@ -93,8 +93,8 @@
                                 <li><a
                                         href="https://drive.google.com/drive/folders/1Ml9agz-_Nyd70hbgrfMkMH123uOKNYrq?usp=sharing">Documentacion</a>
                                 </li>
-                                <li><a href="">Suporte</a></li>
-                                <li><a href="">Termino Legales</a></li>
+                                <li><a href="">Soporte</a></li>
+                                <li><a href="">Términos Legales</a></li>
                             </ul>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                     </ul><br>
                 </div>
                 <div class="col-md-2">
-                    <h5 class="text-md-right">¡Envianos un comentario!</h5>
+                    <h5 class="text-md-right">¡Envíanos un comentario!</h5>
                     <hr>
                 </div>
                 <div class="col-md-5">
