@@ -6,13 +6,21 @@
 option{ background-color: #222; }
 
 /*clases*/
+.barberos {
+	height: 100%;
+    width: 100%;
+    background: url(../img/barberos.jpg) no-repeat;
+    background-size: cover;
+    /* background-position: center center; */
+}
 
 .mainConsultBarber{
     width: 100%;
     height: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 8em;
+    flex-direction: column;
 }
 
 .nom-categoria{
@@ -46,14 +54,114 @@ text-shadow: 0 0 10px yellow;
     border: 1px solid #444;
 }
 
-#main{
+#containerBarberos{
     width: 90%;
     height: 100%;
-    margin-top: 2.5em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     background: linear-gradient(rgb(17, 17, 17), #333);
     border-radius: 30px;
     padding-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+    top: -12px;
+}
+
+/*BARBEROS*/
+/* @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700); */
+
+/* .mainConsultBarber{
+    width: 100%;
+    height: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10em;
+} */
+
+.consultBarber{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    background: no-repeat center;
+    background-size:cover;
+}
+
+.cardBarberos{
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+
+#cuadroCard{
+    width: 24rem;
+    height: 40rem;
+    background-color: rgba(14, 13, 13, 0.9);
+    border-radius: 20px;
+}
+
+.sec-cardBarberos{
+    width: 100%;
+    height: 100%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sec-busqueda{
+    width: 100%;
+    height: 2.5em;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-Barbero{
+    width:80%;
+    height: 22rem;
+    position:relative;
+    z-index: 10;
+    top: 3rem;
+    border-radius: 30px;
+    box-shadow: 0 0 10px 4px #ffd17b;
+}
+
+.btn-barbero{
+    width: 8rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+    background-color: rgba(0, 0, 0, 0.479);
+    color: #F5F5F5;
+    cursor: pointer;
+}
+
+.datos{
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    bottom: 5rem;
+    z-index: 1;
+    color: #F5F5F5;
+}
+
+#input-ConsultBarber{
+    margin-top: 1.5rem;
+}
+.nameB{
+    font-family: Open Sans;
+    font-weight: 300;
+	line-height: 1;
+}
+.nameR{
+    font-family: Open Sans;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
