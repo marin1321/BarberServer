@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{% static 'css/calificacion.css'%}">
 {% endblock stilos %}
 {% block appContenido %}
-<body>
+<main class="containerNegro">
     <!-- <h1>Perfil Barbero</h1>
     {% for datosB in datosB %}
     <p>{{ datosB.nombres }}</p>
@@ -130,7 +130,7 @@
                             </div>
                         </div>
                     </div>
-                    {% comment %} <div class="col-lg-14 col-xl-14 cardP-box">
+                    <div class="col-lg-14 col-xl-14 cardP-box">
                         <ul class="list-unstyled timeline-sm">
                             <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
                                 <h5 class="mt-0">Lead designer / Developer</h5>
@@ -139,7 +139,7 @@
                                     desirable: one could refuse to pay expensive translators. To achieve this, it would
                                     be necessary to have uniform grammar, pronunciation and more common words.</p>
                                 <div class="verCita">
-                                    <a class="" href="{% url 'citasBarbero' %}"><button>Ver Cita</button></a>
+                                    <a class="" href="{% url 'citasBarbero' %}">Ver Cita</a>
                                 </div>
                             </li>
                             <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
@@ -149,15 +149,15 @@
                                     desirable: one could refuse to pay expensive translators. To achieve this, it would
                                     be necessary to have uniform grammar, pronunciation and more common words.</p>
                                 <div class="verCita">
-                                    <a class="" href="{% url 'citasBarbero' %}"><button>Ver Cita</button></a>
+                                    <a class="" href="{% url 'citasBarbero' %}">Ver Cita</a>
                                 </div>
                             </li>
                         </ul>
-                    </div> {% endcomment %}
+                    </div>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-</body>
+</main>
 {% endblock %}

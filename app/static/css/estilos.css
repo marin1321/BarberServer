@@ -2,6 +2,12 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');/* Pertenece a los estilos del login y register */
 @import url(https://fonts.googleapis.com/css?family=Alegreya+Sans:300);
 
+.app{
+    width: 100%;
+    height: auto;
+    order: 2;
+}
+
 a{
     margin-top: 17px;
     text-decoration: none;
@@ -65,11 +71,17 @@ header{
     z-index: 1000;
     transition: 0.4s;
     top:0;
+    order: 1;
 }
 
-.prueba{
+.mainInicio{
+    width: 100%;
     height: 100%;
-    width: 50%;
+}
+
+.contenidoBarberServer{
+    width: 100%;
+    height: auto;
     color: white;
 }
 
@@ -195,6 +207,12 @@ header{
 body {
     /* font-family: 'Alegreya Sans', sans-serif; */
     font-family:'Alegreya Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100%;
+
 }
 
 /* Sticky footer position and size
@@ -208,13 +226,6 @@ body {
   margin-bottom: 15em;
   background-color: #292c2f;
 }
-.footer {
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height:260px;
-}
 
 
 /* Sticky footer style and color
@@ -224,7 +235,11 @@ footer {
   background-color: #292c2f;
   color: #bbb;
   margin-bottom: 0px;
-  margin-top: 2em;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height:260px;
+  order: 3;
 }
 
 footer a {
@@ -251,9 +266,6 @@ footer .form-control {
 @media screen and (min-width: 1350px) {
     .imagenLogo{
         width: 100px;
-    }
-    .slider{
-        height: 1100px;
     }
 }
 a:not([href]):not([tabindex]) {
@@ -374,7 +386,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 .children li{
     margin: 0;
 }
-.submenus:hover ul.children{height:250px;opacity:1;}
+.submenus:hover ul.children{ height:200px;opacity:1; }
 .submenus ul.children li a{
 	color: #fefefe !important;
 	padding: 13px 0 13px 20px;
