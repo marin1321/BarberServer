@@ -4,7 +4,7 @@
 
 .app{
     width: 100%;
-    height: 100%;
+    height: auto;
     order: 2;
 }
 
@@ -81,7 +81,8 @@ header{
 
 .contenidoBarberServer{
     width: 100%;
-
+    height: auto;
+    color: white;
 }
 
 .slider{

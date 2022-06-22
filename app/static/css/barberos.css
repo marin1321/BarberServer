@@ -16,7 +16,7 @@ option{ background-color: #222; }
 
 .mainConsultBarber{
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
