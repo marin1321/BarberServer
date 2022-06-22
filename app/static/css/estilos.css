@@ -66,6 +66,13 @@ header{
     transition: 0.4s;
     top:0;
 }
+
+.prueba{
+    height: 100%;
+    width: 50%;
+    color: white;
+}
+
 .slider{
     background: url(../img/srb.jpeg) no-repeat center center;
     background-size: cover;
