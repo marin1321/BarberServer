@@ -386,7 +386,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 .children li{
     margin: 0;
 }
-.submenus:hover ul.children{ height:200px;opacity:1; }
+.submenus:hover ul.children{ height:auto; opacity:1; padding-bottom: 5px;}
 .submenus ul.children li a{
 	color: #fefefe !important;
 	padding: 13px 0 13px 20px;
@@ -516,3 +516,28 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 .nav-link{
     color: wheat;
 }
+
+/*Icono del select*/
+select::-ms-expand {
+    display: none;
+}
+
+.ctr_select{
+    width: auto;
+    height: auto;
+    position: relative;
+}
+
+.ctr_select::after{
+    content: '\25BC';
+    position: absolute;
+    top: 1px;
+    right: 0;
+    padding: 0.9em 1em;
+    /* background: #050505; */
+    cursor:pointer;
+    pointer-events:none;
+    transition:.25s all ease;
+    border-radius: 0 5px 5px 0;
+    font-size: 0.6em;
+ }

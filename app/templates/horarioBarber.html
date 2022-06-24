@@ -9,10 +9,10 @@
 <div class='sliderlore' style="background-image: url('{% static 'img/blg.jpg' %}')">
     <div class="containerHorario "  id="container">
         <div class="form-container sign-in-contacto-container formlr">
-            <form action="" class='formlr' method="post">{% csrf_token %}
+            <form action="" class='formlr formHorario' method="post">{% csrf_token %}
                 <div class="titulo">
-                <h1 class='h1form'>Horarios</h1>
-                <p>Ten encuenta que cada turno es de 1 hora y 30 de duración</p>
+                    <h1 class='h1form'>Horarios</h1>
+                    <p>Ten encuenta que cada turno es de 1 hora y 30 de duración</p>
                 </div>
                 <div class="inputsHora">
                     <input type="date" placeholder="Fecha" id='fecha' name='fecha'/>

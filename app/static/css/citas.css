@@ -13,6 +13,7 @@
     background-color: #050505;
     background: url(../img/fondo/tijerasDerecha.jpg);
     background-size: 100% 100%;
+    box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
 }
 
 .ctrCitaTrabajador{
@@ -24,7 +25,7 @@
 /*lado izquierdo*/
 .citasIzq{
     margin-top: 7rem;
-    width: 70%;
+    width: 68%;
     height: 100%;
     background: #1b1b1b;
     padding: 20px 10px 20px 20px;
@@ -47,6 +48,7 @@
     background-color: #f8f8f80e;
     border-radius: 20px;
     text-shadow: 0 0 5px #fff;
+    padding: 5px 0;
 }
 
 .cardsCitas{
@@ -59,7 +61,7 @@
 .cardCita{
     width: 98%;
     height: 38%;
-    background: linear-gradient(to right, black, #1115);
+    background: linear-gradient(to right, black, #111111);
     color: #fff;
     border-radius: 20px;
     border: 1px solid black;
@@ -142,14 +144,14 @@ svg{ width: 32px; height: 32px; margin-right: 10px;}
 /*Lado Derecho*/
 .citasFiltro{
     margin-top: 7rem;
-    width: 30%;
+    width: 32%;
     height: 100%;
     background: #111;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-around;
-    border-top: 2px solid rgb(19, 19, 19);
+    border-top: 2px solid #050505;
     border-right: 2px solid #050505;
     border-bottom: 2px solid #050505;
     border-left: 1px solid #050505;
@@ -159,7 +161,7 @@ svg{ width: 32px; height: 32px; margin-right: 10px;}
 
 .citasFiltro ul{
     width: 100%;
-    height: 15%;
+    height: auto;
     /* border-bottom: 1px solid rgba(0, 0, 0, 0.425);
     border-bottom: 1px solid #E8E8E8; */
 }
@@ -168,11 +170,12 @@ svg{ width: 32px; height: 32px; margin-right: 10px;}
     width: 100%;
     height: auto;
     display: flex;
+    align-items: center;
     margin-top: 10px; 
     font-size: 1.5rem;
     color: #fff;
     gap: 5px;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .select{
@@ -186,12 +189,14 @@ svg{ width: 32px; height: 32px; margin-right: 10px;}
     border: 1px solid #111;
     cursor: pointer;
     color: #fff;
-    /* content:"\025be"; */
-    background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E);
+    line-height: 2;
+    /* background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E);
     background-repeat: no-repeat, repeat;
     background-position: right 0.7em top 50%, 0 0;
-    background-size: 0.65em auto, 100%;
+    background-size: 0.65em auto, 100%; */
 }
+
+option{ background-color: #222; }
 
 .citasFiltro hr{
     width: 90%;
