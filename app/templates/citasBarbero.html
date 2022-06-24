@@ -11,7 +11,7 @@
             <h2 class="tituloIzq">MIS CITAS</h2>
             <div class="cardsCitas">
               {% for datosCita in datosCita %}
-              {% if datosCita.peticion == "pendiente" %}
+              {% if datosCita.peticion == "activo" %}
                 <article class="cardCita">
                     <div class="infoCita">
                         <h3 class="titulo">¡{{ datosCita.idCliente.nombres }} te ha pedido una cita!</h3>

@@ -1,5 +1,7 @@
 import email
+import imp
 from arrow import now
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.models import User
@@ -8,21 +10,46 @@ from .forms import *
 from .models import *
 from datetime import datetime
 import time
+from django.db.models import Q
+from django.core.mail import send_mail
 
 
 # Create your views here.
 
 def inicio(request):
-    return render(request, 'inicio.html')
+    if request.user.is_authenticated:
+        global user_id
+        user_id = request.user.id
+        usuarioActivo = User.objects.get(id=user_id)
+        if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+            datas = Trabajadores.objects.filter(email=usuarioActivo)
+            data = {
+                "datas": datas 
+            }
+        else:
+            if Clientes.objects.filter(email=usuarioActivo).exists()==True:
+                datas = Clientes.objects.filter(email=usuarioActivo)
+                data = {
+                    "datas": datas 
+                }
+        return render(request, 'inicio.html', data)
+    else:
+        return render(request, 'inicio.html')
 
 def sobreNosotros(request):
     return render(request, 'sobreNosotros.html')
 
 def barber(request):
     barber = Trabajadores.objects.all()
+    
+    
+    searchs = request.GET.get('search')
+    if searchs:
+        barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs)).distinct()
     data = {
         "barber":barber
-    } 
+    }  
+     
     return render(request, 'barberos.html', data)
 
 def perfil(request):
@@ -90,6 +117,7 @@ def registro(request):
         "form":RegistrationForm
     }
     if request.method=='POST':
+        print("hola")
         formulario = RegistrationForm(data=request.POST, files=request.FILES)
         email = request.POST.get('email')
         if User.objects.filter(username=email).exists():
@@ -151,6 +179,7 @@ def registro(request):
                     request.session['id'] = user.id
                     return redirect(to="perfilC")
             else:
+                print("LLENAR TODOS DATOS")
                 data = {
                     "form":RegistrationForm
                 }
@@ -208,12 +237,13 @@ def cita(request, id):
         idCategoria = Trabajadores.objects.get( id = id ).idCategoria
         idCategoria = Categoria.objects.get(nombre_cat = idCategoria).idServicio
         idServicio = idCategoria
-        horaRegistroCita = time.strftime("%H:%M:%S")
+        horaRegistroCita = time.strftime("%H:%M:%Sq")
         horaRegistroCita = horaRegistroCita.strip()
         idHorario = request.POST.get('idHorario')
         fechaRegistroCita = datetime.today().strftime('%Y-%m-%d')
         fechaRegistroCita = fechaRegistroCita.strip()
         idHorario = idHorario.strip()
+        mandarNotificacion(idHorario, idCliente, barbero)
         idHorario =  horarios.objects.get(id=idHorario)
         cita = citas()
         cita.idCliente = idCliente
@@ -222,12 +252,20 @@ def cita(request, id):
         cita.fechaRegistroCita = fechaRegistroCita
         cita.idHorario = idHorario
         cita.idTrabajador = barbero
-        cita.peticion = "pendiente"
+        cita.peticion = "activo"
         cita.save()
         idHorario.estado = "inactivo"
         idHorario.save()
-
     return render(request, "agendar.html", data)
+
+def mandarNotificacion(idHorario, nombreCliente, barbero):
+    inicioHorario = horarios.objects.get(id = idHorario).horaInicio
+    subject = 'Señor Barber usted tiene una cita a las: ' + str(inicioHorario)
+    message = 'Quien Reservo la cita el cliente ' + nombreCliente.nombres 
+    email_from =  settings.EMAIL_HOST_USER
+    recipient_list = [barbero.email]
+    send_mail(subject, message, email_from, recipient_list) 
+
 
 def eliminarCuenta(request):
     global user_id 
@@ -256,6 +294,9 @@ def editarPerfilC(request):
     if request.method=='POST':
         formulario = EditarClienteForm(data=request.POST, instance=perfil, files=request.FILES)
         if formulario.is_valid():
+            foto=request.FILES.get('foto')
+            idCliente = Clientes.objects.get(email=usuarioActivo)
+            idCliente.foto = foto
             formulario.save()
             return redirect(to="perfilC")
         else:
@@ -274,6 +315,9 @@ def editarPerfilB(request):
     if request.method=='POST':
         formulario = EditarBarberoForm(data=request.POST, instance=perfil, files=request.FILES)
         if formulario.is_valid():
+            foto=request.FILES.get('foto')
+            idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
+            idTrabajador.foto = foto
             formulario.save()
             return redirect(to="perfilB")
         else:
@@ -288,6 +332,19 @@ def modal_barber(request, id):
     return render(request, 'modalB.html', data)
 
 def contacto(request):
+    if request.method=='POST':
+        firstName = request.POST.get('FirstName')
+        Email = request.POST.get('Email')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+        print(message)
+        phone = phone.strip()
+        Email = Email.strip()
+        subject = 'Comentario de parte: ' + firstName
+        message = 'Numero de telefono ' + phone + ' correo electronico ' + str(Email) + ' Mensaje: ' + message
+        email_from =  settings.EMAIL_HOST_USER
+        recipient_list = ["barberserver123company@gmail.com"]
+        send_mail(subject, message, email_from, recipient_list) 
     return render(request, 'contacto.html')
 
 def verHorarios(request):
@@ -303,10 +360,8 @@ def verHorarios(request):
         'datosB':datosB,
     }
     return render(request, 'verHorarios.html', data)
-# def eliminarHorario(request):
-#     if request.method=='POST':
-#         id = request.POST.get('id')
-#         print('id', id)
-#         usuario = get_object_or_404(horarios, id=id)
-#         usuario.delete()
-#         return redirect(to="inicio")
+def eliminarHorario(request):
+    if request.method=='POST':
+        usuario = get_object_or_404(horarios, id=id)
+        usuario.delete()
+        return redirect(to="inicio")
