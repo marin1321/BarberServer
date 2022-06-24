@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block stilos %}
-<link rel="stylesheet" href="{% static 'css/estilosBarber.css'%}">
+
 <link rel="stylesheet" href="{% static 'css/search.css'%}">
 <link rel="stylesheet" href="{% static 'css/barberos.css'%}">
 <link rel="stylesheet" href="{% static 'css/card.css'%}">
@@ -28,9 +28,10 @@
                     <option value="Barberos">Barberos</option>
                     <option value="Peluqueros">Peluqueros</option>
                     <option value="Estilista">Estilista</option>
-                </select></form>
+                </select>
+            </form>
         </section>
-        <section id="main">
+        <section id="containerBarberos">
             <h2 class="nom-categoria">Barberos</h2>
             <div class="cards-barberos">
                 {% for barber in barber %}
@@ -53,6 +54,7 @@
             </div>
         </section>
     </div>
+
         <div  class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 </main>
 {% endblock %}
