@@ -1,3 +1,27 @@
 .containerContactform{
+    min-height: 400px;
+}
+.containerBarber{
     min-height: 700px;
+}
+.divEditarPerfil{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.divEditarPerfil h4 {
+    display: flex;
+    align-items: center;
+}
+.divEditarPerfil input{
+    background: linear-gradient(#333, #222);
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    border-radius: 15px;
+    color: wheat;
+}
+.InputFoto{
+    width: 70%;
 }
