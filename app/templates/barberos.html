@@ -22,7 +22,6 @@
 <main class="barberos">
     <div class="mainConsultBarber">
         <section class="busqueda">
-<<<<<<< HEAD
             <form action="" method="" class="form-busqueda"><input type="search" placeholder="What are you looking for?">
                 <button>Search</button>
                 <div class="ctr_select">
@@ -33,15 +32,6 @@
                         <option value="Estilista">Estilista</option>
                     </select>
                 </div>
-=======
-            <form action="" method="get" class="form-busqueda">
-                <input type="search" name="search" placeholder="What are you looking for?"><button>Search</button><select name="opciones" id="seleciona">
-                    <option value="Todos">Todos</option>
-                    <option value="Barberos">Barberos</option>
-                    <option value="Peluqueros">Peluqueros</option>
-                    <option value="Estilista">Estilista</option>
-                </select>
->>>>>>> e26ec776efa35eed4c4e74238dce4b8aa9a7c89e
             </form>
         </section>
         <section id="containerBarberos">
@@ -49,7 +39,9 @@
             <div class="cards-barberos">
                 {% for barber in barber %}
                 <article class="cards card1">
-                    <div class="efectoBlur"><button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button></div>
+                    <div class="efectoBlur">
+                        <button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button>
+                    </div>
                     <figure class="figura">
                         {% if barber.foto %}
                         <img src="{{ barber.foto.url }}" alt="las vegas"

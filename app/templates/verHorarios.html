@@ -1,60 +1,176 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block stilos %}
-<link rel="stylesheet" href="{% static 'css/barberos.css'%}">
-<link rel="stylesheet" href="{% static 'css/horario.css'%}">
-{% endblock stilos %}
-{% block appContenido %}
+{% extends 'base.html' %} {% load static %} {% block stilos %}
+<link rel="stylesheet" href="{% static 'css/horario.css'%}" />
+{% endblock stilos %} {% block appContenido %}
+<main class="vtn_main">
+  <section class="horarios">
+    <table>
+      <caption>Mi Horario(mi libro)</caption>
+      <tbody>
+        <tr>
+          <th>Bloque</th>
+          <th>Lunes</th>
+          <th>Martes</th>
+          <th>Miercoles</th>
+          <th>Jueves</th>
+          <th>Viernes</th>
+        </tr>
+        <tr>
+          <th>8:00am - 12:00am</th>
+          <td>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:40am
+            </article>
+          </td>
+          <td>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:40am
+            </article>
+            <article>
+              Nombre= Juan Pepe Hora= 9:40am - 11:40am
+            </article>
+            <article>
+              Nombre= Juan Pepe Hora= 9:40am - 11:40am
+            </article>
+          </td>
+          <td>
+            <article>
+              
+            </article>
+          </td>
+          <td>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:30am
+            </article>
+          </td>
+          <td>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:30am
+            </article>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:30am
+            </article>
+          </td>
+        </tr>
+        <tr>
+          <th>2:00pm - 6:00pm</th>
+          <td>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:40am
+            </article>
+          </td>
+          <td>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:40am
+            </article>
+          </td>
+          <td>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:40am
+            </article>
+            <article>
+              Nombre= Juan Pepe Hora= 9:40am - 11:40am
+            </article>
+            <article>
+              Nombre= Juan Pepe Hora= 9:40am - 11:40am
+            </article>
+          </td>
+          <td>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:30am
+            </article>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:30am
+            </article>
+          </td>
+          <td>
+            <article>
+              Nombre= Juan Noreña Hora= 8:10am - 9:30am
+            </article>
+          </td>
+        </tr>
+    </table>
+  </section>
+</main>
+
+{% comment %}
 <div class="row flex-lg-nowrap">
-    <div class="col mb-3">
-      <div class="e-panel card cardVerHorarios align-items-center">
-        <div class="card-body">
-          <div class="card-title">
-            <h2 class="nom-categoria">Este es su horario {{datosH.idTrabajador.nombres}}</h2>
-          </div>
-          <div class="e-table">
-            <div class="table-responsive table-lg mt-3">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th class="sortable">Name</th>
-                    <th class="sortable">Date</th>
-                    <th class="sortable">Comienzo</th>
-                    <th class="sortable">Finalizar</th>
-                    <th> </th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for datosH in datosH %}
-                    <tr>
-                    <td class="text-nowrap align-middle" name="id">{{datosH.id}}</td>
-                    <td class="text-nowrap align-middle">{{datosH.idTrabajador.nombres}}</td>
-                    <td class="text-nowrap align-middle"><span>{{datosH.fecha}}</span></td>
-                    <td class="text-nowrap align-middle"><span>{{datosH.horaInicio}}</span></td>
-                    <td class="text-nowrap align-middle"><span>{{datosH.horaFinalizacion}}</span></td>
-                    {% if datosH.estado == "activo" %}
-                      <td class="text-center align-middle"><i class="fa fa-fw text-secondary cursor-pointer fa-toggle-on"></i></td>
-                      {% else %}
-                      <td class="text-center align-middle"><i class="fa fa-fw text-secondary cursor-pointer fa-toggle-off"></i></td>
-                    {% endif %}
-                    <td class="text-center align-middle">
-                      <div class="btn-group align-top" >
-                        {% if datosH.estado == "activo" %}
-                          <button class="btn btn-sm btn-outline-secondary badge" data-toggle="modal" data-target="#user-form-modal">Edit</button>
-                          <button class="btn btn-sm btn-outline-secondary badge"><i class="fa fa-trash"></i></button>
-                        {% endif %}
-                      </div>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
+  <div class="col mb-3">
+    <div class="e-panel card cardVerHorarios align-items-center">
+      <div class="card-body">
+        <div class="card-title">
+          <h2 class="nom-categoria">
+            Este es su horario {{datosH.idTrabajador.nombres}}
+          </h2>
+        </div>
+        <div class="e-table">
+          <div class="table-responsive table-lg mt-3">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th class="sortable">Name</th>
+                  <th class="sortable">Date</th>
+                  <th class="sortable">Comienzo</th>
+                  <th class="sortable">Finalizar</th>
+                  <th></th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for datosH in datosH %}
+                <tr>
+                  <td class="text-nowrap align-middle" name="id">
+                    {{datosH.id}}
+                  </td>
+                  <td class="text-nowrap align-middle">
+                    {{datosH.idTrabajador.nombres}}
+                  </td>
+                  <td class="text-nowrap align-middle">
+                    <span>{{datosH.fecha}}</span>
+                  </td>
+                  <td class="text-nowrap align-middle">
+                    <span>{{datosH.horaInicio}}</span>
+                  </td>
+                  <td class="text-nowrap align-middle">
+                    <span>{{datosH.horaFinalizacion}}</span>
+                  </td>
+                  {% if datosH.estado == "activo" %}
+                  <td class="text-center align-middle">
+                    <i
+                      class="fa fa-fw text-secondary cursor-pointer fa-toggle-on"
+                    ></i>
+                  </td>
+                  {% else %}
+                  <td class="text-center align-middle">
+                    <i
+                      class="fa fa-fw text-secondary cursor-pointer fa-toggle-off"
+                    ></i>
+                  </td>
+                  {% endif %}
+                  <td class="text-center align-middle">
+                    <div class="btn-group align-top">
+                      {% if datosH.estado == "activo" %}
+                      <button
+                        class="btn btn-sm btn-outline-secondary badge"
+                        data-toggle="modal"
+                        data-target="#user-form-modal"
+                      >
+                        Edit
+                      </button>
+                      <button class="btn btn-sm btn-outline-secondary badge">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                      {% endif %}
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
-{% endblock  %}
+</div>
+{% endcomment %} {% endblock %}

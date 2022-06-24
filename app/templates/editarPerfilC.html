@@ -8,29 +8,31 @@
 {% endblock stilos %}
 
 {% block appContenido %}
-<div class='sliderlore' style="background-image: url('{% static 'img/blg.jpg' %}')">
-    <div class="containerContactform "  id="container">
-        <div class="form-container sign-in-contacto-container">
-            <form action="" class="formlr formularioEditar" method="post" enctype="multipart/form-data">{% csrf_token %}
-                <h1 class='h1form'>Editar</h1>
-                <div class="divEditarPerfil">
-                    <h4 class="col-sm-3 mb-0 alturaTamaño">Nombres</h4>
-                    {{ form.nombres }}
-                </div>
-                <div class="divEditarPerfil">
-                    <h4 class="col-sm-3 mb-0 alturaTamaño">Apellidos</h4>
-                    {{ form.apellidos }}
-                </div>
-                <div class="divEditarPerfil">
-                    <h4 class="col-sm-3 mb-0 alturaTamaño">Telefono</h4>
-                    {{ form.telefono }}
-                </div>
-                <div class="InputFoto">
-                    <input class="form-control" type="file" name="foto" accept="image/*"  id="id_foto"> 
-                </div>
-                <button class='buttonform' type="submit">Editar</button>
-            </form>
+<main class="vtn_main">
+    <div class="sliderlore">
+        <div class="containerContactform "  id="container">
+            <div class="form-container sign-in-contacto-container">
+                <form action="" class="formlr formularioEditar" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <h1 class='h1form'>Editar</h1>
+                    <div class="divEditarPerfil">
+                        <h4 class="col-sm-3 mb-0 alturaTamaño">Nombres</h4>
+                        {{ form.nombres }}
+                    </div>
+                    <div class="divEditarPerfil">
+                        <h4 class="col-sm-3 mb-0 alturaTamaño">Apellidos</h4>
+                        {{ form.apellidos }}
+                    </div>
+                    <div class="divEditarPerfil">
+                        <h4 class="col-sm-3 mb-0 alturaTamaño">Telefono</h4>
+                        {{ form.telefono }}
+                    </div>
+                    <div class="InputFoto">
+                        <input class="form-control" type="file" name="foto" accept="image/*"  id="id_foto"> 
+                    </div>
+                    <button class='buttonform' type="submit">Editar</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+</main>
 {% endblock appContenido %}

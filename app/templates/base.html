@@ -48,7 +48,9 @@
             {% comment %} <div> <a href="{% url 'logout' %}"> Cerrar Sesiòn </a> </div> {% endcomment %}
             <div>
                 <li class="submenus">
-                    <a href = "{% url 'perfil' %}"><img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/></a>
+                    <a href = "{% url 'perfil' %}">
+                        <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/>
+                    </a>
                     <ul class="children">
                             <li>
                                 <a href="{% url 'citasbarber' %}">CITAS</a>
