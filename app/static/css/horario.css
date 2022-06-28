@@ -169,6 +169,11 @@ color: #969ba1;
 }
 
 /*VER HORARIOS*/
+.vtn_main{
+  background: url(../img/sillas.jpg) no-repeat center center;
+  background-size: cover;
+}
+
 .horarios{
   width: 100%;
   height: auto;
@@ -183,7 +188,7 @@ color: #969ba1;
   width: 80%;
   height: auto;
   margin-top: 5em;
-  background-color: #050505f1;
+  background-color: #0e0e0ef7;
   color: #fff;
   caption-side: top;
 }
@@ -192,14 +197,15 @@ color: #969ba1;
   font-size: 3rem;
   text-align: center;
   font-weight: bold;
-  color: #010101;
+  color: white;
   font-family: 'Rye', cursive;
+  text-shadow: 0 0 30px black;
 }
 
 table, td, th{ 
   width: 3rem;
   height: auto;
-  border: 2px solid black;
+  border: 3px solid black;
   /* border-collapse: separate; */
   border-spacing: 5px;
   padding: 10px;

@@ -4,7 +4,7 @@
 <main class="vtn_main">
   <section class="horarios">
     <table class="tablaHorarios">
-      <caption class="caption">Mi Horario(mi libro)</caption>
+      <caption class="caption">Mi Horario</caption>
       <tbody>
         <tr>
           <th>Bloque</th>
@@ -17,11 +17,13 @@
         <tr>
           <th class="tiempo">8:00am <br>-<br> 12:00am</th>
           <td>
+            {% for datosH in datosH %}
             <article class="campoHorario" id="ocupado">
-              <h3>Juan Noreña Ortiz</h3>
+              <h3>{{datosH.idTrabajador.nombres}}</h3>
               <h3>8:10am - 9:40am</h3>
               <a class="ver">Ver</a>
             </article>
+            {% endfor %}
             <article class="campoHorario" id="pendiente">
               <h3>Pendiente</h3>
               <h3>8:10am - 9:40am</h3>
