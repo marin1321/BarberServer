@@ -1,9 +1,11 @@
 import email
 import imp
+from multiprocessing import AuthenticationError
+from django.contrib import messages
 from arrow import now
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .forms import *
@@ -12,9 +14,27 @@ from datetime import datetime
 import time
 from django.db.models import Q
 from django.core.mail import send_mail
+from django.contrib.auth.forms import AuthenticationForm
 
 
 # Create your views here.
+
+def loginPrueba(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('/')
+        else:
+            print("malo")
+            messages.success(request, 'A serious error occurred.')
+    else:
+        form = AuthenticationForm(request)
+    context = {
+        "form": form
+    }
+    return render(request, "registration/loginPrueba.html", context)
 
 def inicio(request):
     if request.user.is_authenticated:
@@ -41,13 +61,18 @@ def sobreNosotros(request):
 
 def barber(request):
     barber = Trabajadores.objects.all()
-    
-    
+    categorias = Categoria.objects.all()
     searchs = request.GET.get('search')
+    select = request.GET.get('opciones')
     if searchs:
-        barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs)).distinct()
+        if select:
+            print('hola')
+        else:
+            barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs)).distinct()
+        
     data = {
-        "barber":barber
+        "barber":barber,
+        "categoria":categorias,
     }  
      
     return render(request, 'barberos.html', data)
@@ -101,15 +126,10 @@ def citasBarbero(request):
         "datosCita":datosCita
     }
     if request.method=='POST':
-        peticion = request.POST.get('peticion')
         idCita = request.POST.get('idCita')
         idCita =  citas.objects.get(id=idCita)
-        if peticion == "aceptar":
-            idCita.peticion = "aceptar"
-            idCita.save()
-        else:
-            idCita.peticion = "cancelada"
-            idCita.save()
+        idCita.peticion = "cancelada"
+        idCita.save()
     return render(request, 'citasBarbero.html', data)
 
 def registro(request):
@@ -162,7 +182,7 @@ def registro(request):
                     user = User.objects.create_user(email, email, password)
                     login(request, user)
                     request.session['id'] = user.id
-                    return redirect(to="perfilB")
+                    return redirect(to="inicio")
                 else:
                     cliente = Clientes()
                     cliente.nombres=nombres
@@ -177,7 +197,7 @@ def registro(request):
                     user = User.objects.create_user(email, email, password)
                     login(request, user)
                     request.session['id'] = user.id
-                    return redirect(to="perfilC")
+                    return redirect(to="inicio")
             else:
                 print("LLENAR TODOS DATOS")
                 data = {
