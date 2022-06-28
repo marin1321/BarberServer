@@ -54,6 +54,8 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
 TAILWIND_APP_NAME = 'theme'
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
@@ -98,7 +100,11 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
+<<<<<<< HEAD
             'PASSWORD': 'Sena1234',
+=======
+            'PASSWORD': '',
+>>>>>>> 176653312cc40b09888681a4f1ef955a627f7e4a
             'HOST': 'localhost',
             'PORT': '3306',
         }
