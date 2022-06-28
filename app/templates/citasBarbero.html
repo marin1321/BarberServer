@@ -11,7 +11,7 @@
             <h2 class="tituloIzq">MIS CITAS</h2>
             <div class="cardsCitas">
               {% for datosCita in datosCita %}
-              {% if datosCita.peticion == "pendiente" %}
+              {% if datosCita.peticion == "activo" %}
                 <article class="cardCita">
                     <div class="infoCita">
                         <h3 class="titulo">¡{{ datosCita.idCliente.nombres }} te ha pedido una cita!</h3>
@@ -25,8 +25,10 @@
                         <form action="" method="post">{% csrf_token %}
                             <input type='hidden' value="aceptar" name='peticion'>
                             <input type='hidden' value={{ datosCita.id }} name='idCita'>
-                            <button id="btnAceptarCita"><i class="fa fa-check mx-1" id="chulo" aria-hidden="true"></i>
-                                Aceptar</button>
+                            <button id="btnAceptarCita">
+                                <i class="fa fa-check mx-1" id="chulo" aria-hidden="true"></i>
+                                Aceptar
+                            </button>
                         </form>
                             <button id="btnRechazarCita">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-square"
@@ -44,25 +46,29 @@
         <section class="citasFiltro">
             <ul>
                 <li>
-                    <h3>Busqueda por fechas: </h3>
-                    <select class="select">
-                        <option value="hoy">Hoy</option>
-                        <option value="ayer">Ayer</option>
-                        <option value="estaSemana">Esta Semana</option>
-                        <option value="estaSemana">Este Mes</option>
-                    </select>
+                    <h3>Busqueda por fechas:</h3>
+                    <div class="ctr_select">
+                        <select class="select">
+                            <option value="hoy">Hoy</option>
+                            <option value="ayer">Ayer</option>
+                            <option value="estaSemana">Esta Semana</option>
+                            <option value="estaSemana">Este Mes</option>
+                        </select>
+                    </div>
                 </li>
                 <li>
-                    <h3>Busqueda por estado: </h3>
-                    <select class="select">
-                        <option value="hoy">Aceptadas</option>
-                        <option value="ayer">Editadas</option>
-                        <option value="estaSemana">Eliminadas</option>
-                        <option value="estaSemana">En Espera</option>
-                    </select>
+                    <h3>Busqueda por estado:</h3>
+                    <div class="ctr_select">
+                        <select class="select">
+                            <option value="hoy">Aceptadas</option>
+                            <option value="ayer">Editadas</option>
+                            <option value="estaSemana">Eliminadas</option>
+                            <option value="estaSemana">En Espera</option>
+                        </select>
+                    </div>
                 </li>
             </ul>
-            <hr>
+            {% comment %} <hr> {% endcomment %}
         </section>
     </div>
 </main>

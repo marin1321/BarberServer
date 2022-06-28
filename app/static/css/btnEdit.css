@@ -81,8 +81,10 @@
     width: 5rem;
     border: 1px solid #0d6efd;
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
-.timeline-sm-item .verCita a:hover{
-    box-shadow: 0 0 10px 2px #0d6efd inset;
-}
+.timeline-sm-item .verCita a:hover{ box-shadow: 0 0 10px 2px #0d6efd inset; }

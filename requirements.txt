@@ -6,3 +6,4 @@ pymysql
 django-admin-interface
 django-tailwind
 tailwind
+django-bootstrap-v5

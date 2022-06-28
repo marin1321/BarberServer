@@ -1,143 +1,176 @@
+.sliderlore{ padding-top: 15em; padding-bottom: 10em; }
+
 .containerHorario {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
-    position: relative;
-    overflow: hidden;
-    width: 70%;
-    max-width: 100%;
-    min-height: 40%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+  position: relative;
+  overflow: hidden;
+  width: 70%;
+  height: 22em;
+  max-width: 100%;
+  min-height: 40%;
 }
+
+.formHorario{
+  width: 100%;
+  height: 70%;
+}
+
+.btnHora{
+  width: 21%;
+  height: 30%;
+}
+
 .inputsHora{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .inputsHora input{
-        background: linear-gradient(#333, #222);
-        border: none;
-        padding: 12px 15px;
-        margin: 8px 0;
-        width: 30%;
-        color: wheat; 
+  background: linear-gradient(#333, #222);
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  color: wheat; 
 }
+
+#fecha{ width: 26%; }
+
+#horaInicio{ width: 20%; }
+
 .icon-btn {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #cdcdcd;
-    background: linear-gradient(#333, #222);
-    border-radius: 25px;
-    overflow: hidden;
-    position: relative;
-    transition: width 0.2s ease-in-out;
-    font-weight: 500;
-    font-family: inherit;
-  }
-  .icon-btn{
-    color: white;
-  }
-  .add-btn:hover {
-    width: 40%;
-  }
-  
-  .add-btn::before,
-  .add-btn::after {
-    transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
-    content: "";
-    position: absolute;
-    height: 4px;
-    width: 10px;
-    top: calc(50% - 2px);
-    background:#ffd17b;
-  }
-  
-  .add-btn::after {
-    right: 14px;
-    overflow: hidden;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-  }
-  
-  .add-btn::before {
-    left: 14px;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-  }
-  
-  .icon-btn:focus {
-    outline: none;
-  }
-  
-  .btn-txt {
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  
-  .add-btn:hover::before,
-  .add-btn:hover::after {
-    width: 4px;
-    border-radius: 2px;
-  }
-  
-  .add-btn:hover .btn-txt {
-    opacity: 1;
-  }
-  
-  .add-icon::after,
-  .add-icon::before {
-    transition: all 0.2s ease-in-out;
-    content: "";
-    position: absolute;
-    height: 20px;
-    width: 2px;
-    top: calc(50% - 10px);
-    background: #ffd17b;
-    overflow: hidden;
-  }
-  
-  .add-icon::before {
-    left: 22px;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-  }
-  
-  .add-icon::after {
-    right: 22px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-  }
-  
-  .add-btn:hover .add-icon::before {
-    left: 15px;
-    height: 4px;
-    top: calc(50% - 2px);
-  }
-  
-  .add-btn:hover .add-icon::after {
-    right: 15px;
-    height: 4px;
-    top: calc(50% - 2px);
-  }
-  /* ver Horarios */
-  .card-body {
-    display: flex;
-    flex-direction: column; 
-    width: 75%;
-  }
-  .cardVerHorarios{
-    margin-top: 7rem;
-    background: #333;
-  }
-  .nom-categoria {
-    border-bottom:0;
-    font-size: 3rem;
-  }
-  .card-title{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-  .table{
-    --bs-table-color: #f8f9fa;
-  }
+  width: 50px;
+  height: 50px;
+  border: 1px solid #cdcdcd;
+  background: linear-gradient(#333, #222);
+  border-radius: 25px;
+  overflow: hidden;
+  position: relative;
+  transition: width 0.2s ease-in-out;
+  font-weight: 500;
+  font-family: inherit;
+}
+.icon-btn{
+  color: white;
+}
+.add-btn:hover {
+  width: 28%;
+}
+
+.add-btn::before,
+.add-btn::after {
+  transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 10px;
+  top: calc(50% - 2px);
+  background:#ffd17b;
+}
+
+.add-btn::after {
+  right: 14px;
+  overflow: hidden;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.add-btn::before {
+  left: 14px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.icon-btn:focus {
+  outline: none;
+}
+
+.btn-txt {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.add-btn:hover::before,
+.add-btn:hover::after {
+  width: 4px;
+  border-radius: 2px;
+}
+
+.add-btn:hover .btn-txt {
+  opacity: 1;
+}
+
+.add-icon::after,
+.add-icon::before {
+  transition: all 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 2px;
+  top: calc(50% - 10px);
+  background: #ffd17b;
+  overflow: hidden;
+}
+
+.add-icon::before {
+  left: 22px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.add-icon::after {
+  right: 22px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.add-btn:hover .add-icon::before {
+  left: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+
+.add-btn:hover .add-icon::after {
+  right: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+/* ver Horarios */
+.card-body {
+  display: flex;
+  flex-direction: column; 
+  width: 75%;
+}
+.cardVerHorarios{
+  margin-top: 7rem;
+  background: #333;
+}
+.nom-categoria {
+  border-bottom:0;
+  font-size: 3rem;
+}
+.card-title{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.table{
+  --bs-table-color: #f8f9fa;
+  color: #fff;
+}
+
+.titulo p{
+color: #969ba1;
+}
+
+/*VER HORARIOS*/
+.horarios{
+  width: 100%;
+  height: 50em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

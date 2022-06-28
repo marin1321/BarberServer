@@ -1,45 +1,43 @@
 {% extends 'base.html' %}
 {% block appContenido %}
-    <main class="mainInicio">
-        <section class="slider">
-            <article class="sliders">
-                <h1 class="text">EL SITIO WEB DE LOS BARBEROS</h1>
-            </article>
-        </section>
-        <section class="contenidoBarberServer">
-            
-            {% comment %} <section class="sect_f">
-                <div class="container-elements">
-                    <div>
-                        <h1 class="tit">¡Hola!</h1>
-                        <p class="parrafo">Te damos la bienvenida a Barberserver<br>El sitio web donde evitaras la espera
-                            aburrida por tu turno y te ahorrarás el trabajo de desplazarte por varios lugares hasta
-                            encontrar el barbero ideal para tu corte.<br>Aquí te daremos la oportunidad de visualizar el
-                            variado grupo de barberos que se encuentran en la ciudad de Armenia, con los cuales podrás
-                            agendar una cita de forma rápida y sencilla.</p>
-                    </div>
-                    <div class="element1"></div>
+<main class="mainInicio">
+    <section class="slider">
+        <article class="sliders">
+            <h1 class="text">EL SITIO WEB DE LOS BARBEROS</h1>
+        </article>
+    </section>
+    <section class="contenidoBarberServer">
+        <section class="sect_f">
+            <div class="container-elements">
+                <div>
+                    <h1 class="tit">¡Hola!</h1>
+                    <p class="parrafo">Te damos la bienvenida a Barberserver<br>El sitio web donde evitaras la espera
+                        aburrida por tu turno y te ahorrarás el trabajo de desplazarte por varios lugares hasta
+                        encontrar el barbero ideal para tu corte.<br>Aquí te daremos la oportunidad de visualizar el
+                        variado grupo de barberos que se encuentran en la ciudad de Armenia, con los cuales podrás
+                        agendar una cita de forma rápida y sencilla.</p>
                 </div>
-            </section>
-            <section class="secc">
-                <h1>.</h1>
-            </section>
-            <section class="sect_f1">
-                <div class="container-elements1">
-                    <div class="element2"></div>
-                    <div>
-                        <h1 class="tit">¿Qué esperas?</h1>
-                        <p class="parrafo">¡Agenda tu cita!<br>Mira los perfiles de los barberos para que no pierdas más
-                            tiempo y agendes tu cita de manera inmediata y sin complicaciones.<br></p>
-                        <div class="cont-btn"><a class="" href="{% url 'barberos' %}"><button class="buttonform">Ver
-                                    Barberos</button></a></div>
-                    </div>
-                </div>
-            </section>
-            <section class="secc1">
-                <h1>.</h1>
-            </section> {% endcomment %}
-            
+                <div class="element1"></div>
+            </div>
         </section>
-    </main>
-{% endblock  %}
+        <section class="secc">
+            <h1>.</h1>
+        </section>
+        <section class="sect_f1">
+            <div class="container-elements1">
+                <div class="element2"></div>
+                <div>
+                    <h1 class="tit">¿Qué esperas?</h1>
+                    <p class="parrafo">¡Agenda tu cita!<br>Mira los perfiles de los barberos para que no pierdas más
+                        tiempo y agendes tu cita de manera inmediata y sin complicaciones.<br></p>
+                    <div class="cont-btn"><a class="" href="{% url 'barberos' %}"><button class="buttonform">Ver
+                                Barberos</button></a></div>
+                </div>
+            </div>
+        </section>
+        <section class="secc1">
+            <h1>.</h1>
+        </section>
+    </section>
+</main>
+{% endblock %}
