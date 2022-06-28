@@ -19,5 +19,6 @@ urlpatterns=[
     path('verHorario/', verHorarios, name='verHorario'),
     path('perdirCitas/<id>', cita, name='citas'),
     path('citasBarbero/', citasBarbero, name='citasbarber'),
+    path('loginPrueba/', loginPrueba, name='loginPrueba'),
     # path('eliminarHorario/', eliminarHorario, name='eliminarHorario'),
 ]

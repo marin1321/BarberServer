@@ -135,5 +135,28 @@
         </div>
     </div>
 </main>
+
+{% block llamdoJavaScript %}
+
+    {% if messages %}
+
+        {% for m in messages %}
+            <script >
+
+                Swal.fire({
+                    icon:"success",
+                    title: "Venta realizada",
+                    text: "Bienvenido Señor Usuario",
+                });
+
+            </script>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock llamdoJavaScript %}
+
 {% endblock %}
-</html>
+
+
+
