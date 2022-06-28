@@ -100,7 +100,15 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
+<<<<<<< HEAD
             'PASSWORD': 'Sena1234',
+=======
+<<<<<<< HEAD
+            'PASSWORD': 'Sena1234',
+=======
+            'PASSWORD': '',
+>>>>>>> 176653312cc40b09888681a4f1ef955a627f7e4a
+>>>>>>> 3bee853899dac2cbbe9568ec4773b5b898bbef71
             'HOST': 'localhost',
             'PORT': '3306',
         }

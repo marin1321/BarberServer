@@ -19,16 +19,16 @@ from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
 
-def loginPrueba(request):
+def loginF(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('/')
+            messages.success(request, "logueado con exito!")
+            return redirect('/perfilCliente.html')
         else:
-            print("malo")
-            messages.success(request, 'A serious error occurred.')
+            messages.warning(request, "Credenciales incorrectas")
     else:
         form = AuthenticationForm(request)
     context = {
@@ -261,6 +261,7 @@ def cita(request, id):
         horaRegistroCita = horaRegistroCita.strip()
         idHorario = request.POST.get('idHorario')
         fechaRegistroCita = datetime.today().strftime('%Y-%m-%d')
+        print("Fecha registro -->", fechaRegistroCita)
         fechaRegistroCita = fechaRegistroCita.strip()
         idHorario = idHorario.strip()
         mandarNotificacion(idHorario, idCliente, barbero)
