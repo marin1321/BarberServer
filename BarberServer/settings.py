@@ -50,6 +50,12 @@ INSTALLED_APPS = [
     "bootstrap5",
 ]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
 TAILWIND_APP_NAME = 'theme'
 
 X_FRAME_OPTIONS = "SAMEORIGIN"

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');/* Pertenece a los estilos del login y register */
 @import url(https://fonts.googleapis.com/css?family=Alegreya+Sans:300);
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500;1,600&family=Vidaloka&display=swap');
 
 .app{
     width: 100%;
@@ -9,7 +10,6 @@
 }
 
 a{
-    margin-top: 17px;
     text-decoration: none;
     list-style-type:none;
     color: #fefd9f;
@@ -154,7 +154,7 @@ header{
     background-size: 100%;
 }
 .secc{
-    background: url(../img/vintage-chairs.jpg);
+    background: url(../img/cillas.jpg);
     /* width: 100%;
     height: 100vh; */
     width: 100%;
@@ -344,16 +344,28 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 }
 .aboutU{
     padding-top: 90px;
-}.submenus{
+}
+.submenus{
     text-decoration: none;
     list-style: none;
-    width: 50px;
-    height: 50px;
+    width: 4rem;
+    height: 4rem;
 }
-.submenus a:hover{
-    height: 300;
-    font-weight: bold;
+
+.submenus a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 0; */
 }
+
+.linkPerfil{
+    width: 80%;
+    height: 80%;
+}
+
 .children{
     display: flex;
     flex-direction: column;
@@ -364,7 +376,6 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 	float:  right;
 	position: absolute;
     right: 0px;
-	top: 95px;
 	border: 0;
 	opacity: 0;
 	filter: alpha(opacity=0); /* Internet Explorer*/
@@ -535,6 +546,7 @@ select::-ms-expand {
     right: 0;
     padding: 0.9em 1em;
     /* background: #050505; */
+    color: #fff;
     cursor:pointer;
     pointer-events:none;
     transition:.25s all ease;

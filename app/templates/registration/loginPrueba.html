@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stilos %}
+{% comment %} <link rel="stylesheet" href="{% static 'css/lore.css'%}"> {% endcomment %}
+{% endblock stilos %}
+
+{% block llamdoJavaScript %}
+<script src="{% static 'js/card.js'%}"></script>
+{% endblock llamdoJavaScript %}
+
+{% block appContenido %}
+<div class='sliderlore'>
+    <div class="containerform" id="container">
+        <div class="form-container sign-in-container">
+            <form action="" class='formlr' method="post" enctype="multipart/form-data">{% csrf_token %}
+                <h1 class='h1form'>Iniciar Sesión</h1>
+                <input type="text" placeholder="Email" id='usname' class='inputform'  name="username"/>
+                <input type="password" placeholder="Contraseña" id='uspassword' class='inputform' name="password"/>
+                <a href="#" class='aform'>¿Olvidaste tu contraseña?</a>
+                <button class='buttonform' type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <form  action="{% url 'registro' %}" method="post">{% csrf_token %}
+                <div class="overlay-panel overlay-right">
+                    <h1 class='h1form'>¡Hola amig@!</h1>
+                    <p class='pform'>Ingresa tus datos personales y comienza tu viaje con nosotros</p>
+                    <button class="ghost buttonform">Crear Cuenta</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock appContenido %}

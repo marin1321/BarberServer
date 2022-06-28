@@ -1,9 +1,11 @@
 import email
 import imp
+from multiprocessing import AuthenticationError
+from django.contrib import messages
 from arrow import now
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .forms import *
@@ -12,9 +14,27 @@ from datetime import datetime
 import time
 from django.db.models import Q
 from django.core.mail import send_mail
+from django.contrib.auth.forms import AuthenticationForm
 
 
 # Create your views here.
+
+def loginF(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, "logueado con exito!")
+            return redirect('/perfilCliente.html')
+        else:
+            messages.warning(request, "Credenciales incorrectas")
+    else:
+        form = AuthenticationForm(request)
+    context = {
+        "form": form
+    }
+    return render(request, "registration/loginPrueba.html", context)
 
 def inicio(request):
     if request.user.is_authenticated:
@@ -41,13 +61,18 @@ def sobreNosotros(request):
 
 def barber(request):
     barber = Trabajadores.objects.all()
-    
-    
+    categorias = Categoria.objects.all()
     searchs = request.GET.get('search')
+    select = request.GET.get('opciones')
     if searchs:
-        barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs)).distinct()
+        if select:
+            print('hola')
+        else:
+            barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs)).distinct()
+        
     data = {
-        "barber":barber
+        "barber":barber,
+        "categoria":categorias,
     }  
      
     return render(request, 'barberos.html', data)
@@ -70,7 +95,16 @@ def perfilBarbero(request):
             'datosB':datosB,
         }
         print("AQUI --> " +str(request.user))
-
+        if request.method=='POST':
+            trabajador =  Trabajadores.objects.get(email=usuarioActivo)
+            estado =  request.POST.get("estado")
+            print(estado)
+            if estado == "activo":
+                trabajador.state = "activo"
+                trabajador.save()
+            else:
+                trabajador.state = "inactivo"
+                trabajador.save()
         return render(request, 'perfilBarbero.html', data)
     else:
         return redirect(to="login")
@@ -101,15 +135,10 @@ def citasBarbero(request):
         "datosCita":datosCita
     }
     if request.method=='POST':
-        peticion = request.POST.get('peticion')
         idCita = request.POST.get('idCita')
         idCita =  citas.objects.get(id=idCita)
-        if peticion == "aceptar":
-            idCita.peticion = "aceptar"
-            idCita.save()
-        else:
-            idCita.peticion = "cancelada"
-            idCita.save()
+        idCita.peticion = "cancelada"
+        idCita.save()
     return render(request, 'citasBarbero.html', data)
 
 def registro(request):
@@ -162,7 +191,7 @@ def registro(request):
                     user = User.objects.create_user(email, email, password)
                     login(request, user)
                     request.session['id'] = user.id
-                    return redirect(to="perfilB")
+                    return redirect(to="inicio")
                 else:
                     cliente = Clientes()
                     cliente.nombres=nombres
@@ -177,7 +206,7 @@ def registro(request):
                     user = User.objects.create_user(email, email, password)
                     login(request, user)
                     request.session['id'] = user.id
-                    return redirect(to="perfilC")
+                    return redirect(to="inicio")
             else:
                 print("LLENAR TODOS DATOS")
                 data = {
@@ -241,6 +270,7 @@ def cita(request, id):
         horaRegistroCita = horaRegistroCita.strip()
         idHorario = request.POST.get('idHorario')
         fechaRegistroCita = datetime.today().strftime('%Y-%m-%d')
+        print("Fecha registro -->", fechaRegistroCita)
         fechaRegistroCita = fechaRegistroCita.strip()
         idHorario = idHorario.strip()
         mandarNotificacion(idHorario, idCliente, barbero)
@@ -306,6 +336,7 @@ def editarPerfilC(request):
 def editarPerfilB(request):
     global user_id 
     user_id = request.user.id
+    print("Hola")
     usuarioActivo = User.objects.get(id=user_id)
     id = Trabajadores.objects.get(email=usuarioActivo).id
     perfil = get_object_or_404(Trabajadores, id=id)
@@ -313,6 +344,7 @@ def editarPerfilB(request):
         'form': EditarBarberoForm(instance=perfil),
     }
     if request.method=='POST':
+        estado =  request.POST.get("estado")
         formulario = EditarBarberoForm(data=request.POST, instance=perfil, files=request.FILES)
         if formulario.is_valid():
             foto=request.FILES.get('foto')
@@ -320,6 +352,14 @@ def editarPerfilB(request):
             idTrabajador.foto = foto
             formulario.save()
             return redirect(to="perfilB")
+        elif estado == "activo":
+            trabajador = Trabajadores()
+            trabajador.estado = "activo"
+            trabajador.save()
+        elif estado == "inactivo":
+            trabajador = Trabajadores()
+            trabajador.estado = "inactivo"
+            trabajador.save()
         else:
             data["form"] = formulario
     return render(request, 'editarPerfilB.html', data)
