@@ -48,7 +48,9 @@
             {% comment %} <div> <a href="{% url 'logout' %}"> Cerrar Sesiòn </a> </div> {% endcomment %}
             <div>
                 <li class="submenus">
-                    <a href = "{% url 'perfil' %}"><img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/></a>
+                    <a href = "{% url 'perfil' %}">
+                        <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/>
+                    </a>
                     <ul class="children">
                             <li>
                                 <a href="{% url 'citasbarber' %}">CITAS</a>
@@ -132,29 +134,8 @@
 </body>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-{% if messages %}
-    {% for m in messages %})
-        <script>
 
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-            
-            Toast.fire({
-                icon: 'success',
-                text: '{{ m }}'
-            })
-        </script>
-    {% endfor %}
-{% endif %}
+{% block llamdoJavaScript %}
 
-{% block llamdoJavaScript %}{% endblock llamdoJavaScript %}
+{% endblock llamdoJavaScript %}
 </html>

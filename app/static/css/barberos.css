@@ -163,3 +163,5 @@ text-shadow: 0 0 10px yellow;
     font-weight: 700;
     font-size: 1.5rem;
 }
+
+.ctr_select::after{ padding: 1.4em 1em; }

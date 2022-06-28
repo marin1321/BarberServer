@@ -5,21 +5,55 @@
 <link rel="stylesheet" href="{% static 'css/barberos.css'%}">
 <link rel="stylesheet" href="{% static 'css/card.css'%}">
 {% endblock stilos %}
+
 {% block llamdoJavaScript %}
 <script src="{% static 'js/card.js'%}"></script>
+
+<script>
+
+</script>
+
+{% if messages %}
+
+    {% for m in messages %}
+
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            
+            Toast.fire({
+                icon: 'warning',
+                title: '{{m}}'
+            })
+        </script>
+
+    {% endfor %}
+
+{% endif %}
+
 {% endblock llamdoJavaScript %}
+
 {% block appContenido %}
 <div class='sliderlore'>
     <div class="containerform right-panel-active" id="container">
         <div class="form-container sign-up-container">
-            <form action="" class='formlr' method="post" enctype="multipart/form-data">{% csrf_token %}
+            <form action="" method="post" class='formlr' enctype="multipart/form-data">{% csrf_token %}
                 <div>
                 <h1 class='h1form'>Crear Cuenta</h1>
-                <input type="email" placeholder="Gmail"name="email" id='remail' class='inputform'/>
-                <input type="text" placeholder="Apellidos" name="apellidos" id='rapellido' class='inputform'/>
-                <input type="text" placeholder="Nombres" name="nombres" id='rname' class='inputform'/>
-                <input type="text" placeholder="Telefono"name="telefono" id='ruser' class='inputform'/>
-                <input type="password" placeholder="Contraseña" name="password" id='rpassword' class='inputform'/>
+                <input type="email" placeholder="Gmail"name="email" id='remail' class='inputform' maxlength="30" required/>
+                <input type="text" placeholder="Nombres" name="nombres" id='rname' class='inputform' required/>
+                <input type="text" placeholder="Apellidos" name="apellidos" id='rapellido' class='inputform' required/>
+                <input type="text" placeholder="Telefono"name="telefono" id='ruser' class='inputform' required/>
+                <input type="password" placeholder="Contraseña" name="password" autofocus minlength="5" maxlength="10" required id='rpassword' class='inputform'/>
                 <input class="form-control" type="file" name="foto" accept="image/*"  id="id_foto">
                 <div class="radiusB">
                     <input type="radio" name='decision' value="trabajador" id='trabajador'  onchange="Mover()"/>
@@ -35,9 +69,6 @@
                         <h4 class="info">categoría</h2>
                             {{ form.idCategoria}}
                     </div>
-                    {% comment %} {{form.nom_local}}
-                    {{ form.direccion }}
-                    {{ form.foto}} {% endcomment %}
                     <input type="text" placeholder="Nombre del local" name="nom_local" id='nom_local' class='inputform'/>
                     <input type="text" placeholder="Dirección del Local" name="direccion" id='direccion' class='inputform'/>
                 </div>
@@ -45,13 +76,11 @@
         </div>
         <div class="overlay-container">
             <div class="overlay">
-                <form action="{% url 'login' %}" method="post">{% csrf_token %}
                 <div class="overlay-panel overlay-left">
                     <h1 class='h1form'>¡Bienvenido de nuevo!</h1>
                     <p class='pform'>Para mantenerse conectado con nosotros, inicie sesión con su información personal</p>
-                    <button class="ghost buttonform">Iniciar Sesión</button>
+                    <a href="{% url  'login' %}" class="ghost buttonform">Iniciar Sesión</a>
                 </div>
-            </form>
             </div>
         </div>
     </div>

@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     "bootstrap5",
 ]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 TAILWIND_APP_NAME = 'theme'
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
@@ -94,7 +98,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
-            'PASSWORD': '',
+            'PASSWORD': 'root1234',
             'HOST': 'localhost',
             'PORT': '3306',
         }

@@ -5,20 +5,23 @@
 <link rel="stylesheet" href="{% static 'css/lore.css'%}">
 {% endblock stilos %}
 {% block appContenido %}
-<div class='sliderlore' style="background-image: url('{% static 'img/blg.jpg' %}')">
-    <div class="containerContactform "  id="container">
-        <div class="form-container sign-in-contacto-container">
-            <form action="" class='formlr' method="POST">{% csrf_token %}
-                <h1 class='h1form'>Contáctenos</h1>
-                <input type="text" placeholder="Nombre" name="FirstName" id='firstname' class='inputform'/>
-                <input type="email" placeholder="E-mail" id='Email' class='inputform' name="Email" />
-                <input typem="text" id="phone" name="phone" placeholder="Numero Celular" class='inputform'/>
-                <textarea  id="message" name="message" placeholder='Danos más detalles..' cols="30" rows="10" class='inputform'></textarea>
-                <button class='buttonform' type="submit">Contactar</button>
-            </form>
+<main class="vtn_main">
+    <div class="sliderlore">
+        <div class="containerContactform" id="container">
+            <div class="form-container sign-in-contacto-container">
+                <form action="" class='formlr' method="POST">{% csrf_token %}
+                    <h1 class='h1form'>Contáctenos</h1>
+                    <input type="text" placeholder="Nombre" name="FirstName" id='firstname' class='inputform'/>
+                    <input type="email" placeholder="E-mail" id='Email' class='inputform' name="Email" />
+                    <input typem="text" id="phone" name="phone" placeholder="Numero Celular" class='inputform'/>
+                    <textarea  id="message" name="message" placeholder='Danos más detalles..' cols="30" rows="10" class='inputform'></textarea>
+                    <button class='buttonform' type="submit">Contactar</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+</main>
+
 {% endblock appContenido %}
 {% block llamdoJavaScript %}
 {% endblock llamdoJavaScript %}
