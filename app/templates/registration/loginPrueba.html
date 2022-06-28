@@ -7,32 +7,7 @@
 {% block llamdoJavaScript %}
 <script src="{% static 'js/card.js'%}"></script>
 {% endblock llamdoJavaScript %}
-{% if messages %}
 
-        {% for m in messages %}
-
-        <script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-          
-          Toast.fire({
-            icon: 'warning',
-            title: '{{m}}'
-          })
-        </script>
-
-        {% endfor %}
-
-    {% endif %}
 {% block appContenido %}
 <div class='sliderlore'>
     <div class="containerform" id="container">
