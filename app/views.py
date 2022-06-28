@@ -1,7 +1,10 @@
 import email
+from pyexpat.errors import messages
 from arrow import now
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .forms import *
@@ -11,6 +14,20 @@ import time
 
 
 # Create your views here.
+
+def login(request):
+    if request.method == "POST":
+        nom_usuario = request.POST["username"]
+        password = request.POST["password"]
+        usuario = authenticate(username=nom_usuario, password=password)
+        if usuario is not None:
+            login(request, usuario)
+            messages.Erorr(request, ("Error"))
+            return redirect("login")
+        else:
+                messages.success(request, "Bienvenido")
+    else:
+        return render(request, "login.html", {})
 
 def inicio(request):
     return render(request, 'inicio.html')
@@ -93,6 +110,8 @@ def registro(request):
         formulario = RegistrationForm(data=request.POST, files=request.FILES)
         email = request.POST.get('email')
         if User.objects.filter(username=email).exists():
+            print("AQUI -->" + str(request))
+            messages.warning(request, "El correo ya se encuentra en uso")
             return redirect(to="login")
         else:
             if formulario.is_valid():
@@ -101,6 +120,7 @@ def registro(request):
                 telefono = request.POST.get('telefono')
                 foto=request.FILES.get('foto')
                 password = request.POST.get('password')
+                print(password)
                 email = request.POST.get('email')
                 idCategoria = request.POST.get('idCategoria')
                 nom_local = request.POST.get('nom_local')
@@ -133,6 +153,7 @@ def registro(request):
                     barbero.save()
                     user = User.objects.create_user(email, email, password)
                     login(request, user)
+                    messages.success(request, "Registrado correctamente")
                     request.session['id'] = user.id
                     return redirect(to="perfilB")
                 else:
@@ -151,6 +172,7 @@ def registro(request):
                     request.session['id'] = user.id
                     return redirect(to="perfilC")
             else:
+                messages.warning(request, "Debe llenar todos los  datos de formulario")
                 data = {
                     "form":RegistrationForm
                 }

@@ -11,7 +11,10 @@
 //     container.classList.add("right-panel-active");
 // }
 function Mover(){
-    console.log("ok");
+    console.log("ok")
+    document.querySelector("#nom_local").required = true
+    document.querySelector("#direccion").required = true
+    document.querySelector("#id_idCategoria").required = true
     const nuevoForm= document.querySelector(".nuevoForm");
     nuevoForm.classList.add("mostrarFormulario");
     nuevoForm.classList.remove("regresarFormulario");
@@ -23,6 +26,9 @@ function Mover(){
 function Regresar(){
     console.log(Mostrar);
     if(Mostrar){
+        document.querySelector("#nom_local").required = false
+        document.querySelector("#direccion").required = false
+        document.querySelector("#id_idCategoria").required = false
         const nuevoForm= document.querySelector(".nuevoForm")
         nuevoForm.classList.remove("mostrarFormulario");
         nuevoForm.classList.add("regresarFormulario");

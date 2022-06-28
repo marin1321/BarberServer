@@ -6,6 +6,34 @@
 
 {% block llamdoJavaScript %}
 <script src="{% static 'js/card.js'%}"></script>
+
+    {% if messages %}
+
+        {% for m in messages %}
+
+        <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+          
+          Toast.fire({
+            icon: 'warning',
+            title: '{{m}}'
+          })
+        </script>
+
+        {% endfor %}
+
+    {% endif %}
+
 {% endblock llamdoJavaScript %}
 
 {% block appContenido %}
@@ -14,23 +42,22 @@
         <div class="form-container sign-in-container">
             <form action="" class='formlr' method="post" enctype="multipart/form-data">{% csrf_token %}
                 <h1 class='h1form'>Iniciar Sesión</h1>
-                <input type="text" placeholder="Email" id='usname' class='inputform'  name="username"/>
-                <input type="password" placeholder="Contraseña" id='uspassword' class='inputform' name="password"/>
+                <input type="text" placeholder="Email" id='usname' class='inputform' required name="username"/>
+                <input type="password" placeholder="Contraseña" id='uspassword' required class='inputform' name="password"/>
                 <a href="#" class='aform'>¿Olvidaste tu contraseña?</a>
                 <button class='buttonform' type="submit">Iniciar Sesión</button>
             </form>
         </div>
         <div class="overlay-container">
             <div class="overlay">
-                <form  action="{% url 'registro' %}" method="post">{% csrf_token %}
                 <div class="overlay-panel overlay-right">
                     <h1 class='h1form'>¡Hola amig@!</h1>
                     <p class='pform'>Ingresa tus datos personales y comienza tu viaje con nosotros</p>
-                    <button class="ghost buttonform">Crear Cuenta</button>
+                   <a href="{% url  'registro' %}"> <button class="ghost buttonform">Crear Cuenta</button></a>
                 </div>
-                </form>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock appContenido %}
