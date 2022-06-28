@@ -55,7 +55,7 @@
                                         </path>
                                     </svg>WhatsApp
                                 </a>
-                                <span class="text-secondary">{{datosC.telefono}}</span>
+                                <span class="colorGris">{{datosC.telefono}}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox" target="_blank" class="mb-0 wh">
@@ -65,18 +65,18 @@
                                         </path>
                                     </svg>Email
                                 </a>
-                                <span class="text-secondary">{{datosC.email}}</span>
+                                <span class="colorGris">{{datosC.email}}</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="card mb-3">
+                    {% comment %} <div class="card mb-3">
                         <div class="card-body">
                             <div class="row">
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Nombre(s)</h4>
                                 <div class="col-sm-9">
-                                    <p class="col-sm-9 text-secondary alturaTamaño" id="info1">{{ datosC.nombres }}</p>
+                                    <p class="col-sm-9 alturaTamaño colorGris" id="info1">{{ datosC.nombres }}</p>
                                     <input type="text" class="form-control" id="infoInput1" placeholder="" name="Nombres" value="">
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                             <div class="row">
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Apellidos(s)</h4>
                                 <div class="col-sm-9">
-                                    <p class="col-sm-9 text-secondary alturaTamaño" id="info6">{{ datosC.apellidos }}</p>
+                                    <p class="col-sm-9 alturaTamaño colorGris" id="info6">{{ datosC.apellidos }}</p>
                                     <input type="text" class="form-control" id="infoInput6" name="Apellidos" placeholder="" value="">
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                             <div class="row">
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Email</h4>
                                 <div class="col-sm-9">
-                                    <p class="col-sm-9 text-secondary alturaTamaño" id="info2">{{ datosC.email }}</p>
+                                    <p class="col-sm-9 alturaTamaño colorGris" id="info2">{{ datosC.email }}</p>
                                     <input type="text" class="form-control col-sm-9" id="infoInput2" placeholder="" name="Email" value="">
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                             <div class="row">
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Teléfono</h4>
                                 <div class="col-sm-9">
-                                    <p class="col-sm-9 text-secondary alturaTamaño" id="info3">{{ datosC.telefono }}</p>
+                                    <p class="col-sm-9 alturaTamaño colorGris" id="info3">{{ datosC.telefono }}</p>
                                     <input type="text" class="form-control col-sm-9" id="infoInput3" placeholder="" name="Telefono" value="">
                                 </div>
                             </div>
@@ -109,16 +109,16 @@
                                 {% comment %} <div class="col-10 form-check form-switch editar">
                                     <input class="col-2 form-check-input align-self-center" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                                     <label class="col-10 form-check-label align-self-center pt-2" forhtml="flexSwitchCheckDefault">Editar</label>
-                                </div> {% endcomment %}
+                                </div>
                                 <a href="{% url 'editarPerfilC' %}"><button class='buttonform'>Editar</button></a>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     {% endfor %}
                     <div class="col-lg-14 col-xl-14 cardP-box">
                         <ul class="list-unstyled timeline-sm">
-                            {% for citasId in citas %}
-                                {% if citasId.peticion == "aceptar" %}
+                            {% comment %} {% for citasId in citas %}
+                                {% if citasId.peticion == "aceptar" %} {% endcomment %}
                                 <li class="timeline-sm-item">
                                     <span class="timeline-sm-date">{{citasId.idHorario.fecha}}</span>
                                     <h5 class="mt-0">{{citasId.idTrabajador.idCategoria}}: {{citasId.idServicio.tipoServicio}}</h5>
@@ -126,8 +126,8 @@
                                     <p class="text-white-50 mt-2">Hora de inicio de corte: {{citasId.idHorario.horaInicio}}</p>
                                     <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
                                 </li>
-                                {% endif %}
-                            {% endfor %}
+                                {% comment %} {% endif %}
+                            {% endfor %} {% endcomment %}
                         </ul>
                     </div>
                 </div>
