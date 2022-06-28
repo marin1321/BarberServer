@@ -86,7 +86,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'BarberServer.wsgi.application'
 
 
-# Database
+# sbase
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
@@ -94,7 +94,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
-            'PASSWORD': '',
+            'PASSWORD': 'Sena1234',
             'HOST': 'localhost',
             'PORT': '3306',
         }
