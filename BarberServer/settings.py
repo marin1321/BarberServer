@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     "bootstrap5",
+    "django_cron",
 ]
 
 INTERNAL_IPS = [
@@ -58,7 +59,14 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 TAILWIND_APP_NAME = 'theme'
 
+
+
 X_FRAME_OPTIONS = "SAMEORIGIN"
+
+CRON_CLASSES = [
+    'BarberServer.cron.MyCronJob',
+    # ...
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -70,6 +78,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
+
 
 ROOT_URLCONF = 'BarberServer.urls'
 
@@ -150,7 +159,7 @@ EMAIL_HOST="smtp.gmail.com"
 EMAIL_USE_TLS=True
 EMAIL_PORT=587
 EMAIL_HOST_USER="barberserver123company@gmail.com"
-EMAIL_HOST_PASSWORD="cicohcubaqamswjj"
+EMAIL_HOST_PASSWORD="qbtsyhkdtihlbdql"
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
