@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{% static 'css/calificacion.css'%}">
 {% endblock stilos %}
 {% block appContenido %}
-<main>
+<main class="containerNegro">
     <!-- {% comment %} <h1>Perfil Cliente</h1>
     {% for datosC in datosC %}
     <p>{{ datosC.nombres }}</p>
@@ -14,6 +14,9 @@
     <a href="{% url 'inactivarCuenta' %}">Inactivar cuenta</a>
     <a href="{% url 'editarPerfilC' %}">Editar cuenta</a> {% endcomment %} -->
     <div class="container">
+        {%block editarPerfil%}
+            <li><a href="{% url 'editarPerfilC' %}"> EDITAR PERFIL </a></li>
+        {%endblock%}
         <div class="main-body">
             <div class="row cardsP gutters-sm">
                 {% for datosC in datosC %}
@@ -24,7 +27,7 @@
                                 {% if datosC.foto %}
                                     <img src="{{ datosC.foto.url }}" alt="Admin" class="rounded-circle" width="150">
                                     {% else %}
-                                        <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                    <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                                 {% endif %}
                             </button>
                             <div class="mt-3">

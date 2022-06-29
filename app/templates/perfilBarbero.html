@@ -14,11 +14,21 @@
     <a href="{% url 'inactivarCuenta' %}">Inactivar cuenta</a>
     <a href="{% url 'editarPerfilB' %}">Editar cuenta</a> -->
     <div class="container">
-
-        {% block horarios %}
-            <li><a href="{% url 'horarios' %}"> HORARIOS </a></li>
-            <li><a href="{% url 'editarPerfilB' %}"> EDITAR PERFIL </a></li>
+        {% block citas %}
+            <li>
+                <a href="{% url 'citasbarber' %}">CITAS</a>
+            </li>
         {% endblock %}
+        {% block horarios %}
+            <li>
+                <a href="{% url 'horarios' %}"> HORARIOS </a>
+            </li>
+        {% endblock %}
+        {%block editarPerfil%}
+            <li>
+                <a href="{% url 'editarPerfilB' %}"> EDITAR PERFIL </a>
+            </li>
+        {%endblock%}
 
         {% for datosB in datosB %}
         <div class="main-body">
@@ -160,42 +170,9 @@
                             </li>
                         </ul>
                         <ul class="list-unstyled timeline-sm">
-                            {% for datosCita in datosCita %}
+                            {% for citasId in citas %}
                             <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
-                                <h5 class="mt-0">Tienes una nueva Cita de {{ datosCita.idCliente.nombres }}</h5>
-                                <p>websitename.com</p>
-                                <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
-                                    desirable: one could refuse to pay expensive translators. To achieve this, it would
-                                    be necessary to have uniform grammar, pronunciation and more common words.</p>
-                                <div class="verCita">
-                                    <a id="aceptar" href="{% url 'citasBarbero' %}">Aceptar</a>
-                                    <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
-                                </div>
-                            </li>
-                            <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
-                                <h5 class="mt-0">Lead designer / Developer</h5>
-                                <p>websitename.com</p>
-                                <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
-                                    desirable: one could refuse to pay expensive translators. To achieve this, it would
-                                    be necessary to have uniform grammar, pronunciation and more common words.</p>
-                                <div class="verCita">
-                                    <a id="aceptar" href="{% url 'citasBarbero' %}">Aceptar</a>
-                                    <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
-                                </div>
-                            </li>
-                            <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
-                                <h5 class="mt-0">Lead designer / Developer</h5>
-                                <p>websitename.com</p>
-                                <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
-                                    desirable: one could refuse to pay expensive translators. To achieve this, it would
-                                    be necessary to have uniform grammar, pronunciation and more common words.</p>
-                                <div class="verCita">
-                                    <a id="aceptar" href="{% url 'citasBarbero' %}">Aceptar</a>
-                                    <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
-                                </div>
-                            </li>
-                            <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
-                                <h5 class="mt-0">Lead designer / Developer</h5>
+                                <h5 class="mt-0">Tienes una nueva Cita de {{ citasId.idCliente.nombres }}</h5>
                                 <p>websitename.com</p>
                                 <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
                                     desirable: one could refuse to pay expensive translators. To achieve this, it would

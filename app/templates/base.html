@@ -52,10 +52,11 @@
                         <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/>
                     </a>
                     <ul class="children">
-                            <li>
-                                <a href="{% url 'citasbarber' %}">CITAS</a>
-                            </li>
+                            {%block citas%}
+                            {%endblock%}
                             {%block horarios%}
+                            {%endblock%}
+                            {%block editarPerfil%}
                             {%endblock%}
                             <li>
                                 <a href="{% url 'logout' %}">SALIR</a>
