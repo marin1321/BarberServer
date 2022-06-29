@@ -23,12 +23,16 @@
     <div class="mainConsultBarber">
         <section class="busqueda">
             <form action="" method="get" class="form-busqueda">
-                <input type="search" name="search" placeholder="What are you looking for?"><button>Search</button><select name="opciones" id="seleciona">
-                    <option value="Todos">Todos</option>
-                    {% for categoria in categoria %}
-                        <option value="{{categoria.nombre_cat}}">{{categoria.nombre_cat}}</option>
-                    {% endfor %}
-                </select>
+                <input type="search" name="search" placeholder="What are you looking for?">
+                <button class="2xl:mr-3">Search</button>
+                <div class="ctr_select">
+                    <select name="opciones" id="seleciona">
+                        <option value="Todos">Todos</option>
+                        {% for categoria in categoria %}
+                            <option value="{{categoria.nombre_cat}}">{{categoria.nombre_cat}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </form>
         </section>
         <section id="containerBarberos">
@@ -41,7 +45,8 @@
                         {% if barber.foto %}
                         <img src="{{ barber.foto.url }}" alt="las vegas"
                             class="img_cards">
-                        {% endif %}
+                        {% endif %} 
+
                         </figure>
                     <div class="infoBasica">
                         <h3 id="nombre">{{ barber.nombres }}</h3>

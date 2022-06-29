@@ -10,7 +10,7 @@ urlpatterns=[
     path('perfil_barbero/', perfilBarbero, name='perfilB'),
     path('perfil_cliente/', perfilCliente, name='perfilC'),
     path('citas_barbero/', citasBarbero, name='citasBarbero'),
-    path('accounts/registrar/', registro, name='registro'),
+    path('registrar/', registro, name='registro'),
     path('elimininar_cunta/', eliminarCuenta, name='inactivarCuenta'),
     path('editar_perfil_cliente/', editarPerfilC, name='editarPerfilC'),
     path('editar_perfil_barbero/', editarPerfilB, name='editarPerfilB'),
@@ -19,6 +19,6 @@ urlpatterns=[
     path('verHorario/', verHorarios, name='verHorario'),
     path('perdirCitas/<id>', cita, name='citas'),
     path('citasBarbero/', citasBarbero, name='citasbarber'),
-    path('loginPrueba/', loginPrueba, name='loginPrueba'),
+    path('login/', loginF, name='login'),
     # path('eliminarHorario/', eliminarHorario, name='eliminarHorario'),
 ]

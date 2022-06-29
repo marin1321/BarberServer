@@ -55,6 +55,8 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
 TAILWIND_APP_NAME = 'theme'
 
 
@@ -99,7 +101,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'BarberServer.wsgi.application'
 
 
-# Database
+# sbase
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {

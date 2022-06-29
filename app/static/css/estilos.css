@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');/* Pertenece a los estilos del login y register */
 @import url(https://fonts.googleapis.com/css?family=Alegreya+Sans:300);
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500;1,600&family=Vidaloka&display=swap');
 
 .app{
     width: 100%;
@@ -153,7 +154,7 @@ header{
     background-size: 100%;
 }
 .secc{
-    background: url(../img/vintage-chairs.jpg);
+    background: url(../img/sillas.jpg);
     /* width: 100%;
     height: 100vh; */
     width: 100%;
@@ -211,7 +212,16 @@ body {
     justify-content: space-between;
     height: 100vh;
     width: 100%;
+}
 
+body::-webkit-scrollbar{
+    width: 14px;
+    background-color: #444;
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color: #888;
+    border-radius: 5px;
 }
 
 /* Sticky footer position and size
@@ -370,7 +380,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
     flex-direction: column;
     margin: 0px;
 	padding: 0px;
-	width: 150px;
+	width: 160px;
 	height: 0;
 	float:  right;
 	position: absolute;
@@ -399,8 +409,8 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 .submenus:hover ul.children{ height:auto; opacity:1; padding-bottom: 5px;}
 .submenus ul.children li a{
 	color: #fefefe !important;
-	padding: 13px 0 13px 20px;
-	width: 130px;
+	padding: 13px 10px 13px 20px;
+	width: 100%;
 	border-bottom: 1px solid #2f2f2f;
 	font-size: 12px;
 	
@@ -528,6 +538,12 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 }
 
 /*Icono del select*/
+select{
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
 select::-ms-expand {
     display: none;
 }
@@ -551,4 +567,4 @@ select::-ms-expand {
     transition:.25s all ease;
     border-radius: 0 5px 5px 0;
     font-size: 0.6em;
- }
+}

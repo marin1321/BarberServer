@@ -151,6 +151,8 @@
 .nom-categoria {
   border-bottom:0;
   font-size: 3rem;
+  color: #fff;
+  text-align: center;
 }
 .card-title{
   display: flex;
@@ -167,10 +169,92 @@ color: #969ba1;
 }
 
 /*VER HORARIOS*/
+.vtn_main{
+  background: url(../img/sillas.jpg) no-repeat center center;
+  background-size: cover;
+}
+
 .horarios{
   width: 100%;
-  height: 50em;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+.tablaHorarios{
+  width: 80%;
+  height: auto;
+  margin-top: 5em;
+  background-color: #0e0e0ef7;
+  color: #fff;
+  caption-side: top;
+}
+
+.caption{
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-family: 'Rye', cursive;
+  text-shadow: 0 0 30px black;
+}
+
+table, td, th{ 
+  width: 3rem;
+  height: auto;
+  border: 3px solid black;
+  /* border-collapse: separate; */
+  border-spacing: 5px;
+  padding: 10px;
+}
+
+.campoHorario{
+  width: 95%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 0.5rem 0;
+  border-radius: 5px;
+  /* border-top: 1px solid black;
+  border-bottom: 1px solid black; */
+}
+
+#pendiente{
+  background-color: #4e4e4e;
+  /* https://encycolorpedia.es/7c7c7c */
+}
+
+#ocupado{
+  background-color: #868686;
+}
+
+th{
+  font-size: 2rem;
+  text-align: center;
+}
+
+.tiempo{
+  font-size: 1.5rem;
+}
+
+.ver{
+  width: auto;
+  height: auto;
+  padding: 3px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #333;
+  color: white !important;
+  font-size: 1.2rem;
+}
+
+.ver:hover{
+  background-color: #222;
 }

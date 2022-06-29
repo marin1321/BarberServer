@@ -18,17 +18,16 @@ from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
 
-
-def loginPrueba(request):
+def loginF(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('/')
+            messages.success(request, "logueado con exito!")
+            return redirect('/perfilCliente.html')
         else:
-            print("malo")
-            messages.success(request, 'A serious error occurred.')
+            messages.warning(request, "Credenciales incorrectas")
     else:
         form = AuthenticationForm(request)
     context = {
@@ -95,7 +94,16 @@ def perfilBarbero(request):
             'datosB':datosB,
         }
         print("AQUI --> " +str(request.user))
-
+        if request.method=='POST':
+            trabajador =  Trabajadores.objects.get(email=usuarioActivo)
+            estado =  request.POST.get("estado")
+            print(estado)
+            if estado == "activo":
+                trabajador.state = "activo"
+                trabajador.save()
+            else:
+                trabajador.state = "inactivo"
+                trabajador.save()
         return render(request, 'perfilBarbero.html', data)
     else:
         return redirect(to="login")
@@ -261,6 +269,7 @@ def cita(request, id):
         horaRegistroCita = horaRegistroCita.strip()
         idHorario = request.POST.get('idHorario')
         fechaRegistroCita = datetime.today().strftime('%Y-%m-%d')
+        print("Fecha registro -->", fechaRegistroCita)
         fechaRegistroCita = fechaRegistroCita.strip()
         idHorario = idHorario.strip()
         mandarNotificacion(idHorario, idCliente, barbero)
@@ -326,6 +335,7 @@ def editarPerfilC(request):
 def editarPerfilB(request):
     global user_id 
     user_id = request.user.id
+    print("Hola")
     usuarioActivo = User.objects.get(id=user_id)
     id = Trabajadores.objects.get(email=usuarioActivo).id
     perfil = get_object_or_404(Trabajadores, id=id)
@@ -333,6 +343,7 @@ def editarPerfilB(request):
         'form': EditarBarberoForm(instance=perfil),
     }
     if request.method=='POST':
+        estado =  request.POST.get("estado")
         formulario = EditarBarberoForm(data=request.POST, instance=perfil, files=request.FILES)
         if formulario.is_valid():
             foto=request.FILES.get('foto')
@@ -340,6 +351,14 @@ def editarPerfilB(request):
             idTrabajador.foto = foto
             formulario.save()
             return redirect(to="perfilB")
+        elif estado == "activo":
+            trabajador = Trabajadores()
+            trabajador.estado = "activo"
+            trabajador.save()
+        elif estado == "inactivo":
+            trabajador = Trabajadores()
+            trabajador.estado = "inactivo"
+            trabajador.save()
         else:
             data["form"] = formulario
     return render(request, 'editarPerfilB.html', data)
