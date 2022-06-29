@@ -77,7 +77,6 @@
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Nombre(s)</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 alturaTamaño colorGris" id="info1">{{ datosC.nombres }}</p>
-                                    <input type="text" class="form-control" id="infoInput1" placeholder="" name="Nombres" value="">
                                 </div>
                             </div>
                             <hr>
@@ -85,7 +84,6 @@
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Apellidos(s)</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 alturaTamaño colorGris" id="info6">{{ datosC.apellidos }}</p>
-                                    <input type="text" class="form-control" id="infoInput6" name="Apellidos" placeholder="" value="">
                                 </div>
                             </div>
                             <hr>
@@ -93,7 +91,6 @@
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Email</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 alturaTamaño colorGris" id="info2">{{ datosC.email }}</p>
-                                    <input type="text" class="form-control col-sm-9" id="infoInput2" placeholder="" name="Email" value="">
                                 </div>
                             </div>
                             <hr>
@@ -101,7 +98,6 @@
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Teléfono</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 alturaTamaño colorGris" id="info3">{{ datosC.telefono }}</p>
-                                    <input type="text" class="form-control col-sm-9" id="infoInput3" placeholder="" name="Telefono" value="">
                                 </div>
                             </div>
                             <hr>
@@ -116,9 +112,33 @@
                     </div> {% endcomment %}
                     {% endfor %}
                     <div class="col-lg-14 col-xl-14 cardP-box">
+                        <ul class="filtro">
+                            <li class="seleccion">
+                                <h3>Busqueda por fechas:</h3>
+                                <div class="ctr_select">
+                                    <select class="select">
+                                        <option value="hoy">Hoy</option>
+                                        <option value="ayer">Ayer</option>
+                                        <option value="estaSemana">Esta Semana</option>
+                                        <option value="estaSemana">Este Mes</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li class="seleccion">
+                                <h3>Busqueda por estado:</h3>
+                                <div class="ctr_select">
+                                    <select class="select">
+                                        <option value="hoy">Aceptadas</option>
+                                        <option value="ayer">Editadas</option>
+                                        <option value="estaSemana">Eliminadas</option>
+                                        <option value="estaSemana">En Espera</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
                         <ul class="list-unstyled timeline-sm">
-                            {% comment %} {% for citasId in citas %}
-                                {% if citasId.peticion == "aceptar" %} {% endcomment %}
+                            {% for citasId in citas %}
+                                {% comment %} {% if citasId.peticion == "aceptar" %} {% endcomment %}
                                 <li class="timeline-sm-item">
                                     <span class="timeline-sm-date">{{citasId.idHorario.fecha}}</span>
                                     <h5 class="mt-0">{{citasId.idTrabajador.idCategoria}}: {{citasId.idServicio.tipoServicio}}</h5>
@@ -126,8 +146,8 @@
                                     <p class="text-white-50 mt-2">Hora de inicio de corte: {{citasId.idHorario.horaInicio}}</p>
                                     <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
                                 </li>
-                                {% comment %} {% endif %}
-                            {% endfor %} {% endcomment %}
+                                {% comment %} {% endif %} {% endcomment %}
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>

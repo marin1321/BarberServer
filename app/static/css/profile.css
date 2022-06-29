@@ -57,6 +57,15 @@ hr{ border: 1px solid #444; }
     align-items: center;
 }
 
+.mb-0:hover{
+    color: #ffd17b;
+    text-shadow: 0 0 2px yellow;
+}
+
+.bi{
+    color: #17a2b8;
+}
+
 .alturaTamaño{
     height: 2.7rem;
     font-size: 1.2rem;
@@ -255,12 +264,6 @@ hr{ border: 1px solid #444; }
     background: linear-gradient(#111, #000);
     padding: 0 20px;
 }
-
-/* .filtro::after{
-    padding: 2rem;
-    position: absolute;
-    background-color: #050505;
-} */
 
 .seleccion{
     width: auto;

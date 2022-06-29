@@ -160,6 +160,7 @@
                             </li>
                         </ul>
                         <ul class="list-unstyled timeline-sm">
+                            {% for datosCita in datosCita %}
                             <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
                                 <h5 class="mt-0">Tienes una nueva Cita de {{ datosCita.idCliente.nombres }}</h5>
                                 <p>websitename.com</p>
@@ -204,6 +205,7 @@
                                     <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
                                 </div>
                             </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
