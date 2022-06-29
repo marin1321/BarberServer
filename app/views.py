@@ -16,8 +16,8 @@ from django.db.models import Q
 from django.core.mail import send_mail
 from django.contrib.auth.forms import AuthenticationForm
 
-
 # Create your views here.
+
 
 def loginPrueba(request):
     if request.method == "POST":

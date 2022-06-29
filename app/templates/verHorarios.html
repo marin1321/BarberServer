@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block stilos %}
 <link rel="stylesheet" href="{% static 'css/horario.css'%}" />
 {% endblock stilos %} {% block appContenido %}
-<main class="vtn_main">
+{% comment %} <main class="vtn_main">
   <section class="horarios">
     <table>
       <caption>Mi Horario(mi libro)</caption>
@@ -90,9 +90,9 @@
         </tr>
     </table>
   </section>
-</main>
+</main> {% endcomment %}
 
-{% comment %}
+
 <div class="row flex-lg-nowrap">
   <div class="col mb-3">
     <div class="e-panel card cardVerHorarios align-items-center">
@@ -173,4 +173,4 @@
     </div>
   </div>
 </div>
-{% endcomment %} {% endblock %}
+ {% endblock %}
