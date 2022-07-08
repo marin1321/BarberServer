@@ -167,43 +167,16 @@
                                 <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
                                     desirable: one could refuse to pay expensive translators. To achieve this, it would
                                     be necessary to have uniform grammar, pronunciation and more common words.</p>
-                                <div class="verCita">
-                                    <a id="aceptar" href="{% url 'citasBarbero' %}">Aceptar</a>
-                                    <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
-                                </div>
-                            </li>
-                            <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
-                                <h5 class="mt-0">Lead designer / Developer</h5>
-                                <p>websitename.com</p>
-                                <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
-                                    desirable: one could refuse to pay expensive translators. To achieve this, it would
-                                    be necessary to have uniform grammar, pronunciation and more common words.</p>
-                                <div class="verCita">
-                                    <a id="aceptar" href="{% url 'citasBarbero' %}">Aceptar</a>
-                                    <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
-                                </div>
-                            </li>
-                            <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
-                                <h5 class="mt-0">Lead designer / Developer</h5>
-                                <p>websitename.com</p>
-                                <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
-                                    desirable: one could refuse to pay expensive translators. To achieve this, it would
-                                    be necessary to have uniform grammar, pronunciation and more common words.</p>
-                                <div class="verCita">
-                                    <a id="aceptar" href="{% url 'citasBarbero' %}">Aceptar</a>
-                                    <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
-                                </div>
-                            </li>
-                            <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
-                                <h5 class="mt-0">Lead designer / Developer</h5>
-                                <p>websitename.com</p>
-                                <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
-                                    desirable: one could refuse to pay expensive translators. To achieve this, it would
-                                    be necessary to have uniform grammar, pronunciation and more common words.</p>
-                                <div class="verCita">
-                                    <a id="aceptar" href="{% url 'citasBarbero' %}">Aceptar</a>
-                                    <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
-                                </div>
+                                
+                                    <div class="verCita">
+                                        <form action="" method="post">{% csrf_token %}
+                                            {% if datosCita == "activo" %}
+                                                <a id="aceptar" type="submit">Aceptar</a>
+                                            {% endif %}
+                                        </form>
+                                        <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
+                                    </div>
+                                
                             </li>
                             {% endfor %}
                         </ul>

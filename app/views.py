@@ -90,8 +90,11 @@ def perfilBarbero(request):
         global user_id 
         usuarioActivo = User.objects.get(id=user_id)
         datosB = Trabajadores.objects.filter(email=usuarioActivo)
+        idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
+        datosCita = citas.objects.filter(idTrabajador = idTrabajador)
         data = {
             'datosB':datosB,
+            "datosCita":datosCita,
         }
         print("AQUI --> " +str(request.user))
         if request.method=='POST':
@@ -101,9 +104,14 @@ def perfilBarbero(request):
             if estado == "activo":
                 trabajador.state = "activo"
                 trabajador.save()
-            else:
+            elif estado == "inactivo":
                 trabajador.state = "inactivo"
                 trabajador.save()
+            else:
+                idCita = request.POST.get('idCita')
+                idCita =  citas.objects.get(id=idCita)
+                idCita.peticion = "inactivo"
+                idCita.save()
         return render(request, 'perfilBarbero.html', data)
     else:
         return redirect(to="login")
@@ -224,9 +232,11 @@ def horarioBarber(request):
         id_usuario = Trabajadores.objects.get(email=usuarioActivo)
         print(id_usuario)
         inicioHora = request.POST.get('horaInicio')
+        inicioHora = inicioHora.strip()
         fecha = request.POST.get('fecha')
         fecha =  fecha.strip()
-        inicioHora = inicioHora.strip()
+        desdeFecha = request.POST.get('desdeF')
+        gastaFecha =  request.POST.get('hastaF')
         hora2 = inicioHora[3:5]
         hora2 = int(hora2) + 30
         if hora2 >= 60:
@@ -281,7 +291,7 @@ def cita(request, id):
         cita.fechaRegistroCita = fechaRegistroCita
         cita.idHorario = idHorario
         cita.idTrabajador = barbero
-        cita.peticion = "activo"
+        cita.peticion = "pendiente"
         cita.save()
         idHorario.estado = "inactivo"
         idHorario.save()
@@ -404,3 +414,4 @@ def eliminarHorario(request):
         usuario = get_object_or_404(horarios, id=id)
         usuario.delete()
         return redirect(to="inicio")
+    

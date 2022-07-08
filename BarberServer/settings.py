@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     "bootstrap5",
-    "django_cron",
+    'django_crontab',
 ]
 
 INTERNAL_IPS = [
@@ -63,10 +63,10 @@ TAILWIND_APP_NAME = 'theme'
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
-CRON_CLASSES = [
-    'BarberServer.cron.MyCronJob',
-    # ...
+CRONJOBS  = [ 
+    ( ' */1 * * * * ' , ' BarberServer.cron.MyCronJob') 
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
