@@ -141,15 +141,15 @@
                         </ul>
                         <ul class="list-unstyled timeline-sm">
                             {% for citasId in citas %}
-                                {% comment %} {% if citasId.peticion == "aceptar" %} {% endcomment %}
-                                <li class="timeline-sm-item">
-                                    <span class="timeline-sm-date">{{citasId.idHorario.fecha}}</span>
-                                    <h5 class="mt-0">{{citasId.idTrabajador.idCategoria}}: {{citasId.idServicio.tipoServicio}}</h5>
-                                    <p> Peluquero: {{ citasId.idTrabajador.nombres }} {{ citasId.idTrabajador.apellidos }}</p>
-                                    <p class="text-white-50 mt-2">Hora de inicio de corte: {{citasId.idHorario.horaInicio}}</p>
-                                    <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
-                                </li>
-                                {% comment %} {% endif %} {% endcomment %}
+                                {% if citasId.peticion == "aceptar" %} 
+                                    <li class="timeline-sm-item">
+                                        <span class="timeline-sm-date">{{citasId.idHorario.fecha}}</span>
+                                        <h5 class="mt-0">{{citasId.idTrabajador.idCategoria}}: {{citasId.idServicio.tipoServicio}}</h5>
+                                        <p> Peluquero: {{ citasId.idTrabajador.nombres }} {{ citasId.idTrabajador.apellidos }}</p>
+                                        <p class="text-white-50 mt-2">Hora de inicio de corte: {{citasId.idHorario.horaInicio}}</p>
+                                        <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
+                                    </li>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                     </div>
