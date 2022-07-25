@@ -28,9 +28,13 @@
                 <button class="2xl:mr-3" type="submit">Search</button>
                 <div class="ctr_select">
                     <select name="opciones" id="seleciona">
-                        <option value="Todos">Todos</option>
+                        <option value="Todos">Todos</option> 
                         {% for categoria in categoria %}
-                            <option value="{{categoria.nombre_cat}}" type="submit">{{categoria.nombre_cat}}</option>
+                            {% if select == categoria.id %}
+                            <option value="{{categoria.nombre_cat}}" selected>{{categoria.nombre_cat}}</option>
+                            {% else %}
+                                <option value="{{categoria.nombre_cat}}">{{categoria.nombre_cat}}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                 </div>

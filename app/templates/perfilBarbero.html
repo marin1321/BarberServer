@@ -145,34 +145,40 @@
                         </div>
                     </div> {% endcomment %}
                     <div class="col-lg-14 col-xl-14 cardP-box">
-                        <ul class="filtro">
-                            <li class="seleccion">
-                                <h3>Busqueda por fechas:</h3>
-                                <div class="ctr_select">
-                                    <select class="select">
-                                        <option value="hoy">Hoy</option>
-                                        <option value="ayer">Ayer</option>
-                                        <option value="estaSemana">Esta Semana</option>
-                                        <option value="estaSemana">Este Mes</option>
-                                    </select>
-                                </div>
-                            </li>
-                            <li class="seleccion">
-                                <h3>Busqueda por estado:</h3>
-                                <div class="ctr_select">
-                                    <select class="select">
-                                        <option value="hoy">Aceptadas</option>
-                                        <option value="ayer">Pendientes</option>
-                                        <option value="estaSemana">Cancaladas</option>
-                                    </select>
-                                </div>
-                            </li>
-                        </ul>
+                        <form action="" method="get">
+                            <ul class="filtro">
+                                <li class="seleccion">
+                                    <h3>Busqueda por fechas:</h3>
+                                    <div class="ctr_select">
+                                        <select class="select" name="TiempoSelect">
+                                            <option value="todos">Todos</option>
+                                            <option value="esteAño">Este Año</option>
+                                            <option value="esteMes">Este Mes</option>
+                                            <option value="estaSemana">Esta Semana</option>
+                                            <option value="hoy">Hoy</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="seleccion">
+                                    <h3>Busqueda por estado:</h3>
+                                    <div class="ctr_select">
+                                        <select class="select">
+                                            <option value="hoy">Aceptadas</option>
+                                            <option value="ayer">Pendientes</option>
+                                            <option value="estaSemana">Cancaladas</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="seleccin¿">
+                                    <button>Buscar</button>
+                                </li>    
+                            </ul>
+                        </form>
                         <ul class="list-unstyled timeline-sm">
                             {% for datosCita in datosCita %}
-                            <li class="timeline-sm-item"><span class="timeline-sm-date">{{datosCita.idHorario.fecha}} - 06 - 20 </span>
+                            <li class="timeline-sm-item"><span class="timeline-sm-date">{{datosCita.idHorario.fecha}}</span>
                                 <h5 class="mt-0">Tienes una nueva Cita de {{ datosCita.idCliente.nombres }}</h5>
-                                <p>websitename.com</p>
+                                <p>BarberServe.xxx</p>
                                 <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
                                     desirable: one could refuse to pay expensive translators. To achieve this, it would
                                     be necessary to have uniform grammar, pronunciation and more common words.</p>

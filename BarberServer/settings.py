@@ -44,9 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
     'colorfield',
-    'tailwind',
-    'theme',
-    'django_browser_reload',
     "bootstrap5",
     'django_crontab',
 ]
@@ -76,7 +73,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 
@@ -109,7 +105,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
-            'PASSWORD': 'Sena1234',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '3306',
         }

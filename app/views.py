@@ -1,24 +1,24 @@
 import email
 import imp
 from multiprocessing import AuthenticationError
+from tokenize import String
 from django.contrib import messages
-from arrow import now
 from django.conf import settings
+from django.forms import DateInput
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from sklearn.utils import assert_all_finite
 from .forms import *
 from .models import *
-from datetime import datetime
+from datetime import datetime, date
 import time
 from django.db.models import Q
 from django.core.mail import send_mail
 from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
-
+fechaHoy = datetime.today().strftime('%Y-%m-%d')
 def loginF(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
@@ -89,17 +89,21 @@ def barber(request):
             datas = Trabajadores.objects.get(email=usuarioActivo).rol
         elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
             datas = Clientes.objects.get(email=usuarioActivo).rol
-
+    nombreSelect=None
     if searchs:
         if select != None and select != 'Todos':
-            select = Categoria.objects.get(nombre_cat = 'corte').id
+            select = Categoria.objects.get(nombre_cat = select).id
             barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs),idCategoria = select).distinct()
+            nombreSelect=select
         else:
+            nombreSelect=None
             barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs)).distinct()
+    print(nombreSelect)
     data = {
         "barber":barber,
         "categoria":categorias,
-        "rol":datas
+        "rol":datas,
+        "select": nombreSelect
     }  
     return render(request, 'barberos.html', data)
 
@@ -119,6 +123,41 @@ def perfilBarbero(request):
         datosB = Trabajadores.objects.filter(email=usuarioActivo)
         idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
         datosCita = citas.objects.filter(idTrabajador = idTrabajador)
+        selectT =  request.GET.get('TiempoSelect')
+        datosSelect = []
+        if selectT != None and selectT != 'todos':
+            if selectT == 'estaSemana':
+                print(1)
+                semanaHoy =sacarSemana(int(fechaHoy[0:4]),int(fechaHoy[5:7]), int(fechaHoy[8:10]))
+                for datoCita in datosCita:
+                    fechaDeCita = datoCita.idHorario.fecha 
+                    if int(fechaHoy[0:4]) == int(fechaDeCita.year):
+                        print(fechaDeCita)
+                        semanaCita = sacarSemana(int(fechaDeCita.year),int(fechaDeCita.month), int(fechaDeCita.day))
+                        if semanaHoy == semanaCita:
+                            datosSelect.append(datoCita)
+            elif selectT == 'hoy':
+                print(2)
+                for datoCita in datosCita:
+                    fechaDeCita = datoCita.idHorario.fecha 
+                    if fechaHoy == fechaDeCita:
+                        datosSelect.append(datoCita)
+            elif selectT == 'esteMes':
+                print(3)
+                for datoCita in datosCita:
+                    fechaDeCita = datoCita.idHorario.fecha 
+                    if int(fechaHoy[0:4]) == int(fechaDeCita.year) and int(fechaHoy[5:7]) == int(fechaDeCita.month):
+                        print(20)
+                        datosSelect.append(datoCita)
+            elif selectT == 'esteAño':
+                print("2")
+                for datoCita in datosCita:
+                    fechaDeCita = datoCita.idHorario.fecha
+                    if int(fechaHoy[0:4]) == int(fechaDeCita.year):
+                        datosSelect.append(datoCita)
+            else:
+                datosSelect = citas.objects.filter(idTrabajador = idTrabajador)
+        datosCita = datosSelect
         data = {
             'datosB':datosB,
             "datosCita":datosCita,
@@ -158,6 +197,10 @@ def perfilCliente(request):
         return render(request, 'perfilCliente.html', data)
     else:
         return redirect(to="login")
+def sacarSemana (año, mes, dia):
+    dt = date(año, mes, dia) 
+    wk = dt.isocalendar()[1]
+    return wk
 
 def citasBarbero(request):
     global user_id 
@@ -259,7 +302,6 @@ def horarioBarber(request):
         id_usuario = Trabajadores.objects.get(email=usuarioActivo)
         inicioHora = request.POST.get('horaInicio')
         inicioHora = inicioHora.strip()
-        fechaHoy = datetime.today().strftime('%Y-%m-%d')
         horaHoy = time.strftime("%H:%M")
         desdeFecha =  request.POST.get('desdeFecha')
         hastaFecha = request.POST.get('hastaFecha')
@@ -464,9 +506,14 @@ def editarPerfilC(request):
     global user_id 
     user_id = request.user.id
     usuarioActivo = User.objects.get(id=user_id)
+    if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+        datas = Trabajadores.objects.get(email=usuarioActivo).rol
+    elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
+        datas = Clientes.objects.get(email=usuarioActivo).rol
     id = Clientes.objects.get(email=usuarioActivo).id
     perfil = get_object_or_404(Clientes, id=id)
     data = {
+        'rol':datas,
         'form': EditarClienteForm(instance=perfil),
     }
     if request.method=='POST':
@@ -485,9 +532,14 @@ def editarPerfilB(request):
     global user_id 
     user_id = request.user.id
     usuarioActivo = User.objects.get(id=user_id)
+    if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+        datas = Trabajadores.objects.get(email=usuarioActivo).rol
+    elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
+        datas = Clientes.objects.get(email=usuarioActivo).rol
     id = Trabajadores.objects.get(email=usuarioActivo).id
     perfil = get_object_or_404(Trabajadores, id=id)
     data = {
+        'rol':datas,
         'form': EditarBarberoForm(instance=perfil),
     }
     if request.method=='POST':
