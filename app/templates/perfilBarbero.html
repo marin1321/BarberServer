@@ -152,20 +152,37 @@
                                     <div class="ctr_select">
                                         <select class="select" name="TiempoSelect">
                                             <option value="todos">Todos</option>
-                                            <option value="esteAño">Este Año</option>
-                                            <option value="esteMes">Este Mes</option>
-                                            <option value="estaSemana">Esta Semana</option>
-                                            <option value="hoy">Hoy</option>
+                                            {% if selectH == 'esteAnio' %}
+                                                <option value="esteAnio" selected>Este Año</option>
+                                            {% else %}
+                                                <option value="esteAnio">Este Año</option>
+                                            {% endif %}
+                                            {% if selectH == 'esteMes' %}
+                                                <option value="esteMes" selected>Este Mes</option>
+                                            {% else %}
+                                                <option value="esteMes">Este Mes</option>
+                                            {% endif %}
+                                            {% if selectH == 'estaSemana' %}
+                                                <option value="estaSemana" selected>Esta Semana</option>
+                                            {% else %}
+                                                <option value="estaSemana">Esta Semana</option>
+                                            {% endif %}
+                                            {% if selectH == 'hoy'%}
+                                                <option value="hoy" selected>Hoy</option>
+                                            {% else %}
+                                                <option value="hoy">Hoy</option>
+                                            {% endif %}
                                         </select>
                                     </div>
                                 </li>
                                 <li class="seleccion">
                                     <h3>Busqueda por estado:</h3>
                                     <div class="ctr_select">
-                                        <select class="select">
-                                            <option value="hoy">Aceptadas</option>
-                                            <option value="ayer">Pendientes</option>
-                                            <option value="estaSemana">Cancaladas</option>
+                                        <select class="select" name="estados">
+                                            <option value="todos">Todos</option>
+                                            <option value="aceptados">Aceptadas</option>
+                                            <option value="pendientes">Pendientes</option>
+                                            <option value="canceladas">Canceladas</option>
                                         </select>
                                     </div>
                                 </li>

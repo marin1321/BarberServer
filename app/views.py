@@ -124,43 +124,46 @@ def perfilBarbero(request):
         idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
         datosCita = citas.objects.filter(idTrabajador = idTrabajador)
         selectT =  request.GET.get('TiempoSelect')
+        selectE = request.GET.get('estados')
         datosSelect = []
+        if selectE != None and selectE != 'todos':
+            if selectE == "aceptados":
+                datosCita = citas.objects.filter(idTrabajador = idTrabajador, peticion = 'aceptado')
+            elif selectE == "pendientes":
+                datosCita = citas.objects.filter(idTrabajador = idTrabajador, peticion = 'pendiente')
+            elif selectE == "cancelados":
+                datosCita = citas.objects.filter(idTrabajador = idTrabajador, peticion = 'cancelado')
         if selectT != None and selectT != 'todos':
             if selectT == 'estaSemana':
-                print(1)
                 semanaHoy =sacarSemana(int(fechaHoy[0:4]),int(fechaHoy[5:7]), int(fechaHoy[8:10]))
                 for datoCita in datosCita:
                     fechaDeCita = datoCita.idHorario.fecha 
                     if int(fechaHoy[0:4]) == int(fechaDeCita.year):
-                        print(fechaDeCita)
                         semanaCita = sacarSemana(int(fechaDeCita.year),int(fechaDeCita.month), int(fechaDeCita.day))
                         if semanaHoy == semanaCita:
                             datosSelect.append(datoCita)
             elif selectT == 'hoy':
-                print(2)
                 for datoCita in datosCita:
                     fechaDeCita = datoCita.idHorario.fecha 
                     if fechaHoy == fechaDeCita:
                         datosSelect.append(datoCita)
             elif selectT == 'esteMes':
-                print(3)
                 for datoCita in datosCita:
                     fechaDeCita = datoCita.idHorario.fecha 
                     if int(fechaHoy[0:4]) == int(fechaDeCita.year) and int(fechaHoy[5:7]) == int(fechaDeCita.month):
-                        print(20)
                         datosSelect.append(datoCita)
-            elif selectT == 'esteAño':
-                print("2")
+            elif selectT == 'esteAnio':
                 for datoCita in datosCita:
                     fechaDeCita = datoCita.idHorario.fecha
                     if int(fechaHoy[0:4]) == int(fechaDeCita.year):
                         datosSelect.append(datoCita)
             else:
                 datosSelect = citas.objects.filter(idTrabajador = idTrabajador)
-        datosCita = datosSelect
+            datosCita = datosSelect
         data = {
             'datosB':datosB,
             "datosCita":datosCita,
+            "selectH": selectT,
         }
         print("AQUI --> " +str(request.user))
         if request.method=='POST':
