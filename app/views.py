@@ -236,7 +236,7 @@ def registro(request):
                 nombres = request.POST.get('nombres')
                 apellidos = request.POST.get('apellidos')
                 telefono = request.POST.get('telefono')
-                foto=request.FILES.get('foto')
+                foto=request.POST.get('foto')
                 password = request.POST.get('password')
                 email = request.POST.get('email')
                 idCategoria = request.POST.get('idCategoria')
@@ -640,3 +640,4 @@ def eliminarHorario(request):
         usuario = get_object_or_404(horarios, id=id)
         usuario.delete()
         return redirect(to="inicio")
+    
