@@ -25,7 +25,7 @@
                         <div class="d-flex flex-column align-items-center text-center imagenPerfil">
                             <button class="subirImagen">
                                 {% if datosC.foto %}
-                                    <img src="{{ datosC.foto.url }}" alt="Admin" class="rounded-circle" width="150">
+                                    <img src="{{ datosC.foto }}" alt="Admin" class="rounded-circle" width="150">
                                     {% else %}
                                     <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                                 {% endif %}
@@ -118,30 +118,52 @@
                     </div> {% endcomment %}
                     {% endfor %}
                     <div class="col-lg-14 col-xl-14 cardP-box">
-                        <ul class="filtro">
-                            <li class="seleccion">
-                                <h3>Busqueda por fechas:</h3>
-                                <div class="ctr_select">
-                                    <select class="select">
-                                        <option value="hoy">Hoy</option>
-                                        <option value="ayer">Ayer</option>
-                                        <option value="estaSemana">Esta Semana</option>
-                                        <option value="estaSemana">Este Mes</option>
-                                    </select>
-                                </div>
-                            </li>
-                            <li class="seleccion">
-                                <h3>Busqueda por estado:</h3>
-                                <div class="ctr_select">
-                                    <select class="select">
-                                        <option value="hoy">Aceptadas</option>
-                                        <option value="ayer">Editadas</option>
-                                        <option value="estaSemana">Eliminadas</option>
-                                        <option value="estaSemana">En Espera</option>
-                                    </select>
-                                </div>
-                            </li>
-                        </ul>
+                        <form action="" method="get">
+                            <ul class="filtro">
+                                <li class="seleccion">
+                                    <h3>Busqueda por fechas:</h3>
+                                    <div class="ctr_select">
+                                        <select class="select">
+                                            <option value="todos">todos</option>
+                                            {% if selectH == 'esteAnio' %}
+                                                <option value="esteAnio" selected>Este Año</option>
+                                            {% else %}
+                                                <option value="esteAnio">Este Año</option>
+                                            {% endif %}
+                                            {% if selectH == 'esteMes' %}
+                                                <option value="esteMes" selected>Este Mes</option>
+                                            {% else %}
+                                                <option value="esteMes">Este Mes</option>
+                                            {% endif %}
+                                            {% if selectH == 'estaSemana' %}
+                                                <option value="estaSemana" selected>Esta Semana</option>
+                                            {% else %}
+                                                <option value="estaSemana">Esta Semana</option>
+                                            {% endif %}
+                                            {% if selectH == 'hoy'%}
+                                                <option value="hoy" selected>Hoy</option>
+                                            {% else %}
+                                                <option value="hoy">Hoy</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="seleccion">
+                                    <h3>Busqueda por estado:</h3>
+                                    <div class="ctr_select">
+                                        <select class="select">
+                                            <option value="hoy">Aceptadas</option>
+                                            <option value="ayer">Editadas</option>
+                                            <option value="estaSemana">Eliminadas</option>
+                                            <option value="estaSemana">En Espera</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="seleccin¿">
+                                    <button>Buscar</button>
+                                </li>
+                            </ul>
+                        </form>
                         <ul class="list-unstyled timeline-sm">
                             {% for citasId in citas %}
                                 {% if citasId.peticion == "aceptar" %} 

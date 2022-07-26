@@ -122,44 +122,9 @@ def perfilBarbero(request):
         usuarioActivo = User.objects.get(id=user_id)
         datosB = Trabajadores.objects.filter(email=usuarioActivo)
         idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
-        datosCita = citas.objects.filter(idTrabajador = idTrabajador)
         selectT =  request.GET.get('TiempoSelect')
         selectE = request.GET.get('estados')
-        datosSelect = []
-        if selectE != None and selectE != 'todos':
-            if selectE == "aceptados":
-                datosCita = citas.objects.filter(idTrabajador = idTrabajador, peticion = 'aceptado')
-            elif selectE == "pendientes":
-                datosCita = citas.objects.filter(idTrabajador = idTrabajador, peticion = 'pendiente')
-            elif selectE == "cancelados":
-                datosCita = citas.objects.filter(idTrabajador = idTrabajador, peticion = 'cancelado')
-        if selectT != None and selectT != 'todos':
-            if selectT == 'estaSemana':
-                semanaHoy =sacarSemana(int(fechaHoy[0:4]),int(fechaHoy[5:7]), int(fechaHoy[8:10]))
-                for datoCita in datosCita:
-                    fechaDeCita = datoCita.idHorario.fecha 
-                    if int(fechaHoy[0:4]) == int(fechaDeCita.year):
-                        semanaCita = sacarSemana(int(fechaDeCita.year),int(fechaDeCita.month), int(fechaDeCita.day))
-                        if semanaHoy == semanaCita:
-                            datosSelect.append(datoCita)
-            elif selectT == 'hoy':
-                for datoCita in datosCita:
-                    fechaDeCita = datoCita.idHorario.fecha 
-                    if fechaHoy == fechaDeCita:
-                        datosSelect.append(datoCita)
-            elif selectT == 'esteMes':
-                for datoCita in datosCita:
-                    fechaDeCita = datoCita.idHorario.fecha 
-                    if int(fechaHoy[0:4]) == int(fechaDeCita.year) and int(fechaHoy[5:7]) == int(fechaDeCita.month):
-                        datosSelect.append(datoCita)
-            elif selectT == 'esteAnio':
-                for datoCita in datosCita:
-                    fechaDeCita = datoCita.idHorario.fecha
-                    if int(fechaHoy[0:4]) == int(fechaDeCita.year):
-                        datosSelect.append(datoCita)
-            else:
-                datosSelect = citas.objects.filter(idTrabajador = idTrabajador)
-            datosCita = datosSelect
+        datosCita = getBarberosClientes(selectE, selectT, "trabajador", idTrabajador)
         data = {
             'datosB':datosB,
             "datosCita":datosCita,
@@ -192,14 +157,77 @@ def perfilCliente(request):
         usuarioActivo = User.objects.get(id=user_id)
         datosC = Clientes.objects.filter(email=usuarioActivo)
         idCliente = Clientes.objects.get(email=usuarioActivo)
-        citasId = citas.objects.filter(idCliente=idCliente)
+        selectT =  request.GET.get('TiempoSelect')
+        selectE = request.GET.get('estados')
+        citasId = getBarberosClientes(selectE, selectT, "trabajador", idCliente)
         data = {
             'citas':citasId,
             'datosC':datosC,
+            'selectH':citasId,
         }
         return render(request, 'perfilCliente.html', data)
     else:
         return redirect(to="login")
+
+def getBarberosClientes(selectE, selectT,rol, ids):
+    datosSelect = []
+    if selectE != None and selectE != 'todos':
+        if rol == "trabajador":
+            if selectE == "aceptados":
+                datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'aceptado')
+            elif selectE == "pendientes":
+                datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'pendiente')
+            elif selectE == "cancelados":
+                datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'cancelado')
+        elif rol == "cliente":
+            if selectE == "aceptados":
+                datosCita = citas.objects.filter(idCliente = ids, peticion = 'aceptado')
+            elif selectE == "pendientes":
+                datosCita = citas.objects.filter(idCliente = ids, peticion = 'pendiente')
+            elif selectE == "cancelados":
+                datosCita = citas.objects.filter(idCliente = ids, peticion = 'cancelado')
+    else:
+        if rol == "trabajador":
+            datosSelect = citas.objects.filter(idTrabajador = ids)
+        elif rol == "cliente":
+            datosSelect = citas.objects.filter(idCliente = ids)
+
+    if selectT != None and selectT != 'todos':
+        if selectT == 'estaSemana':
+            semanaHoy =sacarSemana(int(fechaHoy[0:4]),int(fechaHoy[5:7]), int(fechaHoy[8:10]))
+            for datoCita in datosCita:
+                fechaDeCita = datoCita.idHorario.fecha 
+                if int(fechaHoy[0:4]) == int(fechaDeCita.year):
+                    semanaCita = sacarSemana(int(fechaDeCita.year),int(fechaDeCita.month), int(fechaDeCita.day))
+                    if semanaHoy == semanaCita:
+                        datosSelect.append(datoCita)
+        elif selectT == 'hoy':
+            for datoCita in datosCita:
+                fechaDeCita = datoCita.idHorario.fecha 
+                if fechaHoy == fechaDeCita:
+                    datosSelect.append(datoCita)
+        elif selectT == 'esteMes':
+            for datoCita in datosCita:
+                fechaDeCita = datoCita.idHorario.fecha 
+                if int(fechaHoy[0:4]) == int(fechaDeCita.year) and int(fechaHoy[5:7]) == int(fechaDeCita.month):
+                    datosSelect.append(datoCita)
+        elif selectT == 'esteAnio':
+            for datoCita in datosCita:
+                fechaDeCita = datoCita.idHorario.fecha
+                if int(fechaHoy[0:4]) == int(fechaDeCita.year):
+                    datosSelect.append(datoCita)
+        else:
+            if rol == "trabajador":
+                datosSelect = citas.objects.filter(idTrabajador = ids)
+            elif rol == "cliente":
+                datosSelect = citas.objects.filter(idCliente = ids)
+    else:
+        if rol == "trabajador":
+            datosSelect = citas.objects.filter(idTrabajador = ids)
+        elif rol == "cliente":
+            datosSelect = citas.objects.filter(idCliente = ids)
+    return datosSelect
+
 def sacarSemana (año, mes, dia):
     dt = date(año, mes, dia) 
     wk = dt.isocalendar()[1]
