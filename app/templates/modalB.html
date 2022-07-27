@@ -1,4 +1,13 @@
-
+{% block llamdoJavaScript %}
+<script>
+  function calificacion(n){
+    result =  document.getElementById('result')
+    result.value = n
+    mostrar = document.getElementById('mostrarC')
+    mostrar.innerHTML = n
+  }
+</script>
+{% endblock %}
 <!-- Modal -->
 {% for dataT in dataT %}
     <div class="modal-dialog" role="document">
@@ -13,7 +22,7 @@
                       <section class="contenedor-modal">
                     <figure class="campoimg-modal">
                         {% if dataT.foto %}
-                          <img src={{dataT.foto.url}} alt="El barbero Gustavo" class="img-vtn"/>
+                          <img src={{dataT.foto}} alt="El barbero Gustavo" class="img-vtn"/>
                         {% endif %}
                         
                     </figure>
@@ -23,7 +32,47 @@
                             <h4 class="info-modal"><b>Especialización:</b> Barbero</h4>
                             <h4 class="info-modal"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
                             <h4 class="info-modal"><b>Estado:</b> Activo</h4>
-                            <h4 class="info-modal"><b>Descripción:</b> Activo Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, rerum fugiat! Temporibus officiis magni molestias repellat reprehenderit. Aperiam recusandae labore aspernatur distinctio consectetur aut placeat laudantium. Ex quod fugit eligendi.</h4>
+                            {% if rol == 'Cliente' %}
+                              <form action='' class="clasificacionF" method="post"> {% csrf_token %}
+                                  <p class="clasificacion">
+                                  <input id="radio1" type="radio" name="estrellas" value="5" onclick="calificacion(5)" {% if calificacion == 5%}checked{% endif %}></input>
+                                  <label for="radio1">★</label>
+                                  <input id="radio2" type="radio" name="estrellas" value="4" onclick="calificacion(4)" {% if calificacion == 4%}checked{% endif %} ></input>
+                                  <label for="radio2">★</label>
+                                  <input id="radio3" type="radio" name="estrellas" value="3" onclick="calificacion(3)" {% if calificacion == 3%}checked{% endif %}></input>
+                                  <label for="radio3">★</label>
+                                  <input id="radio4" type="radio" name="estrellas" value="2" onclick="calificacion(2)" {% if calificacion == 2%}checked{% endif %}></input>
+                                  <label for="radio4">★</label>
+                                  <input id="radio5" type="radio" name="estrellas" value="1" onclick="calificacion(1)" {% if calificacion == 1%}checked{% endif %}></input>
+                                  <label for="radio5">★</label>
+                                  </p>
+                                  <h6 class="mb-0" id="mostrarC">{{calificacion}}</h6>
+                                  <input type="hidden" name="result" id="result" value="{{calificacion}}">
+                                  <input type="hidden" name="idTrabajadores" id="idTrbajadores" value="{{dataT.id}}">
+                                  <button type="submit">calificar</button>
+                              </form>
+                          {% else %}
+                            {% if calificacion > 0 %}
+                              <div class="star-rating">
+                                {% for estrellitas in estrellitas %}
+                                  {% if calificacion >= estrellitas %}
+                                    <a style="color:orange">★</a>
+                                  {% else %}
+                                    <a>★</a>
+                                  {% endif %}
+
+                                {% endfor %}
+                              </div>
+                            {% else %}
+                              <div class="star-rating">
+                                <a>★</a>
+                                <a>★</a>
+                                <a>★</a>
+                                <a>★</a>
+                                <a>★</a>
+                              </div>
+                            {% endif %}
+                        {% endif %}
                         </section>
                         <section class="local">
                             <h4 class="info-modal" id="direccion"><b>Dirección:</b> B/Limonar 3era etapa manzana 6 casa #3</h4>

@@ -81,6 +81,19 @@ def barber(request):
     categorias = Categoria.objects.all()
     searchs = request.GET.get('search')
     select = request.GET.get('opciones')
+        # listIdT = []
+        # promedioC = []
+        # for idBarberos in barber:
+        #     listIdT.append(idBarberos.id)
+        #     numeroCalificaciones = []
+        #     for idCalificacion in calificaciones:
+        #         if idBarberos.id == idCalificacion.idTrabajador:
+        #             numeroCalificaciones.append(idCalificacion.numeroCalificacion) 
+        #     sumcalificacion = sum(numeroCalificaciones)
+        #     promedios = sumcalificacion / len(numeroCalificaciones)
+        #     promedioC.append(promedios)
+        # dictCalificacion = dict(zip(listIdT, promedioC))
+                    
     if request.user.is_authenticated:
         global user_id
         user_id = request.user.id
@@ -88,7 +101,8 @@ def barber(request):
         if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
             datas = Trabajadores.objects.get(email=usuarioActivo).rol
         elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
-            datas = Clientes.objects.get(email=usuarioActivo).rol
+            idUsr = Clientes.objects.get(email=usuarioActivo)
+            datas = idUsr.rol
     nombreSelect=None
     if searchs:
         if select != None and select != 'Todos':
@@ -98,12 +112,22 @@ def barber(request):
         else:
             nombreSelect=None
             barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs)).distinct()
-    print(nombreSelect)
+    if request.method == "POST":
+        idsTrabajador = request.POST.get('idTrabajadores')
+        result  = request.POST.get('result')
+        if int(result) > 5:
+            print("Error Hoho")
+        else: 
+            calificacionDatos = calificacion()
+            calificacionDatos.idCliente = idUsr
+            calificacionDatos.idTrabajador = Trabajadores.objects.get(id = idsTrabajador)
+            calificacionDatos.numeroCalificacion = int(result)
+            calificacionDatos.save()
     data = {
         "barber":barber,
         "categoria":categorias,
         "rol":datas,
-        "select": nombreSelect
+        "select": nombreSelect,
     }  
     return render(request, 'barberos.html', data)
 
@@ -159,7 +183,7 @@ def perfilCliente(request):
         idCliente = Clientes.objects.get(email=usuarioActivo)
         selectT =  request.GET.get('TiempoSelect')
         selectE = request.GET.get('estados')
-        citasId = getBarberosClientes(selectE, selectT, "trabajador", idCliente)
+        citasId = getBarberosClientes(selectE, selectT, "cliente", idCliente)
         data = {
             'citas':citasId,
             'datosC':datosC,
@@ -255,7 +279,7 @@ def registro(request):
     }
     if request.method=='POST':
         print("hola")
-        formulario = RegistrationForm(data=request.POST, files=request.FILES)
+        formulario = RegistrationForm(data=request.POST)
         email = request.POST.get('email')
         if User.objects.filter(username=email).exists():
             return redirect(to="login")
@@ -548,9 +572,9 @@ def editarPerfilC(request):
         'form': EditarClienteForm(instance=perfil),
     }
     if request.method=='POST':
-        formulario = EditarClienteForm(data=request.POST, instance=perfil, files=request.FILES)
+        formulario = EditarClienteForm(data=request.POST, instance=perfil)
         if formulario.is_valid():
-            foto=request.FILES.get('foto')
+            foto=request.POST.get('foto')
             idCliente = Clientes.objects.get(email=usuarioActivo)
             idCliente.foto = foto
             formulario.save()
@@ -575,9 +599,9 @@ def editarPerfilB(request):
     }
     if request.method=='POST':
         estado =  request.POST.get("estado")
-        formulario = EditarBarberoForm(data=request.POST, instance=perfil, files=request.FILES)
+        formulario = EditarBarberoForm(data=request.POST, instance=perfil)
         if formulario.is_valid():
-            foto=request.FILES.get('foto')
+            foto=request.POST.get('foto')
             idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
             idTrabajador.foto = foto
             formulario.save()
@@ -596,8 +620,32 @@ def editarPerfilB(request):
 
 def modal_barber(request, id):
     barbero = Trabajadores.objects.filter( id = id )
+    calificaciones = calificacion.objects.all()
+    numeroCalificacion = 0
+    promedioC = []
+    if request.user.is_authenticated:
+        global user_id
+        user_id = request.user.id
+        usuarioActivo = User.objects.get(id=user_id)
+        if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+            idUsr = Trabajadores.objects.get(email=usuarioActivo)
+            datas = idUsr.rol
+        elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
+            idUsr = Clientes.objects.get(email=usuarioActivo)
+            datas = idUsr.rol
+    if len(calificaciones) >= 1:
+        idsTrabajador =  Trabajadores.objects.get( id = id ) 
+        for idCalificacion in calificaciones:
+            if idsTrabajador == idCalificacion.idTrabajador:
+                promedioC.append(idCalificacion.numeroCalificacion) 
+        sumcalificacion = sum(promedioC)
+        numeroCalificacion = sumcalificacion / len(promedioC)
+        print(numeroCalificacion)
     data = {
-        "dataT":barbero
+        "dataT":barbero,
+        "calificacion": numeroCalificacion,
+        "rol":datas,
+        "estrellitas":[1,2,3,4,5]
     } 
     return render(request, 'modalB.html', data)
 def modal_EdiH(request, id):

@@ -6,7 +6,22 @@
 <link rel="stylesheet" href="{% static 'css/contactof.css' %}">
 <link rel="stylesheet" href="{% static 'css/editar.css' %}">
 {% endblock stilos %}
-
+{% block llamdoJavaScript %}
+    <script>
+        const inputFoto = document.getElementById('foto')
+        var myCropWidget = cloudinary.createUploadWidget({
+            cloudName: 'barberserver', uploadPreset: 'BarberServer'}, 
+            (error, result) => {
+                if (!error && result.event === 'success'){
+                    console.log('Imagen subida con éxito', result.info)
+                    inputFoto.value = result.info.secure_url; 
+                }
+            })
+        function openWindow () {
+            myCropWidget.open();
+        }
+    </script>
+{% endblock llamdoJavaScript %}
 {% block appContenido %}
 <main class="vtn_main">
     <div class="sliderlore">
@@ -27,7 +42,8 @@
                         {{ form.telefono }}
                     </div>
                     <div class="InputFoto">
-                        <input class="form-control" type="file" name="foto" accept="image/*"  id="id_foto"> 
+                        <input class="form-control" type="button" onclick="openWindow()">
+                        <input class="form-control" type="hidden" name="foto" id="foto" onclick="openWindow()">
                     </div>
                     <button class='buttonform' type="submit">Editar</button>
                 </form>

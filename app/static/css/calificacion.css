@@ -35,3 +35,24 @@
 .clasificacion input[type="radio"]:checked ~ label {
   color: orange;
 }
+.start-rating{
+  display: inline-block;
+}
+.start-rating a {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  transition: color .3s;
+}
+.start-rating :hover a {
+  color: #959595;
+}
+
+.start-rating :hover ~ a {
+  color: #959595;
+}
