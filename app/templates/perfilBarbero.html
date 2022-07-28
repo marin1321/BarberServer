@@ -160,7 +160,7 @@
                             <li class="seleccion">
                                 <h3>Busqueda por estado:</h3>
                                 <div class="ctr_select">
-                                    <select class="select">
+                                    <select class="select" id="estado">
                                         <option value="hoy">Aceptadas</option>
                                         <option value="ayer">Editadas</option>
                                         <option value="estaSemana">Eliminadas</option>
@@ -178,8 +178,8 @@
                                     desirable: one could refuse to pay expensive translators. To achieve this, it would
                                     be necessary to have uniform grammar, pronunciation and more common words.</p>
                                 <div class="verCita">
-                                    <a id="aceptar" href="{% url 'citasBarbero' %}">Aceptar</a>
-                                    <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
+                                    <button id="aceptar" href="{% url 'citasBarbero' %}">Aceptar</button>
+                                    <button class="" href="{% url 'citasBarbero' %}">Rechazar</button>
                                 </div>
                             </li>
                             {% endfor %}
