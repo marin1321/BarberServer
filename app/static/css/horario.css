@@ -37,9 +37,9 @@
   color: wheat; 
 }
 
-#fecha{ width: 26%; }
+#fecha{ width: 100%; }
 
-#horaInicio{ width: 20%; }
+#horaInicio{ width: 100%; }
 
 .icon-btn {
   width: 50px;

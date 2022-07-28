@@ -44,11 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
     'colorfield',
-    'tailwind',
+    # 'tailwind',
     # 'theme',
-    'django_browser_reload',
+    # 'django_browser_reload',
     "bootstrap5",
-    "django_cron",
+    'django_crontab',
 ]
 
 INTERNAL_IPS = [
@@ -61,10 +61,10 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
-CRON_CLASSES = [
-    'BarberServer.cron.MyCronJob',
-    # ...
+CRONJOBS  = [ 
+    ( ' */1 * * * * ' , ' BarberServer.cron.MyCronJob') 
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

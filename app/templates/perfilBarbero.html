@@ -7,14 +7,8 @@
 {% endblock stilos %}
 {% block appContenido %}
 <main class="containerNegro">
-    <!-- <h1>Perfil Barbero</h1>
-    {% for datosB in datosB %}
-    <p>{{ datosB.nombres }}</p>
-    {% endfor %}
-    <a href="{% url 'inactivarCuenta' %}">Inactivar cuenta</a>
-    <a href="{% url 'editarPerfilB' %}">Editar cuenta</a> -->
     <div class="container">
-        {% block citas %}
+        {% comment %} {% block citas %}
             <li>
                 <a href="{% url 'citasbarber' %}">CITAS</a>
             </li>
@@ -28,7 +22,7 @@
             <li>
                 <a href="{% url 'editarPerfilB' %}"> EDITAR PERFIL </a>
             </li>
-        {%endblock%}
+        {%endblock%} {% endcomment %}
 
         {% for datosB in datosB %}
         <div class="main-body">
@@ -162,28 +156,68 @@
                                 <div class="ctr_select">
                                     <select class="select" id="estado">
                                         <option value="hoy">Aceptadas</option>
-                                        <option value="ayer">Editadas</option>
-                                        <option value="estaSemana">Eliminadas</option>
-                                        <option value="estaSemana">En Espera</option>
+                                        <option value="ayer">Pendientes</option>
+                                        <option value="estaSemana">Cancaladas</option>
                                     </select>
                                 </div>
                             </li>
                         </ul>
-                        <ul class="list-unstyled timeline-sm">
-                            {% for citasId in citas %}
-                            <li class="timeline-sm-item"><span class="timeline-sm-date">2015 - 19</span>
-                                <h5 class="mt-0">Tienes una nueva Cita de {{ citasId.idCliente.nombres }}</h5>
-                                <p>websitename.com</p>
-                                <p class="text-white-50 mt-2">Everyone realizes why a new common language would be
-                                    desirable: one could refuse to pay expensive translators. To achieve this, it would
-                                    be necessary to have uniform grammar, pronunciation and more common words.</p>
-                                <div class="verCita">
-                                    <button id="aceptar" href="{% url 'citasBarbero' %}">Aceptar</button>
-                                    <button class="" href="{% url 'citasBarbero' %}">Rechazar</button>
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                        <section class="citas">
+                            <ul class="list-unstyled timeline-sm">
+                                {% for datosCita in datosCita %}
+                                <li class="timeline-sm-item">
+                                    <section class="lineaFecha">
+                                        <span class="timeline-sm-date">{{datosCita.idHorario.fecha}} - 06 - 20 </span>
+                                    </section>
+                                    <section class="ctr_info">
+                                        <article class="informacion">
+                                            <h5 class="mt-0">Tienes una nueva Cita de {{ datosCita.idCliente.nombres }}</h5>
+                                            <p class="text-white-50 mt-2">Hora de inicio de corte: {{datosCita.idHorario.horaInicio}}</p>
+                                            <p class="text-white-50 mt-2">Hora de finalización de corte: {{datosCita.idHorario.horaFinalizacion}}</p>
+                                        </article>
+                                        <article class="verCita">
+                                            <button id="aceptar" type="submit">Aceptar</button>
+                                            <button id="btnChat{{datosCita.id}}" name="btnCita{{datosCita.id}}" onClick="Chat(this.id)">Chat</button>
+                                            <button id="btnEditar{{datosCita.id}}" name="btnEditar{{datosCita.id}}" onClick="Editar(this.id)">Editar</button>
+                                            <button class="" type="submit">Rechazar</button>
+                                        </article>
+                                    </section>
+                                    {% comment %} <div class="verCita">
+                                        <form action="" method="post">{% csrf_token %}
+                                            {% if datosCita == "activo" %}
+                                                <a id="aceptar" type="submit">Aceptar</a>
+                                                <a class="" href="{% url 'citasBarbero' %}">Rechazar</a>
+                                            {% endif %}
+                                        </form>
+                                    </div> {% endcomment %}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            <ul class="acciones">
+                                <section class="info_adicional">
+                                    <h2>Tienes X citas pendientes</h2>
+                                    <h2>Tienes X citas en espera</h2>
+                                </section>
+                                <section class="chat">
+                                    <article class="msj_campo">
+                                        <h3 id="otro">Usted es chimbo al hombro?</h3>
+                                        <h3 id="yo">Si senor, el mismo</h3>
+                                        <h3 id="yo">Vea sabe que? DIEGO ES GAY y PUTO EL QUE LO LEA JAJAJAJAJ</h3>
+                                    </article>
+                                    <article class="msj_enviar">
+                                        <input type="text" name="mensaje" placeholder="Escribe tu mensaje" autofocus size="5">
+                                        <button>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                                        </svg>
+                                        </button>
+                                    </article>
+                                </section>
+                                <section class="campoEditar">
+                                    <h4>FORMULARIO</h4>
+                                </section>
+                            </ul>
+                        </section>
                     </div>
                 </div>
             </div>
@@ -191,4 +225,9 @@
         {% endfor %}
     </div>
 </main>
+
+{% block llamdoJavaScript %}
+    <script src="{% static 'js/opcionesCitas.js'%}"></script>
+{% endblock llamdoJavaScript %}
+
 {% endblock %}

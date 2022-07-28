@@ -52,15 +52,13 @@
                         <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/>
                     </a>
                     <ul class="children">
-                            {%block citas%}
-                            {%endblock%}
-                            {%block horarios%}
-                            {%endblock%}
-                            {%block editarPerfil%}
-                            {%endblock%}
-                            <li>
-                                <a href="{% url 'logout' %}">SALIR</a>
-                            </li>
+                        {% if dataT or rol == "Barbero" or datosB%}
+                            <li><a href="{% url 'horarios' %}"> HORARIOS </a></li>
+                            <li><a href="{% url 'editarPerfilB' %}"> EDITAR PERFIL </a></li>
+                        {% endif %}
+                        <li>
+                            <a href="{% url 'logout' %}">SALIR</a>
+                        </li>
                     </ul>
                 </li> 
             </div>

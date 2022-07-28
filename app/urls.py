@@ -7,6 +7,7 @@ urlpatterns=[
     path('perfil/', perfil , name='perfil'),
     path('barberos/', barber, name='barberos'),
     path('modal_barberos/<id>/', modal_barber, name='modal_barberos'),
+    path('modal_edith/<id>', modal_EdiH, name='modal_edith'),
     path('perfil_barbero/', perfilBarbero, name='perfilB'),
     path('perfil_cliente/', perfilCliente, name='perfilC'),
     path('citas_barbero/', citasBarbero, name='citasBarbero'),

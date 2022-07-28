@@ -156,11 +156,11 @@
                                                 <p> Peluquero: {{ citasId.idTrabajador.nombres }} {{ citasId.idTrabajador.apellidos }}</p>
                                                 <p class="text-white-50 mt-2">Hora de inicio de corte: {{citasId.idHorario.horaInicio}}</p>
                                                 <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
-                                                <p class="text-white-50 mt-2">Direccion</p>
+                                                <p class="text-white-50 mt-2">Direccion: {{citasId.idTrabajador.direccion}}</p>
                                             </article>
                                             <article class="verCita">
                                                 <button id="btnChat{{citasId.id}}" name="btnCita{{citasId.id}}" onClick="Chat(this.id)">Chat</button>
-                                                <button id="btnEditar{{citasId.id}}" id="btnEditar{{citasId.id}}" onClick="Editar(this.id)">Editar</button>
+                                                <button id="btnEditar{{citasId.id}}" name="btnEditar{{citasId.id}}" onClick="Editar(this.id)">Editar</button>
                                                 <button id="cancelar">Cancelar</button>
                                             </article>
                                         </section>

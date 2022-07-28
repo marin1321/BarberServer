@@ -2,7 +2,6 @@ import email
 import imp
 from multiprocessing import AuthenticationError
 from django.contrib import messages
-from arrow import now
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
@@ -43,37 +42,63 @@ def inicio(request):
         if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
             datas = Trabajadores.objects.filter(email=usuarioActivo)
             data = {
-                "datas": datas 
+                "dataT": datas 
             }
         else:
             if Clientes.objects.filter(email=usuarioActivo).exists()==True:
                 datas = Clientes.objects.filter(email=usuarioActivo)
                 data = {
-                    "datas": datas 
+                    "dataC": datas 
                 }
         return render(request, 'inicio.html', data)
     else:
         return render(request, 'inicio.html')
 
 def sobreNosotros(request):
-    return render(request, 'sobreNosotros.html')
+    if request.user.is_authenticated:
+        global user_id
+        user_id = request.user.id
+        usuarioActivo = User.objects.get(id=user_id)
+        if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+            datas = Trabajadores.objects.filter(email=usuarioActivo)
+            data = {
+                "dataT": datas 
+            }
+        else:
+            if Clientes.objects.filter(email=usuarioActivo).exists()==True:
+                datas = Clientes.objects.filter(email=usuarioActivo)
+                data = {
+                    "dataC": datas 
+                }
+        return render(request, 'sobreNosotros.html', data)
+    else:
+        return render(request, 'sobreNosotros.html')
 
 def barber(request):
-    barber = Trabajadores.objects.all()
+    barber = Trabajadores.objects.filter(state = "activo")
     categorias = Categoria.objects.all()
     searchs = request.GET.get('search')
     select = request.GET.get('opciones')
+    if request.user.is_authenticated:
+        global user_id
+        user_id = request.user.id
+        usuarioActivo = User.objects.get(id=user_id)
+        if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+            datas = Trabajadores.objects.get(email=usuarioActivo).rol
+        elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
+            datas = Clientes.objects.get(email=usuarioActivo).rol
+
     if searchs:
-        if select:
-            print('hola')
+        if select != None and select != 'Todos':
+            select = Categoria.objects.get(nombre_cat = 'corte').id
+            barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs),idCategoria = select).distinct()
         else:
             barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs)).distinct()
-        
     data = {
         "barber":barber,
         "categoria":categorias,
+        "rol":datas
     }  
-     
     return render(request, 'barberos.html', data)
 
 def perfil(request):
@@ -90,8 +115,11 @@ def perfilBarbero(request):
         global user_id 
         usuarioActivo = User.objects.get(id=user_id)
         datosB = Trabajadores.objects.filter(email=usuarioActivo)
+        idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
+        datosCita = citas.objects.filter(idTrabajador = idTrabajador)
         data = {
             'datosB':datosB,
+            "datosCita":datosCita,
         }
         print("AQUI --> " +str(request.user))
         if request.method=='POST':
@@ -101,9 +129,14 @@ def perfilBarbero(request):
             if estado == "activo":
                 trabajador.state = "activo"
                 trabajador.save()
-            else:
+            elif estado == "inactivo":
                 trabajador.state = "inactivo"
                 trabajador.save()
+            else:
+                idCita = request.POST.get('idCita')
+                idCita =  citas.objects.get(id=idCita)
+                idCita.peticion = "inactivo"
+                idCita.save()
         return render(request, 'perfilBarbero.html', data)
     else:
         return redirect(to="login")
@@ -215,39 +248,153 @@ def registro(request):
 
 def horarioBarber(request):
     data = {
-        "form" : HorariosBarbero
+        "form" : HorariosBarbero    
     }
     if request.method=='POST':
         global user_id 
         user_id = request.user.id
         usuarioActivo = User.objects.get(id=user_id)
         id_usuario = Trabajadores.objects.get(email=usuarioActivo)
-        print(id_usuario)
         inicioHora = request.POST.get('horaInicio')
-        fecha = request.POST.get('fecha')
-        fecha =  fecha.strip()
         inicioHora = inicioHora.strip()
-        hora2 = inicioHora[3:5]
-        hora2 = int(hora2) + 30
-        if hora2 >= 60:
-            hora2 = int(hora2) - 60
-            hora1 = inicioHora[0:2]
-            hora1 = int(hora1) + 2
-        else: 
-            hora1 = inicioHora[0:2]
-            hora1 = int(hora1) + 1
-        finalizarHora = str(hora1) + ":" + str(hora2)
-        activo = "activo"
-        horario = horarios()
-        horario.idTrabajador = id_usuario
-        horario.horaInicio = inicioHora
-        horario.fecha = fecha
-        horario.horaFinalizacion = finalizarHora
-        horario.estado = activo
-        horario.save()
-
+        fechaHoy = datetime.today().strftime('%Y-%m-%d')
+        horaHoy = time.strftime("%H:%M")
+        desdeFecha =  request.POST.get('desdeFecha')
+        hastaFecha = request.POST.get('hastaFecha')
+        inputInfo = request.POST.get('inputInfo')
+        print(inputInfo)
+        if inputInfo == '1':
+            if inicioHora:
+                hora2 = inicioHora[3:5]
+                hora1 = inicioHora[0:2]
+                hora2 = int(hora2) + 30
+                fecha = request.POST.get('fecha')
+                fecha =  fecha.strip()
+                if int(fecha[0:4]) >= int(fechaHoy[0:4]):
+                    restaAñosUnDia = int(fecha[0:4]) - int(fechaHoy[0:4])
+                    if restaAñosUnDia == 1:
+                        restaMeses = int(fecha[5:7]) - int(fechaHoy[5:7])
+                        if restaMeses == 1:
+                            if int(hora1) < 22:
+                                tiempo(hora1,hora2,id_usuario,inicioHora,fecha)                             
+                        elif int(fechaHoy[5:7]) == int(fecha[5:7]):
+                            if  int(fecha[8:10]) >= int(fechaHoy[8:10]):
+                                if int(horaHoy[0:2]) > int(hora1):
+                                    then =  datetime(int(fechaHoy[0:4]), int(fechaHoy[5:7]), int(fechaHoy[8:10]), int(horaHoy[0:2]), int(horaHoy[3:5], 0))
+                                    now =  datetime(int(fecha[0:4]), int(fecha[5:7]), int(fecha[8:10]), int(inicioHora[0:2]), int(inicioHora[3:5], 0))
+                                    tiempoMinutos = obtenerDiferencias(then,now, 'mins')
+                                    if tiempoMinutos >= 90:
+                                        if int(hora1) < 22:
+                                            tiempo(hora1,hora2,id_usuario,inicioHora,fecha)
+                                        else:
+                                            print("La hora pasa de los limites de tiempo")
+                                    else:
+                                        print("La hora que colocaste no cumple con el reglamiento ")
+                                else:
+                                    print("No puede ser antes de la hora de hoy")
+                            else:
+                                print("No colocar los dias antes")
+                        else:
+                            print("Esta fecha no es permitida")
+                else:
+                    print("Mala la fecha")
+            else:
+                print("Llene los espacios")
+        elif inputInfo == '0':
+            if int(desdeFecha[0:4]) >= int(fechaHoy[0:4]):
+                restaAños = int(hastaFecha[0:4]) - int(fechaHoy[0:4])
+                if restaAños == 1:
+                    if int(desdeFecha[5:7]) < 12 and int(hastaFecha[5:7]) > 1:
+                        print("no puede escocger esta fecha")
+                    else:
+                        diasFaltantes = 31 - int(desdeFecha[8:10])
+                        diasRestantes = diasFaltantes + int(hastaFecha[8:10])
+                        forTiempo(diasRestantes,diasFaltantes,desdeFecha,hastaFecha, hora1, hora2, id_usuario, inicioHora)
+                elif int(hastaFecha[0:4]) == int(fechaHoy[0:4]):
+                    restaMeses = int(hastaFecha[5:7]) - int(desdeFecha[5:7]) 
+                    if restaMeses == 1:
+                        diasDesde = obtener_dias_del_mes(int(desdeFecha[5:7]), int(desdeFecha[0:4]))
+                        diasFaltantes = diasDesde - int(desdeFecha[8:10])
+                        diasRestantes = diasFaltantes + int(hastaFecha[8:10])
+                        forTiempo(diasRestantes,diasFaltantes,desdeFecha,hastaFecha, hora1, hora2, id_usuario, inicioHora)
+                    elif int(hastaFecha[5:7]) == int(desdeFecha[5:7]):
+                        if int(desdeFecha[8:10]) >= int(fechaHoy[8:10]):
+                            restaDias =  int(hastaFecha[8:10]) - int(desdeFecha[8:10])
+                            forTiempo(restaDias,0,desdeFecha,hastaFecha, hora1, hora2, id_usuario, inicioHora)
+                        else:
+                            print("No es permitida")
+                    else:
+                        print("Esta fecha no es permitida")
+            else:
+                print("revise su fecha")
     return render(request, "horarioBarber.html", data)
+def obtenerDiferencias(then, now = datetime.now()):
 
+    duration = now - then
+    duration_in_s = duration.total_seconds() 
+    
+
+    minute_ct = 60 
+
+    def mins():
+        return divmod(duration_in_s, minute_ct)[0]
+
+    return  int(mins())
+
+
+def forTiempo (diasRestantes, diasFaltantes, desdeFecha, hastaFecha, hora1, hora2, id_usuario, inicioHora):
+    listaDias = [int(desdeFecha[8:10]), int(hastaFecha[8:10])]
+    tiempo(hora1,hora2,id_usuario,inicioHora,desdeFecha)
+    print("dias-->", diasRestantes)
+    for dias in range(diasRestantes):
+        print(5)
+        # tiempo(hora1,hora2,id_usuario,inicioHora,desdeFecha )
+        if diasFaltantes != 0:
+            print(8)
+            if diasFaltantes >= dias:
+                listaDias[1] = listaDias[1] - 1 
+                fecha = hastaFecha[0:4] + "-" + hastaFecha[5:7] + "-"+ str(listaDias[1])
+                tiempo(hora1,hora2,id_usuario,inicioHora,fecha)
+            else:
+                listaDias[0] = listaDias[0] + 1 
+                fecha = desdeFecha[0:4] + "-" + desdeFecha[5:7] + "-"+ str(listaDias[0])
+                tiempo(hora1,hora2,id_usuario,inicioHora,fecha)
+        else:
+            print(3)
+            listaDias[0] = listaDias[0] + 1 
+            fecha = desdeFecha[0:4] + "-" + desdeFecha[5:7] + "-"+ str(listaDias[0])
+            tiempo(hora1,hora2,id_usuario,inicioHora,fecha)
+def tiempo (hora1,hora2,id_usuario,inicioHora,fecha):
+    print(1)
+    if hora2 >= 60:
+            hora2 = int(hora2) - 60 
+            hora1 = int(hora1) + 2
+    else: 
+        hora1 = int(hora1) + 1
+    finalizarHora = str(hora1) + ":" + str(hora2)
+    activo = "activo"
+    horario = horarios()
+    horario.idTrabajador = id_usuario
+    horario.horaInicio = inicioHora
+    horario.fecha = fecha
+    horario.horaFinalizacion = finalizarHora
+    horario.estado = activo
+    horario.save()
+def es_bisiesto(anio: int) -> bool:
+    return anio % 4 == 0 and (anio % 100 != 0 or anio % 400 == 0)
+def obtener_dias_del_mes(mes: int, anio: int) -> int:
+    # Abril, junio, septiembre y noviembre tienen 30
+    if mes in [4, 6, 9, 11]:
+        return 30
+    # Febrero depende de si es o no bisiesto
+    if mes == 2:
+        if es_bisiesto(anio):
+            return 29
+        else:
+            return 28
+    else:
+        # En caso contrario, tiene 31 días
+        return 31
 def cita(request, id):
     # data = {
     #     "form" : Citas 
@@ -281,7 +428,7 @@ def cita(request, id):
         cita.fechaRegistroCita = fechaRegistroCita
         cita.idHorario = idHorario
         cita.idTrabajador = barbero
-        cita.peticion = "activo"
+        cita.peticion = "pendiente"
         cita.save()
         idHorario.estado = "inactivo"
         idHorario.save()
@@ -335,7 +482,6 @@ def editarPerfilC(request):
 def editarPerfilB(request):
     global user_id 
     user_id = request.user.id
-    print("Hola")
     usuarioActivo = User.objects.get(id=user_id)
     id = Trabajadores.objects.get(email=usuarioActivo).id
     perfil = get_object_or_404(Trabajadores, id=id)
@@ -369,7 +515,18 @@ def modal_barber(request, id):
         "dataT":barbero
     } 
     return render(request, 'modalB.html', data)
-
+def modal_EdiH(request, id):
+    horario = horarios.objects.filter( id = id )
+    idHorario = get_object_or_404(horarios, id=id)
+    data = {
+        "dataH":  horario,
+        "form": EditarHorarios(instance=idHorario),
+    } 
+    if request.method == 'POST':
+        formulario = EditarHorarios(data=request.POST, instance=horario)
+        if formulario.is_valid():
+            formulario.save()
+    return render(request, 'modalH.html', data)
 def contacto(request):
     if request.method=='POST':
         firstName = request.POST.get('FirstName')
@@ -383,8 +540,25 @@ def contacto(request):
         message = 'Numero de telefono ' + phone + ' correo electronico ' + str(Email) + ' Mensaje: ' + message
         email_from =  settings.EMAIL_HOST_USER
         recipient_list = ["barberserver123company@gmail.com"]
-        send_mail(subject, message, email_from, recipient_list) 
-    return render(request, 'contacto.html')
+        send_mail(subject, message, email_from, recipient_list)
+    if request.user.is_authenticated:
+        global user_id
+        user_id = request.user.id
+        usuarioActivo = User.objects.get(id=user_id)
+        if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+            datas = Trabajadores.objects.filter(email=usuarioActivo)
+            data = {
+                "dataT": datas 
+            }
+        else:
+            if Clientes.objects.filter(email=usuarioActivo).exists()==True:
+                datas = Clientes.objects.filter(email=usuarioActivo)
+                data = {
+                    "dataC": datas 
+                }
+        return render(request, 'contacto.html', data)
+    else:
+        return render(request, 'contacto.html') 
 
 def verHorarios(request):
     global user_id 
@@ -393,11 +567,16 @@ def verHorarios(request):
     id_usuario = Trabajadores.objects.get(email=usuarioActivo)
     datosH = horarios.objects.filter(idTrabajador=id_usuario)
     datosB = Trabajadores.objects.filter(email=usuarioActivo)
-    print('dattosB', datosB)
+    
     data = {
         'datosH':datosH,
         'datosB':datosB,
     }
+    if request.method == 'POST':
+        horarioId = request.POST.get('horarioId')
+        horarioId = horarios.objects.get(id = horarioId)
+        horarioId.estado = 'inactivo'
+        horarioId.save()
     return render(request, 'verHorarios.html', data)
 def eliminarHorario(request):
     if request.method=='POST':
