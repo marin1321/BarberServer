@@ -74,7 +74,7 @@
     justify-content: flex-end;
 }
 
-.timeline-sm-item .verCita a{
+.timeline-sm-item .verCita button{
     background-color: #050505;
     border-radius: 10px;
     height: 3rem;
@@ -88,4 +88,4 @@
     margin-left: 10px;
 }
 
-.timeline-sm-item .verCita a:hover{ box-shadow: 0 0 10px 2px #0d6efd inset; }
+.timeline-sm-item .verCita button:hover{ box-shadow: 0 0 10px 2px #0d6efd inset; }
