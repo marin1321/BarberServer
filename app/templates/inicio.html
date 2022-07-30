@@ -30,8 +30,12 @@
                     <h1 class="tit">¿Qué esperas?</h1>
                     <p class="parrafo">¡Agenda tu cita!<br>Mira los perfiles de los barberos para que no pierdas más
                         tiempo y agendes tu cita de manera inmediata y sin complicaciones.<br></p>
-                    <div class="cont-btn"><a class="" href="{% url 'barberos' %}"><button class="buttonform">Ver
-                                Barberos</button></a></div>
+                    {% if user.is_authenticated %}
+                        <div class="cont-btn"><a class="" href="{% url 'barberos' %}"><button class="buttonform">Ver Barberos</button></a></div>            
+                    {% else %}
+                        <div class="cont-btn"><a class="" href="{% url 'inicio' %}"><button class="buttonform">Ver Barberos</button></a></div>
+                    {% endif %}
+
                 </div>
             </div>
         </section>

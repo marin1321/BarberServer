@@ -1,10 +1,22 @@
 {% extends 'base.html' %} {% load static %} {% block stilos %}
 <link rel="stylesheet" href="{% static 'css/horario.css'%}" />
-{% endblock stilos %} {% block appContenido %}
-<main class="vtn_main">
+<link rel="stylesheet" href="{% static 'css/modal.css'%}">
+{% endblock stilos %} 
+{% block llamdoJavaScript %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict()
+  function Horario(url){
+      $('#exampleModal').load(url, function(){
+          $(this).modal('show');
+      })
+  }
+</script>
+{% endblock llamdoJavaScript %}
+{% block appContenido %}
+{% comment %} <main class="vtn_main">
   <section class="horarios">
     <table class="tablaHorarios">
-      <caption class="caption">Mi Horario(mi libro)</caption>
+      <caption class="caption">Mi Horario</caption>
       <tbody>
         <tr>
           <th>Bloque</th>
@@ -15,13 +27,15 @@
           <th>Viernes</th>
         </tr>
         <tr>
-          <th class="tiempo">8:00am <br>-<br> 12:00am</th>
+          <th class="tiempo">8:00am <br>-<fechabr> 12:00am</th>
           <td>
+            {% for datosH in datosH %}
             <article class="campoHorario" id="ocupado">
-              <h3>Juan Noreña Ortiz</h3>
+              <h3>{{datosH.idTrabajador.nombres}}</h3>
               <h3>8:10am - 9:40am</h3>
               <a class="ver">Ver</a>
             </article>
+            {% endfor %}
             <article class="campoHorario" id="pendiente">
               <h3>Pendiente</h3>
               <h3>8:10am - 9:40am</h3>
@@ -35,11 +49,11 @@
               <a class="ver">Ver</a>
             </article>
             <article class="campoHorario">
+            <article class="campoHorario">
               <h3>Juan Pepe</h3>
               <h3>9:40am - 11:40am </h3>
               <a class="ver">Ver</a>
             </article>
-            <article class="campoHorario">
               <h3>Juan Pepe</h3>
               <h3>9:40am - 11:40am </h3>
               <a class="ver">Ver</a>
@@ -51,8 +65,8 @@
             </article>
           </td>
           <td>
+            <h3>Juan Noreña</h3>
             <article class="campoHorario">
-              <h3>Juan Noreña</h3>
               <h3>8:10am - 9:40am</h3>
               <a class="ver">Ver</a>
             </article>
@@ -125,8 +139,8 @@
         </tr>
     </table>
   </section>
-</main>
-{% comment %} <div class="row flex-lg-nowrap">
+</main> {% endcomment %}
+<div class="row flex-lg-nowrap">
   <div class="col mb-3">
     <div class="e-panel card cardVerHorarios align-items-center">
       <div class="card-body">
@@ -156,7 +170,7 @@
                     {{datosH.id}}
                   </td>
                   <td class="text-nowrap align-middle">
-                    {datosH.idTrabajador.nombres}}Juan David
+                    {{datosH.idTrabajador.nombres}}
                   </td>
                   <td class="text-nowrap align-middle">
                     <span>{{datosH.fecha}}</span>
@@ -184,15 +198,20 @@
                     <div class="btn-group align-top">
                       {% if datosH.estado == "activo" %}
                       <button
+                        href="#"
                         class="btn btn-sm btn-outline-secondary badge"
                         data-toggle="modal"
                         data-target="#user-form-modal"
+                        onclick="Horario('{% url 'modal_edith' datosH.id %}')"
                       >
                         Edit
                       </button>
-                      <button class="btn btn-sm btn-outline-secondary badge">
-                        <i class="fa fa-trash"></i>
-                      </button>
+                      <form action="" method="post">{% csrf_token %}
+                        <input type='hidden' value={{datosH.id}} name='horarioId'> 
+                        <button class="btn btn-sm btn-outline-secondary badge">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </form>
                       {% endif %}
                     </div>
                   </td>
@@ -205,5 +224,6 @@
       </div>
     </div>
   </div>
-</div> {% endcomment %}
-{% endblock %}
+</div>
+<div  class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+{% endblock  %}

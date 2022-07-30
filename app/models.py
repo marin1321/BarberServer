@@ -4,6 +4,7 @@ from django.db import models
 
 class Servicio(models.Model):
     tipoServicio = models.CharField(max_length=50)
+    # idCategoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, blank=True, null=True)
     valor = models.FloatField()
 
 class Categoria(models.Model):

@@ -33,7 +33,7 @@
                             <td class="text-nowrap align-middle"><span>{{horario.horaInicio}}</span></td>
                             <td class="text-nowrap align-middle"><span>{{horario.horaFinalizacion}}</span></td>
                             <td class="text-center align-middle">
-                            <div class="btn-group align-top" >
+                              <div class="btn-group align-top" >
                                 <form action="" method="post">{% csrf_token %}
                                   <input type='hidden' value={{ horario.id }} name='idHorario'>
                                   <button class="btn btn-sm btn-outline-secondary badge" data-toggle="modal" data-target="#user-form-modal">Agendar</button>

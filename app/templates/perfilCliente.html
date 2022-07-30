@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{% static 'css/calificacion.css'%}">
 {% endblock stilos %}
 {% block appContenido %}
-<main>
+<main class="containerNegro">
     <!-- {% comment %} <h1>Perfil Cliente</h1>
     {% for datosC in datosC %}
     <p>{{ datosC.nombres }}</p>
@@ -14,6 +14,9 @@
     <a href="{% url 'inactivarCuenta' %}">Inactivar cuenta</a>
     <a href="{% url 'editarPerfilC' %}">Editar cuenta</a> {% endcomment %} -->
     <div class="container">
+        {%block editarPerfil%}
+            <li><a href="{% url 'editarPerfilC' %}"> EDITAR PERFIL </a></li>
+        {%endblock%}
         <div class="main-body">
             <div class="row cardsP gutters-sm">
                 {% for datosC in datosC %}
@@ -24,7 +27,7 @@
                                 {% if datosC.foto %}
                                     <img src="{{ datosC.foto.url }}" alt="Admin" class="rounded-circle" width="150">
                                     {% else %}
-                                        <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                    <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                                 {% endif %}
                             </button>
                             <div class="mt-3">
@@ -54,7 +57,7 @@
                                         </path>
                                     </svg>WhatsApp
                                 </a>
-                                <span class="text-secondary">{{datosC.telefono}}</span>
+                                <span class="colorGris">{{datosC.telefono}}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox" target="_blank" class="mb-0 wh">
@@ -64,19 +67,19 @@
                                         </path>
                                     </svg>Email
                                 </a>
-                                <span class="text-secondary">{{datosC.email}}</span>
+                                <span class="colorGris">{{datosC.email}}</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="card mb-3">
+                    {% comment %} <div class="card mb-3">
                         <div class="card-body">
                             <div class="row">
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Nombre(s)</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 text-secondary alturaTamaño" id="info1">{{ datosC.nombres }}</p>
-                                    <input type="text" class="form-control" id="infoInput1" placeholder="" name="Nombres" value="">
+                                    
                                 </div>
                             </div>
                             <hr>
@@ -84,7 +87,7 @@
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Apellidos(s)</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 text-secondary alturaTamaño" id="info6">{{ datosC.apellidos }}</p>
-                                    <input type="text" class="form-control" id="infoInput6" name="Apellidos" placeholder="" value="">
+                                    
                                 </div>
                             </div>
                             <hr>
@@ -92,7 +95,7 @@
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Email</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 text-secondary alturaTamaño" id="info2">{{ datosC.email }}</p>
-                                    <input type="text" class="form-control col-sm-9" id="infoInput2" placeholder="" name="Email" value="">
+                                    
                                 </div>
                             </div>
                             <hr>
@@ -100,7 +103,6 @@
                                 <h4 class="col-sm-3 mb-0 alturaTamaño">Teléfono</h4>
                                 <div class="col-sm-9">
                                     <p class="col-sm-9 text-secondary alturaTamaño" id="info3">{{ datosC.telefono }}</p>
-                                    <input type="text" class="form-control col-sm-9" id="infoInput3" placeholder="" name="Telefono" value="">
                                 </div>
                             </div>
                             <hr>
@@ -108,23 +110,47 @@
                                 {% comment %} <div class="col-10 form-check form-switch editar">
                                     <input class="col-2 form-check-input align-self-center" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                                     <label class="col-10 form-check-label align-self-center pt-2" forhtml="flexSwitchCheckDefault">Editar</label>
-                                </div> {% endcomment %}
+                                </div>
                                 <a href="{% url 'editarPerfilC' %}"><button class='buttonform'>Editar</button></a>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     {% endfor %}
                     <div class="col-lg-14 col-xl-14 cardP-box">
+                        <ul class="filtro">
+                            <li class="seleccion">
+                                <h3>Busqueda por fechas:</h3>
+                                <div class="ctr_select">
+                                    <select class="select">
+                                        <option value="hoy">Hoy</option>
+                                        <option value="ayer">Ayer</option>
+                                        <option value="estaSemana">Esta Semana</option>
+                                        <option value="estaSemana">Este Mes</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li class="seleccion">
+                                <h3>Busqueda por estado:</h3>
+                                <div class="ctr_select">
+                                    <select class="select">
+                                        <option value="hoy">Aceptadas</option>
+                                        <option value="ayer">Editadas</option>
+                                        <option value="estaSemana">Eliminadas</option>
+                                        <option value="estaSemana">En Espera</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
                         <ul class="list-unstyled timeline-sm">
                             {% for citasId in citas %}
-                                {% if citasId.peticion == "aceptar" %}
-                                <li class="timeline-sm-item">
-                                    <span class="timeline-sm-date">{{citasId.idHorario.fecha}}</span>
-                                    <h5 class="mt-0">{{citasId.idTrabajador.idCategoria}}: {{citasId.idServicio.tipoServicio}}</h5>
-                                    <p> Peluquero: {{ citasId.idTrabajador.nombres }} {{ citasId.idTrabajador.apellidos }}</p>
-                                    <p class="text-white-50 mt-2">Hora de inicio de corte: {{citasId.idHorario.horaInicio}}</p>
-                                    <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
-                                </li>
+                                {% if citasId.peticion == "aceptar" %} 
+                                    <li class="timeline-sm-item">
+                                        <span class="timeline-sm-date">{{citasId.idHorario.fecha}}</span>
+                                        <h5 class="mt-0">{{citasId.idTrabajador.idCategoria}}: {{citasId.idServicio.tipoServicio}}</h5>
+                                        <p> Peluquero: {{ citasId.idTrabajador.nombres }} {{ citasId.idTrabajador.apellidos }}</p>
+                                        <p class="text-white-50 mt-2">Hora de inicio de corte: {{citasId.idHorario.horaInicio}}</p>
+                                        <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
