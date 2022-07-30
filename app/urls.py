@@ -19,6 +19,7 @@ urlpatterns=[
     path('verHorario/', verHorarios, name='verHorario'),
     path('perdirCitas/<id>', cita, name='citas'),
     path('citasBarbero/', citasBarbero, name='citasbarber'),
-    path('login/', loginF, name='login'),
+    path('login/', loginF, name='login'),    
+    path('chat/', chat),
     # path('eliminarHorario/', eliminarHorario, name='eliminarHorario'),
 ]

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+from zmq import CHANNEL
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,6 +37,7 @@ LOGOUT_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,19 +47,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
     'colorfield',
-    'tailwind',
-    'theme',
-    'django_browser_reload',
-    "bootstrap5",
+    'bootstrap5',
 ]
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+ASGI_APPLICATION = 'BarberServer.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND':'channels.layers.InMemoryChannelLayer'
+    }
+}
+
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
-
-TAILWIND_APP_NAME = 'theme'
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
@@ -68,7 +71,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'BarberServer.urls'
@@ -100,11 +102,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
-<<<<<<< HEAD
-            'PASSWORD': 'Sena1234',
-=======
-            'PASSWORD': '',
->>>>>>> 176653312cc40b09888681a4f1ef955a627f7e4a
+            'PASSWORD': 'root1234',
             'HOST': 'localhost',
             'PORT': '3306',
         }
