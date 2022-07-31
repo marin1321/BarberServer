@@ -371,9 +371,9 @@ def horarioBarber(request):
                 fecha =  fecha.strip()
                 if int(fecha[0:4]) >= int(fechaHoy[0:4]):
                     restaAñosUnDia = int(fecha[0:4]) - int(fechaHoy[0:4])
-                    if restaAñosUnDia == 1:
+                    if restaAñosUnDia <= 1:
                         restaMeses = int(fecha[5:7]) - int(fechaHoy[5:7])
-                        if restaMeses == 1:
+                        if restaMeses <= 1:
                             if int(hora1) < 22:
                                 tiempo(hora1,hora2,id_usuario,inicioHora,fecha)                             
                         elif int(fechaHoy[5:7]) == int(fecha[5:7]):

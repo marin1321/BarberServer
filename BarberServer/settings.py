@@ -46,8 +46,9 @@ INSTALLED_APPS = [
     'colorfield',
     "bootstrap5",
     'django_crontab',
+    'channels',
 ]
-
+ASGI_APPLICATION = 'BarberServer.asgi.application'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
