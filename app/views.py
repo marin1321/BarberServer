@@ -149,6 +149,12 @@ def perfilBarbero(request):
         selectT =  request.GET.get('TiempoSelect')
         selectE = request.GET.get('estados')
         datosCita = getBarberosClientes(selectE, selectT, "trabajador", idTrabajador)
+        if request.method == "POST":
+            peticion = request.POST.get('peticion')
+            citaPeticion = request.POST.get('idCita')
+            citaPeticion = citas.objects.get(id = citaPeticion)
+            citaPeticion.peticion = peticion
+            citaPeticion.save()
         data = {
             'datosB':datosB,
             "datosCita":datosCita,
@@ -158,7 +164,6 @@ def perfilBarbero(request):
         if request.method=='POST':
             trabajador =  Trabajadores.objects.get(email=usuarioActivo)
             estado =  request.POST.get("estado")
-            print(estado)
             if estado == "activo":
                 trabajador.state = "activo"
                 trabajador.save()
@@ -184,6 +189,27 @@ def perfilCliente(request):
         selectT =  request.GET.get('TiempoSelect')
         selectE = request.GET.get('estados')
         citasId = getBarberosClientes(selectE, selectT, "cliente", idCliente)
+        if request.method == "POST":
+            user =  Clientes.objects.get(email=usuarioActivo)
+            estado =  request.POST.get("estado")
+            peticion = request.POST.get('peticion')
+            citaPeticion = request.POST.get('idCita')
+            if citaPeticion != None:
+                citaPeticion = citas.objects.get(id = citaPeticion)
+                citaPeticion.peticion = peticion
+                citaPeticion.save()
+            else:
+                if estado == "activo":
+                    user.state = "activo"
+                    user.save()
+                elif estado == "inactivo":
+                    user.state = "inactivo"
+                    user.save()
+                else:
+                    idCita = request.POST.get('idCita')
+                    idCita =  citas.objects.get(id=idCita)
+                    idCita.peticion = "inactivo"
+                    idCita.save()
         data = {
             'citas':citasId,
             'datosC':datosC,
@@ -509,8 +535,7 @@ def cita(request, id):
     } 
     if request.method == 'POST':
         idCategoria = Trabajadores.objects.get( id = id ).idCategoria
-        idCategoria = Categoria.objects.get(nombre_cat = idCategoria).idServicio
-        idServicio = idCategoria
+        idServicio = Servicio.objects.get(idCategoria = idCategoria)
         horaRegistroCita = time.strftime("%H:%M:%Sq")
         horaRegistroCita = horaRegistroCita.strip()
         idHorario = request.POST.get('idHorario')

@@ -48,7 +48,7 @@
                                 <p class=" mb-1"></p>
                                 <p class="font-size-sm">{{datosB.nombres}} {{datosB.apellidos}}</p>
                                 <div class="btnActivateM">
-                                    <p>Su cuenta esta {{datosB.state}}</p>
+                                    <p>Estado: {{datosB.state}}</p>
                                     <label class="switch">
                                             {% if datosB.state == "activo" %}
                                                 <form action="" method="post">{% csrf_token %}
@@ -61,7 +61,6 @@
                                                         <button type="submit"><input type="checkbox" > <span class="sliderP"></span></button>
                                                     </form>
                                             {% endif %}
-                                        
                                     </label>
                                 </div>
                             </div>
@@ -187,7 +186,7 @@
                                     </div>
                                 </li>
                                 <li class="seleccin¿">
-                                    <button>Buscar</button>
+                                    <button class="btnSearchDE">Buscar</button>
                                 </li>    
                             </ul>
                         </form>
@@ -205,10 +204,17 @@
                                             <p class="text-white-50 mt-2">Hora de finalización de corte: {{datosCita.idHorario.horaFinalizacion}}</p>
                                         </article>
                                         <article class="verCita">
-                                            <button id="aceptar" type="submit">Aceptar</button>
                                             <button id="btnChat{{datosCita.id}}" name="btnCita{{datosCita.id}}" onClick="Chat(this.id)">Chat</button>
-                                            <button id="btnEditar{{datosCita.id}}" name="btnEditar{{datosCita.id}}" onClick="Editar(this.id)">Editar</button>
-                                            <button class="" type="submit">Rechazar</button>
+                                                <form action="" method="post">{% csrf_token %}
+                                                    <button id="btnEditar{{datosCita.id}}" name="btnEditar{{datosCita.id}}">Aceptar</button>
+                                                    <input type="hidden" value="aceptar" name="peticion"></input>
+                                                    <input type="hidden" value="{{datosCita.id}}" name="idCita"></input>
+                                                </form>
+                                                <form  action="" method="post">{% csrf_token %}
+                                                    <button id="cancelar">Cancelar</button>
+                                                    <input type="hidden" value="cancelar" name="peticion"></input>
+                                                    <input type="hidden" value="{{datosCita.id}}" name="idCita"></input>
+                                                </form>
                                         </article>
                                         {% comment %}
                                             <form action="" method="post">{% csrf_token %}

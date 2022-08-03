@@ -35,12 +35,19 @@
                                 <p class=" mb-1"></p>
                                 <p class="font-size-sm ">{{datosC.nombres}} {{datosC.apellidos}}</p>
                                 <div class="btnActivateM">
+                                    <p>Estado: {{datosC.state}}</p>
                                     <label class="switch">
                                         {% if datosC.state == "activo" %}
-                                            <input type="checkbox" checked> <span class="sliderP"></span> 
-                                            {% else %}
-                                                <input type="checkbox"> <span class="sliderP"></span>
-                                        {% endif %}
+                                                <form action="" method="post">{% csrf_token %}
+                                                    <input type='hidden' value="inactivo" name='estado'>
+                                                    <button type="submit" class="btnAD"></button><input type="checkbox" checked type="submit"><span class="sliderP"></span></button>
+                                                </form> 
+                                                {% else %}
+                                                    <form action="" method="post">{% csrf_token %}
+                                                        <input type='hidden' value="activo" name='estado'>
+                                                        <button type="submit" class="btnAD"><input type="checkbox" > <span class="sliderP"></span></button>
+                                                    </form>
+                                            {% endif %}
                                         
                                     </label>
                                     {% comment %} <button class="btn btnM btn-outline-primary">Mensaje</button> {% endcomment %}
@@ -121,7 +128,7 @@
                         <form action="" method="get">
                             <ul class="filtro">
                                 <li class="seleccion">
-                                    <h3>Busqueda por fechas:</h3>
+                                    <h3>Fechas:</h3>
                                     <div class="ctr_select">
                                         <select class="select">
                                             <option value="todos">todos</option>
@@ -149,7 +156,7 @@
                                     </div>
                                 </li>
                                 <li class="seleccion">
-                                    <h3>Busqueda por estado:</h3>
+                                    <h3>Estado:</h3>
                                     <div class="ctr_select">
                                         <select class="select">
                                             <option value="hoy">Aceptadas</option>
@@ -159,15 +166,14 @@
                                         </select>
                                     </div>
                                 </li>
-                                <li class="seleccin¿">
-                                    <button>Buscar</button>
+                                <li class="seleccion">
+                                    <button class="btnSearchDE">Buscar</button>
                                 </li>
                             </ul>
                         </form>
                         <section class="citas">
                             <ul class="list-unstyled timeline-sm">
                                 {% for citasId in citas %}
-                                    {% if citasId.peticion == "aceptar" %} 
                                     <li class="timeline-sm-item">
                                         <section class="lineaFecha">
                                             <span class="timeline-sm-date">{{citasId.idHorario.fecha}}</span>
@@ -180,14 +186,18 @@
                                                 <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
                                                 <p class="text-white-50 mt-2">Direccion: {{citasId.idTrabajador.direccion}}</p>
                                             </article>
+                                            {% if citas.peticion != cancelado %}
                                             <article class="verCita">
                                                 <button id="btnChat{{citasId.id}}" name="btnCita{{citasId.id}}" onClick="Chat(this.id)">Chat</button>
-                                                <button id="btnEditar{{citasId.id}}" name="btnEditar{{citasId.id}}" onClick="Editar(this.id)">Editar</button>
-                                                <button id="cancelar">Cancelar</button>
+                                                <form  action="" method="post">{% csrf_token %}
+                                                    <button id="cancelar">Cancelar</button>
+                                                    <input type="hidden" value="cancelado" name="peticion"></input>
+                                                    <input type="hidden" value="{{citasId.id}}" name="idCita"></input>
+                                                </form>
                                             </article>
+                                            {% endif %}
                                         </section>
                                     </li>
-                                    {% endif %}
                                 {% endfor %}
                             </ul>
                             <ul class="acciones">
