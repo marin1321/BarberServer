@@ -184,6 +184,8 @@ def perfilCliente(request):
         selectT =  request.GET.get('TiempoSelect')
         selectE = request.GET.get('estados')
         citasId = getBarberosClientes(selectE, selectT, "cliente", idCliente)
+        citasId = citas.objects.all()
+        print(citasId)
         data = {
             'citas':citasId,
             'datosC':datosC,
@@ -361,7 +363,7 @@ def horarioBarber(request):
         desdeFecha =  request.POST.get('desdeFecha')
         hastaFecha = request.POST.get('hastaFecha')
         inputInfo = request.POST.get('inputInfo')
-        print(inputInfo)
+        print(inputInfo == '1')
         if inputInfo == '1':
             if inicioHora:
                 hora2 = inicioHora[3:5]
@@ -371,11 +373,14 @@ def horarioBarber(request):
                 fecha =  fecha.strip()
                 if int(fecha[0:4]) >= int(fechaHoy[0:4]):
                     restaAñosUnDia = int(fecha[0:4]) - int(fechaHoy[0:4])
-                    if restaAñosUnDia == 1:
+                    print(restaAñosUnDia)
+                    if restaAñosUnDia <= 1:
                         restaMeses = int(fecha[5:7]) - int(fechaHoy[5:7])
                         if restaMeses == 1:
+                            print("Quinto if")
                             if int(hora1) < 22:
-                                tiempo(hora1,hora2,id_usuario,inicioHora,fecha)                             
+                                tiempo(hora1,hora2,id_usuario,inicioHora,fecha)
+                                print("Sexto if")                            
                         elif int(fechaHoy[5:7]) == int(fecha[5:7]):
                             if  int(fecha[8:10]) >= int(fechaHoy[8:10]):
                                 if int(horaHoy[0:2]) > int(hora1):
@@ -395,6 +400,8 @@ def horarioBarber(request):
                                 print("No colocar los dias antes")
                         else:
                             print("Esta fecha no es permitida")
+                    else:
+                        print("Mala fecha primera")
                 else:
                     print("Mala la fecha")
             else:
@@ -509,8 +516,7 @@ def cita(request, id):
     } 
     if request.method == 'POST':
         idCategoria = Trabajadores.objects.get( id = id ).idCategoria
-        idCategoria = Categoria.objects.get(nombre_cat = idCategoria).idServicio
-        idServicio = idCategoria
+        idServicio = Servicio.objects.get( idCategoria = idCategoria )
         horaRegistroCita = time.strftime("%H:%M:%Sq")
         horaRegistroCita = horaRegistroCita.strip()
         idHorario = request.POST.get('idHorario')
