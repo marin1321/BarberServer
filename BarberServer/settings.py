@@ -35,6 +35,7 @@ LOGOUT_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,18 +49,19 @@ INSTALLED_APPS = [
     'django_crontab',
     'channels',
 ]
+
 ASGI_APPLICATION = 'BarberServer.asgi.application'
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
-TAILWIND_APP_NAME = 'theme'
-
-
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
+
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND':'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 CRONJOBS  = [ 
     ( ' */1 * * * * ' , ' BarberServer.cron.MyCronJob') 
@@ -106,7 +108,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
-            'PASSWORD': '',
+            'PASSWORD': 'root1234',
             'HOST': 'localhost',
             'PORT': '3306',
         }

@@ -387,7 +387,7 @@ def horarioBarber(request):
         desdeFecha =  request.POST.get('desdeFecha')
         hastaFecha = request.POST.get('hastaFecha')
         inputInfo = request.POST.get('inputInfo')
-        print(inputInfo)
+        print(inputInfo == '1')
         if inputInfo == '1':
             if inicioHora:
                 hora2 = inicioHora[3:5]
@@ -401,7 +401,8 @@ def horarioBarber(request):
                         restaMeses = int(fecha[5:7]) - int(fechaHoy[5:7])
                         if restaMeses <= 1:
                             if int(hora1) < 22:
-                                tiempo(hora1,hora2,id_usuario,inicioHora,fecha)                             
+                                tiempo(hora1,hora2,id_usuario,inicioHora,fecha)
+                                print("Sexto if")                            
                         elif int(fechaHoy[5:7]) == int(fecha[5:7]):
                             if  int(fecha[8:10]) >= int(fechaHoy[8:10]):
                                 if int(horaHoy[0:2]) > int(hora1):
@@ -421,6 +422,8 @@ def horarioBarber(request):
                                 print("No colocar los dias antes")
                         else:
                             print("Esta fecha no es permitida")
+                    else:
+                        print("Mala fecha primera")
                 else:
                     print("Mala la fecha")
             else:
