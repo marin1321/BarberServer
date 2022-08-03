@@ -158,11 +158,23 @@
                                 <li class="seleccion">
                                     <h3>Estado:</h3>
                                     <div class="ctr_select">
-                                        <select class="select">
-                                            <option value="hoy">Aceptadas</option>
-                                            <option value="ayer">Editadas</option>
-                                            <option value="estaSemana">Eliminadas</option>
-                                            <option value="estaSemana">En Espera</option>
+                                        <select class="select" name="estados">
+                                            <option value="todos">Todos</option>
+                                            {% if selectE == aceptada%}
+                                            <option value="aceptada" selected>Aceptadas</option>
+                                            {% else %}
+                                            <option value="aceptada">Aceptadas</option>
+                                            {% endif %}
+                                            {% if selectE == pendiente %}
+                                            <option value="pendiente" selected>Pendientes</option>
+                                            {% else %}
+                                            <option value="pendiente">Pendientes</option>
+                                            {% endif %}
+                                            {% if selectE == cancelada %}
+                                            <option value="cancelada" selected>Canceladas</option>
+                                            {% else %}
+                                            <option value="cancelada">Canceladas</option>
+                                            {% endif %}
                                         </select>
                                     </div>
                                 </li>
@@ -186,12 +198,12 @@
                                                 <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
                                                 <p class="text-white-50 mt-2">Direccion: {{citasId.idTrabajador.direccion}}</p>
                                             </article>
-                                            {% if citas.peticion != cancelado %}
+                                            {% if citas.peticion == pendientes %}
                                             <article class="verCita">
                                                 <button id="btnChat{{citasId.id}}" name="btnCita{{citasId.id}}" onClick="Chat(this.id)">Chat</button>
                                                 <form  action="" method="post">{% csrf_token %}
                                                     <button id="cancelar">Cancelar</button>
-                                                    <input type="hidden" value="cancelado" name="peticion"></input>
+                                                    <input type="hidden" value="cancelada" name="peticion"></input>
                                                     <input type="hidden" value="{{citasId.id}}" name="idCita"></input>
                                                 </form>
                                             </article>

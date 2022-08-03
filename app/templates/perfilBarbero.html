@@ -53,12 +53,12 @@
                                             {% if datosB.state == "activo" %}
                                                 <form action="" method="post">{% csrf_token %}
                                                     <input type='hidden' value="inactivo" name='estado'>
-                                                    <button type="submit"></button><input type="checkbox" checked type="submit"><span class="sliderP"></span></button>
+                                                    <button class="btnAD" type="submit"></button><input type="checkbox" checked type="submit"><span class="sliderP"></span></button>
                                                 </form> 
                                                 {% else %}
                                                     <form action="" method="post">{% csrf_token %}
                                                         <input type='hidden' value="activo" name='estado'>
-                                                        <button type="submit"><input type="checkbox" > <span class="sliderP"></span></button>
+                                                        <button class="btnAD" type="submit"><input type="checkbox" > <span class="sliderP"></span></button>
                                                     </form>
                                             {% endif %}
                                     </label>
@@ -147,7 +147,7 @@
                         <form action="" method="get">
                             <ul class="filtro">
                                 <li class="seleccion">
-                                    <h3>Busqueda por fechas:</h3>
+                                    <h3>Fechas:</h3>
                                     <div class="ctr_select">
                                         <select class="select" name="TiempoSelect">
                                             <option value="todos">Todos</option>
@@ -175,13 +175,25 @@
                                     </div>
                                 </li>
                                 <li class="seleccion">
-                                    <h3>Busqueda por estado:</h3>
+                                    <h3>Estado:</h3>
                                     <div class="ctr_select">
                                         <select class="select" name="estados">
                                             <option value="todos">Todos</option>
-                                            <option value="aceptados">Aceptadas</option>
-                                            <option value="pendientes">Pendientes</option>
-                                            <option value="canceladas">Canceladas</option>
+                                            {% if selectE == 'aceptada' %}
+                                            <option value="aceptada" selected>Aceptadas</option>
+                                            {% else %}
+                                            <option value="aceptada">Aceptadas</option>
+                                            {% endif %}
+                                            {% if selectE == 'pendiente' %}
+                                            <option value="pendiente" selected>Pendientes</option>
+                                            {% else %}
+                                            <option value="pendiente">Pendientes</option>
+                                            {% endif %}
+                                            {% if selectE == 'cancelada' %}
+                                            <option value="cancelada" selected>Canceladas</option>
+                                            {% else %}
+                                            <option value="cancelada">Canceladas</option>
+                                            {% endif %}
                                         </select>
                                     </div>
                                 </li>
@@ -204,17 +216,19 @@
                                             <p class="text-white-50 mt-2">Hora de finalización de corte: {{datosCita.idHorario.horaFinalizacion}}</p>
                                         </article>
                                         <article class="verCita">
+                                            {% if datosCita.peticion == "pendiente" %}
                                             <button id="btnChat{{datosCita.id}}" name="btnCita{{datosCita.id}}" onClick="Chat(this.id)">Chat</button>
-                                                <form action="" method="post">{% csrf_token %}
-                                                    <button id="btnEditar{{datosCita.id}}" name="btnEditar{{datosCita.id}}">Aceptar</button>
-                                                    <input type="hidden" value="aceptar" name="peticion"></input>
-                                                    <input type="hidden" value="{{datosCita.id}}" name="idCita"></input>
-                                                </form>
-                                                <form  action="" method="post">{% csrf_token %}
-                                                    <button id="cancelar">Cancelar</button>
-                                                    <input type="hidden" value="cancelar" name="peticion"></input>
-                                                    <input type="hidden" value="{{datosCita.id}}" name="idCita"></input>
-                                                </form>
+                                            <form action="" method="post">{% csrf_token %}
+                                                <button id="btnEditar{{datosCita.id}}" name="btnEditar{{datosCita.id}}">Aceptar</button>
+                                                <input type="hidden" value="aceptada" name="peticion"></input>
+                                                <input type="hidden" value="{{datosCita.id}}" name="idCita"></input>
+                                            </form>
+                                            <form  action="" method="post">{% csrf_token %}
+                                                <button id="cancelar">Cancelar</button>
+                                                <input type="hidden" value="cancelada" name="peticion"></input>
+                                                <input type="hidden" value="{{datosCita.id}}" name="idCita"></input>
+                                            </form>
+                                            {% endif %}
                                         </article>
                                         {% comment %}
                                             <form action="" method="post">{% csrf_token %}

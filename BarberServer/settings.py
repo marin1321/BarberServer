@@ -35,7 +35,6 @@ LOGOUT_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
     'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -108,7 +107,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
-            'PASSWORD': 'root1234',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '3306',
         }
