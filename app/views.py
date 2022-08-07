@@ -148,17 +148,20 @@ def perfilBarbero(request):
         idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
         selectT =  request.GET.get('TiempoSelect')
         selectE = request.GET.get('estados')
+        print("Estado-->",selectE)
         datosCita = getBarberosClientes(selectE, selectT, "trabajador", idTrabajador)
+        print("DatosTraido=>",datosCita)
         data = {
             'datosB':datosB,
             "datosCita":datosCita,
             "selectH": selectT,
+            "selectE": selectE,
         }
         print("AQUI --> " +str(request.user))
-        if request.method=='POST':
+        if request.method == "POST":
+            peticion = request.POST.get('peticion')
             trabajador =  Trabajadores.objects.get(email=usuarioActivo)
             estado =  request.POST.get("estado")
-            print(estado)
             if estado == "activo":
                 trabajador.state = "activo"
                 trabajador.save()
@@ -168,7 +171,7 @@ def perfilBarbero(request):
             else:
                 idCita = request.POST.get('idCita')
                 idCita =  citas.objects.get(id=idCita)
-                idCita.peticion = "inactivo"
+                idCita.peticion = peticion
                 idCita.save()
         return render(request, 'perfilBarbero.html', data)
     else:
@@ -184,6 +187,28 @@ def perfilCliente(request):
         selectT =  request.GET.get('TiempoSelect')
         selectE = request.GET.get('estados')
         citasId = getBarberosClientes(selectE, selectT, "cliente", idCliente)
+        if request.method == "POST":
+            user =  Clientes.objects.get(email=usuarioActivo)
+            estado =  request.POST.get("estado")
+            peticion = request.POST.get('peticion')
+            citaPeticion = request.POST.get('idCita')
+            print()
+            if citaPeticion != None:
+                citaPeticion = citas.objects.get(id = citaPeticion)
+                citaPeticion.peticion = peticion
+                citaPeticion.save()
+            else:
+                if estado == "activo":
+                    user.state = "activo"
+                    user.save()
+                elif estado == "inactivo":
+                    user.state = "inactivo"
+                    user.save()
+                else:
+                    idCita = request.POST.get('idCita')
+                    idCita =  citas.objects.get(id=idCita)
+                    idCita.peticion = "inactivo"
+                    idCita.save()
         data = {
             'citas':citasId,
             'datosC':datosC,
@@ -197,25 +222,27 @@ def getBarberosClientes(selectE, selectT,rol, ids):
     datosSelect = []
     if selectE != None and selectE != 'todos':
         if rol == "trabajador":
-            if selectE == "aceptados":
-                datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'aceptado')
-            elif selectE == "pendientes":
+            if selectE == "aceptada":
+                datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'aceptada')
+            elif selectE == "pendiente":
                 datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'pendiente')
-            elif selectE == "cancelados":
-                datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'cancelado')
+            elif selectE == "cancelada":
+                datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'cancelada')
         elif rol == "cliente":
-            if selectE == "aceptados":
-                datosCita = citas.objects.filter(idCliente = ids, peticion = 'aceptado')
-            elif selectE == "pendientes":
+            if selectE == "aceptado":
+                datosCita = citas.objects.filter(idCliente = ids, peticion = 'aceptada')
+            elif selectE == "pendiente":
                 datosCita = citas.objects.filter(idCliente = ids, peticion = 'pendiente')
-            elif selectE == "cancelados":
-                datosCita = citas.objects.filter(idCliente = ids, peticion = 'cancelado')
+            elif selectE == "cancelada":
+                datosCita = citas.objects.filter(idCliente = ids, peticion = 'cancelada')
     else:
-        if rol == "trabajador":
-            datosSelect = citas.objects.filter(idTrabajador = ids)
-        elif rol == "cliente":
-            datosSelect = citas.objects.filter(idCliente = ids)
-
+        if selectE == "todos":
+            if rol == "trabajador":
+                datosCita = citas.objects.filter(idTrabajador = ids)
+            elif rol == "cliente":
+                datosCita = citas.objects.filter(idCliente = ids)
+    print("Dias estado",selectT != None and selectT != 'todos')
+    print('Estado select',selectT )
     if selectT != None and selectT != 'todos':
         if selectT == 'estaSemana':
             semanaHoy =sacarSemana(int(fechaHoy[0:4]),int(fechaHoy[5:7]), int(fechaHoy[8:10]))
@@ -236,16 +263,12 @@ def getBarberosClientes(selectE, selectT,rol, ids):
                 if int(fechaHoy[0:4]) == int(fechaDeCita.year) and int(fechaHoy[5:7]) == int(fechaDeCita.month):
                     datosSelect.append(datoCita)
         elif selectT == 'esteAnio':
+            print()
             for datoCita in datosCita:
                 fechaDeCita = datoCita.idHorario.fecha
                 if int(fechaHoy[0:4]) == int(fechaDeCita.year):
                     datosSelect.append(datoCita)
-        else:
-            if rol == "trabajador":
-                datosSelect = citas.objects.filter(idTrabajador = ids)
-            elif rol == "cliente":
-                datosSelect = citas.objects.filter(idCliente = ids)
-    else:
+    if len(datosSelect) == 0 and selectE == None and selectT == None:
         if rol == "trabajador":
             datosSelect = citas.objects.filter(idTrabajador = ids)
         elif rol == "cliente":
@@ -361,7 +384,7 @@ def horarioBarber(request):
         desdeFecha =  request.POST.get('desdeFecha')
         hastaFecha = request.POST.get('hastaFecha')
         inputInfo = request.POST.get('inputInfo')
-        print(inputInfo)
+        print(inputInfo == '1')
         if inputInfo == '1':
             if inicioHora:
                 hora2 = inicioHora[3:5]
@@ -371,11 +394,12 @@ def horarioBarber(request):
                 fecha =  fecha.strip()
                 if int(fecha[0:4]) >= int(fechaHoy[0:4]):
                     restaAñosUnDia = int(fecha[0:4]) - int(fechaHoy[0:4])
-                    if restaAñosUnDia == 1:
+                    if restaAñosUnDia <= 1:
                         restaMeses = int(fecha[5:7]) - int(fechaHoy[5:7])
-                        if restaMeses == 1:
+                        if restaMeses <= 1:
                             if int(hora1) < 22:
-                                tiempo(hora1,hora2,id_usuario,inicioHora,fecha)                             
+                                tiempo(hora1,hora2,id_usuario,inicioHora,fecha)
+                                print("Sexto if")                            
                         elif int(fechaHoy[5:7]) == int(fecha[5:7]):
                             if  int(fecha[8:10]) >= int(fechaHoy[8:10]):
                                 if int(horaHoy[0:2]) > int(hora1):
@@ -395,6 +419,8 @@ def horarioBarber(request):
                                 print("No colocar los dias antes")
                         else:
                             print("Esta fecha no es permitida")
+                    else:
+                        print("Mala fecha primera")
                 else:
                     print("Mala la fecha")
             else:
@@ -509,8 +535,7 @@ def cita(request, id):
     } 
     if request.method == 'POST':
         idCategoria = Trabajadores.objects.get( id = id ).idCategoria
-        idCategoria = Categoria.objects.get(nombre_cat = idCategoria).idServicio
-        idServicio = idCategoria
+        idServicio = Servicio.objects.get(idCategoria = idCategoria)
         horaRegistroCita = time.strftime("%H:%M:%Sq")
         horaRegistroCita = horaRegistroCita.strip()
         idHorario = request.POST.get('idHorario')

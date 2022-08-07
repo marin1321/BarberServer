@@ -48,20 +48,19 @@
                                 <p class=" mb-1"></p>
                                 <p class="font-size-sm">{{datosB.nombres}} {{datosB.apellidos}}</p>
                                 <div class="btnActivateM">
-                                    <p>Su cuenta esta {{datosB.state}}</p>
+                                    <p>Estado: {{datosB.state}}</p>
                                     <label class="switch">
                                             {% if datosB.state == "activo" %}
                                                 <form action="" method="post">{% csrf_token %}
                                                     <input type='hidden' value="inactivo" name='estado'>
-                                                    <button type="submit"></button><input type="checkbox" checked type="submit"><span class="sliderP"></span></button>
+                                                    <button class="btnAD" type="submit"></button><input type="checkbox" checked type="submit"><span class="sliderP"></span></button>
                                                 </form> 
                                                 {% else %}
                                                     <form action="" method="post">{% csrf_token %}
                                                         <input type='hidden' value="activo" name='estado'>
-                                                        <button type="submit"><input type="checkbox" > <span class="sliderP"></span></button>
+                                                        <button class="btnAD" type="submit"><input type="checkbox" > <span class="sliderP"></span></button>
                                                     </form>
                                             {% endif %}
-                                        
                                     </label>
                                 </div>
                             </div>
@@ -148,7 +147,7 @@
                         <form action="" method="get">
                             <ul class="filtro">
                                 <li class="seleccion">
-                                    <h3>Busqueda por fechas:</h3>
+                                    <h3>Fechas:</h3>
                                     <div class="ctr_select">
                                         <select class="select" name="TiempoSelect">
                                             <option value="todos">Todos</option>
@@ -176,18 +175,30 @@
                                     </div>
                                 </li>
                                 <li class="seleccion">
-                                    <h3>Busqueda por estado:</h3>
+                                    <h3>Estado:</h3>
                                     <div class="ctr_select">
                                         <select class="select" name="estados">
                                             <option value="todos">Todos</option>
-                                            <option value="aceptados">Aceptadas</option>
-                                            <option value="pendientes">Pendientes</option>
-                                            <option value="canceladas">Canceladas</option>
+                                            {% if selectE == 'aceptada' %}
+                                            <option value="aceptada" selected>Aceptadas</option>
+                                            {% else %}
+                                            <option value="aceptada">Aceptadas</option>
+                                            {% endif %}
+                                            {% if selectE == 'pendiente' %}
+                                            <option value="pendiente" selected>Pendientes</option>
+                                            {% else %}
+                                            <option value="pendiente">Pendientes</option>
+                                            {% endif %}
+                                            {% if selectE == 'cancelada' %}
+                                            <option value="cancelada" selected>Canceladas</option>
+                                            {% else %}
+                                            <option value="cancelada">Canceladas</option>
+                                            {% endif %}
                                         </select>
                                     </div>
                                 </li>
                                 <li class="seleccin¿">
-                                    <button>Buscar</button>
+                                    <button class="btnSearchDE">Buscar</button>
                                 </li>    
                             </ul>
                         </form>
@@ -205,10 +216,19 @@
                                             <p class="text-white-50 mt-2">Hora de finalización de corte: {{datosCita.idHorario.horaFinalizacion}}</p>
                                         </article>
                                         <article class="verCita">
-                                            <button id="btnAceptar" type="submit"><span>Aceptar</span></button>
-                                            <button id="btnChat{{datosCita.id}} btnChat" name="btnCita{{datosCita.id}}" onClick="Chat(this.id)"><span>Chat</span></button>
-                                            <button id="btnEditar{{datosCita.id}} btnEditar" name="btnEditar{{datosCita.id}}" onClick="Editar(this.id)"><span>Editar</span></button>
-                                            <button id="btnRechazar" class="" type="submit"><span>Rechazar</span></button>
+                                            {% if datosCita.peticion == "pendiente" %}
+                                            <button id="btnChat{{datosCita.id}}" class="btnAceptar" name="btnCita{{datosCita.id}}"  onClick="Chat(this.id)">Chat</button>
+                                            <form action="" method="post">{% csrf_token %}
+                                                <button id="btnEditar{{datosCita.id}}" name="btnEditar{{datosCita.id}}">Aceptar</button>
+                                                <input type="hidden" value="aceptada" name="peticion"></input>
+                                                <input type="hidden" value="{{datosCita.id}}" name="idCita"></input>
+                                            </form>
+                                            <form  action="" method="post">{% csrf_token %}
+                                                <button id="cancelar">Cancelar</button>
+                                                <input type="hidden" value="cancelada" name="peticion"></input>
+                                                <input type="hidden" value="{{datosCita.id}}" name="idCita"></input>
+                                            </form>
+                                            {% endif %}
                                         </article>
                                         {% comment %}
                                             <form action="" method="post">{% csrf_token %}
@@ -228,12 +248,13 @@
                                 </section>
                                 <section class="chat">
                                     <article class="msj_campo">
-                                        <h3 id="otro">Usted es chimbo al hombro?</h3>
-                                        <h3 id="yo">Si senor, el mismo</h3>
-                                        <h3 id="yo">Vea sabe que? DIEGO ES GAY y PUTO EL QUE LO LEA JAJAJAJAJ</h3>
+                                        <div id="messages">
+                                        </div>
                                     </article>
                                     <article class="msj_enviar">
-                                        <input type="textarea" name="mensaje" placeholder="Escribe tu mensaje" autofocus size="5">
+                                        <form id="form">
+                                            <input type="text" name="message" placeholder="Escribe tu mensaje" autofocus size="5"/>
+                                        </form>
                                         <button>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
                                             <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
@@ -254,6 +275,8 @@
     </div>
 </main>
 {% block llamdoJavaScript %}
+    <script src="{% static 'js/chat.js'%}"></script>
+
     <script src="{% static 'js/opcionesCitas.js'%}"></script>
 {% endblock llamdoJavaScript %}
 

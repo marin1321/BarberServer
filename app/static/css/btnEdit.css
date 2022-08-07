@@ -92,7 +92,7 @@
 	overflow: hidden;
 }
 
-.verCita #btnAceptar::after{
+.verCita .btnAceptar::after{
     content: "";
     width: 100%;
     height: 100%;
@@ -104,7 +104,7 @@
     transition: .3s ease-in-out all;
 }
 
-#btnAceptar:hover::after{
+.btnAceptar:hover::after{
     top:0;
 }
 

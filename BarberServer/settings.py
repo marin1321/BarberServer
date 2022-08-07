@@ -46,19 +46,21 @@ INSTALLED_APPS = [
     'colorfield',
     "bootstrap5",
     'django_crontab',
+    'channels',
 ]
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+ASGI_APPLICATION = 'BarberServer.asgi.application'
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
-TAILWIND_APP_NAME = 'theme'
-
-
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
+
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND':'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 CRONJOBS  = [ 
     ( ' */1 * * * * ' , ' BarberServer.cron.MyCronJob') 
