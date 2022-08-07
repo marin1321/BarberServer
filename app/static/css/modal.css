@@ -11,9 +11,20 @@
     display: flex;
     justify-content: center;
   }
+
+  .modal-content{
+    background: linear-gradient(#1b1b1b, #111);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    box-shadow: rgba(230, 222, 222, 0.2) 0 0 29px 3px;
+    padding: 20px;
+    color: white;
+  }
+
+  .modal-body{ padding-top: 0; }
   
   .contenedorModalPerfil{
-    width: 70%;
+    /* width: 100%; */
     height: 28em;
     top: 7.2em;
     background: linear-gradient(#1b1b1b, #111);
@@ -24,6 +35,22 @@
     box-shadow: rgba(230, 222, 222, 0.2) 0 0 29px 3px;
     padding: 20px;
     color: white;
+  }
+
+  .modal-header{
+    border: none;
+    padding: 0;
+  }
+
+  .btn-close::after{
+    content: "\0274c";
+    color: #f44336 !important;
+    visibility: visible;
+    cursor: pointer;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 1rem;
+    right: 15px;
   }
   
   .encabezadoModal{
@@ -52,7 +79,7 @@
     border-radius: 5px;
     color: #f44336;
   }
-  .btn-cerrar:hover {
+  .btn-cerrar:hover .btn-close:hover{
     background-color: #1c1c1c;
   }
   
@@ -69,7 +96,7 @@
   }
   
   .infoBasica-modal{
-    width: 63%;
+    width: 65%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -77,53 +104,99 @@
   }
   
   .campoimg-modal{
-    width: 35%;
-    height: 100%;
+    width: 33%;
+    height: 28rem;
     box-shadow: 0 0 10px 5px black;
     border-radius: 20px;
   }
+  
+  .btn-calificar{
+    width: auto;
+    background-color: transparent;
+    height: 2.5rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.3rem;
+    padding: 0 1rem;
+    color: #0061a9;
+    font-weight: bold;
+    /* color: #fefd9f; */
+    /* #ffd17b; var(--color); */
+    box-shadow: 0px 6px 10px -5px;
+    transition: .6s ease all;
+  }
+
+  .btn-calificar:hover{
+    background-color: #05050562;
+    text-decoration: none;
+    box-shadow: 0px 0px 10px 1px;
+  }
+
+  .btn-calificar:active{
+    /* border: 1px solid #0592ff; */
+    color: #0592ff;
+    text-decoration: none;
+  }
+
+  .btn-calificar:focus{ outline: 1.5px solid #0592ff !important; }
 
   .texto{
     width: 100%;
     height: 50%;
-  }
-  .texto h3{
-    color: #fefd9f;
-    font-weight: bold;
-    font-size: 2.5rem;
-    text-align: center;
-  }
-  .local-calendario{
-    width: 100%;
-    height: auto;
     display: flex;
   }
 
-  .local{
-    width: 100%;
+  .datosIzq{
+    width: 60%;
+    height: auto;
+  }
+
+  .valorizarBarbero{
+    width: 40%;
     height: 10%;
+    padding: 20px 5px;
+  }
+
+  .valorizarBarbero h3{ font-size: x-large; text-decoration: underline;}
+
+  .valorizarBarbero textarea{
+    resize: none;
+    width: 100%;
+    background: linear-gradient(#333, #222);
+    color: #fff;
+  }
+
+  .valorizarBarbero textarea:focus{ outline: 1px solid #fefd9f; border: 2px solid #111; }
+
+  .carousel{ width: 75%; height: 14rem; }
+
+  .carousel-item{ width: 100%; height: 100%;}
+
+  .carousel-item .row .col img{
+    width: 50%;
+    height: 100%;
   }
   
   .btn-cita{
-  background: linear-gradient(#1b1b1b, #111);
-  color: white;
-  font-family: inherit;
-  /* padding: 0.35em; */
-  padding-left: 1.2em;
-  font-size: 17px;
-  font-weight: 500;
-  border-radius: 0.9em;
-  border: none;
-  letter-spacing: 0.05em;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  position: absolute;
-  height: 2.8em;
-  padding-right: 3.3em;
-  right: 1.3rem;
-  bottom: 1.3rem;
-  box-shadow: 0 0 6px 1px white;
+    background: linear-gradient(#1b1b1b, #111);
+    color: white;
+    font-family: inherit;
+    /* padding: 0.35em; */
+    padding-left: 1.2em;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 0.9em;
+    border: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: absolute;
+    height: 2.8em;
+    padding-right: 3.3em;
+    right: 1.3rem;
+    bottom: 1.3rem;
+    box-shadow: 0 0 6px 1px white;
   }
   .btn-cita .icon {
     background: white;
@@ -159,7 +232,6 @@
     border-radius: 20px;
   }
 
-  
   .imgLocal{
     width: 80%;
     height: 100%;
@@ -171,11 +243,14 @@
     width: 100%;
     text-align: center;
     font-size: 3rem;
+    color: #fefd9f;
+    font-weight: bold;
+    text-align: center;
   }
 
-  #direccion{
+  /* #direccion{
     height: 10%;
-  }
+  } */
 
 /*CITA*/
 .contenedorModalCita{

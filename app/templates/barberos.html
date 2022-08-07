@@ -8,15 +8,23 @@
 <link rel="stylesheet" href="{% static 'css/calificacion.css'%}">
 {% endblock stilos %}
 {% block llamdoJavaScript %}
-<script src="{% static 'js' %}"></script>
-<script type="text/javascript">
-    var $ = jQuery.noConflict()
-    function barbero(url){
-        $('#exampleModal').load(url, function(){
-            $(this).modal('show');
-        })
+{% comment %} <script>
+    function calificacion(n){
+      result =  document.getElementById('result')
+      result.value = n
+      mostrar = document.getElementById('mostrarC')
+      mostrar.innerHTML = n
     }
-</script>
+  </script> {% endcomment %}
+    <script src="{% static 'js' %}"></script>
+    <script type="text/javascript">
+        var $ = jQuery.noConflict()
+        function barbero(url){
+            $('#exampleModal').load(url, function(){
+                $(this).modal('show');
+            })
+        }
+    </script>
 {% endblock llamdoJavaScript %}
 
 {% block appContenido %}
@@ -45,7 +53,12 @@
             <div class="cards-barberos">
                 {% for barber in barber %}
                 <article class="cards card1">
-                    <div class="efectoBlur"><button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button></div>
+                    <div class="efectoBlur">
+                        <button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button>
+                        {% comment %} <button type="button" class="btn btn-primary btn-VerMas" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Ver Más
+                          </button> {% endcomment %}
+                    </div>
                     <figure class="figura">
                         {% if barber.foto %}
                         <img src="{{ barber.foto }}" alt="las vegas"
@@ -64,6 +77,25 @@
         </section>
     </div>
 
-    <div  class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+    <div class="modal fade" id="exampleModal" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+    <!-- Modal -->
+    {% comment %} <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                {% comment %} <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <h2>FEOFOFEFEF</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                <h2>FEOFOFEFEF</h2>
+            </div>
+        </div>
+    </div> {% endcomment %}
 </main>
 {% endblock %}

@@ -1,13 +1,17 @@
 .clasificacionF {
   display: flex;
   width: 250px;
-  margin: 0 auto;
   height: 50px;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .clasificacionF p {
   text-align: center;
+}
+
+.clasificacionF h6{
+  font-size: 20px;
 }
 
 .clasificacionF label {

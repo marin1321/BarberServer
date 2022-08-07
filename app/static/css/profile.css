@@ -177,7 +177,6 @@ hr{ border: 1px solid #444; }
     background-color: #ffffff2b;
     border-radius: 100px;
     padding: 1px;
-    margin: 10px;
     cursor: pointer;
     transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     align-items: center;
@@ -213,10 +212,25 @@ hr{ border: 1px solid #444; }
 
 .switch input[type="checkbox"] { display: none; }
 
+.switch button{ 
+    background-color: transparent; 
+    border: none; 
+    padding-top: 5px; 
+}
+
 .btnActivateM{
     display: flex;
     align-items: center;
+    height: 2rem;
 }
+
+.btnActivateM form{ 
+    height: auto;
+    width: auto;
+    display: flex; 
+}
+
+.btnActivateM p{ margin: auto; }
 
 .btnActivateM label { display: flex; }
 

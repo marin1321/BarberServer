@@ -205,10 +205,10 @@
                                             <p class="text-white-50 mt-2">Hora de finalización de corte: {{datosCita.idHorario.horaFinalizacion}}</p>
                                         </article>
                                         <article class="verCita">
-                                            <button id="aceptar" type="submit">Aceptar</button>
-                                            <button id="btnChat{{datosCita.id}}" name="btnCita{{datosCita.id}}" onClick="Chat(this.id)">Chat</button>
-                                            <button id="btnEditar{{datosCita.id}}" name="btnEditar{{datosCita.id}}" onClick="Editar(this.id)">Editar</button>
-                                            <button class="" type="submit">Rechazar</button>
+                                            <button id="btnAceptar" type="submit"><span>Aceptar</span></button>
+                                            <button id="btnChat{{datosCita.id}} btnChat" name="btnCita{{datosCita.id}}" onClick="Chat(this.id)"><span>Chat</span></button>
+                                            <button id="btnEditar{{datosCita.id}} btnEditar" name="btnEditar{{datosCita.id}}" onClick="Editar(this.id)"><span>Editar</span></button>
+                                            <button id="btnRechazar" class="" type="submit"><span>Rechazar</span></button>
                                         </article>
                                         {% comment %}
                                             <form action="" method="post">{% csrf_token %}
@@ -233,7 +233,7 @@
                                         <h3 id="yo">Vea sabe que? DIEGO ES GAY y PUTO EL QUE LO LEA JAJAJAJAJ</h3>
                                     </article>
                                     <article class="msj_enviar">
-                                        <input type="text" name="mensaje" placeholder="Escribe tu mensaje" autofocus size="5">
+                                        <input type="textarea" name="mensaje" placeholder="Escribe tu mensaje" autofocus size="5">
                                         <button>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
                                             <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
