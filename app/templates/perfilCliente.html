@@ -37,11 +37,10 @@
                                 <div class="btnActivateM">
                                     <label class="switch">
                                         {% if datosC.state == "activo" %}
-                                            <input type="checkbox" checked> <span class="sliderP"></span> 
-                                            {% else %}
-                                                <input type="checkbox"> <span class="sliderP"></span>
+                                            <input type="checkbox" id="checkbox" checked> <span class="sliderP" ></span> 
+                                        {% else %}
+                                            <input type="checkbox" id="checkbox"> <span class="sliderP" ></span>
                                         {% endif %}
-                                        
                                     </label>
                                     {% comment %} <button class="btn btnM btn-outline-primary">Mensaje</button> {% endcomment %}
                                 </div>
@@ -205,7 +204,7 @@
     {% if messages %}
 
         {% for m in messages %}
-            <script >
+            <script>
 
                 Swal.fire({
                     icon:"success",

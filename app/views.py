@@ -17,6 +17,9 @@ from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
 
+def chat(request):
+    return render(request, 'chat.html')
+
 def loginF(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
@@ -25,6 +28,7 @@ def loginF(request):
             login(request, user)
             messages.success(request, "logueado con exito!")
             return redirect('/perfilCliente.html')
+
         else:
             messages.warning(request, "Credenciales incorrectas")
     else:
@@ -182,7 +186,7 @@ def registro(request):
         formulario = RegistrationForm(data=request.POST, files=request.FILES)
         email = request.POST.get('email')
         if User.objects.filter(username=email).exists():
-            return redirect(to="login")
+            messages.success(request, "El correo electronico ya se encuentra logueado")
         else:
             if formulario.is_valid():
                 nombres = request.POST.get('nombres')
@@ -240,7 +244,6 @@ def registro(request):
                     request.session['id'] = user.id
                     return redirect(to="inicio")
             else:
-                print("LLENAR TODOS DATOS")
                 data = {
                     "form":RegistrationForm
                 }
@@ -450,11 +453,13 @@ def eliminarCuenta(request):
     if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
         id = Trabajadores.objects.get(email=usuarioActivo).id
         usuario = get_object_or_404(Trabajadores, id=id)
-        usuario.delete()
+
     if Clientes.objects.filter(email=usuarioActivo).exists()==True:
         id = Clientes.objects.get(email=usuarioActivo).id
+        state = Clientes.objects.get(state=usuarioActivo)
         usuario = get_object_or_404(Clientes, id=id)
-        usuario.delete()
+        print("HOLA")
+        
     usuarioActivo.delete()
     return redirect(to="inicio")
 

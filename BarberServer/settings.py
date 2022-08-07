@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+# from zmq import CHANNEL
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,6 +37,7 @@ LOGOUT_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,22 +52,24 @@ INSTALLED_APPS = [
     # 'django_browser_reload',
     "bootstrap5",
     'django_crontab',
+    'bootstrap5',
 ]
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+ASGI_APPLICATION = 'BarberServer.asgi.application'
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 # TAILWIND_APP_NAME = 'theme'
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND':'channels.layers.InMemoryChannelLayer'
+    }
+}
+
+
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
-
-CRONJOBS  = [ 
-    ( ' */1 * * * * ' , ' BarberServer.cron.MyCronJob') 
-]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,7 +80,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 
 ROOT_URLCONF = 'BarberServer.urls'
 
@@ -98,7 +102,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'BarberServer.wsgi.application'
 
 
-# sbase
+# Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
@@ -107,6 +111,7 @@ DATABASES = {
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
             'PASSWORD': '',
+            'PASSWORD': 'root1234',
             'HOST': 'localhost',
             'PORT': '3306',
         }
@@ -156,7 +161,7 @@ EMAIL_HOST="smtp.gmail.com"
 EMAIL_USE_TLS=True
 EMAIL_PORT=587
 EMAIL_HOST_USER="barberserver123company@gmail.com"
-EMAIL_HOST_PASSWORD="qbtsyhkdtihlbdql"
+EMAIL_HOST_PASSWORD="cicohcubaqamswjj"
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
