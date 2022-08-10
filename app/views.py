@@ -558,7 +558,6 @@ def cita(request, id):
         print("Fecha registro -->", fechaRegistroCita)
         fechaRegistroCita = fechaRegistroCita.strip()
         idHorario = idHorario.strip()
-        mandarNotificacion(idHorario, idCliente, barbero)
         idHorario =  horarios.objects.get(id=idHorario)
         cita = citas()
         cita.idCliente = idCliente
