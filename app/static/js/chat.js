@@ -7,7 +7,7 @@ let data = JSON.parse(e.data)
 console.log('Data:', data)
 
 if(data.type === 'chat'){
-    let message = document.getElementById('messages')
+    let messages = document.getElementById('messages')
 
     messages.insertAdjacentHTML('beforeend', `<div>
                                                     <p>${data.message}</p>

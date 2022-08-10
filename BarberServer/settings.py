@@ -107,7 +107,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
-            'PASSWORD': '',
+            'PASSWORD': 'root1234',
             'HOST': 'localhost',
             'PORT': '3306',
         }
