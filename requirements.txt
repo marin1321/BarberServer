@@ -4,5 +4,5 @@ pymysql
 pillow
 pymysql
 django-admin-interface
-tailwind
 django-bootstrap-v5
+

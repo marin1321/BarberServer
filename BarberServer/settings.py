@@ -44,27 +44,26 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
     'colorfield',
-    'tailwind',
-    'theme',
-    'django_browser_reload',
     "bootstrap5",
     'django_crontab',
+    'channels',
 ]
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+ASGI_APPLICATION = 'BarberServer.asgi.application'
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
-
-TAILWIND_APP_NAME = 'theme'
-
 
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND':'channels.layers.InMemoryChannelLayer'
+    }
+}
+
 CRONJOBS  = [ 
-    ( ' */1 * * * * ' , ' BarberServer.cron.MyCronJob') 
+    ('*/1 * * * * ' , 'BarberServer.cron.MyCronJob') 
 ]
 
 
@@ -76,7 +75,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 
@@ -109,7 +107,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
-            'PASSWORD': 'Sena1234',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '3306',
         }

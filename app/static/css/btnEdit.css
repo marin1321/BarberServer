@@ -69,15 +69,17 @@
 }
 
 .timeline-sm-item .verCita{
-    width: 100%;
+    width: 30%;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.timeline-sm-item .verCita a{
+.timeline-sm-item .verCita button{
     background-color: #050505;
     border-radius: 10px;
-    height: 3rem;
+    height: 2.6rem;
     width: 5rem;
     border: 1px solid #0d6efd;
     color: #fff;
@@ -86,6 +88,32 @@
     align-items: center;
     text-decoration: none;
     margin-left: 10px;
+	position: relative;
+	overflow: hidden;
 }
 
-.timeline-sm-item .verCita a:hover{ box-shadow: 0 0 10px 2px #0d6efd inset; }
+/* .verCita .btnAceptar::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #0d6efd;
+    position: absolute;
+    z-index: 0;
+    top: -2.6rem;
+    left: 0;
+    transition: .3s ease-in-out all;
+} */
+
+/* .btnAceptar:hover::after{
+    top:0;
+} */
+
+.verCita button span{
+	position: relative;
+	z-index: 2;
+	transition: .3s ease all;
+}
+
+/* https://labs.loupbrun.ca/buttons/ */
+
+.timeline-sm-item .verCita button:hover{ box-shadow: 0 0 10px 2px #0d6efd inset; }
