@@ -379,8 +379,8 @@ option{ background-color: #222; }
 
 .msj_campo{ 
     width: 100%;
-    height: 85%;
-    background-color: white;
+    height: 80%;
+    background-color: #333;
     display: flex;
     flex-direction: column;
     padding: 0 10px;
@@ -412,35 +412,59 @@ option{ background-color: #222; }
     margin-left: 1.8rem;
 }
 
-.msj_enviar{
+.msj_enviar, .msj_enviar div{
     width: 100%;
     height: auto;
     padding: 5px 0;
     /* background-color: #333; */
     display: flex;
-    justify-content: space-evenly;
 }
 
-#form input{
-    width: 120%;
+.msj_enviar div{
+    padding: 0;
+    box-shadow: 0 0 4px 0px #ddd;
+    border-radius: 20px;
+    justify-content: space-between;
+}
+
+/* .msj_enviar div:active{
+    box-shadow: 0 0 10px -1px #fff;
+} */
+
+#form{
+    width: 90%;
     height: auto;
+}
+
+#form textarea{
+    width: 100%;
+    height: 1.8rem;
+    resize: none;
     background-color: #060606;
     border: none;
-    box-shadow: 0 0 4px 0px #ddd;
     color: #fff;
+    border-radius: 20px;
+    margin: 7px 5px 0 10px;
+    max-height: 5rem;
 }
 
-/* .msj_enviar input:focus{ outline: #333;} */
+#form textarea::-webkit-scrollbar{
+    width: 0;
+}
+
+#form textarea:focus{ outline: none; }
 
 .msj_enviar button{
     height: 100%;
     width: 15%;
-    background-color: #090909;
-    padding-left: 0;
-    padding-top: 4px;
-    padding-bottom: 7px; 
-    padding-right: 4px;
-    border-radius: 50%;
+    padding: 0 4px 2px 0;
+    background: transparent;
+    border: none;
+}
+
+.msj_enviar button:hover{
+    background-color: #111;
+    border-radius: 20px;
 }
 
 .msj_enviar button svg{ transform: rotate(45deg); }

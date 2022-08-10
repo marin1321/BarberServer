@@ -1,15 +1,23 @@
 
 const campoChat= document.querySelector(".chat");
 const campoEditar= document.querySelector(".campoEditar");
+const areaTexto= document.querySelector("textarea");
+const msj_campo= document.querySelector(".msj_campo");
 
+/*cambiando el tamano del textarea automaticamente */
+areaTexto.addEventListener("keyup", e => {
+    areaTexto.style.height= "1.8rem";
+    let scHeight= e.target.scrollHeight;
+    areaTexto.style.height= `${scHeight}px`;
+});
+
+
+/*Elegir el campo a usar(Chat o editar)*/
 let veriEditar= false;
 let veriChat= false;
 let contadorChat= 0;
 let contadorEdit= 0;
 let listaId=[];
-
-// btnChat.addEventListener('click', MostrarChat);
-// btnEditar.addEventListener('click', MostrarEditar);
 
 function Chat(idChat) {
     const btnChat= document.getElementById(`${idChat}`);
