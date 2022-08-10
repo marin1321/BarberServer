@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block stilos %}
+<link rel="stylesheet" href="{% static 'css/horario.css'%}" />
+<link rel="stylesheet" href="{% static 'css/modal.css'%}">
+<link rel="stylesheet" href="{% static 'fullCalendar/lib/main.css'%}">
+{% endblock stilos %} 
+{% block appContenido %}
+<div class="card" style="margin-top:  100px;">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <h2><strong class="card-title">Lista Citas</strong></h2>
+      </div>
+    </div>
+  </div>
+  <div id="calendar" class="container"></div> 
+</div>
+
+{% endblock  %}
+{% block llamdoJavaScript %}
+{% comment %} <script type="text/javascript">
+  var $ = jQuery.noConflict()
+  function Horario(url){
+      $('#exampleModal').load(url, function(){
+          $(this).modal('show');
+      })
+  }
+</script> {% endcomment %}
+<script src="{% static 'fullCalendar/lib/main.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded',function(){
+      var calendarUI = document.getElementById('calendar')
+      var calendar = new FullCalendar.Calendar(calendarUI,{})
+      calendar.render()
+  })
+</script>
+{% endblock llamdoJavaScript %}

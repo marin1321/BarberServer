@@ -63,7 +63,7 @@ CHANNEL_LAYERS = {
 }
 
 CRONJOBS  = [ 
-    ( ' */1 * * * * ' , ' BarberServer.cron.MyCronJob') 
+    ('*/1 * * * * ' , 'BarberServer.cron.MyCronJob') 
 ]
 
 

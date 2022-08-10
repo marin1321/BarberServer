@@ -198,7 +198,7 @@
                                                 <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
                                                 <p class="text-white-50 mt-2">Direccion: {{citasId.idTrabajador.direccion}}</p>
                                             </article>
-                                            {% if citas.peticion == pendientes %}
+                                            {% if citas.peticion == 'pendiente' %}
                                             <article class="verCita">
                                                 <button id="btnChat{{citasId.id}}" name="btnCita{{citasId.id}}" class="btnAceptar" onClick="Chat(this.id)"><span>Chat</span></button>
                                                 <form  action="" method="post">{% csrf_token %}
