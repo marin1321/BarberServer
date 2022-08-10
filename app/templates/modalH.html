@@ -1,25 +1,23 @@
 
 <!-- Modal -->
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <section class="fondo">
-              <div class="contenedorModalPerfil xl:h-10 modal-header">
-                <article class="infoBasica-modal">
-                  <section class="texto">
-                    <form action="" class="formlr formularioEditar" method="post" >{% csrf_token %}
-                      {{ form }}
-                      <input type="hidden" name="horarioId" value="{{id.id}}"></input>
-                      <button type="submit">Ok</button>
-                    </form>
-                    <form action="" method="post">{% csrf_token %}
-                      <input type='hidden' value={{id.id}} name='horarioId'> 
-                      <button class="btn btn-sm btn-outline-secondary badge">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </form>
-                  </section>
-                </article>
-              </div>
-            </section>
-        </div> 
-    </div>
+<div class="modal-dialog .modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content modal-contentH">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar mi horario</h5>
+        <button type="button" class="btn-close btn-closeH" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" class="formlr formularioEditar" method="post" >{% csrf_token %}
+          {{ form }}
+          <input type="hidden" name="horarioId" value="{{id.id}}"></input>
+          <button type="submit" class="btn btn-outline-light">Ok</button>
+        </form>
+        <form action="" method="post">{% csrf_token %}
+          <input type='hidden' value={{id.id}} name='horarioId'> 
+          <button class="btn btn-sm btn-outline-secondary badge">
+            <i class="fa fa-trash"></i>
+          </button>
+        </form>
+      </div>
+    </div> 
+</div>
