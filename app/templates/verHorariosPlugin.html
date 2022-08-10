@@ -57,6 +57,7 @@
       var calendarUI = document.getElementById('calendar')
       var calendar = new FullCalendar.Calendar(calendarUI,{
         themeSystem: themeSystem,
+        locale: 'es',
       events: [
       {% for objectH in datosH %}
       { 
