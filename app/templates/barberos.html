@@ -61,15 +61,15 @@
                     </div>
                     <figure class="figura">
                         {% if barber.foto %}
-                        <img src="{{ barber.foto }}" alt="las vegas"
-                            class="img_cards">
+                        <img src="{{ barber.foto }}" alt="las vegas" class="img_cards">
                         {% endif %} 
 
                         </figure>
                     <div class="infoBasica">
                         <h3 id="nombre">{{ barber.nombres }}</h3>
                         <h4 class="info"><b>Barrio:</b>{{ barber.nom_local }}</h4>
-                        <h4 class="info"><b>Estado:</b> Activo</h4>
+                        <h4 class="info"><b>Estado:</b> {{barber.estado}}</h4>
+                        <h4 class="info"><b>Calificacion:</b> {{barber.estado}}</h4>
                     </div>
                 </article>
                 {% endfor %}
