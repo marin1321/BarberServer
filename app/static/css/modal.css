@@ -97,10 +97,9 @@
   
   .infoBasica-modal{
     width: 65%;
-    height: 100%;
+    height: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
   }
   
   .campoimg-modal{
@@ -142,7 +141,16 @@
 
   .texto{
     width: 100%;
-    height: 50%;
+    height: 80%;
+    display: flex;
+  }
+  .Estrellitas{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .comentario{
     display: flex;
   }
 

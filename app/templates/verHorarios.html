@@ -13,7 +13,7 @@
 </script>
 {% endblock llamdoJavaScript %}
 {% block appContenido %}
-{% comment %} <main class="vtn_main">
+<main class="vtn_main">
   <section class="horarios">
     <table class="tablaHorarios">
       <caption class="caption">Mi Horario</caption>
@@ -139,8 +139,8 @@
         </tr>
     </table>
   </section>
-</main> {% endcomment %}
-<div class="row flex-lg-nowrap">
+</main> 
+{% comment %} <div class="row flex-lg-nowrap">
   <div class="col mb-3">
     <div class="e-panel card cardVerHorarios align-items-center">
       <div class="card-body">
@@ -225,5 +225,5 @@
     </div>
   </div>
 </div>
-<div  class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+<div  class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div> {% endcomment %}
 {% endblock  %}

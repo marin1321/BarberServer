@@ -104,17 +104,23 @@ def barber(request):
             idUsr = Clientes.objects.get(email=usuarioActivo)
             datas = idUsr.rol
     nombreSelect=None
+    pasarC = 0
     if searchs:
         if select != None and select != 'Todos':
             select = Categoria.objects.get(nombre_cat = select).id
             barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs),idCategoria = select).distinct()
             nombreSelect=select
+            pasarC = 1
         else:
-            nombreSelect=None
             barber= Trabajadores.objects.filter(Q(nombres__icontains = searchs)|Q(apellidos__icontains = searchs)).distinct()
+    if select and nombreSelect == None and pasarC == 1:
+        select = Categoria.objects.get(nombre_cat = select).id
+        barber = Trabajadores.objects.filter(idCategoria = select)
+        nombreSelect = select
     if request.method == "POST":
         idsTrabajador = request.POST.get('idTrabajadores')
         result  = request.POST.get('result')
+        comentarios= request.POST.get('sugerencia')
         if int(result) > 5:
             print("Error Hoho")
         else: 
@@ -122,7 +128,9 @@ def barber(request):
             calificacionDatos.idCliente = idUsr
             calificacionDatos.idTrabajador = Trabajadores.objects.get(id = idsTrabajador)
             calificacionDatos.numeroCalificacion = int(result)
+            calificacionDatos.comentario = comentarios
             calificacionDatos.save()
+    
     data = {
         "barber":barber,
         "categoria":categorias,
@@ -148,9 +156,7 @@ def perfilBarbero(request):
         idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
         selectT =  request.GET.get('TiempoSelect')
         selectE = request.GET.get('estados')
-        print("Estado-->",selectE)
         datosCita = getBarberosClientes(selectE, selectT, "trabajador", idTrabajador)
-        print("DatosTraido=>",datosCita)
         data = {
             'datosB':datosB,
             "datosCita":datosCita,
@@ -192,7 +198,6 @@ def perfilCliente(request):
             estado =  request.POST.get("estado")
             peticion = request.POST.get('peticion')
             citaPeticion = request.POST.get('idCita')
-            print()
             if citaPeticion != None:
                 citaPeticion = citas.objects.get(id = citaPeticion)
                 citaPeticion.peticion = peticion
@@ -269,6 +274,11 @@ def getBarberosClientes(selectE, selectT,rol, ids):
                 if int(fechaHoy[0:4]) == int(fechaDeCita.year):
                     datosSelect.append(datoCita)
     if len(datosSelect) == 0 and selectE == None and selectT == None:
+        if rol == "trabajador":
+            datosSelect = citas.objects.filter(idTrabajador = ids)
+        elif rol == "cliente":
+            datosSelect = citas.objects.filter(idCliente = ids)
+    elif len(datosSelect) == 0 and selectE == "todos" and selectT == "todos":
         if rol == "trabajador":
             datosSelect = citas.objects.filter(idTrabajador = ids)
         elif rol == "cliente":
@@ -384,11 +394,11 @@ def horarioBarber(request):
         desdeFecha =  request.POST.get('desdeFecha')
         hastaFecha = request.POST.get('hastaFecha')
         inputInfo = request.POST.get('inputInfo')
+        hora2 = inicioHora[3:5]
+        hora1 = inicioHora[0:2]
         print(inputInfo == '1')
         if inputInfo == '1':
             if inicioHora:
-                hora2 = inicioHora[3:5]
-                hora1 = inicioHora[0:2]
                 hora2 = int(hora2) + 30
                 fecha = request.POST.get('fecha')
                 fecha =  fecha.strip()
@@ -453,6 +463,7 @@ def horarioBarber(request):
             else:
                 print("revise su fecha")
     return render(request, "horarioBarber.html", data)
+    
 def obtenerDiferencias(then, now = datetime.now()):
 
     duration = now - then
@@ -491,7 +502,7 @@ def forTiempo (diasRestantes, diasFaltantes, desdeFecha, hastaFecha, hora1, hora
             tiempo(hora1,hora2,id_usuario,inicioHora,fecha)
 def tiempo (hora1,hora2,id_usuario,inicioHora,fecha):
     print(1)
-    if hora2 >= 60:
+    if int(hora2) >= 60:
             hora2 = int(hora2) - 60 
             hora1 = int(hora1) + 2
     else: 
@@ -735,7 +746,7 @@ def verHorarios(request):
         horarioId = horarios.objects.get(id = horarioId)
         horarioId.estado = 'inactivo'
         horarioId.save()
-    return render(request, 'verHorarios.html', data)
+    return render(request, 'verHorariosPlugin.html', data)
 def eliminarHorario(request):
     if request.method=='POST':
         usuario = get_object_or_404(horarios, id=id)
