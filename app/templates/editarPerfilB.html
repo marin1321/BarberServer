@@ -1,10 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block stilos %}
-{% comment %} <link rel="stylesheet" href="{% static 'css/lore.css'%}"> {% endcomment %}
 <link rel="stylesheet" href="{% static 'css/profile.css'%}">
-<link rel="stylesheet" href="{% static 'css/lore.css'%}">
-<link rel="stylesheet" href="{% static 'css/contactof.css' %}">
 <link rel="stylesheet" href="{% static 'css/editar.css' %}">
 {% endblock stilos %}
 {% block llamdoJavaScript %}
@@ -26,42 +23,49 @@
 {% block appContenido %}
 <main class="vtn_main">
     <div class="sliderlore">
-        <div class="containerContactform containerBarber"  id="container">
-            <div class="form-container sign-in-contacto-container">
-                <form action="" class="formlr" method="post" enctype="multipart/form-data">{% csrf_token %}
-                    <h1 class='h1form'>Editar</h1>
-                    <div class="divEditarPerfil">
-                        <h4 class="col-sm-3 mb-0 alturaTamaño">Nombres</h4>
-                        {{ form.nombres }}
-                    </div>
-                    <div class="divEditarPerfil">
-                        <h4 class="col-sm-3 mb-0 alturaTamaño">Apellidos</h4>
-                        {{ form.apellidos }}
-                    </div>
-                    <div class="divEditarPerfil">
-                        <h4 class="col-sm-3 mb-0 alturaTamaño">Telefono</h4>
-                        {{ form.telefono }}
-                    </div>
-                    <div class="divEditarPerfil">
-                        <h4 class="col-sm-3 mb-0 alturaTamaño">Categoria</h4>
-                        {{ form.idCategoria }}
-                    </div>
-                    <div class="divEditarPerfil">
-                        <h4 class="col-sm-3 mb-0 alturaTamaño">Nombre Local</h4>
-                        {{ form.nom_local }}
-                    </div>
-                    <div class="divEditarPerfil">
-                        <h4 class="col-sm-3 mb-0 alturaTamaño">Direccíon</h4>
-                        {{ form.direccion }}
-                    </div>
-                    <div class="InputFoto">
-                        <input class="form-control" type="button" onclick="openWindow()">
-                        <input class="form-control" type="hidden" name="foto" id="foto" onclick="openWindow()">
-                    </div>
-                    <button class='buttonform' >Editar</button>
-                </form>
-            </div>
-        </div>
+        <section class="containerEdit">
+            <form action="" class="formlr" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <h1 class='h1form'>Editar</h1>
+                <section class="camposEdit">
+                    <article>
+                        <div class="divEditarPerfil">
+                            <h4 class="col-sm-3 mb-0 alturaTamaño">Nombres</h4>
+                            {{ form.nombres }}
+                        </div>
+                        <div class="divEditarPerfil">
+                            <h4 class="col-sm-3 mb-0 alturaTamaño">Apellidos</h4>
+                            {{ form.apellidos }}
+                        </div>
+                        <div class="divEditarPerfil">
+                            <h4 class="col-sm-3 mb-0 alturaTamaño">Telefono</h4>
+                            {{ form.telefono }}
+                        </div>
+                    </article>
+    
+                    <article>
+                        <div class="divEditarPerfil">
+                            <h4 class="col-sm-4 mb-0 alturaTamaño">Nombre Local</h4>
+                            {{ form.nom_local }}
+                        </div>
+                        <div class="divEditarPerfil">
+                            <h4 class="col-sm-3 mb-0 alturaTamaño">Direccíon</h4>
+                            {{ form.direccion }}
+                        </div>
+                        <div class="camposJuntos">
+                            <div class="divEditarPerfil">
+                                <h4 class="col-sm-3 mb-0 alturaTamaño">Categoria</h4>
+                                {{ form.idCategoria }}
+                            </div>
+                            <div class="InputFoto">
+                                <input class="form-control" type="button" onclick="openWindow()" value="Cambiar imagen de perfil">
+                                <input class="form-control" type="hidden" name="foto" id="foto" onclick="openWindow()">
+                            </div>
+                        </div>
+                    </article>
+                </section>
+                <button class='buttonform' >Editar</button>
+            </form>
+        </section>
     </div>
 </main>
 {% endblock appContenido %}
