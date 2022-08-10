@@ -2,8 +2,6 @@
 {% load static %}
 {% block stilos %}
 {% comment %} <link rel="stylesheet" href="{% static 'css/lore.css'%}"> {% endcomment %}
-<link rel="stylesheet" href="{% static 'css/barberos.css'%}">
-<link rel="stylesheet" href="{% static 'css/card.css'%}">
 {% endblock stilos %}
 
 {% block llamdoJavaScript %}
@@ -54,47 +52,49 @@
 {% endblock llamdoJavaScript %}
 
 {% block appContenido %}
-<div class='sliderlore'>
-    <div class="containerform right-panel-active" id="container">
-        <div class="form-container sign-up-container">
-            <form action="" method="post" class='formlr'>{% csrf_token %}
-                <div>
-                <h1 class='h1form'>Crear Cuenta</h1>
-                <input type="email" placeholder="Gmail"name="email" id='remail' class='inputform' maxlength="30" required/>
-                <input type="text" placeholder="Nombres" name="nombres" id='rname' class='inputform' required/>
-                <input type="text" placeholder="Apellidos" name="apellidos" id='rapellido' class='inputform' required/>
-                <input type="text" placeholder="Telefono"name="telefono" id='ruser' class='inputform' required/>
-                <input type="password" placeholder="Contraseña" name="password" autofocus minlength="5" maxlength="10" required id='rpassword' class='inputform'/>
-                <input class="form-control" type="button" onclick="openWindow()">
-                <input class="form-control" type="hidden" name="foto" id="foto" onclick="openWindow()">
-                <div class="radiusB">
-                    <input type="radio" name='decision' value="trabajador" id='trabajador'  onchange="Mover()"/>
-                    <label forHtml="trabajador" class="labelRadio" >Trabajador</label>
-                    <input type="radio" name='decision' value="cliente" id='cliente' onchange="Regresar()" />
-                    <label forHtml="cliente" class="labelRadio">Cliente</label>
-                </div>
-                <button type="submit" class='buttonform'>Crear Cuenta</button>
-                </div>
-                <div class="nuevoForm formlr">
-                    <h1 class='h1form'>Datos Adicionales</h1>
-                    <div class="categoria">
-                        <h4 class="info">categoría</h2>
-                            {{ form.idCategoria}}
+<main class="vtn_main">
+    <div class='sliderlore'>
+        <div class="containerform right-panel-active" id="container">
+            <div class="form-container sign-up-container">
+                <form action="" method="post" class='formlr'>{% csrf_token %}
+                    <div>
+                    <h1 class='h1form'>Crear Cuenta</h1>
+                    <input type="email" placeholder="Gmail"name="email" id='remail' class='inputform' maxlength="30" required/>
+                    <input type="text" placeholder="Nombres" name="nombres" id='rname' class='inputform' required/>
+                    <input type="text" placeholder="Apellidos" name="apellidos" id='rapellido' class='inputform' required/>
+                    <input type="text" placeholder="Telefono"name="telefono" id='ruser' class='inputform' required/>
+                    <input type="password" placeholder="Contraseña" name="password" autofocus minlength="5" maxlength="10" required id='rpassword' class='inputform'/>
+                    <input class="form-control" type="button" onclick="openWindow()" value="Seleccionar imagen de perfil">
+                    <input class="form-control" type="hidden" name="foto" id="foto" onclick="openWindow()">
+                    <div class="radiusB">
+                        <input type="radio" name='decision' value="trabajador" id='trabajador'  onchange="Mover()"/>
+                        <label forHtml="trabajador" class="labelRadio" >Trabajador</label>
+                        <input type="radio" name='decision' value="cliente" id='cliente' onchange="Regresar()" />
+                        <label forHtml="cliente" class="labelRadio">Cliente</label>
                     </div>
-                    <input type="text" placeholder="Nombre del local" name="nom_local" id='nom_local' class='inputform'/>
-                    <input type="text" placeholder="Dirección del Local" name="direccion" id='direccion' class='inputform'/>
-                </div>
-            </form>
-        </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1 class='h1form'>¡Bienvenido de nuevo!</h1>
-                    <p class='pform'>Para mantenerse conectado con nosotros, inicie sesión con su información personal</p>
-                    <a href="{% url  'login' %}" class="ghost buttonform">Iniciar Sesión</a>
+                    <button type="submit" class='buttonform'>Crear Cuenta</button>
+                    </div>
+                    <div class="nuevoForm formlr">
+                        <h1 class='h1form'>Datos Adicionales</h1>
+                        <div class="categoria">
+                            <h4 class="info">categoría</h2>
+                                {{ form.idCategoria}}
+                        </div>
+                        <input type="text" placeholder="Nombre del local" name="nom_local" id='nom_local' class='inputform'/>
+                        <input type="text" placeholder="Dirección del Local" name="direccion" id='direccion' class='inputform'/>
+                    </div>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1 class='h1form'>¡Bienvenido de nuevo!</h1>
+                        <p class='pform'>Para mantenerse conectado con nosotros, inicie sesión con su información personal</p>
+                        <a href="{% url  'login' %}" class="ghost buttonform">Iniciar Sesión</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</main>
 {% endblock appContenido %}
