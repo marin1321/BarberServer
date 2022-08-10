@@ -1,7 +1,265 @@
+
 .sliderlore{ padding-top: 10em; padding-bottom: 5em; }
 
 /* #sliderlore1{ padding-top: 10rem; padding-bottom: 2rem;}
 #sliderlore2{ padding-top: 0;padding-bottom: 5rem;} */
+
+.sliderlore{ padding-top: 15em; padding-bottom: 10em; }
+
+.containerHorario {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+  position: relative;
+  overflow: hidden;
+  width: 70%;
+  height: 22em;
+  max-width: 100%;
+  min-height: 40%;
+}
+
+.formHorario{
+  width: 100%;
+  height: 70%;
+}
+
+.btnHora{
+  width: 21%;
+  height: 30%;
+}
+
+.inputsHora{
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.inputsHora input{
+  background: linear-gradient(#333, #222);
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  color: wheat; 
+}
+
+#fecha{ width: 26%; }
+
+#horaInicio{ width: 20%; }
+
+.icon-btn {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #cdcdcd;
+  background: linear-gradient(#333, #222);
+  border-radius: 25px;
+  overflow: hidden;
+  position: relative;
+  transition: width 0.2s ease-in-out;
+  font-weight: 500;
+  font-family: inherit;
+}
+.icon-btn{
+  color: white;
+}
+.add-btn:hover {
+  width: 28%;
+}
+
+.add-btn::before,
+.add-btn::after {
+  transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 10px;
+  top: calc(50% - 2px);
+  background:#ffd17b;
+}
+
+.add-btn::after {
+  right: 14px;
+  overflow: hidden;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.add-btn::before {
+  left: 14px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.icon-btn:focus {
+  outline: none;
+}
+
+.btn-txt {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.add-btn:hover::before,
+.add-btn:hover::after {
+  width: 4px;
+  border-radius: 2px;
+}
+
+.add-btn:hover .btn-txt {
+  opacity: 1;
+}
+
+.add-icon::after,
+.add-icon::before {
+  transition: all 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 2px;
+  top: calc(50% - 10px);
+  background: #ffd17b;
+  overflow: hidden;
+}
+
+.add-icon::before {
+  left: 22px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.add-icon::after {
+  right: 22px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.add-btn:hover .add-icon::before {
+  left: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+
+.add-btn:hover .add-icon::after {
+  right: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+/* ver Horarios */
+.card-body {
+  display: flex;
+  flex-direction: column; 
+  width: 75%;
+}
+.cardVerHorarios{
+  margin-top: 7rem;
+  background: #333;
+}
+.nom-categoria {
+  border-bottom:0;
+  font-size: 3rem;
+  color: #fff;
+  text-align: center;
+}
+.card-title{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.table{
+  --bs-table-color: #f8f9fa;
+  color: #fff;
+}
+
+.titulo p{
+color: #969ba1;
+}
+
+/*VER HORARIOS*/
+.horarios{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+.tablaHorarios{
+  width: 80%;
+  height: auto;
+  margin-top: 5em;
+  background-color: #050505f1;
+  color: #fff;
+  caption-side: top;
+}
+
+.caption{
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bold;
+  color: #010101;
+  font-family: 'Rye', cursive;
+}
+
+table, td, th{ 
+  width: 3rem;
+  height: auto;
+  border: 2px solid black;
+  /* border-collapse: separate; */
+  border-spacing: 5px;
+  padding: 10px;
+}
+
+.campoHorario{
+  width: 95%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 0.5rem 0;
+  border-radius: 5px;
+  /* border-top: 1px solid black;
+  border-bottom: 1px solid black; */
+}
+
+#pendiente{
+  background-color: #4e4e4e;
+  /* https://encycolorpedia.es/7c7c7c */
+}
+
+#ocupado{
+  background-color: #868686;
+}
+
+th{
+  font-size: 2rem;
+  text-align: center;
+}
+
+.tiempo{
+  font-size: 1.5rem;
+}
+
+.ver{
+  width: auto;
+  height: auto;
+  padding: 3px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #333;
+  color: white !important;
+  font-size: 1.2rem;
+}
+
+.ver:hover{
+  background-color: #222;
+}
+.sliderlore{ padding-top: 15em; padding-bottom: 10em; }
+
 
 .containerHorario {
   background-color: rgb(17, 17, 17);

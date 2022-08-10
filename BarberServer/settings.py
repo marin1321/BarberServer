@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,7 +78,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 ROOT_URLCONF = 'BarberServer.urls'
 
 TEMPLATES = [
@@ -99,7 +99,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'BarberServer.wsgi.application'
 
 
-# sbase
+# Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
@@ -157,7 +157,7 @@ EMAIL_HOST="smtp.gmail.com"
 EMAIL_USE_TLS=True
 EMAIL_PORT=587
 EMAIL_HOST_USER="barberserver123company@gmail.com"
-EMAIL_HOST_PASSWORD="qbtsyhkdtihlbdql"
+EMAIL_HOST_PASSWORD="cicohcubaqamswjj"
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
