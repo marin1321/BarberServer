@@ -660,7 +660,7 @@ def editarPerfilB(request):
 
 def modal_barber(request, id):
     barbero = Trabajadores.objects.filter( id = id )
-    calificaciones = calificacion.objects.all()
+    calificaciones = calificacion.objects.filter( id = id)
     numeroCalificacion = 0
     promedioC = []
     if request.user.is_authenticated:
@@ -673,11 +673,10 @@ def modal_barber(request, id):
         elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
             idUsr = Clientes.objects.get(email=usuarioActivo)
             datas = idUsr.rol
+    print(len(calificaciones))
     if len(calificaciones) >= 1:
-        idsTrabajador =  Trabajadores.objects.get( id = id ) 
         for idCalificacion in calificaciones:
-            if idsTrabajador == idCalificacion.idTrabajador:
-                promedioC.append(idCalificacion.numeroCalificacion) 
+            promedioC.append(idCalificacion.numeroCalificacion) 
         sumcalificacion = sum(promedioC)
         numeroCalificacion = sumcalificacion / len(promedioC)
         print(numeroCalificacion)
