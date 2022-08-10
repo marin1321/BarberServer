@@ -1,3 +1,4 @@
+from cgi import print_form
 import email
 import imp
 from multiprocessing import AuthenticationError
@@ -26,8 +27,10 @@ def loginF(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, "logueado con exito!")
-            return redirect('/perfilCliente.html')
+            print("logueado con exito!")
+            return redirect('perfilCliente.html')
         else:
+            print("Credenciales incorrectas")
             messages.warning(request, "Credenciales incorrectas")
     else:
         form = AuthenticationForm(request)
