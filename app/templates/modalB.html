@@ -30,7 +30,7 @@
           <section class="contenedor-modal">
             <figure class="campoimg-modal">
               {% if dataT.foto %}
-                <img src={{dataT.foto.url}} alt="El barbero {{dataT.nombres}}" class="img-vtn"/>
+                <img src={{dataT.foto}} alt="El barbero {{dataT.nombres}}" class="img-vtn"/>
               {% endif %}
             </figure>
             <article class="infoBasica-modal">
@@ -53,13 +53,13 @@
                         <p class="clasificacion">
                           <input id="radio1" type="radio" name="estrellas" value="5" onclick="calificacion(5)" {% if calificacion == 5%}checked{% endif %}></input>
                           <label for="radio1">★</label>
-                          <input id="radio2" type="radio" name="estrellas" value="4" onclick="calificacion(4)" {% if calificacion == 4%}checked{% endif %} ></input>
+                          <input id="radio2" type="radio" name="estrellas" value="4" onclick="calificacion(4)" {% if calificacion >= 4 and calificacion < 5%}checked{% endif %} ></input>
                           <label for="radio2">★</label>
-                          <input id="radio3" type="radio" name="estrellas" value="3" onclick="calificacion(3)" {% if calificacion == 3%}checked{% endif %}></input>
+                          <input id="radio3" type="radio" name="estrellas" value="3" onclick="calificacion(3)" {% if calificacion >= 3 and calificacion < 4 %}checked{% endif %}></input>
                           <label for="radio3">★</label>
-                          <input id="radio4" type="radio" name="estrellas" value="2" onclick="calificacion(2)" {% if calificacion == 2%}checked{% endif %}></input>
+                          <input id="radio4" type="radio" name="estrellas" value="2" onclick="calificacion(2)" {% if calificacion >= 2 and calificacion < 3%}checked{% endif %}></input>
                           <label for="radio4">★</label>
-                          <input id="radio5" type="radio" name="estrellas" value="1" onclick="calificacion(1)" {% if calificacion == 1%}checked{% endif %}></input>
+                          <input id="radio5" type="radio" name="estrellas" value="1" onclick="calificacion(1)" {% if calificacion >= 1 and calificacion < 2%}checked{% endif %}></input>
                           <label for="radio5">★</label>
                           </p>
                           <h6 class="mb-0" id="mostrarC">{{calificacion}}</h6>

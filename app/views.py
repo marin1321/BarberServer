@@ -1,3 +1,4 @@
+from ast import If
 from cgi import print_form
 import email
 import imp
@@ -86,19 +87,23 @@ def barber(request):
     categorias = Categoria.objects.all()
     searchs = request.GET.get('search')
     select = request.GET.get('opciones')
-        # listIdT = []
-        # promedioC = []
-        # for idBarberos in barber:
-        #     listIdT.append(idBarberos.id)
-        #     numeroCalificaciones = []
-        #     for idCalificacion in calificaciones:
-        #         if idBarberos.id == idCalificacion.idTrabajador:
-        #             numeroCalificaciones.append(idCalificacion.numeroCalificacion) 
-        #     sumcalificacion = sum(numeroCalificaciones)
-        #     promedios = sumcalificacion / len(numeroCalificaciones)
-        #     promedioC.append(promedios)
-        # dictCalificacion = dict(zip(listIdT, promedioC))
-                    
+    calificaciones = calificacion.objects.all()
+    listIdT = []
+    promedioC = []
+    for idBarberos in barber:
+        listIdT.append(idBarberos.id)
+        numeroCalificaciones = []
+        if len(calificaciones) >= 1:
+            for idCalificacion in calificaciones:
+                if idBarberos == idCalificacion.idTrabajador:
+                    numeroCalificaciones.append(idCalificacion.numeroCalificacion)
+            if len(numeroCalificaciones) >0:          
+                sumcalificacion = sum(numeroCalificaciones)
+                promedios = sumcalificacion // len(numeroCalificaciones)
+                promedioC.append(promedios)
+            else:
+                promedioC.append(0)
+    dictCalificacion = dict(zip(listIdT, promedioC))
     if request.user.is_authenticated:
         global user_id
         user_id = request.user.id
@@ -141,6 +146,7 @@ def barber(request):
         "categoria":categorias,
         "rol":datas,
         "select": nombreSelect,
+        "dicCalificacion":dictCalificacion,
     }  
     return render(request, 'barberos.html', data)
 
@@ -222,7 +228,8 @@ def perfilCliente(request):
         data = {
             'citas':citasId,
             'datosC':datosC,
-            'selectH':citasId,
+            'selectH':selectT,
+            'selectE':selectE,
         }
         return render(request, 'perfilCliente.html', data)
     else:
@@ -239,7 +246,7 @@ def getBarberosClientes(selectE, selectT,rol, ids):
             elif selectE == "cancelada":
                 datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'cancelada')
         elif rol == "cliente":
-            if selectE == "aceptado":
+            if selectE == "aceptada":
                 datosCita = citas.objects.filter(idCliente = ids, peticion = 'aceptada')
             elif selectE == "pendiente":
                 datosCita = citas.objects.filter(idCliente = ids, peticion = 'pendiente')
@@ -273,7 +280,6 @@ def getBarberosClientes(selectE, selectT,rol, ids):
                 if int(fechaHoy[0:4]) == int(fechaDeCita.year) and int(fechaHoy[5:7]) == int(fechaDeCita.month):
                     datosSelect.append(datoCita)
         elif selectT == 'esteAnio':
-            print()
             for datoCita in datosCita:
                 fechaDeCita = datoCita.idHorario.fecha
                 if int(fechaHoy[0:4]) == int(fechaDeCita.year):
@@ -555,29 +561,34 @@ def cita(request, id):
         horaRegistroCita = horaRegistroCita.strip()
         idHorario = request.POST.get('idHorario')
         fechaRegistroCita = datetime.today().strftime('%Y-%m-%d')
-        print("Fecha registro -->", fechaRegistroCita)
         fechaRegistroCita = fechaRegistroCita.strip()
         idHorario = idHorario.strip()
         idHorario =  horarios.objects.get(id=idHorario)
-        cita = citas()
-        cita.idCliente = idCliente
-        cita.idServicio = idServicio
-        cita.horaRegistroCita = horaRegistroCita
-        cita.fechaRegistroCita = fechaRegistroCita
-        cita.idHorario = idHorario
-        cita.idTrabajador = barbero
-        cita.peticion = "pendiente"
-        cita.save()
-        idHorario.estado = "inactivo"
-        idHorario.save()
-    return render(request, "agendar.html", data)
+        mandarNotificacion(idHorario, idCliente, barbero)
+        if citas.objects.filter(idHorario = idHorario ).exists():
+            redirect(to="barberos")
+        else:
+            cita = citas()
+            cita.idCliente = idCliente
+            cita.idServicio = idServicio
+            cita.horaRegistroCita = horaRegistroCita
+            cita.fechaRegistroCita = fechaRegistroCita
+            cita.idHorario = idHorario
+            cita.idTrabajador = barbero
+            cita.peticion = "pendiente"
+            cita.save()
+            idHorario.estado = "inactivo"
+            idHorario.save()
+            messages.success(request,"Tu cita se agendado")
+    return render(request, "agendarPlugin.html", data)
 
 def mandarNotificacion(idHorario, nombreCliente, barbero):
-    inicioHorario = horarios.objects.get(id = idHorario).horaInicio
+    inicioHorario = horarios.objects.get(id = idHorario.id).horaInicio
     subject = 'Señor Barber usted tiene una cita a las: ' + str(inicioHorario)
     message = 'Quien Reservo la cita el cliente ' + nombreCliente.nombres 
     email_from =  settings.EMAIL_HOST_USER
     recipient_list = [barbero.email]
+    print('si lo mando')
     send_mail(subject, message, email_from, recipient_list) 
 
 
@@ -585,11 +596,11 @@ def eliminarCuenta(request):
     global user_id 
     user_id = request.user.id
     usuarioActivo = User.objects.get(id=user_id)
-    if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+    if Trabajadores.objects.filter(email=usuarioActivo).exists():
         id = Trabajadores.objects.get(email=usuarioActivo).id
         usuario = get_object_or_404(Trabajadores, id=id)
 
-    if Clientes.objects.filter(email=usuarioActivo).exists()==True:
+    if Clientes.objects.filter(email=usuarioActivo).exists():
         id = Clientes.objects.get(email=usuarioActivo).id
         state = Clientes.objects.get(state=usuarioActivo)
         usuario = get_object_or_404(Clientes, id=id)
@@ -602,9 +613,9 @@ def editarPerfilC(request):
     global user_id 
     user_id = request.user.id
     usuarioActivo = User.objects.get(id=user_id)
-    if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+    if Trabajadores.objects.filter(email=usuarioActivo).exists():
         datas = Trabajadores.objects.get(email=usuarioActivo).rol
-    elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
+    elif Clientes.objects.filter(email=usuarioActivo).exists():
         datas = Clientes.objects.get(email=usuarioActivo).rol
     id = Clientes.objects.get(email=usuarioActivo).id
     perfil = get_object_or_404(Clientes, id=id)
@@ -628,9 +639,9 @@ def editarPerfilB(request):
     global user_id 
     user_id = request.user.id
     usuarioActivo = User.objects.get(id=user_id)
-    if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+    if Trabajadores.objects.filter(email=usuarioActivo).exists():
         datas = Trabajadores.objects.get(email=usuarioActivo).rol
-    elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
+    elif Clientes.objects.filter(email=usuarioActivo).exists():
         datas = Clientes.objects.get(email=usuarioActivo).rol
     id = Trabajadores.objects.get(email=usuarioActivo).id
     perfil = get_object_or_404(Trabajadores, id=id)
@@ -661,7 +672,7 @@ def editarPerfilB(request):
 
 def modal_barber(request, id):
     barbero = Trabajadores.objects.filter( id = id )
-    calificaciones = calificacion.objects.filter( id = id)
+    calificaciones = calificacion.objects.filter( idTrabajador = id)
     numeroCalificacion = 0
     promedioC = []
     if request.user.is_authenticated:
@@ -674,13 +685,14 @@ def modal_barber(request, id):
         elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
             idUsr = Clientes.objects.get(email=usuarioActivo)
             datas = idUsr.rol
-    print(len(calificaciones))
     if len(calificaciones) >= 1:
         for idCalificacion in calificaciones:
-            promedioC.append(idCalificacion.numeroCalificacion) 
+            promedioC.append(idCalificacion.numeroCalificacion)
         sumcalificacion = sum(promedioC)
-        numeroCalificacion = sumcalificacion / len(promedioC)
-        print(numeroCalificacion)
+        numeroCalificacion = sumcalificacion // len(promedioC)
+    print(numeroCalificacion)
+
+
     data = {
         "dataT":barbero,
         "calificacion": numeroCalificacion,

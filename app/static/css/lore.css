@@ -619,6 +619,9 @@
 	z-index: 20;
 	position: relative;
 }
+.categoria select option{
+	background: #333;
+}
 /* categoria */
 .categoria{
 	display: flex;

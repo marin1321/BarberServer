@@ -55,4 +55,4 @@ class calificacion(models.Model):
     idCliente = models.ForeignKey(Clientes, on_delete=models.SET_NULL, blank=True, null=True)
     idTrabajador = models.ForeignKey(Trabajadores, on_delete=models.SET_NULL, blank=True, null=True)
     comentario = models.CharField(max_length=180, blank=False ,null=False)
-    numeroCalificacion = models.IntegerField(blank=True, null=True)
+    numeroCalificacion = models.FloatField(blank=True, null=True)

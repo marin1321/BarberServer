@@ -51,7 +51,7 @@ class MyCronJob():
         else:
             if int(fecha[0:4]) == int(fechaHorario.year):
                 if int(fecha[5:7]) == int(fechaHorario.month):
-                    if int(fecha[8:10]) > int(fechaHorario.days):
+                    if int(fecha[8:10]) > int(fechaHorario.day):
                         cita.peticion = "cancelada"
                 else:
                     restaMeses = int(fechaHorario.month) - int(fecha[5:7]) 

@@ -130,8 +130,8 @@
                                 <li class="seleccion">
                                     <h3>Fechas:</h3>
                                     <div class="ctr_select">
-                                        <select class="select">
-                                            <option value="todos">todos</option>
+                                        <select class="select" name="TiempoSelect">
+                                            <option value="todos">Todos</option>
                                             {% if selectH == 'esteAnio' %}
                                                 <option value="esteAnio" selected>Este Año</option>
                                             {% else %}
@@ -160,17 +160,17 @@
                                     <div class="ctr_select">
                                         <select class="select" name="estados">
                                             <option value="todos">Todos</option>
-                                            {% if selectE == aceptada%}
+                                            {% if selectE == 'aceptada'%}
                                             <option value="aceptada" selected>Aceptadas</option>
                                             {% else %}
                                             <option value="aceptada">Aceptadas</option>
                                             {% endif %}
-                                            {% if selectE == pendiente %}
+                                            {% if selectE == 'pendiente' %}
                                             <option value="pendiente" selected>Pendientes</option>
                                             {% else %}
                                             <option value="pendiente">Pendientes</option>
                                             {% endif %}
-                                            {% if selectE == cancelada %}
+                                            {% if selectE == 'cancelada' %}
                                             <option value="cancelada" selected>Canceladas</option>
                                             {% else %}
                                             <option value="cancelada">Canceladas</option>
@@ -198,15 +198,15 @@
                                                 <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
                                                 <p class="text-white-50 mt-2">Direccion: {{citasId.idTrabajador.direccion}}</p>
                                             </article>
-                                            {% if citas.peticion == 'pendiente' %}
-                                            <article class="verCita">
-                                                <button id="btnChat{{citasId.id}}" name="btnCita{{citasId.id}}" class="btnAceptar" onClick="Chat(this.id)"><span>Chat</span></button>
-                                                <form  action="" method="post">{% csrf_token %}
-                                                    <button id="cancelar">Cancelar</button>
-                                                    <input type="hidden" value="cancelada" name="peticion"></input>
-                                                    <input type="hidden" value="{{citasId.id}}" name="idCita"></input>
-                                                </form>
-                                            </article>
+                                            {% if citasId.peticion == 'pendiente' %}
+                                                <article class="verCita">
+                                                    <button id="btnChat{{citasId.id}}" name="btnCita{{citasId.id}}" class="btnAceptar" onClick="Chat(this.id)"><span>Chat</span></button>
+                                                    <form  action="" method="post">{% csrf_token %}
+                                                        <button id="cancelar">Cancelar</button>
+                                                        <input type="hidden" value="cancelada" name="peticion"></input>
+                                                        <input type="hidden" value="{{citasId.id}}" name="idCita"></input>
+                                                    </form>
+                                                </article>
                                             {% endif %}
                                         </section>
                                     </li>
