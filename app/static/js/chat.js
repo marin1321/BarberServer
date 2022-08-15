@@ -20,7 +20,9 @@ let form = document.getElementById('form')
 form.addEventListener('submit', (e)=>{
     e.preventDefault()
     let message = e.target.message.value
+    let name = e.target.name.value
     chatSocket.send(JSON.stringify({
+        'name':name,
         'message':message
     }))
     form.reset()
