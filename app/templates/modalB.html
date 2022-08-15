@@ -29,9 +29,9 @@
         <div class="modal-body">
           <section class="contenedor-modal">
             <figure class="campoimg-modal">
-                {% if dataT.foto %}
-                  <img src={{dataT.foto}} alt="El barbero {{dataT.nombres}}" class="img-vtn"/>
-                {% endif %}
+              {% if dataT.foto %}
+                <img src={{dataT.foto.url}} alt="El barbero {{dataT.nombres}}" class="img-vtn"/>
+              {% endif %}
             </figure>
             <article class="infoBasica-modal">
               <h3 id="nombre-modal">{{dataT.nombres }}</h3>

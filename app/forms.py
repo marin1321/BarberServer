@@ -31,4 +31,4 @@ class Citas(forms.ModelForm):
 class EditarHorarios(forms.ModelForm):
     class Meta:
         model = horarios
-        fields = ["horaInicio","fecha"]
+        fields = ["horaInicio","fecha","horaFinalizacion"]

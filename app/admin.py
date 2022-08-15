@@ -23,7 +23,7 @@ class HorarioAdmin(admin.ModelAdmin):
     list_display = ("idTrabajador", "horaInicio", "fecha", "horaFinalizacion", "estado")
 
 class calificacionAdmin(admin.ModelAdmin):
-    list_display = ("idTrabajador", "idCliente", "numeroCalificacion")
+    list_display = ("idTrabajador", "idCliente", "numeroCalificacion", "comentario")
 
 admin.site.register(Servicio, ServiciosAdmin)
 admin.site.register(Clientes, ClientesAdmin)

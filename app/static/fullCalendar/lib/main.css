@@ -47,7 +47,7 @@
 .fc a[data-navlink]:hover {
     text-decoration: underline;
   }
-.fc-direction-ltr {
+.fc-direction-ltr { 
   direction: ltr;
   text-align: left;
 }
@@ -856,6 +856,7 @@ A HORIZONTAL event
 }
 .fc-direction-ltr .fc-daygrid-event.fc-event-end,
 .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+  color: white;
   margin-right: 2px;
 }
 .fc-direction-ltr .fc-daygrid-week-number {

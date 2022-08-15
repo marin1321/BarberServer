@@ -2,6 +2,7 @@ from cgi import print_form
 import email
 import imp
 from multiprocessing import AuthenticationError
+import re
 from tokenize import String
 from django.contrib import messages
 from django.conf import settings
@@ -675,7 +676,7 @@ def editarPerfilB(request):
 
 def modal_barber(request, id):
     barbero = Trabajadores.objects.filter( id = id )
-    calificaciones = calificacion.objects.all()
+    calificaciones = calificacion.objects.filter( id = id)
     numeroCalificacion = 0
     promedioC = []
     if request.user.is_authenticated:
@@ -688,11 +689,10 @@ def modal_barber(request, id):
         elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
             idUsr = Clientes.objects.get(email=usuarioActivo)
             datas = idUsr.rol
+    print(len(calificaciones))
     if len(calificaciones) >= 1:
-        idsTrabajador =  Trabajadores.objects.get( id = id ) 
         for idCalificacion in calificaciones:
-            if idsTrabajador == idCalificacion.idTrabajador:
-                promedioC.append(idCalificacion.numeroCalificacion) 
+            promedioC.append(idCalificacion.numeroCalificacion) 
         sumcalificacion = sum(promedioC)
         numeroCalificacion = sumcalificacion / len(promedioC)
         print(numeroCalificacion)
@@ -704,16 +704,14 @@ def modal_barber(request, id):
     } 
     return render(request, 'modalB.html', data)
 def modal_EdiH(request, id):
-    horario = horarios.objects.filter( id = id )
+    print("-->",id)
+    horariosIds = horarios.objects.get(id = id)
     idHorario = get_object_or_404(horarios, id=id)
     data = {
-        "dataH":  horario,
+        "id": horariosIds,
         "form": EditarHorarios(instance=idHorario),
     } 
-    if request.method == 'POST':
-        formulario = EditarHorarios(data=request.POST, instance=horario)
-        if formulario.is_valid():
-            formulario.save()
+    print(request)
     return render(request, 'modalH.html', data)
 def contacto(request):
     if request.method=='POST':
@@ -755,16 +753,21 @@ def verHorarios(request):
     id_usuario = Trabajadores.objects.get(email=usuarioActivo)
     datosH = horarios.objects.filter(idTrabajador=id_usuario)
     datosB = Trabajadores.objects.filter(email=usuarioActivo)
-    
     data = {
         'datosH':datosH,
         'datosB':datosB,
     }
     if request.method == 'POST':
         horarioId = request.POST.get('horarioId')
-        horarioId = horarios.objects.get(id = horarioId)
-        horarioId.estado = 'inactivo'
-        horarioId.save()
+        idHorario = get_object_or_404(horarios, id=horarioId)
+        formulario = EditarHorarios(data=request.POST, instance=idHorario)
+        if formulario.is_valid():
+            formulario.save()
+        else:
+            horarioId = request.POST.get('horarioId')
+            horarioId = horarios.objects.get(id = horarioId)
+            horarioId.estado = 'inactivo'
+            horarioId.save()
     return render(request, 'verHorariosPlugin.html', data)
 def eliminarHorario(request):
     if request.method=='POST':
