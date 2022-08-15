@@ -13,6 +13,22 @@
         cloudName: 'barberserver', uploadPreset: 'BarberServer'}, 
         (error, result) => {
             if (!error && result.event === 'success'){
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Imagen subida con exito'
+  })
                 console.log('Imagen subida con éxito', result.info)
                 inputFoto.value = result.info.secure_url; 
             }

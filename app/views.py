@@ -317,8 +317,9 @@ def registro(request):
     if request.method=='POST':
         print("hola")
         formulario = RegistrationForm(data=request.POST)
-        email = request.POST.get('email')
+        email = request.POST.get('email') 
         if User.objects.filter(username=email).exists():
+            messages.success(request, "usuario ya se encuentra registrado")
             return redirect(to="login")
         else:
             if formulario.is_valid():
@@ -360,6 +361,7 @@ def registro(request):
                     user = User.objects.create_user(email, email, password)
                     login(request, user)
                     request.session['id'] = user.id
+                    messages.success(request, "registrado con exito")
                     return redirect(to="inicio")
                 else:
                     cliente = Clientes()
@@ -375,6 +377,7 @@ def registro(request):
                     user = User.objects.create_user(email, email, password)
                     login(request, user)
                     request.session['id'] = user.id
+                    messages.success(request, "registrado con exito")
                     return redirect(to="inicio")
             else:
                 print("LLENAR TODOS DATOS")
@@ -384,11 +387,18 @@ def registro(request):
     return render(request, 'registration/registrar.html', data)
 
 def horarioBarber(request):
-    data = {
-        "form" : HorariosBarbero    
-    }
+
+    if request.user.is_authenticated:
+
+        user_id = request.user.id
+        usuarioActivo = User.objects.get(id=user_id)
+        if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
+            datas = Trabajadores.objects.get(email=usuarioActivo).rol
+        elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
+            idUsr = Clientes.objects.get(email=usuarioActivo)
+            datas = idUsr.rol
     if request.method=='POST':
-        global user_id 
+
         user_id = request.user.id
         usuarioActivo = User.objects.get(id=user_id)
         id_usuario = Trabajadores.objects.get(email=usuarioActivo)
@@ -466,6 +476,12 @@ def horarioBarber(request):
                         print("Esta fecha no es permitida")
             else:
                 print("revise su fecha")
+
+    data = {
+        "form" : HorariosBarbero,
+        "rol" : datas    
+    }
+               
     return render(request, "horarioBarber.html", data)
     
 def obtenerDiferencias(then, now = datetime.now()):
