@@ -21,6 +21,7 @@ let listaId=[];
 
 function Chat(idChat) {
     const btnChat= document.getElementById(`${idChat}`);
+    console.log("AQUI -->", idChat)
     listaId.push(idChat);
     campoChat.style.display= "block";
     veriChat= true;
