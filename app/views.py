@@ -273,6 +273,8 @@ def getBarberosClientes(selectE, selectT,rol, ids):
                 datosCita = citas.objects.filter(idCliente = ids, peticion = 'pendiente')
             elif selectE == "cancelada":
                 datosCita = citas.objects.filter(idCliente = ids, peticion = 'cancelada')
+            else:
+                datosCita = citas.objects.filter(idCliente = ids)
         else:
             if selectE == "todos":
                 if rol == "trabajador":
@@ -293,7 +295,8 @@ def getBarberosClientes(selectE, selectT,rol, ids):
         elif selectT == 'hoy':
             for datoCita in datosCita:
                 fechaDeCita = datoCita.idHorario.fecha 
-                if fechaHoy == fechaDeCita:
+                print(fechaHoy == fechaDeCita)
+                if fechaHoy[8:10] == fechaDeCita.day:
                     datosSelect.append(datoCita)
         elif selectT == 'esteMes':
             for datoCita in datosCita:
@@ -306,7 +309,7 @@ def getBarberosClientes(selectE, selectT,rol, ids):
                 if int(fechaHoy[0:4]) == int(fechaDeCita.year):
                     datosSelect.append(datoCita)
     if len(datosSelect) == 0 and selectE == None and selectT == None:
-        if rol == "traba-jador":
+        if rol == "trabajador":
             datosSelect = citas.objects.filter(idTrabajador = ids)
         elif rol == "cliente":
             datosSelect = citas.objects.filter(idCliente = ids)
@@ -437,7 +440,7 @@ def horarioBarber(request):
                 fecha =  fecha.strip()
                 if int(fecha[0:4]) >= int(fechaHoy[0:4]):
                     restaAñosUnDia = int(fecha[0:4]) - int(fechaHoy[0:4])
-                    if restaAñosUnDia >= 1:
+                    if restaAñosUnDia >= 0:
                         restaMeses = int(fecha[5:7]) - int(fechaHoy[5:7])
                         if restaMeses >= 1:
                             if int(hora1) < 22:
@@ -445,7 +448,7 @@ def horarioBarber(request):
                                 print("Sexto if")                            
                         elif int(fechaHoy[5:7]) == int(fecha[5:7]):
                             if  int(fecha[8:10]) >= int(fechaHoy[8:10]):
-                                if int(horaHoy[0:2]) > int(hora1):
+                                if int(horaHoy[0:2]) < int(hora1):
                                     then =  datetime(int(fechaHoy[0:4]), int(fechaHoy[5:7]), int(fechaHoy[8:10]), int(horaHoy[0:2]), int(horaHoy[3:5], 0))
                                     now =  datetime(int(fecha[0:4]), int(fecha[5:7]), int(fecha[8:10]), int(inicioHora[0:2]), int(inicioHora[3:5], 0))
                                     tiempoMinutos = obtenerDiferencias(then,now, 'mins')
@@ -505,7 +508,7 @@ def horarioBarber(request):
                 print("revise su fecha")
     return render(request, "horarioBarber.html", data)
     
-def obtenerDiferencias(then, now = datetime.now()):
+def obtenerDiferencias(then, now = datetime.now(), intervalo = 'secs'):
 
     duration = now - then
     duration_in_s = duration.total_seconds() 
@@ -515,8 +518,11 @@ def obtenerDiferencias(then, now = datetime.now()):
 
     def mins():
         return divmod(duration_in_s, minute_ct)[0]
+    
 
-    return  int(mins())
+    return {
+        'mins': int(mins()),
+    }[intervalo]
 
 
 def forTiempo (diasRestantes, diasFaltantes, desdeFecha, hastaFecha, hora1, hora2, id_usuario, inicioHora):
