@@ -1,6 +1,7 @@
 from ast import If
 from cgi import print_form
 import email
+from email import message
 import imp
 from multiprocessing import AuthenticationError
 import re
@@ -437,7 +438,7 @@ def horarioBarber(request):
                 fecha =  fecha.strip()
                 if int(fecha[0:4]) >= int(fechaHoy[0:4]):
                     restaAñosUnDia = int(fecha[0:4]) - int(fechaHoy[0:4])
-                    if restaAñosUnDia <= 1:
+                    if restaAñosUnDia >= 1:
                         restaMeses = int(fecha[5:7]) - int(fechaHoy[5:7])
                         if restaMeses >= 1:
                             if int(hora1) < 22:
@@ -453,20 +454,28 @@ def horarioBarber(request):
                                         if int(hora1) < 22:
                                             tiempo(hora1,hora2,id_usuario,inicioHora,fecha)
                                         else:
+                                            messages.success(request, "La hora pasa de los limites de tiempo")
                                             print("La hora pasa de los limites de tiempo")
                                     else:
-                                        print("La hora que colocaste no cumple con el reglamiento ")
+                                        messages.success(request, "La hora que colocaste no cumple con el reglamento")
+                                        print("La hora que colocaste no cumple con el reglamiento")
                                 else:
+                                    messages.success(request, "No puede ser antes de la hora de hoy")
                                     print("No puede ser antes de la hora de hoy")
                             else:
+                                messages.success(request, "No colocar los dias antes")
                                 print("No colocar los dias antes")
                         else:
+                            messages.success(request, "Esta fecha no es permitida")
                             print("Esta fecha no es permitida")
                     else:
+                        messages.success(request, "Llene los espacios")
                         print("Mala fecha primera")
                 else:
+                    messages.success(request, "Mala la fecha")
                     print("Mala la fecha")
             else:
+                messages.success(request, "Llene los espacios")
                 print("Llene los espacios")
         elif inputInfo == '0':
             if int(desdeFecha[0:4]) >= int(fechaHoy[0:4]):
