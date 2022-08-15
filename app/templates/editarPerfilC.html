@@ -25,30 +25,34 @@
 {% block appContenido %}
 <main class="vtn_main">
     <div class="sliderlore">
-        <div class="containerContactform "  id="container">
-            <div class="form-container sign-in-contacto-container">
+        <section class="containerEdit">
                 <form action="" class="formlr formularioEditar" method="post" enctype="multipart/form-data">{% csrf_token %}
                     <h1 class='h1form'>Editar</h1>
-                    <div class="divEditarPerfil">
-                        <h4 class="col-sm-3 mb-0 alturaTamaño">Nombres</h4>
-                        {{ form.nombres }}
-                    </div>
-                    <div class="divEditarPerfil">
-                        <h4 class="col-sm-3 mb-0 alturaTamaño">Apellidos</h4>
-                        {{ form.apellidos }}
-                    </div>
-                    <div class="divEditarPerfil">
-                        <h4 class="col-sm-3 mb-0 alturaTamaño">Telefono</h4>
-                        {{ form.telefono }}
-                    </div>
-                    <div class="InputFoto">
-                        <input class="form-control" type="button" onclick="openWindow()">
-                        <input class="form-control" type="hidden" name="foto" id="foto" onclick="openWindow()">
-                    </div>
+                    <section class="camposEdit">
+                        <article>
+                            <div class="divEditarPerfil">
+                                <h4 class="col-sm-3 mb-0 alturaTamaño">Nombres</h4>
+                                {{ form.nombres }}
+                            </div>
+                            <div class="divEditarPerfil">
+                                <h4 class="col-sm-3 mb-0 alturaTamaño">Apellidos</h4>
+                                {{ form.apellidos }}
+                            </div>
+                        </article>
+                        <article>
+                            <div class="divEditarPerfil">
+                                <h4 class="col-sm-3 mb-0 alturaTamaño">Telefono</h4>
+                                {{ form.telefono }}
+                            </div>
+                            <div class="InputFoto inputFotoC">
+                                <input class="form-control imgCliente" type="button" onclick="openWindow()"  value="Cambiar imagen de perfil">
+                                <input class="form-control" type="hidden" name="foto" id="foto" onclick="openWindow()">
+                            </div>
+                        </article>
+                    </section>
                     <button class='buttonform' type="submit">Editar</button>
                 </form>
-            </div>
-        </div>
+        </section>
     </div>
 </main>
 {% endblock appContenido %}
