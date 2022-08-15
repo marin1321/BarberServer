@@ -696,6 +696,7 @@ def modal_barber(request, id):
         global user_id
         user_id = request.user.id
         usuarioActivo = User.objects.get(id=user_id)
+        datas = 0
         if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
             idUsr = Trabajadores.objects.get(email=usuarioActivo)
             datas = idUsr.rol
@@ -709,13 +710,19 @@ def modal_barber(request, id):
         numeroCalificacion = sumcalificacion // len(promedioC)
     print(numeroCalificacion)
 
-
-    data = {
-        "dataT":barbero,
-        "calificacion": numeroCalificacion,
-        "rol":datas,
-        "estrellitas":[1,2,3,4,5]
-    } 
+    if datas != 0:
+        data = {
+            "dataT":barbero,
+            "calificacion": numeroCalificacion,
+            "rol":datas,
+            "estrellitas":[1,2,3,4,5]
+        }
+    else:
+        data = {
+            "dataT":barbero,
+            "calificacion": numeroCalificacion,
+            "estrellitas":[1,2,3,4,5]
+        }
     return render(request, 'modalB.html', data)
 def modal_EdiH(request, id):
     print("-->",id)

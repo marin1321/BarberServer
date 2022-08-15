@@ -10,6 +10,7 @@ class Categoria(models.Model):
 class Servicio(models.Model):
     tipoServicio = models.CharField(max_length=50)
     idCategoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, blank=True, null=True)
+    foto = models.URLField(blank=True, null=True)
     valor = models.FloatField()
 
 class Trabajadores(models.Model):

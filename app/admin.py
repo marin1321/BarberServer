@@ -8,7 +8,7 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 class ServiciosAdmin(admin.ModelAdmin):
     model = Servicio
-    list_display = ("tipoServicio", "valor", "idCategoria")
+    list_display = ("tipoServicio", "valor", "idCategoria","foto")
 
 class ClientesAdmin(admin.ModelAdmin):
     list_display = ("nombres", "apellidos", "telefono", "email", "foto", "rol", "state")
