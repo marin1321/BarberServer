@@ -1,1 +1,5 @@
 node_modules
+media
+BarberServer/__pycache__/
+__pycache__/
+app/__pycache__/

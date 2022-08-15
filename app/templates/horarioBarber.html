@@ -1,15 +1,72 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block stilos %}
-<link rel="stylesheet" href="{% static 'css/contactof.css' %}">
-<link rel="stylesheet" href="{% static 'css/lore.css'%}">
 <link rel="stylesheet" href="{% static 'css/horario.css'%}">
 <link rel="stylesheet" href="{% static 'css/inputFormH.css'%}">
 {% endblock stilos %}
 {% block appContenido %}
 <main class="vtn_main">
     <div class='sliderlore'>
-        <div class="containerHorario" id="container">
+        <section class="containerHorario">
+            <article class="titulo">
+                <h1 class='h1form'>Horarios</h1>
+                <p>Ten encuenta que cada turno es de 1 hora y 30 de duración</p>
+            </article>
+            <hr>
+            <form action="" class='formlr formHorario' method="post">{% csrf_token %}
+                <article>
+                    <h4>Elige el dia exacto que quieras hacer un horario</h4>
+                </article>
+                <article class="inputsHora">
+                    <div class="inputFecha">
+                        <input type="date" placeholder="Fecha" id='fecha' name='fecha'/>
+                        <p>Fecha</p>
+                    </div>
+                    <div class="inputFecha">
+                        <input type="time" placeholder="Hora" id='horaInicio' name='horaInicio'/>
+                        <p>Hora de inicio</p>
+                    </div>
+                    <input type='hidden' value="1" name='inputInfo'>
+                    <button class="icon-btn add-btn" type="submit">
+                        <div class="add-icon"></div>
+                        <div class="btn-txt">Añadir Horario</div>
+                    </button>
+                </article>
+            </form>
+            <div class="btnHora">
+                <a href="{% url 'verHorario' %}"><button class='buttonform'>Ver Horarios</button></a>
+            </div>
+            <hr>
+            <form action="" class='formlr formHorario' method="post">{% csrf_token %}
+                <section>
+                    <h4>Elige los dias en los que quieras hacer un horario</h4>
+                </section>
+                <div class="inputsHora">
+                    <div>
+                        <input type="date" placeholder="Fecha" id='fecha' name='desdeFecha'/>
+                        <p>Desde esta fecha</p>
+                        <input type="date" placeholder="Fecha" id='fecha' name='hastaFecha'/>
+                        <p>Hasta esta fecha</p>
+                    </div>
+                    <div>
+                        <input type="time" placeholder="Hora" id='horaInicio' name='horaInicio'/>
+                        <p>Hora de inicio</p>
+                    </div>
+                    <button class="icon-btn add-btn" type="submit">
+                        <div class="add-icon"></div>
+                        <div class="btn-txt">Añadir Horario</div>
+                    </button>
+                </div>
+                <input type='hidden' value="0" name='inputInfo'>
+            </form>
+                <div class="btnHora">
+                    <a href="{% url 'verHorario' %}"><button class='buttonform'>Ver Horarios</button></a>
+                </div>
+        </section>
+    </div>
+
+    {% comment %} <div class='sliderlore' id="sliderlore1">
+        <div class="containerHorario">
             <div class="form-container sign-in-contacto-container formlr">
                 <form action="" class='formlr formHorario' method="post">{% csrf_token %}
                     <div class="titulo">
@@ -17,15 +74,15 @@
                         <p>Ten encuenta que cada turno es de 1 hora y 30 de duración</p>
                     </div>
                     <div class="inputsHora">
-                        <div class="inputFecha"> 
+                        <div class="inputFecha">
                             <input type="date" placeholder="Fecha" id='fecha' name='fecha'/>
                             <p>Fecha</p>
                         </div>
-                        <div class="inputFecha"> 
+                        <div class="inputFecha">
                             <input type="time" placeholder="Hora" id='horaInicio' name='horaInicio'/>
                             <p>Hora de inicio</p>
                         </div>
-                        <input type='hidden' value="1   " name='inputInfo'>
+                        <input type='hidden' value="1" name='inputInfo'>
                         <button class="icon-btn add-btn" type="submit">
                             <div class="add-icon"></div>
                             <div class="btn-txt">Añadir Horario</div>
@@ -38,8 +95,8 @@
             </div>
         </div>
     </div>
-    <div class='sliderlore'>
-        <div class="containerHorario" id="container">
+    <div class='sliderlore' id="sliderlore2">
+        <div class="containerHorario" style="height: 25rem; ">
             <div class="form-container sign-in-contacto-container formlr">
                 <form action="" class='formlr formHorario' method="post">{% csrf_token %}
                     <div class="titulo">
@@ -49,11 +106,11 @@
                     <div class="inputsHora">
                         <div>
                             <input type="date" placeholder="Fecha" id='fecha' name='desdeFecha'/>
-                            <p>Desde esta fecha</p> 
+                            <p>Desde esta fecha</p>
                             <input type="date" placeholder="Fecha" id='fecha' name='hastaFecha'/>
                             <p>Hasta esta fecha</p>
                         </div>
-                        <div> 
+                        <div>
                             <input type="time" placeholder="Hora" id='horaInicio' name='horaInicio'/>
                             <p>Hora de inicio</p>
                         </div>
@@ -69,7 +126,7 @@
                     </div>
             </div>
         </div>
-    </div> 
+    </div> {% endcomment %}
 </main>
 
 {% endblock  %}

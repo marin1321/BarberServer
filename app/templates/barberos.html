@@ -1,22 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block stilos %}
-
 <link rel="stylesheet" href="{% static 'css/search.css'%}">
 <link rel="stylesheet" href="{% static 'css/barberos.css'%}">
 <link rel="stylesheet" href="{% static 'css/card.css'%}">
 <link rel="stylesheet" href="{% static 'css/modal.css'%}">
+<link rel="stylesheet" href="{% static 'css/calificacion.css'%}">
 {% endblock stilos %}
 {% block llamdoJavaScript %}
-<script src="{% static 'js' %}"></script>
-<script type="text/javascript">
-    var $ = jQuery.noConflict()
-    function barbero(url){
-        $('#exampleModal').load(url, function(){
-            $(this).modal('show');
-        })
+{% comment %} <script>
+    function calificacion(n){
+      result =  document.getElementById('result')
+      result.value = n
+      mostrar = document.getElementById('mostrarC')
+      mostrar.innerHTML = n
     }
-</script>
+  </script> {% endcomment %}
+    <script type="text/javascript">
+        var $ = jQuery.noConflict()
+        function barbero(url){
+            $('#exampleModal').load(url, function(){
+                $(this).modal('show');
+            })
+        }
+    </script>
 {% endblock llamdoJavaScript %}
 
 {% block appContenido %}
@@ -28,9 +35,13 @@
                 <button class="2xl:mr-3" type="submit">Search</button>
                 <div class="ctr_select">
                     <select name="opciones" id="seleciona">
-                        <option value="Todos">Todos</option>
+                        <option value="Todos">Todos</option> 
                         {% for categoria in categoria %}
-                            <option value="{{categoria.nombre_cat}}" type="submit">{{categoria.nombre_cat}}</option>
+                            {% if select == categoria.id %}
+                            <option value="{{categoria.nombre_cat}}" selected>{{categoria.nombre_cat}}</option>
+                            {% else %}
+                                <option value="{{categoria.nombre_cat}}">{{categoria.nombre_cat}}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                 </div>
@@ -41,19 +52,24 @@
             <div class="cards-barberos">
                 {% for barber in barber %}
                 <article class="cards card1">
-                    <div class="efectoBlur"><button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button></div>
+                    <div class="efectoBlur">
+                        <button href="#" class="btn-VerMas" onclick="barbero('{% url 'modal_barberos' barber.id %}')">Ver Más</button>
+                    </div>
                     <figure class="figura">
                         {% if barber.foto %}
-                        <img src="{{ barber.foto.url }}" alt="las vegas"
-                            class="img_cards">
+                        <img src="{{ barber.foto }}" alt="las vegas" class="img_cards">
                         {% endif %} 
 
                         </figure>
                     <div class="infoBasica">
                         <h3 id="nombre">{{ barber.nombres }}</h3>
                         <h4 class="info"><b>Barrio:</b>{{ barber.nom_local }}</h4>
-                        <h4 class="info"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
-                        <h4 class="info"><b>Estado:</b> Activo</h4>
+                        <h4 class="info"><b>Estado:</b> {{barber.state}}</h4>
+                        {% for clave ,info in dicCalificacion.items %}
+                            {% if clave == barber.id %}
+                                <h4 class="info"><b>Calificacion:</b> {{info}}</h4>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </article>
                 {% endfor %}
@@ -61,6 +77,25 @@
         </section>
     </div>
 
-    <div  class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+    <div class="modal fade" id="exampleModal" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+    <!-- Modal -->
+    {% comment %} <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                {% comment %} <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <h2>FEOFOFEFEF</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                <h2>FEOFOFEFEF</h2>
+            </div>
+        </div>
+    </div> {% endcomment %}
 </main>
 {% endblock %}

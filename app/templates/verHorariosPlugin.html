@@ -1,0 +1,115 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block stilos %}
+<link rel="stylesheet" href="{% static 'css/horario.css'%}" />
+<link rel="stylesheet" href="{% static 'css/modal.css'%}">
+<link rel="stylesheet" href="{% static 'fullCalendar/lib/main.css'%}">
+{% endblock stilos %} 
+{% block appContenido %}
+
+<div class="card" style="margin-top:  100px;">
+  <div class='left' style="display: none;">
+
+    <div id='theme-system-selector' class='selector'>
+      Theme System:
+      <select>
+        <option value='bootstrap'selected>Bootstrap 4</option>
+      </select>
+    </div>
+  
+    <div data-theme-system="bootstrap,bootstrap5" class='selector' style='display:inline-block'>
+      Theme Name:
+      <select>
+        <option value='darkly' selected>Darkly</option>
+      </select>
+    </div>
+  
+    <span id='loading' style='display:none'>loading theme...</span>
+  
+  </div>
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-12">
+        <h2><strong class="card-title">Lista Horarios</strong></h2>
+      </div>
+    </div>
+  </div>
+  <div id="calendar" class="container"></div> 
+</div>
+<div  class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+{% endblock  %}
+{% block llamdoJavaScript %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict()
+  function Horario(url){
+      $('#exampleModal').load(url, function(){
+          $(this).modal('show');
+      })
+  }
+</script>
+<script src="{% static 'fullCalendar/lib/main.js' %}"></script>
+<script>
+
+  
+  document.addEventListener('DOMContentLoaded',function(){
+    initThemeChooser({
+      init: function(themeSystem) {
+      var calendarUI = document.getElementById('calendar')
+      var calendar = new FullCalendar.Calendar(calendarUI,{
+        themeSystem: themeSystem,
+        locale: 'es',
+      events: [
+      {% for objectH in datosH %}
+      { 
+        id:'{{objectH.id}}',
+        title: '{{objectH.idTrabajador.nombres}}',
+          {% if  objectH.fecha.month <= 9%}
+            {% if  objectH.fecha.day <= 9%}
+              start: '{{objectH.fecha.year}}-0{{objectH.fecha.month}}-0{{objectH.fecha.day}}T{{objectH.horaInicio }}',
+            {% else %}
+              start: '{{objectH.fecha.year}}-0{{objectH.fecha.month}}-{{objectH.fecha.day}}T{{objectH.horaInicio }}',
+            {% endif %}
+          {% else %}
+            start:'{{objectH.fecha.year}}-{{objectH.fecha.month}}-{{objectH.fecha.day}}T{{objectH.horaInicio }}',
+          {% endif %}
+            {% if objectH.estado == "inactivo"%}
+              extendedProps: {
+                status: 'done'
+            }
+            {% else %}
+              url: '{% url 'modal_edith' objectH.id %}',
+              backgroundColor: 'green',
+              borderColor: 'green',
+            {% endif %}
+            },
+          {% endfor %}
+        ],
+          eventDidMount: function(info) {
+            if (info.event.extendedProps.status === 'done') {
+
+              // Change background color of row
+              info.el.style.backgroundColor = 'red';
+
+              // Change color of dot marker
+              var dotEl = info.el.getElementsByClassName('fc-event-dot')[0];
+              if (dotEl) {
+                dotEl.style.backgroundColor = 'white';
+              }
+            }
+          },
+          eventClick: function(info) {
+            info.jsEvent.preventDefault();
+            console.log(info.event.url);
+            if (info.event.url){
+              var url = info.event.url
+              Horario(url)}
+          }
+          
+        });
+        calendar.render()
+      }
+    });
+  });
+</script>
+<script src="{% static 'js/theme-chooser.js'%}"></script>
+{% endblock llamdoJavaScript %}

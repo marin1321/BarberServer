@@ -1,4 +1,9 @@
-<<<<<<< HEAD
+
+.sliderlore{ padding-top: 10em; padding-bottom: 5em; }
+
+/* #sliderlore1{ padding-top: 10rem; padding-bottom: 2rem;}
+#sliderlore2{ padding-top: 0;padding-bottom: 5rem;} */
+
 .sliderlore{ padding-top: 15em; padding-bottom: 10em; }
 
 .containerHorario {
@@ -252,24 +257,46 @@ th{
 
 .ver:hover{
   background-color: #222;
-=======
+}
 .sliderlore{ padding-top: 15em; padding-bottom: 10em; }
 
+
 .containerHorario {
-  background-color: #fff;
+  background-color: rgb(17, 17, 17);
   border-radius: 10px;
-  box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+  box-shadow: 0 14px 28px rgb(0 0 0 / 70%), 0 10px 10px rgb(0 0 0 / 22%);
   position: relative;
   overflow: hidden;
-  width: 70%;
-  height: 22em;
+  width: 60%;
+  height: 50em;
   max-width: 100%;
   min-height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border: 2px solid #dddddd3d;
+}
+
+.h1form{
+  font-size: 3.5rem;
+  font-family: 'Rye', cursive;
+}
+
+hr{
+  /* border-top: 5px dashed white; */
+  border-top: 1px solid #dddddd;
+  background: none;
+  /* opacity: inherit; */
+  width: 100%;
+  margin: 10px 0 20px;
 }
 
 .formHorario{
   width: 100%;
   height: 70%;
+  justify-content: space-evenly;
 }
 
 .btnHora{
@@ -283,6 +310,7 @@ th{
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
+  /* flex-direction: column; */
 }
 .inputsHora input{
   background: linear-gradient(#333, #222);
@@ -307,10 +335,10 @@ th{
   transition: width 0.2s ease-in-out;
   font-weight: 500;
   font-family: inherit;
-}
-.icon-btn{
   color: white;
+  margin-bottom: 2.5rem;
 }
+
 .add-btn:hover {
   width: 28%;
 }
@@ -420,7 +448,9 @@ th{
 }
 
 .titulo p{
-color: #969ba1;
+  font-size: 22px;
+  color: #969ba1;
+  text-shadow: 2px 2px 2px #dddddd38;
 }
 
 /*VER HORARIOS*/
@@ -512,5 +542,4 @@ th{
 
 .ver:hover{
   background-color: #222;
->>>>>>> 6b640b411884730aa3b63e09f51f5b68a887f1b2
 }
