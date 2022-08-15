@@ -19,7 +19,6 @@ class ChatConsumer(WebsocketConsumer):
 
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        name = text_data_json["name"]
         message = text_data_json['message']
 
         print("name:", name, "message:", message)
@@ -28,17 +27,14 @@ class ChatConsumer(WebsocketConsumer):
             self.room_group_name,
             {
                 'type':'chat_message',
-                'message':message,
-                'name':name
+                'message':message
             }
         )
     
     def chat_message(self, event):
         message = event['message']
-        name = event['name']
 
         self.send(text_data=json.dumps({
             'type':'chat',
-            'message':message,
-            'name':name
+            'message':message
         }))

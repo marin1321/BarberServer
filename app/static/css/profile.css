@@ -434,6 +434,7 @@ option{ background-color: #222; }
 #form{
     width: 90%;
     height: auto;
+    display: flex;
 }
 
 #form textarea{
@@ -453,6 +454,10 @@ option{ background-color: #222; }
 }
 
 #form textarea:focus{ outline: none; }
+
+#messages{
+    color: white;
+}
 
 .msj_enviar button{
     height: 100%;

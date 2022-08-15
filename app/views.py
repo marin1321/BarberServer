@@ -468,7 +468,7 @@ def horarioBarber(request):
                             messages.success(request, "Esta fecha no es permitida")
                             print("Esta fecha no es permitida")
                     else:
-                        messages.success(request, "Llene los espacios")
+                        messages.success(request, "No es posible poner dias anteriores")
                         print("Mala fecha primera")
                 else:
                     messages.success(request, "Mala la fecha")
