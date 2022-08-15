@@ -44,10 +44,19 @@
           <p class="fechaModal" id="textHoraInicio"></p>
           <p class="fechaModal" id="textFinalizacion"></p>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" style="justify-content: space-around;">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancelar</button>
-          <form action="" method="post">
+          <form action="" method="post" style="align-items: center;
+          flex-wrap: wrap;
+          align-content: center;
+          justify-content: space-evenly;
+      ">
             {% csrf_token %}
+            <select class="form-select form-select-lg mb-3" name="datosServicio" aria-label=".form-select-lg example">
+              {% for servicio in servicio %}
+                <option value="{{servicio.id}}">{{servicio.tipoServicio}}</option>
+              {% endfor %}
+            </select>
             <input type="hidden" name="idHorario" id="idHorario">
             <button type="submit" class="btn btn-primary">Agendar</button>
           </form>

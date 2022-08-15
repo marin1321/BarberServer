@@ -64,4 +64,12 @@ select{ width: 7rem !important; padding-left: 5px; }
     outline: 3px solid #ffd17b; 
 }
 
+.InputFoto input:hover{
+    background-color: #28282828;
+}
+
 .buttonform{ height: 3.5em; margin: 0 0 2em; }
+
+/*Estilos para editar Cliente*/
+.imgCliente{ margin: 15px 0; width: 80%; }
+.inputFotoC{ display: flex; justify-content: center;}
