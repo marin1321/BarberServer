@@ -568,12 +568,14 @@ def cita(request, id):
     idCliente =  Clientes.objects.get(email=usuarioActivo)
     horario = horarios.objects.filter( idTrabajador = id )
     barbero = Trabajadores.objects.get( id = id )
+    idServicio = Servicio.objects.filter(idCategoria = barbero.idCategoria)
     data = {
-        "horario":horario
+        "horario":horario,
+        "servicio":idServicio
     } 
     if request.method == 'POST':
-        idCategoria = Trabajadores.objects.get( id = id ).idCategoria
-        idServicio = Servicio.objects.get(idCategoria = idCategoria)
+        datosServicio = request.POST.get("datosServicio")
+        print(datosServicio)
         horaRegistroCita = time.strftime("%H:%M:%Sq")
         horaRegistroCita = horaRegistroCita.strip()
         idHorario = request.POST.get('idHorario')
@@ -587,7 +589,7 @@ def cita(request, id):
         else:
             cita = citas()
             cita.idCliente = idCliente
-            cita.idServicio = idServicio
+            cita.idServicio = Servicio.objects.get(id = datosServicio)
             cita.horaRegistroCita = horaRegistroCita
             cita.fechaRegistroCita = fechaRegistroCita
             cita.idHorario = idHorario
@@ -600,7 +602,7 @@ def cita(request, id):
     return render(request, "agendarPlugin.html", data)
 
 def mandarNotificacion(idHorario, nombreCliente, barbero):
-    inicioHorario = horarios.objects.get(id = idHorario.id).horaInicio
+    inicioHorario = idHorario.horaInicio
     subject = 'Señor Barber usted tiene una cita a las: ' + str(inicioHorario)
     message = 'Quien Reservo la cita el cliente ' + nombreCliente.nombres 
     email_from =  settings.EMAIL_HOST_USER
