@@ -1,9 +1,9 @@
 .clasificacionF {
   display: flex;
   width: 250px;
-  height: 50px;
-  justify-content: space-between;
-  align-items: baseline;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -25,6 +25,7 @@
 
 .clasificacion label {
   color: grey;
+  cursor: pointer;
 }
 
 .clasificacion {

@@ -433,7 +433,7 @@ def horarioBarber(request):
                     restaAñosUnDia = int(fecha[0:4]) - int(fechaHoy[0:4])
                     if restaAñosUnDia <= 1:
                         restaMeses = int(fecha[5:7]) - int(fechaHoy[5:7])
-                        if restaMeses <= 1:
+                        if restaMeses >= 1:
                             if int(hora1) < 22:
                                 tiempo(hora1,hora2,id_usuario,inicioHora,fecha)
                                 print("Sexto if")                            
@@ -692,12 +692,15 @@ def editarPerfilB(request):
 def modal_barber(request, id):
     barbero = Trabajadores.objects.filter( id = id )
     calificaciones = calificacion.objects.filter( idTrabajador = id)
+    for dataCategoria in barbero:
+        servicios = Servicio.objects.filter(idCategoria = dataCategoria.idCategoria)
+    
     numeroCalificacion = 0
     promedioC = []
     if request.user.is_authenticated:
         global user_id
         user_id = request.user.id
-        usuarioActivo = User.objects.get(id=user_id)
+        usuarioActivo = User.objects.get(id=user_id) 
         datas = 0
         if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
             idUsr = Trabajadores.objects.get(email=usuarioActivo)
@@ -717,13 +720,15 @@ def modal_barber(request, id):
             "dataT":barbero,
             "calificacion": numeroCalificacion,
             "rol":datas,
-            "estrellitas":[1,2,3,4,5]
+            "estrellitas":[1,2,3,4,5],
+            "Dservicios":servicios,
         }
     else:
         data = {
             "dataT":barbero,
             "calificacion": numeroCalificacion,
-            "estrellitas":[1,2,3,4,5]
+            "estrellitas":[1,2,3,4,5],
+            "Dservicios":servicios,
         }
     return render(request, 'modalB.html', data)
 def modal_EdiH(request, id):
