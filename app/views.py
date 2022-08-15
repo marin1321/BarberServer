@@ -254,11 +254,14 @@ def perfilCliente(request):
 
 def getBarberosClientes(selectE, selectT,rol, ids):
     datosSelect = []
-    if selectE != None and selectE != 'todos':
+    print(rol == "trabajador")
+    print('ID',selectE)
+    if selectE != None:
         if rol == "trabajador":
             if selectE == "aceptada":
                 datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'aceptada')
             elif selectE == "pendiente":
+                print(4)
                 datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'pendiente')
             elif selectE == "cancelada":
                 datosCita = citas.objects.filter(idTrabajador = ids, peticion = 'cancelada')
@@ -269,12 +272,12 @@ def getBarberosClientes(selectE, selectT,rol, ids):
                 datosCita = citas.objects.filter(idCliente = ids, peticion = 'pendiente')
             elif selectE == "cancelada":
                 datosCita = citas.objects.filter(idCliente = ids, peticion = 'cancelada')
-    else:
-        if selectE == "todos":
-            if rol == "trabajador":
-                datosCita = citas.objects.filter(idTrabajador = ids)
-            elif rol == "cliente":
-                datosCita = citas.objects.filter(idCliente = ids)
+        else:
+            if selectE == "todos":
+                if rol == "trabajador":
+                    datosCita = citas.objects.filter(idTrabajador = ids)
+                elif rol == "cliente":
+                    datosCita = citas.objects.filter(idCliente = ids)
     print("Dias estado",selectT != None and selectT != 'todos')
     print('Estado select',selectT )
     if selectT != None and selectT != 'todos':
@@ -302,7 +305,7 @@ def getBarberosClientes(selectE, selectT,rol, ids):
                 if int(fechaHoy[0:4]) == int(fechaDeCita.year):
                     datosSelect.append(datoCita)
     if len(datosSelect) == 0 and selectE == None and selectT == None:
-        if rol == "trabajador":
+        if rol == "traba-jador":
             datosSelect = citas.objects.filter(idTrabajador = ids)
         elif rol == "cliente":
             datosSelect = citas.objects.filter(idCliente = ids)
@@ -311,6 +314,8 @@ def getBarberosClientes(selectE, selectT,rol, ids):
             datosSelect = citas.objects.filter(idTrabajador = ids)
         elif rol == "cliente":
             datosSelect = citas.objects.filter(idCliente = ids)
+    elif len(datosSelect) == 0 and selectE != "todos"and selectT == "todos":
+        datosSelect = datosCita
     return datosSelect
 
 def sacarSemana (año, mes, dia):
