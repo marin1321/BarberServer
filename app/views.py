@@ -142,6 +142,7 @@ def barber(request):
         idsTrabajador = request.POST.get('idTrabajadores')
         result  = request.POST.get('result')
         comentarios= request.POST.get('sugerencia')
+        result = result.strip()
         if int(result) > 5:
             print("Error Hoho")
         else: 
@@ -184,7 +185,7 @@ def perfilBarbero(request):
         datosB = Trabajadores.objects.filter(email=usuarioActivo)
         idTrabajador = Trabajadores.objects.get(email=usuarioActivo)
         selectT =  request.GET.get('TiempoSelect')
-        selectE = request.GET.get('estados')
+        selectE = request.GET.get('estados')    
         datosCita = getBarberosClientes(selectE, selectT, "trabajador", idTrabajador)
         data = {
             'datosB':datosB,
