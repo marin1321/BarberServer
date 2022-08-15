@@ -50,6 +50,8 @@ text-shadow: 0 0 10px yellow;
     background: linear-gradient(#333, #222);
     color: white;
     border: 1px solid #444;
+    width: 100%;
+    padding-left: 5px;
 }
 
 #containerBarberos{
@@ -164,4 +166,4 @@ text-shadow: 0 0 10px yellow;
     font-size: 1.5rem;
 }
 
-.ctr_select::after{ padding: 1.4em 1em; }
+.ctr_select::after{ padding: 1.4em 0; right: -15px;}

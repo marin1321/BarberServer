@@ -28,96 +28,123 @@
         </div>
         <div class="modal-body">
           <section class="contenedor-modal">
-            <figure class="campoimg-modal">
-              {% if dataT.foto %}
-                <img src={{dataT.foto}} alt="El barbero {{dataT.nombres}}" class="img-vtn"/>
-              {% endif %}
-            </figure>
-            <article class="infoBasica-modal">
-              <h3 id="nombre-modal">{{dataT.nombres }}</h3>
-              <section class="texto">
-                <article class="datosIzq">
-                  <h4 class="info-modal"><b>Especialización:</b> Barbero</h4>
-                  <h4 class="info-modal"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4>
-                  <h4 class="info-modal"><b>Estado:</b> Activo</h4>
-                  <h4 class="info-modal" id="direccion"><b>Dirección:</b>{{dataT.direccion}}</h4>
-                  {% comment %} B/Limonar 3era etapa manzana 6 casa #3 {% endcomment %}
-                  <h4 class="info-modal"><b>Descripcion:</b></h4>
+            <section class="contenedor-info">
+              <article class="contenedor-sup">
+                <figure class="campoimg-modal">
+                  {% if dataT.foto %}
+                    <img src="{{dataT.foto}}" alt="El barbero {{dataT.nombres}}" class="img-vtn"/>
+                  {% endif %}
+                </figure>
+                <article class="infoBasica-modal">
+                  <h3 id="nombre-modal">{{dataT.nombres }}</h3>
+                  <section class="texto">
+                    <article class="datosIzq">
+                      <h4 class="info-modal"><b>Especialización:</b> {{dataT.idCategoria}}</h4>
+                      {% comment %} <h4 class="info-modal"><b>Horarios:</b> 06:00 a 11:30 am y 02:00 a 8:00 pm</h4> {% endcomment %}
+                      <h4 class="info-modal"><b>Estado:</b> Activo</h4>
+                      <h4 class="info-modal" id="direccion"><b>Dirección:</b>{{dataT.direccion}}</h4>
+                      {% comment %} B/Limonar 3era etapa manzana 6 casa #3 {% endcomment %}
+                      <h4 class="info-modal"><b>Descripcion:</b></h4>
+                    </article>
+                  </section>
+                  <section>
+                    <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <div class="row">
+                            <div class="col"><img src="../media/trabajadores/fantasmon.jpg" alt="..."></div>
+                            <div class="col"><img src="../media/trabajadores/Gustavo.jpg" alt="..."></div>
+                          </div>
+                        </div>
+                        <div class="carousel-item">
+                          <div class="row">
+                            <div class="col"><img src="../media/trabajadores/images.jpg" alt="..."></div>
+                            <div class="col"><img src="../media/trabajadores/Vanessa.jpg" alt="..."></div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                  </section>
+                  {% if rol == 'Cliente' %}
+                    <a href="{% url 'citas' dataT.id %}">
+                      <button  class="btn-cita">
+                        AGENDAR
+                        <div class="icon">
+                          <svg
+                            height="24"
+                            width="24"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path
+                              d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                              fill="currentColor"
+                            ></path>
+                          </svg>
+                        </div>
+                      </button>
+                    </a>
+                  {% endif %}
                 </article>
-                <article class="valorizarBarbero">
+              </article>
+            </section>
+            <article class="valorizarBarbero">
+                {% if rol == 'Cliente' %}
+                <form action='' class="clasificacionF" method="post"> {% csrf_token %}
                   <h4>Dale una puntuacion a {{dataT.nombres}}</h4>
-                  <div>
-                    {% if rol == 'Cliente' %}
-                    <form action='' class="clasificacionF" method="post"> {% csrf_token %}
-                      <div class="Estrellitas">
-                        <p class="clasificacion">
-                          <input id="radio1" type="radio" name="estrellas" value="5" onclick="calificacion(5)" {% if calificacion == 5%}checked{% endif %}></input>
-                          <label for="radio1">★</label>
-                          <input id="radio2" type="radio" name="estrellas" value="4" onclick="calificacion(4)" {% if calificacion >= 4 and calificacion < 5%}checked{% endif %} ></input>
-                          <label for="radio2">★</label>
-                          <input id="radio3" type="radio" name="estrellas" value="3" onclick="calificacion(3)" {% if calificacion >= 3 and calificacion < 4 %}checked{% endif %}></input>
-                          <label for="radio3">★</label>
-                          <input id="radio4" type="radio" name="estrellas" value="2" onclick="calificacion(2)" {% if calificacion >= 2 and calificacion < 3%}checked{% endif %}></input>
-                          <label for="radio4">★</label>
-                          <input id="radio5" type="radio" name="estrellas" value="1" onclick="calificacion(1)" {% if calificacion >= 1 and calificacion < 2%}checked{% endif %}></input>
-                          <label for="radio5">★</label>
-                          </p>
-                          <h6 class="mb-0" id="mostrarC">{{calificacion}}</h6>
-                          <input type="hidden" name="result" id="result" value="{{calificacion}}">
-                          <input type="hidden" name="idTrabajadores" id="idTrbajadores" value="{{dataT.id}}">
-                      </div>
-                      <div class="comentario">
-                        <h4>Envia tus opiniones o sugerencias al barbero!</h4>
-                        <textarea name="sugerencia" col="50" rows="6"> </textarea>
-                      </div>
-                      <button class="btn-calificar" type="submit">Calificar &#9745;</button>
-                    </form>
-                    {% else %}
-                    {% if calificacion > 0 %}
-                    <div class="star-rating">
-                      {% for estrellitas in estrellitas %}
-                        {% if calificacion >= estrellitas %}
-                          <a style="color:yellow">★</a>
-                        {% else %}
-                          <a>★</a>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
-                    {% else %}
-                    <div class="star-rating">
-                      <a>★</a>
-                      <a>★</a>
-                      <a>★</a>
-                      <a>★</a>
-                      <a>★</a>
-                    </div>
-                    {% endif %}
-                    {% endif %}
+                  <div class="Estrellitas">
+                    <p class="clasificacion">
+                      <input id="radio1" type="radio" name="estrellas" value="5" onclick="calificacion(5)" {% if calificacion == 5%}checked{% endif %}></input>
+                      <label for="radio1">★</label>
+                      <input id="radio2" type="radio" name="estrellas" value="4" onclick="calificacion(4)" {% if calificacion == 4%}checked{% endif %} ></input>
+                      <label for="radio2">★</label>
+                      <input id="radio3" type="radio" name="estrellas" value="3" onclick="calificacion(3)" {% if calificacion == 3%}checked{% endif %}></input>
+                      <label for="radio3">★</label>
+                      <input id="radio4" type="radio" name="estrellas" value="2" onclick="calificacion(2)" {% if calificacion == 2%}checked{% endif %}></input>
+                      <label for="radio4">★</label>
+                      <input id="radio5" type="radio" name="estrellas" value="1" onclick="calificacion(1)" {% if calificacion == 1%}checked{% endif %}></input>
+                      <label for="radio5">★</label>
+                      </p>
+                      <h6 class="mb-0" id="mostrarC">{{calificacion}}</h6>
+                      <input type="hidden" name="result" id="result" value="{{calificacion}}">
+                      <input type="hidden" name="idTrabajadores" id="idTrbajadores" value="{{dataT.id}}">
                   </div>
-                </article>
-              </section>
-              {% if rol == 'Cliente' %}
-                <a href="{% url 'citas' dataT.id %}">
-                  <button  class="btn-cita">
-                    AGENDAR
-                    <div class="icon">
-                      <svg
-                        height="24"
-                        width="24"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M0 0h24v24H0z" fill="none"></path>
-                        <path
-                          d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
-                          fill="currentColor"
-                        ></path>
-                      </svg>
-                    </div>
-                  </button>
-                </a>
-              {% endif %}
-              
+                  <div class="comentario">
+                    <h4>Envia tus opiniones o sugerencias al barbero!</h4>
+                    <textarea name="sugerencia" col="50" rows="4"> </textarea>
+                  </div>
+                  <button class="btn-calificar" type="submit">Calificar &#9745;</button>
+                </form>
+                {% else %}
+                {% if calificacion > 0 %}
+                <div class="star-rating">
+                  {% for estrellitas in estrellitas %}
+                    {% if calificacion >= estrellitas %}
+                      <a style="color:yellow">★</a>
+                    {% else %}
+                      <a>★</a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+                {% else %}
+                <div class="star-rating">
+                  <a>★</a>
+                  <a>★</a>
+                  <a>★</a>
+                  <a>★</a>
+                  <a>★</a>
+                </div>
+                {% endif %}
+                {% endif %}
             </article>
           </section>
         </div> 
