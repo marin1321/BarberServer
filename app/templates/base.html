@@ -46,9 +46,15 @@
             {% comment %} <div> <a href="{% url 'logout' %}"> Cerrar Sesiòn </a> </div> {% endcomment %}
             <div>
                 <li class="submenus">
+                    {% if user.is_superuser %}
+                    <a href = "{% url 'admin:index' %}">
+                        <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/>
+                    </a>
+                    {% else %}
                     <a href = "{% url 'perfil' %}">
                         <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/>
                     </a>
+                    {% endif %}
                     <ul class="children">
                         {% if dataT or rol == "Barbero" or datosB%}
                             <li><a href="{% url 'horarios' %}"> HORARIOS </a></li>

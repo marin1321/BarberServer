@@ -46,6 +46,7 @@ def inicio(request):
     if request.user.is_authenticated:
         global user_id
         user_id = request.user.id
+        data = 0
         usuarioActivo = User.objects.get(id=user_id)
         if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
             datas = Trabajadores.objects.filter(email=usuarioActivo)
@@ -58,7 +59,11 @@ def inicio(request):
                 data = {
                     "dataC": datas 
                 }
-        return render(request, 'inicio.html', data)
+        print(data)
+        if data != 0:        
+            return render(request, 'inicio.html', data)
+        else:
+            return render(request, 'inicio.html')
     else:
         return render(request, 'inicio.html')
 
@@ -67,6 +72,7 @@ def sobreNosotros(request):
         global user_id
         user_id = request.user.id
         usuarioActivo = User.objects.get(id=user_id)
+        data = 0
         if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
             datas = Trabajadores.objects.filter(email=usuarioActivo)
             data = {
@@ -78,7 +84,10 @@ def sobreNosotros(request):
                 data = {
                     "dataC": datas 
                 }
-        return render(request, 'sobreNosotros.html', data)
+        if data != 0:
+            return render(request, 'sobreNosotros.html', data)
+        else:
+            return render(request, 'sobreNosotros.html')
     else:
         return render(request, 'sobreNosotros.html')
 
@@ -108,6 +117,7 @@ def barber(request):
         global user_id
         user_id = request.user.id
         usuarioActivo = User.objects.get(id=user_id)
+        datas = 0
         if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
             datas = Trabajadores.objects.get(email=usuarioActivo).rol
         elif Clientes.objects.filter(email=usuarioActivo).exists()==True:
@@ -140,14 +150,21 @@ def barber(request):
             calificacionDatos.numeroCalificacion = int(result)
             calificacionDatos.comentario = comentarios
             calificacionDatos.save()
-    
-    data = {
-        "barber":barber,
-        "categoria":categorias,
-        "rol":datas,
-        "select": nombreSelect,
-        "dicCalificacion":dictCalificacion,
-    }  
+    if datas != 0:
+        data = {
+            "barber":barber,
+            "categoria":categorias,
+            "rol":datas,
+            "select": nombreSelect,
+            "dicCalificacion":dictCalificacion,
+        } 
+    else:
+        data = {
+            "barber":barber,
+            "categoria":categorias,
+            "select": nombreSelect,
+            "dicCalificacion":dictCalificacion,
+        } 
     return render(request, 'barberos.html', data)
 
 def perfil(request):
@@ -728,6 +745,7 @@ def contacto(request):
         global user_id
         user_id = request.user.id
         usuarioActivo = User.objects.get(id=user_id)
+        data = 0
         if Trabajadores.objects.filter(email=usuarioActivo).exists()==True:
             datas = Trabajadores.objects.filter(email=usuarioActivo)
             data = {
@@ -739,7 +757,10 @@ def contacto(request):
                 data = {
                     "dataC": datas 
                 }
-        return render(request, 'contacto.html', data)
+        if data != 0:
+            return render(request, 'contacto.html', data)
+        else:
+            return render(request, 'contacto.html')
     else:
         return render(request, 'contacto.html') 
 
