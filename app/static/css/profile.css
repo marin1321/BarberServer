@@ -434,6 +434,7 @@ option{ background-color: #222; }
 #form{
     width: 90%;
     height: auto;
+    display: flex;  
 }
 
 #form textarea{
