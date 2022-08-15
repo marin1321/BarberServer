@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stilos %}
+<link rel="stylesheet" href="{% static 'css/barberos.css'%}">
+<link rel="stylesheet" href="{% static 'css/horario.css'%}">}
+<link rel="stylesheet" href="{% static 'fullCalendar/lib/main.css'%}">
+{% endblock stilos %}
+{% block appContenido %}
+<div class="row flex-lg-nowrap">
+  <div class="col mb-3">
+    <div class="e-panel card cardVerHorarios align-items-center">
+      <div class="card-body">
+        <div class="card-title">
+          <h2 class="nom-categoria">Agendar</h2>
+        </div>
+        <div class="card" style="margin-top:  100px;">
+          <div class='left' style="display: none;">
+            <div id='theme-system-selector' class='selector'>
+              Theme System:
+              <select>
+                <option value='bootstrap'selected>Bootstrap 4</option>
+              </select>
+            </div>
+            <div data-theme-system="bootstrap,bootstrap5" class='selector' style='display:inline-block'>
+              Theme Name:
+              <select>
+                <option value='darkly' selected>Darkly</option>
+              </select>
+          </div>  
+          <span id='loading' style='display:none'>loading theme...</span>
+        </div>
+      <div id="calendar" class="container"></div> 
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agendar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="fechaModal" id="textFecha"></p>
+          <p class="fechaModal" id="textHoraInicio"></p>
+          <p class="fechaModal" id="textFinalizacion"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancelar</button>
+          <form action="" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="idHorario" id="idHorario">
+            <button type="submit" class="btn btn-primary">Agendar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock  %}
+{% block llamdoJavaScript %}
+{% if messages %}
+
+{% for m in messages %}
+
+<script>
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
+  
+  Toast.fire({
+    icon: 'success',
+    title: '{{m}}'
+  })
+</script>
+
+{% endfor %}
+
+{% endif %}
+<script src="{% static 'fullCalendar/lib/main.js' %}"></script>
+<script>
+  const myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+  document.addEventListener('DOMContentLoaded',function(){
+    initThemeChooser({
+      init: function(themeSystem) {
+      var calendarUI = document.getElementById('calendar')
+      var calendar = new FullCalendar.Calendar(calendarUI,{
+        themeSystem: themeSystem,
+        locale: 'es',
+      events: [
+      {% for horario in horario %}
+        {% if horario.estado == "activo" %}
+      { 
+        id:'{{horario.id}}',
+        title: '{{horario.idTrabajador.nombres}}',
+          {% if  horario.fecha.month <= 9%}
+            {% if  horario.fecha.day <= 9%}
+              start: '{{horario.fecha.year}}-0{{horario.fecha.month}}-0{{horario.fecha.day}}T{{horario.horaInicio }}',
+            {% else %}
+              start: '{{horario.fecha.year}}-0{{horario.fecha.month}}-{{horario.fecha.day}}T{{horario.horaInicio }}',
+            {% endif %}
+          {% else %}
+            start:'{{horario.fecha.year}}-{{horario.fecha.month}}-{{horario.fecha.day}}T{{horario.horaInicio }}',
+          {% endif %}
+            {% if horario.estado == "inactivo"%}
+              extendedProps: {
+                status: 'done'
+            }
+            {% else %}
+              url:'bien',
+              backgroundColor: 'green',
+              borderColor: 'green',
+            {% endif %}
+            },
+            {% endif %}
+          {% endfor %}
+        ],
+          eventDidMount: function(info) {
+            if (info.event.extendedProps.status === 'done') {
+
+              // Change background color of row
+              info.el.style.backgroundColor = 'red';
+
+              // Change color of dot marker
+              var dotEl = info.el.getElementsByClassName('fc-event-dot')[0];
+              if (dotEl) {
+                dotEl.style.backgroundColor = 'white';
+              }
+            }
+          },
+          eventClick: function(info) {
+            info.jsEvent.preventDefault();
+            console.log(info.event.url);
+            if (info.event.url){
+              {% for horario in horario %}
+                if(info.event.id == {{horario.id}}){
+                  document.getElementById('textFecha').textContent = 'Fecha de corte: {{horario.fecha}}'
+                  document.getElementById('textHoraInicio').textContent = 'Hora de inicio del corte: {{horario.horaInicio}}'
+                  document.getElementById('textFinalizacion').textContent = 'Hora de finalizacion del corte: {{horario.horaFinalizacion}}'
+                }
+              {% endfor %}
+              document.getElementById('idHorario').value = info.event.id 
+              myModal.show() 
+            }
+          }
+          
+        });
+        calendar.render()
+      }
+    });
+  });
+</script>
+<script src="{% static 'js/theme-chooser.js'%}"></script>
+{% endblock llamdoJavaScript %}

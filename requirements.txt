@@ -2,6 +2,7 @@ django == 3.2.9
 psycopg2-binary
 pymysql
 pillow
-tailwind
+pymysql
 django-admin-interface
 django-bootstrap-v5
+

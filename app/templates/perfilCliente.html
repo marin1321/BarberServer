@@ -25,7 +25,7 @@
                         <div class="d-flex flex-column align-items-center text-center imagenPerfil">
                             <button class="subirImagen">
                                 {% if datosC.foto %}
-                                    <img src="{{ datosC.foto.url }}" alt="Admin" class="rounded-circle" width="150">
+                                    <img src="{{ datosC.foto }}" alt="Admin" class="rounded-circle" width="150">
                                     {% else %}
                                     <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                                 {% endif %}
@@ -35,12 +35,20 @@
                                 <p class=" mb-1"></p>
                                 <p class="font-size-sm ">{{datosC.nombres}} {{datosC.apellidos}}</p>
                                 <div class="btnActivateM">
+                                    <p>Estado: {{datosC.state}}</p>
                                     <label class="switch">
                                         {% if datosC.state == "activo" %}
-                                            <input type="checkbox" id="checkbox" checked> <span class="sliderP" ></span> 
-                                        {% else %}
-                                            <input type="checkbox" id="checkbox"> <span class="sliderP" ></span>
-                                        {% endif %}
+                                                <form action="" method="post">{% csrf_token %}
+                                                    <input type='hidden' value="inactivo" name='estado'>
+                                                    <button type="submit" class="btnAD"></button><input type="checkbox" checked type="submit"><span class="sliderP"></span></button>
+                                                </form> 
+                                                {% else %}
+                                                    <form action="" method="post">{% csrf_token %}
+                                                        <input type='hidden' value="activo" name='estado'>
+                                                        <button type="submit" class="btnAD"><input type="checkbox" > <span class="sliderP"></span></button>
+                                                    </form>
+                                            {% endif %}
+                                        
                                     </label>
                                     {% comment %} <button class="btn btnM btn-outline-primary">Mensaje</button> {% endcomment %}
                                 </div>
@@ -117,34 +125,67 @@
                     </div> {% endcomment %}
                     {% endfor %}
                     <div class="col-lg-14 col-xl-14 cardP-box">
-                        <ul class="filtro">
-                            <li class="seleccion">
-                                <h3>Busqueda por fechas:</h3>
-                                <div class="ctr_select">
-                                    <select class="select">
-                                        <option value="hoy">Hoy</option>
-                                        <option value="ayer">Ayer</option>
-                                        <option value="estaSemana">Esta Semana</option>
-                                        <option value="estaSemana">Este Mes</option>
-                                    </select>
-                                </div>
-                            </li>
-                            <li class="seleccion">
-                                <h3>Busqueda por estado:</h3>
-                                <div class="ctr_select">
-                                    <select class="select" id="estado">
-                                        <option value="hoy">Aceptadas</option>
-                                        <option value="ayer">Editadas</option>
-                                        <option value="estaSemana">Eliminadas</option>
-                                        <option value="estaSemana">En Espera</option>
-                                    </select>
-                                </div>
-                            </li>
-                        </ul>
+                        <form action="" method="get">
+                            <ul class="filtro">
+                                <li class="seleccion">
+                                    <h3>Fechas:</h3>
+                                    <div class="ctr_select">
+                                        <select class="select" name="TiempoSelect">
+                                            <option value="todos">Todos</option>
+                                            {% if selectH == 'esteAnio' %}
+                                                <option value="esteAnio" selected>Este Año</option>
+                                            {% else %}
+                                                <option value="esteAnio">Este Año</option>
+                                            {% endif %}
+                                            {% if selectH == 'esteMes' %}
+                                                <option value="esteMes" selected>Este Mes</option>
+                                            {% else %}
+                                                <option value="esteMes">Este Mes</option>
+                                            {% endif %}
+                                            {% if selectH == 'estaSemana' %}
+                                                <option value="estaSemana" selected>Esta Semana</option>
+                                            {% else %}
+                                                <option value="estaSemana">Esta Semana</option>
+                                            {% endif %}
+                                            {% if selectH == 'hoy'%}
+                                                <option value="hoy" selected>Hoy</option>
+                                            {% else %}
+                                                <option value="hoy">Hoy</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="seleccion">
+                                    <h3>Estado:</h3>
+                                    <div class="ctr_select">
+                                        <select class="select" name="estados">
+                                            <option value="todos">Todos</option>
+                                            {% if selectE == 'aceptada'%}
+                                            <option value="aceptada" selected>Aceptadas</option>
+                                            {% else %}
+                                            <option value="aceptada">Aceptadas</option>
+                                            {% endif %}
+                                            {% if selectE == 'pendiente' %}
+                                            <option value="pendiente" selected>Pendientes</option>
+                                            {% else %}
+                                            <option value="pendiente">Pendientes</option>
+                                            {% endif %}
+                                            {% if selectE == 'cancelada' %}
+                                            <option value="cancelada" selected>Canceladas</option>
+                                            {% else %}
+                                            <option value="cancelada">Canceladas</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="seleccion">
+                                    <button class="btnSearchDE">Buscar</button>
+                                </li>
+                            </ul>
+                        </form>
                         <section class="citas">
                             <ul class="list-unstyled timeline-sm">
                                 {% for citasId in citas %}
-                                    {% comment %} {% if citasId.peticion == "aceptar" %} {% endcomment %}
                                     <li class="timeline-sm-item">
                                         <section class="lineaFecha">
                                             <span class="timeline-sm-date">{{citasId.idHorario.fecha}}</span>
@@ -157,14 +198,18 @@
                                                 <p class="text-white-50 mt-2">Hora de finalización de corte: {{citasId.idHorario.horaFinalizacion}}</p>
                                                 <p class="text-white-50 mt-2">Direccion: {{citasId.idTrabajador.direccion}}</p>
                                             </article>
-                                            <article class="verCita">
-                                                <button id="btnChat{{citasId.id}}" name="btnCita{{citasId.id}}" onClick="Chat(this.id)">Chat</button>
-                                                <button id="btnEditar{{citasId.id}}" name="btnEditar{{citasId.id}}" onClick="Editar(this.id)">Editar</button>
-                                                <button id="cancelar">Cancelar</button>
-                                            </article>
+                                            {% if citasId.peticion == 'pendiente' %}
+                                                <article class="verCita">
+                                                    <button id="btnChat{{citasId.id}}" name="btnCita{{citasId.id}}" class="btnAceptar" onClick="Chat(this.id)"><span>Chat</span></button>
+                                                    <form  action="" method="post">{% csrf_token %}
+                                                        <button id="cancelar">Cancelar</button>
+                                                        <input type="hidden" value="cancelada" name="peticion"></input>
+                                                        <input type="hidden" value="{{citasId.id}}" name="idCita"></input>
+                                                    </form>
+                                                </article>
+                                            {% endif %}
                                         </section>
                                     </li>
-                                    {% comment %} {% endif %} {% endcomment %}
                                 {% endfor %}
                             </ul>
                             <ul class="acciones">
@@ -174,17 +219,18 @@
                                 </section>
                                 <section class="chat">
                                     <article class="msj_campo">
-                                        <h3 id="otro">Usted es chimbo al hombro?</h3>
-                                        <h3 id="yo">Si senor, el mismo</h3>
-                                        <h3 id="yo">Vea sabe que? DIEGO ES GAY y PUTO EL QUE LO LEA JAJAJAJAJ</h3>
+                                        <div id="messages">
+                                        </div>
                                     </article>
                                     <article class="msj_enviar">
-                                        <input type="text" name="mensaje" placeholder="Escribe tu mensaje" autofocus size="5">
-                                        <button>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
-                                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
-                                        </svg>
-                                        </button>
+                                        <form id="form">
+                                            <textarea type="text" name="message" id="messages" cols="30" rows="10" placeholder="Escribe tu mensaje"></textarea>
+                                            <button type="submit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                                <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                                            </svg>
+                                            </button>
+                                        </form>
                                     </article>
                                 </section>
                                 <section class="campoEditar">
@@ -200,6 +246,7 @@
 </main>
 
 {% block llamdoJavaScript %}
+    <script src="{% static 'js/chat.js'%}"></script>
     <script src="{% static 'js/opcionesCitas.js'%}"></script>
     {% if messages %}
 

@@ -458,7 +458,7 @@
 /*nuevo formulario*/
 .nuevoForm{
 	transform: translateX(60%);
-	height: 30em;
+	height: 100%;
 	width: 20em;
 	position: absolute;
 	display: none;
@@ -618,6 +618,9 @@
 	margin-left: 2rem;
 	z-index: 20;
 	position: relative;
+}
+.categoria select option{
+	background: #333;
 }
 /* categoria */
 .categoria{

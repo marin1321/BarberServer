@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    <header class="header">
+    <header class="header" style="display:flex;">
         <div class="imgSlider">
             <img class="imagenLogo" src="{% static 'img/logo/logo-LetrasBlancas.png' %}" alt="Logo">
         </div><input type="checkbox" id="check"><label for="check" class="mostrar-menu">≡</label>
@@ -46,13 +46,21 @@
             {% comment %} <div> <a href="{% url 'logout' %}"> Cerrar Sesiòn </a> </div> {% endcomment %}
             <div>
                 <li class="submenus">
+                    {% if user.is_superuser %}
+                    <a href = "{% url 'admin:index' %}">
+                        <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/>
+                    </a>
+                    {% else %}
                     <a href = "{% url 'perfil' %}">
                         <img class="linkPerfil" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"/>
                     </a>
+                    {% endif %}
                     <ul class="children">
                         {% if dataT or rol == "Barbero" or datosB%}
                             <li><a href="{% url 'horarios' %}"> HORARIOS </a></li>
                             <li><a href="{% url 'editarPerfilB' %}"> EDITAR PERFIL </a></li>
+                        {% elif dataC or rol == "Cliente" or datosC%}
+                            <li><a href="{% url 'editarPerfilC' %}"> EDITAR PERFIL </a></li>
                         {% endif %}
                         <li>
                             <a href="{% url 'logout' %}">SALIR</a>
@@ -131,35 +139,8 @@
 </body>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-{% if messages %}
-
-{% for m in messages %}
-
-<script>
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-})
-  
-  Toast.fire({
-    icon: 'warning',
-    title: '{{m}}'
-  })
+<script  src = " https://upload-widget.cloudinary.com/global/all.js "  type = " text/javascript " >   
 </script>
-
-{% endfor %}
-
-{% endif %}
-
-
 {% block llamdoJavaScript %}
 
 {% endblock llamdoJavaScript %}

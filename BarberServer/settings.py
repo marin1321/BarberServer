@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
-# from zmq import CHANNEL
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,7 +35,6 @@ LOGOUT_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
     'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,29 +44,27 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
     'colorfield',
-    # 'tailwind',
-    # 'theme',
-    # 'django_browser_reload',
     "bootstrap5",
     'django_crontab',
-    'bootstrap5',
+    'channels',
 ]
 
 ASGI_APPLICATION = 'BarberServer.asgi.application'
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
-# TAILWIND_APP_NAME = 'theme'
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
 CHANNEL_LAYERS = {
     'default':{
         'BACKEND':'channels.layers.InMemoryChannelLayer'
     }
 }
 
+CRONJOBS  = [ 
+    ('*/1 * * * * ' , 'BarberServer.cron.MyCronJob') 
+]
 
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
-
-X_FRAME_OPTIONS = "SAMEORIGIN"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,7 +78,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'BarberServer.urls'
 
-TEMPLATES = [
+TEMPLATES = [   
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
@@ -111,7 +106,7 @@ DATABASES = {
             'NAME': 'BARBER_SERVER',
             'USER': 'root',
             'PASSWORD': '',
-            'PASSWORD': 'root1234',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '3306',
         }
@@ -161,7 +156,7 @@ EMAIL_HOST="smtp.gmail.com"
 EMAIL_USE_TLS=True
 EMAIL_PORT=587
 EMAIL_HOST_USER="barberserver123company@gmail.com"
-EMAIL_HOST_PASSWORD="cicohcubaqamswjj"
+EMAIL_HOST_PASSWORD="qbtsyhkdtihlbdql"
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
